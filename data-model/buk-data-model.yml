@@ -1,0 +1,1075 @@
+generated: '2026-08-08'
+method: derived
+source: openapi/_original/buk-data-access-api-chile-openapi.json
+notes: 'Entity graph derived from the Chile variant of the Buk Data Access API — the five country
+  variants share identical paths (151) and operations (206) and differ only in their definition set
+  (Chile 220, Colombia 214, Peru 216, Mexico 199, Brasil 186), so the shape below holds for all five
+  with country-specific payroll entities added or removed. Definitions are Ruby-namespaced (Absences::Licence::Response),
+  which is why entity names carry :: separators.'
+counts:
+  definitions: 220
+  relationships: 196
+  response_entities: 69
+root_entities:
+- Employee (Colaborador)
+- Job (Trabajo)
+- Person (Persona)
+- Company (Empresa)
+- Area
+- Role (Cargo)
+- Process (Proceso)
+- Payroll settlement (Liquidación)
+- Vacation
+- Absence / Licence / Permission
+- Benefit
+- CostCenter
+- Union (Sindicato)
+- Applicant
+- Application
+entities:
+- name: bad_request
+  operations:
+  - POST /recruiting/applicants
+  - POST /recruiting/applicants/search_by_email
+  - GET /recruiting/applicants/{id}
+  - PATCH /recruiting/applicants/{id}
+  - GET /recruiting/applicants/
+  - GET /recruiting/applicants/{id}/applications
+- name: Application
+  operations:
+  - GET /recruiting/applications
+- name: SelectionProcess
+  operations:
+  - GET /recruiting/selection_processes
+- name: SencePercentIndex
+  operations:
+  - GET /training/sence_percents
+- name: SencePercent
+  operations:
+  - GET /training/sence_percents/{employee_id}
+- name: WorkflowProcessAlta
+  operations:
+  - GET /workflow/alta/processes
+- name: Variable
+  operations:
+  - GET /process_periods
+- name: Process
+  operations:
+  - GET /process
+  - POST /process
+  - GET /process/{id}
+- name: FilterQueryModel
+  operations:
+  - GET /groups
+- name: EmployeeResponseCountry
+  operations:
+  - GET /employees
+  - GET /employees/active
+  - GET /employees/{id}
+- name: Employee::Response
+  operations:
+  - PATCH /employees/{id}
+- name: MinimalEmployee
+  operations:
+  - GET /employees/{id}/subordinates
+- name: VacationsAvailable
+  operations:
+  - GET /employees/{id}/vacations_available
+- name: EarnedVacations
+  operations:
+  - GET /employees/{id}/earned_vacations
+- name: EmployeeFamilyResponsibility
+  operations:
+  - GET /employees/{employee_id}/family_responsibilities/{id}
+- name: Finiquito
+  operations:
+  - GET /jobs/{id}/termination
+  - POST /jobs/{id}/termination
+- name: PensionSaving
+  operations:
+  - GET /employees/{id}/pension_savings
+- name: User
+  operations:
+  - GET /users
+  - GET /users/{id}
+- name: PermissionRole
+  operations:
+  - GET /permission_roles
+- name: PlanResponseCountry
+  operations:
+  - GET /employees/{id}/plans
+  - POST /employees/{id}/plans
+  - GET /employees/{employee_id}/plans/{id}
+  - PATCH /employees/{employee_id}/plans/{id}
+- name: JobResponseCountry
+  operations:
+  - GET /employees/{id}/jobs
+  - POST /employees/{id}/jobs
+  - PATCH /employees/{employee_id}/jobs/{id}
+  - PATCH /jobs/{id}/terminate
+  - POST /jobs/{id}/undo
+  - PATCH /jobs/{id}/undo_terminate
+- name: EmployeeFileDetail
+  operations:
+  - GET /employees/{id}/docs/{file_id}
+- name: Settlement
+  operations:
+  - GET /payroll_detail/month
+  - GET /payroll_detail/semi_month
+  - GET /payroll_detail/week
+  - GET /employees/{employee_id}/payroll_detail
+- name: Vacation
+  operations:
+  - GET /vacations
+  - GET /vacations/{id}
+  - GET /vacations/requested
+- name: VacationDefinitionOutput
+  operations:
+  - GET /employees/{id}/vacation_definitions
+  - GET /vacation_definitions
+- name: LicenceType::Response
+  operations:
+  - GET /absences/absence/types
+  - GET /absences/absence/types/{id}
+  - GET /absences/permission/types
+  - GET /absences/permission/types/{id}
+  - GET /absences/licence/types
+  - GET /absences/licence/types/{id}
+- name: Absence::Response
+  operations:
+  - GET /absences
+- name: Absences::Licence::Response
+  operations:
+  - GET /absences/licence
+  - GET /absences/licence/{id}
+  - GET /employees/absences/licences
+- name: Absences::Absence::Response
+  operations:
+  - GET /absences/absence
+  - GET /absences/absence/{id}
+  - GET /employees/absences/absences
+- name: Absences::Permission::Response
+  operations:
+  - GET /absences/permission
+  - GET /absences/permission/{id}
+  - GET /employees/absences/permissions
+- name: Attendances::NonWorkedHours::Index
+  operations:
+  - GET /attendances/non-worked-hours
+- name: Attendances::NonWorkedHours::Response
+  operations:
+  - GET /attendances/non-worked-hours/{id}
+- name: Attendances::Overtime::Index
+  operations:
+  - GET /attendances/overtime
+  - GET /employees/overtimes
+- name: Attendances::Overtime::Response
+  operations:
+  - GET /attendances/overtime/{id}
+- name: Attendances::Overtime::Type
+  operations:
+  - GET /attendances/overtime/types
+- name: Attendances::NonWorkedHours::Type
+  operations:
+  - GET /attendances/non-worked-hours/types
+- name: Area
+  operations:
+  - GET /areas
+  - GET /areas/{id}
+- name: Area_new
+  operations:
+  - GET /organization/areas/
+  - GET /organization/areas/{id}
+  - PATCH /organization/areas/{id}
+  - POST /organization/areas
+- name: Company
+  operations:
+  - GET /companies
+- name: Accounting
+  operations:
+  - GET /accounting
+  - GET /accounting/export_process_differences
+- name: VacationBalance
+  operations:
+  - GET /accounting/vacations/balance
+- name: Holiday
+  operations:
+  - GET /holidays
+- name: Role
+  operations:
+  - GET /roles
+- name: Role::Response
+  operations:
+  - POST /roles
+  - GET /roles/{id}
+  - PATCH /roles/{identifier}
+- name: RoleFamily
+  operations:
+  - GET /role_families
+- name: Bono
+  operations:
+  - GET /items
+- name: CuentaContable
+  operations:
+  - GET /ledger_account
+- name: Employee::Assign
+  operations:
+  - GET /employees/{id}/assigns
+- name: hire
+  operations:
+  - GET /jobs/events/hires
+- name: job_movement
+  operations:
+  - GET /jobs/events/movements
+- name: TerminatedJob
+  operations:
+  - GET /jobs/events/terminations
+- name: KPI
+  operations:
+  - GET /kpis
+- name: KPIDatum
+  operations:
+  - GET /kpi_data
+  - PATCH /kpi_data/{id}
+- name: Location
+  operations:
+  - GET /locations/{id}
+- name: Location::Minimal
+  operations:
+  - GET /locations
+- name: CentroCostoDefinition
+  operations:
+  - GET /centro_costo_definitions/{id}
+  - GET /centro_costo_definitions
+- name: centro_costo_definition_response
+  operations:
+  - PATCH /centro_costo_definitions/{id}
+  - POST /centro_costo_definitions
+- name: Credit
+  operations:
+  - GET /credits
+  - GET /credits/{id}
+  - POST /credits/create
+- name: WorkingDay
+  operations:
+  - GET /working_days
+- name: RecintoIndex
+  operations:
+  - GET /recintos
+- name: Recinto::Response
+  operations:
+  - POST /recintos
+  - PATCH /recintos/{code}
+- name: union
+  operations:
+  - GET /unions/{id}
+  - GET /unions
+- name: version
+  operations:
+  - GET /versions
+- name: EmployeeSubstitutionDetail
+  operations:
+  - GET /substitutions
+  - POST /substitutions
+  - PATCH /substitutions/{id}
+- name: PersonResponse
+  operations:
+  - GET /people/{id}
+- name: BenefitRequestResponse
+  operations:
+  - GET /benefits/benefit_requests
+  - GET /benefits/benefit_requests/{id}
+- name: BenefitVersionResponse
+  operations:
+  - GET /benefits/benefit_versions/{id}
+- name: CompanyVariable
+  operations:
+  - GET /company_variables/{empresa_id}
+- name: CompanyVariableRegistry
+  operations:
+  - GET /company_variable_registries/{id}
+relationships:
+- from: Absence::Request
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Absence::Response
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Accounting
+  kind: has_many
+  to: AccountingItem
+  via: items
+- from: ApplicantBase
+  kind: has_one
+  to: ApplicantCv
+  via: cv_url
+- from: ApplicantBase
+  kind: has_one
+  to: ApplicantSelectionProcess
+  via: seleccion_processes
+- from: ApplicantLocationInput
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: ApplicationApplicantIdentifierInput
+  kind: belongs_to
+  to: applicant
+  via: applicant_id
+- from: ApplicationBase
+  kind: belongs_to
+  to: selection_process
+  via: selection_process_id
+- from: Area
+  kind: has_one
+  to: parent_child_area
+  via: children_area
+- from: Area
+  kind: has_one
+  to: parent_child_area
+  via: parent_area
+- from: Area
+  kind: has_one
+  to: AreaSecondLevel
+  via: department
+- from: Area::Create
+  kind: belongs_to
+  to: parent
+  via: parent_id
+- from: Area::Create
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: Area::Create
+  kind: belongs_to
+  to: cost_center
+  via: cost_center_id
+- from: Area::Update
+  kind: belongs_to
+  to: cost_center
+  via: cost_center_id
+- from: Area::Update
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: AreaSecondLevel
+  kind: has_one
+  to: AreaFirstLevel
+  via: division
+- from: Area_new
+  kind: has_many
+  to: parent_child_area
+  via: children_area
+- from: Area_new
+  kind: has_one
+  to: parent_child_area
+  via: parent_area
+- from: Area_new
+  kind: belongs_to
+  to: first_level
+  via: first_level_id
+- from: Area_new
+  kind: belongs_to
+  to: second_level
+  via: second_level_id
+- from: Assign
+  kind: belongs_to
+  to: item
+  via: item_id
+- from: Assign
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Assign::Create
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Assign::Create
+  kind: belongs_to
+  to: item
+  via: item_id
+- from: Assign::PaymentDetail
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Assign::PaymentDetail
+  kind: belongs_to
+  to: item
+  via: item_id
+- from: Assign::PaymentDetailResponse
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Assign::PaymentDetailResponse
+  kind: belongs_to
+  to: item
+  via: item_id
+- from: Attendances::NonWorkedHours::Index
+  kind: has_one
+  to: Pagination
+  via: pagination
+- from: Attendances::NonWorkedHours::Index
+  kind: has_many
+  to: Attendances::NonWorkedHours::Response
+  via: data
+- from: Attendances::NonWorkedHours::Request
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Attendances::NonWorkedHours::Request
+  kind: belongs_to
+  to: type
+  via: type_id
+- from: Attendances::NonWorkedHours::Response
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Attendances::NonWorkedHours::Response
+  kind: belongs_to
+  to: type
+  via: type_id
+- from: Attendances::Overtime::Index
+  kind: has_one
+  to: Pagination
+  via: pagination
+- from: Attendances::Overtime::Index
+  kind: has_many
+  to: Attendances::Overtime::Response
+  via: data
+- from: Attendances::Overtime::PaymentDetail
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Attendances::Overtime::PaymentDetail
+  kind: belongs_to
+  to: type
+  via: type_id
+- from: Attendances::Overtime::Request
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Attendances::Overtime::Request
+  kind: belongs_to
+  to: type
+  via: type_id
+- from: Attendances::Overtime::Response
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Attendances::Overtime::Response
+  kind: belongs_to
+  to: type
+  via: type_id
+- from: BenefitRequestResponse
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: BenefitRequestResponse
+  kind: belongs_to
+  to: approver
+  via: approver_id
+- from: BenefitRequestResponse
+  kind: belongs_to
+  to: available_version
+  via: available_version_id
+- from: Bono
+  kind: belongs_to
+  to: previous_bono
+  via: previous_bono_id
+- from: Capacities
+  kind: belongs_to
+  to: evaluation
+  via: evaluation_id
+- from: Capacities
+  kind: has_many
+  to: ScoreByCapacity
+  via: score_by_capacity
+- from: Company
+  kind: has_many
+  to: LegalAgent
+  via: legal_agents
+- from: Company
+  kind: has_many
+  to: CompanyBank
+  via: company_banks
+- from: CompanyBank
+  kind: belongs_to
+  to: empresa
+  via: empresa_id
+- from: CostCenterModel
+  kind: belongs_to
+  to: job
+  via: job_id
+- from: Credit
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: DocumentSignature
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: EarnedVacations
+  kind: belongs_to
+  to: vacation_definition
+  via: vacation_definition_id
+- from: EarnedVacations
+  kind: belongs_to
+  to: vacation_type
+  via: vacation_type_id
+- from: Employee::Assign
+  kind: has_one
+  to: Bono::Minimal
+  via: item
+- from: Employee::Response
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: Employee::Response
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: Employee::Response
+  kind: has_one
+  to: EmployeeCurrentJob
+  via: current_job
+- from: Employee::Response
+  kind: has_one
+  to: EmployeeFamilyResponsability
+  via: family_responsabilities
+- from: EmployeeCurrentJob
+  kind: belongs_to
+  to: previous_job
+  via: previous_job_id
+- from: EmployeeCurrentJob
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: EmployeeCurrentJob
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: EmployeeCurrentJob
+  kind: has_one
+  to: Role
+  via: role
+- from: EmployeeCurrentJob
+  kind: has_one
+  to: BossModel
+  via: boss
+- from: EmployeeCurrentJob
+  kind: has_one
+  to: RecintoModel
+  via: recinto_primario
+- from: EmployeeCurrentJob
+  kind: has_many
+  to: RecintoModel
+  via: recinto_secundario
+- from: EmployeeFamilyResponsability
+  kind: has_one
+  to: ResponsabilityDetail
+  via: responsability_details
+- from: EmployeeFamilyResponsibility
+  kind: has_many
+  to: ResponsibilityDetail
+  via: responsibility_details
+- from: EmployeeFileDetail
+  kind: belongs_to
+  to: employee_folder
+  via: employee_folder_id
+- from: EmployeeFileDetail
+  kind: belongs_to
+  to: document_template
+  via: document_template_id
+- from: EmployeeFileDetail
+  kind: has_many
+  to: DocumentSignature
+  via: signatures
+- from: EmployeeFileDetail
+  kind: belongs_to
+  to: reviewer
+  via: reviewer_id
+- from: EmployeeFileListDetail
+  kind: belongs_to
+  to: file
+  via: file_id
+- from: EmployeeInputCountry
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: EmployeeResponseCountry
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: EmployeeResponseCountry
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: EmployeeResponseCountry
+  kind: has_one
+  to: JobResponseCountry
+  via: current_job
+- from: EmployeeResponseCountry
+  kind: has_one
+  to: EmployeeFamilyResponsability
+  via: family_responsabilities
+- from: EmployeeSubstitutionDetail
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: EmployeeSubstitutionDetail
+  kind: belongs_to
+  to: substitute
+  via: substitute_id
+- from: EmployeeSubstitutionInput
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: EmployeeSubstitutionInput
+  kind: belongs_to
+  to: substitute
+  via: substitute_id
+- from: Finiquito
+  kind: has_many
+  to: FiniquitoDescuentos
+  via: descuentos
+- from: Finiquito
+  kind: has_many
+  to: FiniquitoHaberes
+  via: haberes
+- from: FiniquitoBase
+  kind: has_one
+  to: PaymentDetail
+  via: payment_detail
+- from: FiniquitoInputCountry
+  kind: belongs_to
+  to: template_documento
+  via: template_documento_id
+- from: FiniquitoInputCountry
+  kind: has_many
+  to: AsignacionFiniquito
+  via: descuentos
+- from: FiniquitoInputCountry
+  kind: has_many
+  to: AsignacionFiniquito
+  via: haberes
+- from: Goals
+  kind: belongs_to
+  to: evaluation
+  via: evaluation_id
+- from: Goals
+  kind: has_many
+  to: ScoreByGoal
+  via: score_by_goal
+- from: Job
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: Job
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: Job
+  kind: has_one
+  to: Role
+  via: role
+- from: Job
+  kind: has_one
+  to: BossModel
+  via: boss
+- from: JobInputCountry
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: JobInputCountry
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: JobInputCountry
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: JobInputCountry
+  kind: belongs_to
+  to: role
+  via: role_id
+- from: JobInputCountry
+  kind: belongs_to
+  to: leader
+  via: leader_id
+- from: JobInputCountryPatch
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: JobInputCountryPatch
+  kind: belongs_to
+  to: leader
+  via: leader_id
+- from: JobInputCountryPost
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: JobInputCountryPost
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: JobInputCountryPost
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: JobInputCountryPost
+  kind: belongs_to
+  to: role
+  via: role_id
+- from: JobInputCountryPost
+  kind: belongs_to
+  to: leader
+  via: leader_id
+- from: JobResponseCountry
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: JobResponseCountry
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: JobResponseCountry
+  kind: has_one
+  to: CostCenterModel
+  via: cost_centers
+- from: JobResponseCountry
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: JobResponseCountry
+  kind: has_one
+  to: BossModel
+  via: boss
+- from: JobResponseCountry
+  kind: has_one
+  to: ContractualStipulationModel
+  via: contractual_stipulation
+- from: JobResponseCountry
+  kind: has_one
+  to: ContractualDetailModel
+  via: contractual_detail
+- from: KPIDatum
+  kind: belongs_to
+  to: kpi
+  via: kpi_id
+- from: KPIDatum
+  kind: belongs_to
+  to: empresa
+  via: empresa_id
+- from: KPIDatum
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: KPIDatum
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: LegalAgent
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: LicenceBase
+  kind: belongs_to
+  to: licence_type
+  via: licence_type_id
+- from: Location
+  kind: has_one
+  to: Location
+  via: parent
+- from: NoteCreated
+  kind: belongs_to
+  to: postulante
+  via: postulante_id
+- from: NoteInput
+  kind: belongs_to
+  to: process_stage
+  via: process_stage_id
+- from: NoteInput
+  kind: belongs_to
+  to: selection_process
+  via: selection_process_id
+- from: Piecework::Execution::Request
+  kind: belongs_to
+  to: piecework_place
+  via: piecework_place_id
+- from: Piecework::Execution::Request
+  kind: belongs_to
+  to: piecework_task
+  via: piecework_task_id
+- from: Piecework::Execution::Request
+  kind: belongs_to
+  to: piecework_unit
+  via: piecework_unit_id
+- from: Piecework::Execution::Request
+  kind: belongs_to
+  to: piecework_product
+  via: piecework_product_id
+- from: Piecework::Execution::Response
+  kind: belongs_to
+  to: piecework_place
+  via: piecework_place_id
+- from: Piecework::Execution::Response
+  kind: belongs_to
+  to: piecework_task
+  via: piecework_task_id
+- from: Piecework::Execution::Response
+  kind: belongs_to
+  to: piecework_unit
+  via: piecework_unit_id
+- from: Piecework::Execution::Response
+  kind: belongs_to
+  to: piecework_product
+  via: piecework_product_id
+- from: Piecework::Place::Request
+  kind: belongs_to
+  to: empresa
+  via: empresa_id
+- from: Piecework::Place::Request
+  kind: belongs_to
+  to: centro_costo_definition
+  via: centro_costo_definition_id
+- from: Piecework::Place::Response
+  kind: belongs_to
+  to: empresa
+  via: empresa_id
+- from: Piecework::Place::Response
+  kind: belongs_to
+  to: centro_costo_definition
+  via: centro_costo_definition_id
+- from: Piecework::Worklog::Request
+  kind: belongs_to
+  to: piecework_execution
+  via: piecework_execution_id
+- from: Piecework::Worklog::Response
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Piecework::Worklog::Response
+  kind: belongs_to
+  to: variable
+  via: variable_id
+- from: Piecework::Worklog::Response
+  kind: belongs_to
+  to: piecework_execution
+  via: piecework_execution_id
+- from: Recinto
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: RecintoIndex
+  kind: belongs_to
+  to: location
+  via: location_id
+- from: Role
+  kind: has_one
+  to: RoleFamily
+  via: role_family
+- from: Role::Create
+  kind: belongs_to
+  to: role_family
+  via: role_family_id
+- from: Role::Response
+  kind: belongs_to
+  to: role_family
+  via: role_family_id
+- from: Role::Update
+  kind: belongs_to
+  to: role_family
+  via: role_family_id
+- from: SelectionProcessBase
+  kind: belongs_to
+  to: template
+  via: template_id
+- from: SencePercentIndex
+  kind: has_one
+  to: Employee::Response::Simple
+  via: employee
+- from: Settlement
+  kind: belongs_to
+  to: liquidacion
+  via: liquidacion_id
+- from: Settlement
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: Settlement
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Settlement
+  kind: has_many
+  to: SettlementLine
+  via: lines_settlement
+- from: Signature
+  kind: belongs_to
+  to: reviewer
+  via: reviewer_id
+- from: TerminatedJob
+  kind: belongs_to
+  to: role
+  via: role_id
+- from: TerminatedJob
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: TerminatedJob
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: TerminatedJob
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: TerminatedJob
+  kind: belongs_to
+  to: supervisor
+  via: supervisor_id
+- from: User
+  kind: belongs_to
+  to: person
+  via: person_id
+- from: User
+  kind: belongs_to
+  to: permission_role
+  via: permission_role_id
+- from: Vacation
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: Vacation
+  kind: belongs_to
+  to: approved_by
+  via: approved_by_id
+- from: Vacation
+  kind: belongs_to
+  to: vacation_type
+  via: vacation_type_id
+- from: VacationBalance
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: VacationDefinition
+  kind: has_one
+  to: VacationType
+  via: vacation_type
+- from: VacationDefinitionOutput
+  kind: has_many
+  to: VacationDefinition
+  via: vacation_definitions
+- from: VacationsAvailable
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: VacationsAvailable
+  kind: has_one
+  to: CurrentJobDetails
+  via: current_job
+- from: VacationsAvailable
+  kind: has_many
+  to: Vacations
+  via: vacations
+- from: WorkflowProcessAltaJob
+  kind: has_one
+  to: WorkflowProcessAltaJobCompany
+  via: company
+- from: WorkflowProcessAltaJob
+  kind: has_one
+  to: WorkflowProcessAltaJobArea
+  via: area
+- from: WorkflowProcessAltaJob
+  kind: has_one
+  to: WorkflowProcessAltaJobRole
+  via: role
+- from: WorkflowProcessAltaJob
+  kind: has_one
+  to: WorkflowProcessAltaJobSupervisor
+  via: supervisor
+- from: WorkflowProcessAltaOperation
+  kind: has_one
+  to: WorkflowProcessAltaUser
+  via: completed_by
+- from: WorkflowProcessBase
+  kind: has_one
+  to: WorkflowProcessBaseEmployee
+  via: created_by
+- from: WorkingDay
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: WorkingDay::Minimal
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: approved_vacation
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: centro_costo_request
+  kind: belongs_to
+  to: centro_costo_definition
+  via: centro_costo_definition_id
+- from: centro_costo_request
+  kind: belongs_to
+  to: job
+  via: job_id
+- from: centro_costo_response
+  kind: belongs_to
+  to: centro_costo_definition
+  via: centro_costo_definition_id
+- from: centro_costo_response
+  kind: belongs_to
+  to: job
+  via: job_id
+- from: hire
+  kind: belongs_to
+  to: role
+  via: role_id
+- from: hire
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: hire
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: hire
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: hire
+  kind: belongs_to
+  to: supervisor
+  via: supervisor_id
+- from: job_movement
+  kind: belongs_to
+  to: role
+  via: role_id
+- from: job_movement
+  kind: belongs_to
+  to: company
+  via: company_id
+- from: job_movement
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: job_movement
+  kind: belongs_to
+  to: area
+  via: area_id
+- from: job_movement
+  kind: belongs_to
+  to: supervisor
+  via: supervisor_id
+- from: vacation_detail
+  kind: belongs_to
+  to: employee
+  via: employee_id
+- from: version
+  kind: belongs_to
+  to: employee
+  via: employee_id

@@ -1,0 +1,55 @@
+generated: '2026-08-08'
+method: generated
+source: openapi/buk-data-access-api-chile-openapi.yml, openapi/buk-asistencia-api-openapi.yml,
+  openapi/buk-attendance-biometrics-api-openapi.yml, asyncapi/buk-webhooks.yml,
+  conventions/buk-conventions.yml, errors/buk-problem-types.yml
+notes: >-
+  Buk publishes no Agent Skills, no AGENTS.md and no agent-facing documentation of any kind —
+  searched the site, the support center, the /apidocs page and all 38 public repositories in the
+  bukhr GitHub organisation. The six skills below are packaged by API Evangelist from the
+  provider's own published contracts and webhook catalog. Every operation named in every skill
+  was verified present in a harvested spec. Because the Buk Data Access API declares no
+  operationId on any of its 206 operations, operations are addressed as METHOD + path; the Buk
+  Asistencia contract does declare operationIds and those are used where they exist.
+skills:
+- file: buk-sync-employee-directory.md
+  name: Sync the Buk employee directory
+  api: buk:data-access-api
+  operations: 14
+  write: false
+- file: buk-onboard-and-terminate-employees.md
+  name: Onboard and terminate employees in Buk
+  api: buk:data-access-api
+  operations: 21
+  write: true
+- file: buk-run-and-read-payroll.md
+  name: Run and read a Buk payroll cycle
+  api: buk:data-access-api
+  operations: 26
+  write: true
+- file: buk-absence-and-vacation-flows.md
+  name: Time off in Buk — vacations, leave, permissions and absences
+  api: buk:data-access-api
+  operations: 36
+  write: true
+- file: buk-attendance-and-overtime.md
+  name: Attendance in Buk — two APIs, two hosts, two header names
+  api: buk:asistencia-api
+  operations: 27
+  write: true
+- file: buk-consume-buk-webhooks.md
+  name: Consume Buk webhooks
+  api: buk:data-access-api
+  operations: 11
+  write: false
+cross_cutting_rules:
+- Base URL is tenant- and country-scoped — https://{tenant}.buk.cl/api/v1/{country}.
+- Three different auth headers across three hosts — auth_token, token, and x-provider-name plus
+  x-provider-token.
+- The contracts declare securityDefinitions but do not apply security, so generated clients do
+  not send the header.
+- Pagination is page / page_size with a pagination object in the response.
+- There is no idempotency mechanism anywhere — every write skill must re-read before retrying.
+- No 429 is documented and no rate-limit headers exist; throttle conservatively.
+- Errors carry no machine-readable code and mix Spanish and English; branch on HTTP status.
+- Webhooks are notification-only, unsigned, with no documented retry or ordering guarantee.

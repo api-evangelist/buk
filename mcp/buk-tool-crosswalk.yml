@@ -1,0 +1,1332 @@
+generated: '2026-08-08'
+method: derived
+source: mcp/buk-mcp.yml + openapi/_original/*.json
+notes: Buk ships no MCP server and no GraphQL surface, so this crosswalk binds the CANDIDATE MCP
+  tools in mcp/buk-mcp.yml back to the REST operations they were derived from. Every binding is 1:1
+  and high confidence by construction — there is no divergence to record between surfaces because
+  only one surface exists. Recorded so that if Buk later ships the server its empty bukhr/mcps repository
+  announces, the divergence can be measured against this baseline.
+surfaces:
+  openapi:
+  - file: openapi/buk-data-access-api-chile-openapi.yml
+    operations: 206
+    gated: false
+    note: Contract is public at https://{tenant}.buk.cl/api/{country}/{lang}/api_docs; the DATA behind
+      it requires a tenant-issued auth_token.
+  - file: openapi/buk-asistencia-api-openapi.yml
+    operations: 10
+    gated: false
+  - file: openapi/buk-attendance-biometrics-api-openapi.yml
+    operations: 1
+    gated: false
+  graphql: null
+  mcp: null
+coverage:
+  tools: 216
+  rest_operations_total: 217
+  mapped: 216
+  mcp_only: 0
+  rest_only: 1
+crosswalk:
+- tool: buk_post_recruiting_applicants
+  category: Postulante
+  rest:
+  - POST /recruiting/applicants
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_recruiting_applicants_search_by_email
+  category: Postulante
+  rest:
+  - POST /recruiting/applicants/search_by_email
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recruiting_applicants_id
+  category: Postulante
+  rest:
+  - GET /recruiting/applicants/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_recruiting_applicants_id
+  category: Applicant
+  rest:
+  - PATCH /recruiting/applicants/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recruiting_applicants
+  category: Postulante
+  rest:
+  - GET /recruiting/applicants/
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recruiting_applicants_id_applications
+  category: Postulante
+  rest:
+  - GET /recruiting/applicants/{id}/applications
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_recruiting_applications
+  category: Application
+  rest:
+  - POST /recruiting/applications
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recruiting_applications
+  category: Application
+  rest:
+  - GET /recruiting/applications
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_recruiting_applications_id
+  category: Application
+  rest:
+  - PATCH /recruiting/applications/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recruiting_selection_processes
+  category: Selection process
+  rest:
+  - GET /recruiting/selection_processes
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_recruiting_selection_processes
+  category: Selection process
+  rest:
+  - POST /recruiting/selection_processes
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_talent_evaluation_processes
+  category: Evaluations
+  rest:
+  - GET /talent/evaluation_processes
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_talent_evaluation_process_id_results_capacities
+  category: Evaluations
+  rest:
+  - GET /talent/evaluation_process/{id}/results/capacities
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_talent_evaluation_process_id_results_goals
+  category: Evaluations
+  rest:
+  - GET /talent/evaluation_process/{id}/results/goals
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_training_sence_percents
+  category: Capacitaciones
+  rest:
+  - GET /training/sence_percents
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_training_sence_percents_employee_id
+  category: Capacitaciones
+  rest:
+  - GET /training/sence_percents/{employee_id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_tasks
+  category: Labores
+  rest:
+  - GET /piecework/tasks
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_tasks
+  category: Labores
+  rest:
+  - POST /piecework/tasks
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_executions
+  category: Tarifas
+  rest:
+  - GET /piecework/executions
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_executions
+  category: Tarifas
+  rest:
+  - POST /piecework/executions
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_products
+  category: Productos
+  rest:
+  - GET /piecework/products
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_products
+  category: Productos
+  rest:
+  - POST /piecework/products
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_units
+  category: Unidades
+  rest:
+  - GET /piecework/units
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_units
+  category: Unidades
+  rest:
+  - POST /piecework/units
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_places
+  category: Lugares de Trabajo
+  rest:
+  - GET /piecework/places
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_places
+  category: Lugares de Trabajo
+  rest:
+  - POST /piecework/places
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_piecework_worklogs
+  category: Registros de Trabajo
+  rest:
+  - GET /piecework/worklogs
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_piecework_worklogs
+  category: Registros de Trabajo
+  rest:
+  - POST /piecework/worklogs
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_piecework_worklogs_id
+  category: Registros de Trabajo
+  rest:
+  - PATCH /piecework/worklogs/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_workflow_alta_processes
+  category: Workflows
+  rest:
+  - GET /workflow/alta/processes
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_process_periods
+  category: Períodos
+  rest:
+  - GET /process_periods
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_process
+  category: Procesos
+  rest:
+  - GET /process
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_process
+  category: Procesos
+  rest:
+  - POST /process
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_process_id
+  category: Procesos
+  rest:
+  - GET /process/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_process_id
+  category: Procesos
+  rest:
+  - DELETE /process/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_groups
+  category: Grupos
+  rest:
+  - GET /groups
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_groups_id
+  category: Grupos
+  rest:
+  - GET /groups/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees
+  category: Colaboradores
+  rest:
+  - GET /employees
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees
+  category: Colaboradores
+  rest:
+  - POST /employees
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_id_clone
+  category: Colaboradores
+  rest:
+  - POST /employees/{id}/clone
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_active
+  category: Colaboradores
+  rest:
+  - GET /employees/active
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_employees_id
+  category: Colaboradores
+  rest:
+  - PATCH /employees/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_subordinates
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/subordinates
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_vacations_available
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/vacations_available
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_earned_vacations
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/earned_vacations
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_employee_id_family_responsibilities_id
+  category: Colaboradores
+  rest:
+  - GET /employees/{employee_id}/family_responsibilities/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_cargas_id
+  category: Grupo Familiar
+  rest:
+  - PATCH /cargas/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_jobs_id_termination
+  category: Termination processes
+  rest:
+  - GET /jobs/{id}/termination
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_jobs_id_termination
+  category: Termination processes
+  rest:
+  - POST /jobs/{id}/termination
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_pension_savings
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/pension_savings
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_users
+  category: Users and profiles
+  rest:
+  - GET /users
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_users
+  category: Users and profiles
+  rest:
+  - POST /users
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_users_id
+  category: Users and profiles
+  rest:
+  - GET /users/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_users_id
+  category: Users and profiles
+  rest:
+  - PUT /users/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_permission_roles
+  category: Usuarios y perfiles
+  rest:
+  - GET /permission_roles
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_plans
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/plans
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_id_plans
+  category: Colaboradores
+  rest:
+  - POST /employees/{id}/plans
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_employee_id_plans_id
+  category: Colaboradores
+  rest:
+  - GET /employees/{employee_id}/plans/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_employees_employee_id_plans_id
+  category: Colaboradores
+  rest:
+  - PATCH /employees/{employee_id}/plans/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_jobs
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/jobs
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_id_jobs
+  category: Colaboradores
+  rest:
+  - POST /employees/{id}/jobs
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_employees_employee_id_jobs_id
+  category: Colaboradores
+  rest:
+  - PATCH /employees/{employee_id}/jobs/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_jobs_id_terminate
+  category: Jobs
+  rest:
+  - PATCH /jobs/{id}/terminate
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_employees_employee_id_jobs_job_id_cost_centers
+  category: Colaboradores
+  rest:
+  - PATCH /employees/{employee_id}/jobs/{job_id}/cost_centers
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_jobs_id_undo
+  category: Jobs
+  rest:
+  - POST /jobs/{id}/undo
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_jobs_id_undo_terminate
+  category: Jobs
+  rest:
+  - PATCH /jobs/{id}/undo_terminate
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_id_docs
+  category: Colaboradores
+  rest:
+  - POST /employees/{id}/docs
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_docs
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/docs
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_docs_file_id
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/docs/{file_id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_docs_id
+  category: Colaboradores
+  rest:
+  - GET /docs/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_docs_id_signatures_process
+  category: Documents
+  rest:
+  - POST /docs/{id}/signatures/process
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_docs_id_signatures
+  category: Documents
+  rest:
+  - PUT /docs/{id}/signatures
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_payroll_detail_month
+  category: Pay stubs
+  rest:
+  - GET /payroll_detail/month
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_payroll_detail_semi_month
+  category: Pay stubs
+  rest:
+  - GET /payroll_detail/semi_month
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_payroll_detail_week
+  category: Pay stubs
+  rest:
+  - GET /payroll_detail/week
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_employee_id_payroll_detail
+  category: Pay stubs
+  rest:
+  - GET /employees/{employee_id}/payroll_detail
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_statements_year_month_pdf
+  category: Pay stubs
+  rest:
+  - GET /employees/{id}/statements/{year}-{month}.pdf
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_vacations
+  category: Vacaciones
+  rest:
+  - GET /vacations
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_vacations
+  category: Vacaciones
+  rest:
+  - POST /vacations
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_vacations
+  category: Vacaciones
+  rest:
+  - DELETE /vacations
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_vacations_id
+  category: Vacaciones
+  rest:
+  - GET /vacations/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_vacations_business_days
+  category: Vacaciones
+  rest:
+  - GET /vacations/business_days
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_vacations_requested
+  category: Vacaciones
+  rest:
+  - GET /vacations/requested
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_vacation_definitions
+  category: Colaboradores
+  rest:
+  - GET /employees/{id}/vacation_definitions
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_id_vacation_definitions
+  category: Colaboradores
+  rest:
+  - POST /employees/{id}/vacation_definitions
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_employees_id_vacation_definitions_code
+  category: Colaboradores
+  rest:
+  - DELETE /employees/{id}/vacation_definitions/{code}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_vacation_definitions
+  category: Vacation Policies
+  rest:
+  - GET /vacation_definitions
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_absence_types
+  category: Unexcused absence
+  rest:
+  - GET /absences/absence/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_absences_absence_types
+  category: Unexcused absence
+  rest:
+  - POST /absences/absence/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_absence_types_id
+  category: Unexcused absence
+  rest:
+  - GET /absences/absence/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_absence_types_id
+  category: Unexcused absence
+  rest:
+  - DELETE /absences/absence/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_permission_types
+  category: Absences requests
+  rest:
+  - GET /absences/permission/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_absences_permission_types
+  category: Absences requests
+  rest:
+  - POST /absences/permission/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_permission_types_id
+  category: Absences requests
+  rest:
+  - GET /absences/permission/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_permission_types_id
+  category: Absences requests
+  rest:
+  - DELETE /absences/permission/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_licence_types
+  category: Leaves
+  rest:
+  - GET /absences/licence/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_licence_types_id
+  category: Leaves
+  rest:
+  - GET /absences/licence/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences
+  category: Time Off Leaves
+  rest:
+  - GET /absences
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_licence
+  category: Leaves
+  rest:
+  - GET /absences/licence
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_absences_licence
+  category: Leaves
+  rest:
+  - POST /absences/licence
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_licence
+  category: Leaves
+  rest:
+  - DELETE /absences/licence
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_licence_id
+  category: Leaves
+  rest:
+  - GET /absences/licence/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_licence_id
+  category: Leaves
+  rest:
+  - DELETE /absences/licence/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_absences_licences
+  category: Colaboradores
+  rest:
+  - GET /employees/absences/licences
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_absence
+  category: Unexcused absence
+  rest:
+  - GET /absences/absence
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_absence
+  category: Unexcused absence
+  rest:
+  - DELETE /absences/absence
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_absences_absence
+  category: Unexcused absence
+  rest:
+  - POST /absences/absence
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_absence_id
+  category: Unexcused absence
+  rest:
+  - GET /absences/absence/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_absence_id
+  category: Unexcused absence
+  rest:
+  - DELETE /absences/absence/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_absences_absences
+  category: Colaboradores
+  rest:
+  - GET /employees/absences/absences
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_permission
+  category: Absences requests
+  rest:
+  - GET /absences/permission
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_permission
+  category: Absences requests
+  rest:
+  - DELETE /absences/permission
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_absences_permission
+  category: Absences requests
+  rest:
+  - POST /absences/permission
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_absences_permission_id
+  category: Absences requests
+  rest:
+  - GET /absences/permission/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_absences_permission_id
+  category: Absences requests
+  rest:
+  - DELETE /absences/permission/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_absences_permissions
+  category: Colaboradores
+  rest:
+  - GET /employees/absences/permissions
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_non_worked_hours
+  category: Non-Worked Hours
+  rest:
+  - GET /attendances/non-worked-hours
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_attendances_non_worked_hours
+  category: Non-Worked Hours
+  rest:
+  - POST /attendances/non-worked-hours
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_attendances_non_worked_hours
+  category: Non-Worked Hours
+  rest:
+  - PUT /attendances/non-worked-hours
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_non_worked_hours_id
+  category: Non-Worked Hours
+  rest:
+  - GET /attendances/non-worked-hours/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_overtime
+  category: Overtime
+  rest:
+  - GET /attendances/overtime
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_attendances_overtime
+  category: Overtime
+  rest:
+  - POST /attendances/overtime
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_attendances_overtime
+  category: Overtime
+  rest:
+  - PUT /attendances/overtime
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_overtime_id
+  category: Overtime
+  rest:
+  - GET /attendances/overtime/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_overtime_types
+  category: Overtime
+  rest:
+  - GET /attendances/overtime/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_overtimes
+  category: Colaboradores
+  rest:
+  - GET /employees/overtimes
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_attendances_non_worked_hours_types
+  category: Horas no trabajadas
+  rest:
+  - GET /attendances/non-worked-hours/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_attendances_non_worked_hours_types
+  category: Horas no trabajadas
+  rest:
+  - POST /attendances/non-worked-hours/types
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_attendances_non_worked_hours_types_id
+  category: Horas no trabajadas
+  rest:
+  - DELETE /attendances/non-worked-hours/types/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_areas
+  category: Áreas
+  rest:
+  - GET /areas
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_areas_id
+  category: Áreas
+  rest:
+  - GET /areas/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_organization_areas
+  category: Áreas
+  rest:
+  - GET /organization/areas/
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_organization_areas_id
+  category: Áreas
+  rest:
+  - GET /organization/areas/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_organization_areas_id
+  category: Áreas
+  rest:
+  - PATCH /organization/areas/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_organization_areas
+  category: Áreas
+  rest:
+  - POST /organization/areas
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_organization_areas
+  category: Áreas
+  rest:
+  - DELETE /organization/areas
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_companies
+  category: Empresas
+  rest:
+  - GET /companies
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting
+  category: Centralized accounting
+  rest:
+  - GET /accounting
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_export
+  category: Centralized accounting
+  rest:
+  - GET /accounting/export
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_export_period
+  category: Centralized accounting
+  rest:
+  - GET /accounting/export_period
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_export_detail
+  category: Centralized accounting
+  rest:
+  - GET /accounting/export_detail
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_vacations_balance
+  category: Centralized accounting
+  rest:
+  - GET /accounting/vacations/balance
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_export_process_differences
+  category: Centralized accounting
+  rest:
+  - GET /accounting/export_process_differences
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_structure_structures
+  category: Accounting Structures
+  rest:
+  - GET /accounting_structure/structures
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_structure_assignments
+  category: Accounting Structures
+  rest:
+  - GET /accounting_structure/assignments
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_structure_export
+  category: Accounting Structures
+  rest:
+  - GET /accounting_structure/export
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_accounting_structure_export_process_differences
+  category: Accounting Structures
+  rest:
+  - GET /accounting_structure/export_process_differences
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_holidays
+  category: Feriados
+  rest:
+  - GET /holidays
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_roles
+  category: Job Titles
+  rest:
+  - GET /roles
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_roles
+  category: Job Titles
+  rest:
+  - POST /roles
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_roles_id
+  category: Job Titles
+  rest:
+  - GET /roles/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_roles_identifier
+  category: Job Titles
+  rest:
+  - PATCH /roles/{identifier}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_role_families
+  category: Cargos
+  rest:
+  - GET /role_families
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_items
+  category: Ítems
+  rest:
+  - GET /items
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_ledger_account
+  category: Centralized accounting
+  rest:
+  - GET /ledger_account
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_assigns
+  category: Items
+  rest:
+  - POST /assigns
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_assigns_id
+  category: Items
+  rest:
+  - PATCH /assigns/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_assigns_id
+  category: Items
+  rest:
+  - DELETE /assigns/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_assigns_id_terminate
+  category: Items
+  rest:
+  - POST /assigns/{id}/terminate
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_employees_id_assigns
+  category: Items
+  rest:
+  - GET /employees/{id}/assigns
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_jobs_events_hires
+  category: Jobs
+  rest:
+  - GET /jobs/events/hires
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_jobs_events_movements
+  category: Jobs
+  rest:
+  - GET /jobs/events/movements
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_jobs_events_terminations
+  category: Jobs
+  rest:
+  - GET /jobs/events/terminations
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_kpis
+  category: KPIs
+  rest:
+  - GET /kpis
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_kpi_data
+  category: KPIs
+  rest:
+  - GET /kpi_data
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_kpi_data
+  category: KPIs
+  rest:
+  - POST /kpi_data
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_kpi_data_id
+  category: KPIs
+  rest:
+  - PATCH /kpi_data/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_locations_id
+  category: Localidades
+  rest:
+  - GET /locations/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_locations
+  category: Localidades
+  rest:
+  - GET /locations
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_centro_costo_definitions_id
+  category: Centro de costo
+  rest:
+  - GET /centro_costo_definitions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_centro_costo_definitions_id
+  category: Centro de costo
+  rest:
+  - PATCH /centro_costo_definitions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_centro_costo_definitions
+  category: Centro de costo
+  rest:
+  - GET /centro_costo_definitions
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_centro_costo_definitions
+  category: Centro de costo
+  rest:
+  - POST /centro_costo_definitions
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_centro_costo_definitions_update
+  category: Centro de costo
+  rest:
+  - PUT /centro_costo_definitions/update
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_centro_costo_definitions_centro_costo
+  category: Centro de costo
+  rest:
+  - POST /centro_costo_definitions/centro_costo
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_credits
+  category: Créditos
+  rest:
+  - GET /credits
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_credits_id
+  category: Créditos
+  rest:
+  - GET /credits/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_credits_id
+  category: Créditos
+  rest:
+  - PATCH /credits/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_credits_id
+  category: Créditos
+  rest:
+  - DELETE /credits/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_credits_id_suspend
+  category: Créditos
+  rest:
+  - POST /credits/{id}/suspend
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_credits_id_resume
+  category: Créditos
+  rest:
+  - POST /credits/{id}/resume
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_credits_create
+  category: Créditos
+  rest:
+  - POST /credits/create
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_working_days
+  category: Days worked
+  rest:
+  - GET /working_days
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_working_days
+  category: Days worked
+  rest:
+  - POST /working_days
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_working_days_employee_id_monthyear
+  category: Days worked
+  rest:
+  - DELETE /working_days/{employee_id}/{monthyear}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_recintos
+  category: Recintos
+  rest:
+  - GET /recintos
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_recintos
+  category: Recintos
+  rest:
+  - POST /recintos
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_recintos_code
+  category: Recintos
+  rest:
+  - PATCH /recintos/{code}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_unions_id
+  category: Unions
+  rest:
+  - GET /unions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_unions
+  category: Unions
+  rest:
+  - GET /unions
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_unions
+  category: Unions
+  rest:
+  - POST /unions
+  binding: '1:1'
+  confidence: high
+- tool: buk_put_unions_update
+  category: Unions
+  rest:
+  - PUT /unions/update
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_versions
+  category: Versions
+  rest:
+  - GET /versions
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_substitutions
+  category: Substitutions
+  rest:
+  - GET /substitutions
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_substitutions
+  category: Substitutions
+  rest:
+  - POST /substitutions
+  binding: '1:1'
+  confidence: high
+- tool: buk_patch_substitutions_id
+  category: Substitutions
+  rest:
+  - PATCH /substitutions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_delete_substitutions_id
+  category: Substitutions
+  rest:
+  - DELETE /substitutions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_employees_employee_id_payment_data_period_id
+  category: Synchronization of payment data
+  rest:
+  - POST /employees/{employee_id}/payment_data/{period_id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_people_id
+  category: People
+  rest:
+  - GET /people/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_benefits_benefit_requests
+  category: Benefits
+  rest:
+  - GET /benefits/benefit_requests
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_benefits_benefit_requests_id
+  category: Benefits
+  rest:
+  - GET /benefits/benefit_requests/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_benefits_benefit_versions_id
+  category: Benefits
+  rest:
+  - GET /benefits/benefit_versions/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_company_variables_empresa_id
+  category: Variables of the Empresas
+  rest:
+  - GET /company_variables/{empresa_id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_get_company_variable_registries_id
+  category: Empresas Variable Records
+  rest:
+  - GET /company_variable_registries/{id}
+  binding: '1:1'
+  confidence: high
+- tool: buk_post_recruiting_notes
+  category: Notas
+  rest:
+  - POST /recruiting/notes
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_recinto
+  category: Recintos
+  rest:
+  - GET /informacionRecinto
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_nomina
+  category: Nómina Colaborador
+  rest:
+  - GET /obtenerNominaColaborador
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_asignacionturnos
+  category: Turnos
+  rest:
+  - GET /getAsignacionTurnos
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_inasistencia
+  category: Inasistencia
+  rest:
+  - GET /obtenerInasistencias
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_horasextras
+  category: Horas extras
+  rest:
+  - GET /obtenerHorasExtras
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_horasnotrabajadas
+  category: Horas no trabajadas
+  rest:
+  - GET /obtenerHorasNoTrabajadas
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_asistencia_empresa
+  category: Registro de asistencia
+  rest:
+  - GET /v2/asistencia-empresa
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_registrar
+  category: Registro de asistencia
+  rest:
+  - POST /v2/registrar
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_registroasistencia
+  category: Registro de asistencia
+  rest:
+  - GET /obtenerRegistroAsistencia
+  binding: '1:1'
+  confidence: high
+- tool: buk_asistencia_registroasistenciapost
+  category: Registro de asistencia
+  rest:
+  - POST /inyectarRegistroAsistencia
+  binding: '1:1'
+  confidence: high
+mcp_only: []
+rest_only:
+- operation: POST /v1/clockings
+  operationId: createClocking
+  reason: Machine-to-machine biometric clocking ingestion — a device middleware endpoint authenticated
+    by a provider header pair, not a surface an agent should be handed.

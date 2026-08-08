@@ -1,0 +1,3244 @@
+generated: '2026-08-08'
+method: derived
+source: openapi/_original/buk-data-access-api-chile-openapi.json + openapi/_original/buk-asistencia-api-openapi.json
+status: candidate
+first_party_server: null
+first_party_evidence:
+- url: https://github.com/bukhr/mcps
+  status: 200
+  note: Repository named "Model Context Protocol (MCP) públicos de Buk" — created 2025-11-18 and
+    still empty apart from .gitignore and LICENSE. No server, no manifest, no tools.
+- url: https://github.com/bukhr/MCPservers
+  status: 200
+  note: A vendored copy of the Anthropic reference servers (git, github, gdrive, google workspace,
+    jenkins) used for Buk internal engineering tooling. It exposes no Buk product data and is not
+    an API surface for customers.
+- url: https://trust.buk.cl/.well-known/oauth-protected-resource
+  status: 200
+  note: Points at https://app.safebase.io/api/mcp — the SafeBase trust-center platform MCP, not a
+    Buk-operated server. tools/list against https://trust.buk.cl/api/mcp returned a Cloudflare challenge.
+notes: Buk publishes no MCP server for its own HR/payroll API. The tool surface below is a candidate
+  derived by API Evangelist from the published contracts — it is not offered by Buk and has not been
+  deployed. Every tool inherits its input schema from the backing operation. Because the Buk Data
+  Access API declares no operationId on any of its 206 operations, tools are keyed on METHOD + path
+  instead.
+transport_recommendation: streamable-http
+auth_recommendation: Pass the tenant auth_token header through per session; the token is already
+  entity-scoped to Lectura or Lectura y Modificación.
+counts:
+  tools: 216
+  read_only: 127
+  write: 89
+tools:
+- name: buk_post_recruiting_applicants
+  category: Postulante
+  operation: POST /recruiting/applicants
+  summary: Add applicant
+  read_only: false
+  parameters:
+  - name: Applicant
+    in: body
+    required: true
+    type: object
+- name: buk_post_recruiting_applicants_search_by_email
+  category: Postulante
+  operation: POST /recruiting/applicants/search_by_email
+  summary: Display Applicant
+  read_only: false
+  parameters:
+  - name: email
+    in: body
+    required: true
+    type: object
+- name: buk_get_recruiting_applicants_id
+  category: Postulante
+  operation: GET /recruiting/applicants/{id}
+  summary: Display Applicant
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_patch_recruiting_applicants_id
+  category: Applicant
+  operation: PATCH /recruiting/applicants/{id}
+  summary: Update applicants.
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: postulante
+    in: body
+    required: true
+    type: object
+- name: buk_get_recruiting_applicants
+  category: Postulante
+  operation: GET /recruiting/applicants/
+  summary: Create Applicants
+  read_only: true
+  parameters:
+  - name: selection_processes[]
+    in: query
+    required: false
+    type: array
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_recruiting_applicants_id_applications
+  category: Postulante
+  operation: GET /recruiting/applicants/{id}/applications
+  summary: List applications by applicant
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_recruiting_applications
+  category: Application
+  operation: POST /recruiting/applications
+  summary: Add applications
+  read_only: false
+  parameters:
+  - name: application
+    in: body
+    required: true
+    type: object
+- name: buk_get_recruiting_applications
+  category: Application
+  operation: GET /recruiting/applications
+  summary: List the applications.
+  read_only: true
+  parameters:
+  - name: selection_processes[]
+    in: query
+    required: false
+    type: array
+  - name: application_date
+    in: query
+    required: false
+    type: string
+  - name: updated_from
+    in: query
+    required: false
+    type: string
+  - name: updated_to
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_patch_recruiting_applications_id
+  category: Application
+  operation: PATCH /recruiting/applications/{id}
+  summary: Update applications
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: postulacion
+    in: body
+    required: true
+    type: object
+- name: buk_get_recruiting_selection_processes
+  category: Selection process
+  operation: GET /recruiting/selection_processes
+  summary: List selection processes
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+- name: buk_post_recruiting_selection_processes
+  category: Selection process
+  operation: POST /recruiting/selection_processes
+  summary: Selection Process
+  read_only: false
+  parameters:
+  - name: selection_process
+    in: body
+    required: true
+    type: object
+- name: buk_get_talent_evaluation_processes
+  category: Evaluations
+  operation: GET /talent/evaluation_processes
+  summary: Show performance evaluations
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_talent_evaluation_process_id_results_capacities
+  category: Evaluations
+  operation: GET /talent/evaluation_process/{id}/results/capacities
+  summary: Show the results of the Competency from a performance evaluation
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_talent_evaluation_process_id_results_goals
+  category: Evaluations
+  operation: GET /talent/evaluation_process/{id}/results/goals
+  summary: Display the results of the Objetivos from a performance evaluation
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_training_sence_percents
+  category: Capacitaciones
+  operation: GET /training/sence_percents
+  summary: Mostrar tramo sence de todos los empleados
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_training_sence_percents_employee_id
+  category: Capacitaciones
+  operation: GET /training/sence_percents/{employee_id}
+  summary: Mostrar el tramo sence de un empleados
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+- name: buk_get_piecework_tasks
+  category: Labores
+  operation: GET /piecework/tasks
+  summary: Listar labores
+  read_only: true
+  parameters:
+  - name: created_at
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_tasks
+  category: Labores
+  operation: POST /piecework/tasks
+  summary: Crear labores
+  read_only: false
+  parameters:
+  - name: Labor
+    in: body
+    required: true
+    type: object
+- name: buk_get_piecework_executions
+  category: Tarifas
+  operation: GET /piecework/executions
+  summary: Listar Tarifas
+  read_only: true
+  parameters:
+  - name: created_at
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_executions
+  category: Tarifas
+  operation: POST /piecework/executions
+  summary: Crear tarifa
+  read_only: false
+  parameters:
+  - name: Tarifa
+    in: body
+    required: true
+    type: object
+- name: buk_get_piecework_products
+  category: Productos
+  operation: GET /piecework/products
+  summary: Listar Productos
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_products
+  category: Productos
+  operation: POST /piecework/products
+  summary: Crear Productos
+  read_only: false
+  parameters:
+  - name: Producto
+    in: body
+    required: true
+    type: object
+- name: buk_get_piecework_units
+  category: Unidades
+  operation: GET /piecework/units
+  summary: Listar Unidades
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_units
+  category: Unidades
+  operation: POST /piecework/units
+  summary: Crear Unidades
+  read_only: false
+  parameters:
+  - name: Unidad
+    in: body
+    required: true
+    type: object
+- name: buk_get_piecework_places
+  category: Lugares de Trabajo
+  operation: GET /piecework/places
+  summary: Listar Lugares de Trabajo
+  read_only: true
+  parameters:
+  - name: empresa_id
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_places
+  category: Lugares de Trabajo
+  operation: POST /piecework/places
+  summary: Crear Lugares de Trabajo
+  read_only: false
+  parameters:
+  - name: Lugar de Trabajo
+    in: body
+    required: true
+    type: object
+- name: buk_get_piecework_worklogs
+  category: Registros de Trabajo
+  operation: GET /piecework/worklogs
+  summary: Listar Registros de Trabajo
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: query
+    required: false
+    type: integer
+  - name: variable_id
+    in: query
+    required: false
+    type: integer
+  - name: empresa_id
+    in: query
+    required: false
+    type: integer
+  - name: area_id
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_piecework_worklogs
+  category: Registros de Trabajo
+  operation: POST /piecework/worklogs
+  summary: Crear Registro de Trabajo
+  read_only: false
+  parameters:
+  - name: Registro de Trabajo
+    in: body
+    required: true
+    type: object
+- name: buk_patch_piecework_worklogs_id
+  category: Registros de Trabajo
+  operation: PATCH /piecework/worklogs/{id}
+  summary: Editar un Registro de Trabajo
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: Registro de Trabajo
+    in: body
+    required: true
+    type: object
+- name: buk_get_workflow_alta_processes
+  category: Workflows
+  operation: GET /workflow/alta/processes
+  summary: Obtain hiring processes flows
+  read_only: true
+  parameters:
+  - name: status
+    in: query
+    required: false
+    type: integer
+  - name: creation_start_date
+    in: query
+    required: false
+    type: string
+  - name: creation_end_date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_process_periods
+  category: Períodos
+  operation: GET /process_periods
+  summary: Listar períodos
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_process
+  category: Procesos
+  operation: GET /process
+  summary: List processes
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: true
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: name
+    in: query
+    required: false
+    type: string
+- name: buk_post_process
+  category: Procesos
+  operation: POST /process
+  summary: Crear un nuevo proceso de nómina
+  read_only: false
+  parameters:
+  - name: Process
+    in: body
+    required: true
+    type: object
+- name: buk_get_process_id
+  category: Procesos
+  operation: GET /process/{id}
+  summary: Obtener detalles de un proceso
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_delete_process_id
+  category: Procesos
+  operation: DELETE /process/{id}
+  summary: Eliminar proceso
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_groups
+  category: Grupos
+  operation: GET /groups
+  summary: List groups
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_groups_id
+  category: Grupos
+  operation: GET /groups/{id}
+  summary: Show group
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees
+  category: Colaboradores
+  operation: GET /employees
+  summary: 'Display Translation missing: en-cl.{custom_translations.models.employee.other'
+  read_only: true
+  parameters:
+  - name: status
+    in: query
+    required: false
+    type: string
+  - name: document_numberdocument_number
+    in: query
+    required: false
+    type: string
+  - name: code_sheet
+    in: query
+    required: false
+    type: string
+  - name: company_id
+    in: query
+    required: false
+    type: string
+  - name: update_start_date
+    in: query
+    required: false
+    type: string
+  - name: custom_attr_job_name
+    in: query
+    required: false
+    type: string
+  - name: custom_attr_job_value
+    in: query
+    required: false
+    type: string
+  - name: email
+    in: query
+    required: false
+    type: string
+  - name: code_recinto
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: sort
+    in: query
+    required: false
+    type: string
+- name: buk_post_employees
+  category: Colaboradores
+  operation: POST /employees
+  summary: Create an Colaborador
+  read_only: false
+  parameters:
+  - name: Employee
+    in: body
+    required: true
+    type: object
+- name: buk_post_employees_id_clone
+  category: Colaboradores
+  operation: POST /employees/{id}/clone
+  summary: 'Create a new profile for an Translation missing: en-cl.{custom_translations.models.employee.one'
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Employee
+    in: body
+    required: true
+    type: object
+- name: buk_get_employees_active
+  category: Colaboradores
+  operation: GET /employees/active
+  summary: List Colaboradores
+  read_only: true
+  parameters:
+  - name: RUT
+    in: query
+    required: false
+    type: string
+  - name: code_sheet
+    in: query
+    required: false
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: exclude_pending
+    in: query
+    required: false
+    type: boolean
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_id
+  category: Colaboradores
+  operation: GET /employees/{id}
+  summary: 'Display Translation missing: en-cl.{custom_translations.models.employee.one'
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_patch_employees_id
+  category: Colaboradores
+  operation: PATCH /employees/{id}
+  summary: Update Colaborador
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Employee
+    in: body
+    required: true
+    type: object
+- name: buk_get_employees_id_subordinates
+  category: Colaboradores
+  operation: GET /employees/{id}/subordinates
+  summary: Display Colaboradores subordinate to other Colaborador
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_id_vacations_available
+  category: Colaboradores
+  operation: GET /employees/{id}/vacations_available
+  summary: Display number of days available for vacation
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: discount
+    in: query
+    required: false
+    type: boolean
+  - name: date
+    in: query
+    required: false
+    type: string
+- name: buk_get_employees_id_earned_vacations
+  category: Colaboradores
+  operation: GET /employees/{id}/earned_vacations
+  summary: Show details of accrued vacation and proportional simulation
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_employee_id_family_responsibilities_id
+  category: Colaboradores
+  operation: GET /employees/{employee_id}/family_responsibilities/{id}
+  summary: Display Family Group of a Colaborador
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_patch_cargas_id
+  category: Grupo Familiar
+  operation: PATCH /cargas/{id}
+  summary: Actualizar Grupo Familiar
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: carga
+    in: body
+    required: true
+    type: object
+- name: buk_get_jobs_id_termination
+  category: Termination processes
+  operation: GET /jobs/{id}/termination
+  summary: Obtain termination process
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_post_jobs_id_termination
+  category: Termination processes
+  operation: POST /jobs/{id}/termination
+  summary: Create Termination process
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Termination process
+    in: body
+    required: true
+    type: object
+- name: buk_get_employees_id_pension_savings
+  category: Colaboradores
+  operation: GET /employees/{id}/pension_savings
+  summary: View pension savings
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+- name: buk_get_users
+  category: Users and profiles
+  operation: GET /users
+  summary: Show users
+  read_only: true
+  parameters:
+  - name: name
+    in: query
+    required: false
+    type: string
+  - name: email
+    in: query
+    required: false
+    type: string
+  - name: person_id
+    in: query
+    required: false
+    type: integer
+  - name: permission_role_id
+    in: query
+    required: false
+    type: integer
+  - name: limit_areas
+    in: query
+    required: false
+    type: boolean
+  - name: limit_realms
+    in: query
+    required: false
+    type: boolean
+  - name: realm_name
+    in: query
+    required: false
+    type: boolean
+  - name: limited_by_area_id
+    in: query
+    required: false
+    type: integer
+  - name: activated
+    in: query
+    required: false
+    type: boolean
+  - name: rol_visible
+    in: query
+    required: false
+    type: string
+- name: buk_post_users
+  category: Users and profiles
+  operation: POST /users
+  summary: Create users
+  read_only: false
+  parameters:
+  - name: User
+    in: body
+    required: true
+    type: object
+- name: buk_get_users_id
+  category: Users and profiles
+  operation: GET /users/{id}
+  summary: Show user
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_put_users_id
+  category: Users and profiles
+  operation: PUT /users/{id}
+  summary: Edit user
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: User
+    in: body
+    required: true
+    type: object
+- name: buk_get_permission_roles
+  category: Usuarios y perfiles
+  operation: GET /permission_roles
+  summary: Mostrar Perfiles
+  read_only: true
+  parameters:
+  - name: id
+    in: query
+    required: false
+    type: integer
+  - name: name
+    in: query
+    required: false
+    type: string
+- name: buk_get_employees_id_plans
+  category: Colaboradores
+  operation: GET /employees/{id}/plans
+  summary: Display an employee's plans
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_post_employees_id_plans
+  category: Colaboradores
+  operation: POST /employees/{id}/plans
+  summary: Add a plan to an employee
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Plan
+    in: body
+    required: true
+    type: object
+- name: buk_get_employees_employee_id_plans_id
+  category: Colaboradores
+  operation: GET /employees/{employee_id}/plans/{id}
+  summary: Display an employee's plan
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_patch_employees_employee_id_plans_id
+  category: Colaboradores
+  operation: PATCH /employees/{employee_id}/plans/{id}
+  summary: Update a plan to an employee
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Plan
+    in: body
+    required: true
+    type: object
+- name: buk_get_employees_id_jobs
+  category: Colaboradores
+  operation: GET /employees/{id}/jobs
+  summary: Display jobs of a Colaborador
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_post_employees_id_jobs
+  category: Colaboradores
+  operation: POST /employees/{id}/jobs
+  summary: Add a job to Colaborador
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Job
+    in: body
+    required: true
+    type: object
+- name: buk_patch_employees_employee_id_jobs_id
+  category: Colaboradores
+  operation: PATCH /employees/{employee_id}/jobs/{id}
+  summary: Update a job for a Colaborador
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Job
+    in: body
+    required: true
+    type: object
+- name: buk_patch_jobs_id_terminate
+  category: Jobs
+  operation: PATCH /jobs/{id}/terminate
+  summary: Complete the job with the given ID.
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+  - name: Job
+    in: body
+    required: true
+    type: object
+- name: buk_patch_employees_employee_id_jobs_job_id_cost_centers
+  category: Colaboradores
+  operation: PATCH /employees/{employee_id}/jobs/{job_id}/cost_centers
+  summary: Update the cost center in a job for a Colaborador
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: path
+    required: false
+    type: integer
+  - name: job_id
+    in: path
+    required: false
+    type: integer
+  - name: cost center
+    in: body
+    required: true
+    type: object
+- name: buk_post_jobs_id_undo
+  category: Jobs
+  operation: POST /jobs/{id}/undo
+  summary: Undo the last move and return to the previous job.
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_patch_jobs_id_undo_terminate
+  category: Jobs
+  operation: PATCH /jobs/{id}/undo_terminate
+  summary: Termination cancelation
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_post_employees_id_docs
+  category: Colaboradores
+  operation: POST /employees/{id}/docs
+  summary: Add a document to employee
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: file
+    in: formData
+    required: false
+    type: file
+  - name: file_base64
+    in: formData
+    required: false
+    type: object
+  - name: visible
+    in: query
+    required: false
+    type: boolean
+  - name: signable_by_employee
+    in: query
+    required: false
+    type: boolean
+  - name: signable_by_legal_agent
+    in: query
+    required: false
+    type: boolean
+  - name: signable_by_second_legal_agent
+    in: query
+    required: false
+    type: boolean
+  - name: overwrite
+    in: query
+    required: false
+    type: boolean
+  - name: start_signature_workflow
+    in: query
+    required: false
+    type: boolean
+  - name: path
+    in: query
+    required: false
+    type: string
+  - name: signatures
+    in: query
+    required: false
+    type: object
+  - name: reviewer_id
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_id_docs
+  category: Colaboradores
+  operation: GET /employees/{id}/docs
+  summary: Obtain employee documents
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+- name: buk_get_employees_id_docs_file_id
+  category: Colaboradores
+  operation: GET /employees/{id}/docs/{file_id}
+  summary: Obtains an employee document
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: file_id
+    in: path
+    required: true
+    type: string
+- name: buk_get_docs_id
+  category: Colaboradores
+  operation: GET /docs/{id}
+  summary: Obtain document detailed information
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_post_docs_id_signatures_process
+  category: Documents
+  operation: POST /docs/{id}/signatures/process
+  summary: Start document signature workflow
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_put_docs_id_signatures
+  category: Documents
+  operation: PUT /docs/{id}/signatures
+  summary: Add signers to a document
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: Signature specifications
+    in: body
+    required: true
+    type: object
+- name: buk_get_payroll_detail_month
+  category: Pay stubs
+  operation: GET /payroll_detail/month
+  summary: List Pay stubs
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_payroll_detail_semi_month
+  category: Pay stubs
+  operation: GET /payroll_detail/semi_month
+  summary: List Pay stubs
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_payroll_detail_week
+  category: Pay stubs
+  operation: GET /payroll_detail/week
+  summary: List Pay stubs
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_employee_id_payroll_detail
+  category: Pay stubs
+  operation: GET /employees/{employee_id}/payroll_detail
+  summary: Show details of the Colaborador
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: string
+  - name: period_type
+    in: query
+    required: false
+    type: string
+  - name: start
+    in: query
+    required: false
+    type: string
+  - name: end
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_employees_id_statements_year_month_pdf
+  category: Pay stubs
+  operation: GET /employees/{id}/statements/{year}-{month}.pdf
+  summary: Pay stub file
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: year
+    in: path
+    required: true
+    type: integer
+  - name: month
+    in: path
+    required: true
+    type: integer
+- name: buk_get_vacations
+  category: Vacaciones
+  operation: GET /vacations
+  summary: Listar vacaciones
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+  - name: end_after
+    in: query
+    required: false
+    type: string
+  - name: start_before
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_vacations
+  category: Vacaciones
+  operation: POST /vacations
+  summary: Crear una vacacion
+  read_only: false
+  parameters:
+  - name: vacation
+    in: body
+    required: true
+    type: object
+- name: buk_delete_vacations
+  category: Vacaciones
+  operation: DELETE /vacations
+  summary: Borrar una vacación
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: query
+    required: true
+    type: integer
+  - name: start_date
+    in: query
+    required: true
+    type: string
+  - name: end_date
+    in: query
+    required: true
+    type: string
+- name: buk_get_vacations_id
+  category: Vacaciones
+  operation: GET /vacations/{id}
+  summary: Mostrar una vacación
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_get_vacations_business_days
+  category: Vacaciones
+  operation: GET /vacations/business_days
+  summary: Mostrar cantidad de días hábiles
+  read_only: true
+  parameters:
+  - name: start_date
+    in: query
+    required: true
+    type: string
+  - name: end_date
+    in: query
+    required: true
+    type: string
+- name: buk_get_vacations_requested
+  category: Vacaciones
+  operation: GET /vacations/requested
+  summary: Listar Vacaciones
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+  - name: end_after
+    in: query
+    required: false
+    type: string
+  - name: start_before
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: status
+    in: query
+    required: false
+    type: string
+- name: buk_get_employees_id_vacation_definitions
+  category: Colaboradores
+  operation: GET /employees/{id}/vacation_definitions
+  summary: List vacation policies associated with the employee.
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_post_employees_id_vacation_definitions
+  category: Colaboradores
+  operation: POST /employees/{id}/vacation_definitions
+  summary: Add a vacation policy to the employees
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: VacationConfigDefinition
+    in: body
+    required: true
+    type: object
+- name: buk_delete_employees_id_vacation_definitions_code
+  category: Colaboradores
+  operation: DELETE /employees/{id}/vacation_definitions/{code}
+  summary: Unassign an employee vacation policy
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: code
+    in: path
+    required: true
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+- name: buk_get_vacation_definitions
+  category: Vacation Policies
+  operation: GET /vacation_definitions
+  summary: List Vacation Policies
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_absences_absence_types
+  category: Unexcused absence
+  operation: GET /absences/absence/types
+  summary: List time off types
+  read_only: true
+  parameters:
+  - name: with_pay
+    in: query
+    required: false
+    type: boolean
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_absences_absence_types
+  category: Unexcused absence
+  operation: POST /absences/absence/types
+  summary: Create a time off type
+  read_only: false
+  parameters:
+  - name: LicenceType
+    in: body
+    required: false
+    type: object
+- name: buk_get_absences_absence_types_id
+  category: Unexcused absence
+  operation: GET /absences/absence/types/{id}
+  summary: View a time off type
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_delete_absences_absence_types_id
+  category: Unexcused absence
+  operation: DELETE /absences/absence/types/{id}
+  summary: Delete a time off type
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_absences_permission_types
+  category: Absences requests
+  operation: GET /absences/permission/types
+  summary: List absence request types
+  read_only: true
+  parameters:
+  - name: with_pay
+    in: query
+    required: false
+    type: boolean
+  - name: time_measure
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_absences_permission_types
+  category: Absences requests
+  operation: POST /absences/permission/types
+  summary: Create an absence request type
+  read_only: false
+  parameters:
+  - name: LicenceType
+    in: body
+    required: false
+    type: object
+- name: buk_get_absences_permission_types_id
+  category: Absences requests
+  operation: GET /absences/permission/types/{id}
+  summary: View an absence request type
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_delete_absences_permission_types_id
+  category: Absences requests
+  operation: DELETE /absences/permission/types/{id}
+  summary: Delete an absence request type
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_absences_licence_types
+  category: Leaves
+  operation: GET /absences/licence/types
+  summary: Listar tipos de leaves
+  read_only: true
+  parameters:
+  - name: with_pay
+    in: query
+    required: false
+    type: boolean
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_absences_licence_types_id
+  category: Leaves
+  operation: GET /absences/licence/types/{id}
+  summary: Ver un tipo de licencia
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_absences
+  category: Time Off Leaves
+  operation: GET /absences
+  summary: List unexcused absences
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: type
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_absences_licence
+  category: Leaves
+  operation: GET /absences/licence
+  summary: List leaves
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_absences_licence
+  category: Leaves
+  operation: POST /absences/licence
+  summary: Create a leave
+  read_only: false
+  parameters:
+  - name: leaves
+    in: body
+    required: false
+    type: object
+- name: buk_delete_absences_licence
+  category: Leaves
+  operation: DELETE /absences/licence
+  summary: Delete leaves
+  read_only: false
+  parameters:
+  - name: employee_ids
+    in: query
+    required: false
+    type: array
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+- name: buk_get_absences_licence_id
+  category: Leaves
+  operation: GET /absences/licence/{id}
+  summary: View leave
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_delete_absences_licence_id
+  category: Leaves
+  operation: DELETE /absences/licence/{id}
+  summary: Delete a leave
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_employees_absences_licences
+  category: Colaboradores
+  operation: GET /employees/absences/licences
+  summary: Ver leaves de Colaboradores
+  read_only: true
+  parameters:
+  - name: employees_id
+    in: query
+    required: false
+    type: array
+- name: buk_get_absences_absence
+  category: Unexcused absence
+  operation: GET /absences/absence
+  summary: List time off leaves
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_delete_absences_absence
+  category: Unexcused absence
+  operation: DELETE /absences/absence
+  summary: Delete Time Off Leaves
+  read_only: false
+  parameters:
+  - name: employee_ids
+    in: query
+    required: false
+    type: array
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+- name: buk_post_absences_absence
+  category: Unexcused absence
+  operation: POST /absences/absence
+  summary: Create unjustified Time Off
+  read_only: false
+  parameters:
+  - name: Time Off
+    in: body
+    required: false
+    type: object
+- name: buk_get_absences_absence_id
+  category: Unexcused absence
+  operation: GET /absences/absence/{id}
+  summary: View a time off
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_delete_absences_absence_id
+  category: Unexcused absence
+  operation: DELETE /absences/absence/{id}
+  summary: Delete time off leaves
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_employees_absences_absences
+  category: Colaboradores
+  operation: GET /employees/absences/absences
+  summary: View Colaboradores's time off leave
+  read_only: true
+  parameters:
+  - name: employees_id
+    in: query
+    required: false
+    type: array
+- name: buk_get_absences_permission
+  category: Absences requests
+  operation: GET /absences/permission
+  summary: List absence requests
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: time_measure
+    in: query
+    required: false
+    type: string
+  - name: start_time
+    in: query
+    required: false
+    type: string
+  - name: end_time
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_delete_absences_permission
+  category: Absences requests
+  operation: DELETE /absences/permission
+  summary: Delete Absence Requests
+  read_only: false
+  parameters:
+  - name: employee_ids
+    in: query
+    required: false
+    type: array
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+- name: buk_post_absences_permission
+  category: Absences requests
+  operation: POST /absences/permission
+  summary: Create Absence Request
+  read_only: false
+  parameters:
+  - name: Absence Request
+    in: body
+    required: false
+    type: object
+- name: buk_get_absences_permission_id
+  category: Absences requests
+  operation: GET /absences/permission/{id}
+  summary: View an absence request
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_delete_absences_permission_id
+  category: Absences requests
+  operation: DELETE /absences/permission/{id}
+  summary: Delete absence request
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_employees_absences_permissions
+  category: Colaboradores
+  operation: GET /employees/absences/permissions
+  summary: View absence requests of the Colaboradores.
+  read_only: true
+  parameters:
+  - name: employees_id
+    in: query
+    required: false
+    type: array
+- name: buk_get_attendances_non_worked_hours
+  category: Non-Worked Hours
+  operation: GET /attendances/non-worked-hours
+  summary: List non-worked hours
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: sort
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_attendances_non_worked_hours
+  category: Non-Worked Hours
+  operation: POST /attendances/non-worked-hours
+  summary: Add non-worked hours
+  read_only: false
+  parameters:
+  - name: Non-Worked Hours
+    in: body
+    required: false
+    type: object
+- name: buk_put_attendances_non_worked_hours
+  category: Non-Worked Hours
+  operation: PUT /attendances/non-worked-hours
+  summary: Enter non-worked hours
+  read_only: false
+  parameters:
+  - name: Non-Worked Hours
+    in: body
+    required: false
+    type: object
+- name: buk_get_attendances_non_worked_hours_id
+  category: Non-Worked Hours
+  operation: GET /attendances/non-worked-hours/{id}
+  summary: View a non-working time record
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_attendances_overtime
+  category: Overtime
+  operation: GET /attendances/overtime
+  summary: List overtime
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_attendances_overtime
+  category: Overtime
+  operation: POST /attendances/overtime
+  summary: Add overtime
+  read_only: false
+  parameters:
+  - name: Overtime
+    in: body
+    required: false
+    type: object
+- name: buk_put_attendances_overtime
+  category: Overtime
+  operation: PUT /attendances/overtime
+  summary: Add overtime
+  read_only: false
+  parameters:
+  - name: Overtime
+    in: body
+    required: false
+    type: object
+- name: buk_get_attendances_overtime_id
+  category: Overtime
+  operation: GET /attendances/overtime/{id}
+  summary: View an overtime record
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_attendances_overtime_types
+  category: Overtime
+  operation: GET /attendances/overtime/types
+  summary: List types of overtime hours
+  read_only: true
+  parameters: []
+- name: buk_get_employees_overtimes
+  category: Colaboradores
+  operation: GET /employees/overtimes
+  summary: List overtime associated with Colaboradores.
+  read_only: true
+  parameters:
+  - name: employees_id
+    in: query
+    required: false
+    type: array
+  - name: overtime_type_id
+    in: query
+    required: false
+    type: integer
+- name: buk_get_attendances_non_worked_hours_types
+  category: Horas no trabajadas
+  operation: GET /attendances/non-worked-hours/types
+  summary: Listar tipos de horas no trabajadas
+  read_only: true
+  parameters: []
+- name: buk_post_attendances_non_worked_hours_types
+  category: Horas no trabajadas
+  operation: POST /attendances/non-worked-hours/types
+  summary: Crear una tipo de Hora no Trabajada
+  read_only: false
+  parameters:
+  - name: NonWorkedHourType
+    in: body
+    required: false
+    type: object
+- name: buk_delete_attendances_non_worked_hours_types_id
+  category: Horas no trabajadas
+  operation: DELETE /attendances/non-worked-hours/types/{id}
+  summary: Borrar un tipo de hora no trabajada
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: false
+    type: integer
+- name: buk_get_areas
+  category: Áreas
+  operation: GET /areas
+  summary: Listar áreas
+  read_only: true
+  parameters:
+  - name: status
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_areas_id
+  category: Áreas
+  operation: GET /areas/{id}
+  summary: Obtener un área en especifico por ID
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_organization_areas
+  category: Áreas
+  operation: GET /organization/areas/
+  summary: Listar áreas
+  read_only: true
+  parameters:
+  - name: status
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_organization_areas_id
+  category: Áreas
+  operation: GET /organization/areas/{id}
+  summary: Obtener un área en especifico por ID
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_patch_organization_areas_id
+  category: Áreas
+  operation: PATCH /organization/areas/{id}
+  summary: Actualizar un área por ID
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: body
+    in: body
+    required: true
+    type: object
+- name: buk_post_organization_areas
+  category: Áreas
+  operation: POST /organization/areas
+  summary: Crear Área
+  read_only: false
+  parameters:
+  - name: body
+    in: body
+    required: true
+    type: object
+- name: buk_delete_organization_areas
+  category: Áreas
+  operation: DELETE /organization/areas
+  summary: Eliminar áreas por ID
+  read_only: false
+  parameters:
+  - name: id
+    in: query
+    required: true
+    type: integer
+- name: buk_get_companies
+  category: Empresas
+  operation: GET /companies
+  summary: List Empresas
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting
+  category: Centralized accounting
+  operation: GET /accounting
+  summary: Centralized accounting
+  read_only: true
+  parameters:
+  - name: month
+    in: query
+    required: false
+    type: integer
+  - name: year
+    in: query
+    required: false
+    type: integer
+  - name: process_id
+    in: query
+    required: false
+    type: integer
+  - name: company_id
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_export
+  category: Centralized accounting
+  operation: GET /accounting/export
+  summary: Accounting
+  read_only: true
+  parameters:
+  - name: month
+    in: query
+    required: true
+    type: integer
+  - name: year
+    in: query
+    required: true
+    type: integer
+  - name: company_id
+    in: query
+    required: false
+    type: string
+  - name: subprocess_id
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_export_period
+  category: Centralized accounting
+  operation: GET /accounting/export_period
+  summary: Accounting
+  read_only: true
+  parameters:
+  - name: process_id
+    in: query
+    required: true
+    type: integer
+  - name: company_id
+    in: query
+    required: false
+    type: string
+  - name: subprocess_id
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_export_detail
+  category: Centralized accounting
+  operation: GET /accounting/export_detail
+  summary: Accounting by Pay Stub
+  read_only: true
+  parameters:
+  - name: month
+    in: query
+    required: true
+    type: integer
+  - name: year
+    in: query
+    required: true
+    type: integer
+  - name: company_id
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_vacations_balance
+  category: Centralized accounting
+  operation: GET /accounting/vacations/balance
+  summary: Show vacation balance by month
+  read_only: true
+  parameters:
+  - name: employee_id
+    in: query
+    required: false
+    type: integer
+  - name: year
+    in: query
+    required: true
+    type: integer
+  - name: month
+    in: query
+    required: true
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_export_process_differences
+  category: Centralized accounting
+  operation: GET /accounting/export_process_differences
+  summary: Reprocess accounting
+  read_only: true
+  parameters:
+  - name: process_id
+    in: query
+    required: true
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_structure_structures
+  category: Accounting Structures
+  operation: GET /accounting_structure/structures
+  summary: Get accounting structures for a company
+  read_only: true
+  parameters:
+  - name: empresa_id
+    in: query
+    required: true
+    type: integer
+- name: buk_get_accounting_structure_assignments
+  category: Accounting Structures
+  operation: GET /accounting_structure/assignments
+  summary: Get accounting structure assignments
+  read_only: true
+  parameters:
+  - name: empresa_id
+    in: query
+    required: false
+    type: integer
+  - name: accounting_structure_id
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_structure_export
+  category: Accounting Structures
+  operation: GET /accounting_structure/export
+  summary: Export accounting data
+  read_only: true
+  parameters:
+  - name: accounting_structure_assignment_id
+    in: query
+    required: true
+    type: integer
+  - name: month
+    in: query
+    required: true
+    type: integer
+  - name: year
+    in: query
+    required: true
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_accounting_structure_export_process_differences
+  category: Accounting Structures
+  operation: GET /accounting_structure/export_process_differences
+  summary: Accounting of the reprocessing with accounting structure
+  read_only: true
+  parameters:
+  - name: accounting_structure_assignment_id
+    in: query
+    required: true
+    type: integer
+  - name: process_id
+    in: query
+    required: true
+    type: integer
+- name: buk_get_holidays
+  category: Feriados
+  operation: GET /holidays
+  summary: Listar días feriados
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_roles
+  category: Job Titles
+  operation: GET /roles
+  summary: List job titles
+  read_only: true
+  parameters:
+  - name: search
+    in: query
+    required: false
+    type: string
+  - name: code
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_roles
+  category: Job Titles
+  operation: POST /roles
+  summary: Create a job title
+  read_only: false
+  parameters:
+  - name: Role
+    in: body
+    required: true
+    type: object
+- name: buk_get_roles_id
+  category: Job Titles
+  operation: GET /roles/{id}
+  summary: Get a specific role by ID
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_patch_roles_identifier
+  category: Job Titles
+  operation: PATCH /roles/{identifier}
+  summary: Update a position
+  read_only: false
+  parameters:
+  - name: identifier
+    in: path
+    required: true
+    type: string
+  - name: Role
+    in: body
+    required: true
+    type: object
+- name: buk_get_role_families
+  category: Cargos
+  operation: GET /role_families
+  summary: Listar familia de cargos
+  read_only: true
+  parameters:
+  - name: search
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_items
+  category: Ítems
+  operation: GET /items
+  summary: Listar ítems
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: name
+    in: query
+    required: false
+    type: string
+  - name: code
+    in: query
+    required: false
+    type: string
+  - name: type
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_ledger_account
+  category: Centralized accounting
+  operation: GET /ledger_account
+  summary: List accounts
+  read_only: true
+  parameters:
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_assigns
+  category: Items
+  operation: POST /assigns
+  summary: Asignar un ítem
+  read_only: false
+  parameters:
+  - name: body
+    in: body
+    required: true
+    type: object
+- name: buk_patch_assigns_id
+  category: Items
+  operation: PATCH /assigns/{id}
+  summary: Editar una asignación
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Assign
+    in: body
+    required: false
+    type: object
+- name: buk_delete_assigns_id
+  category: Items
+  operation: DELETE /assigns/{id}
+  summary: Eliminar una asignación
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+- name: buk_post_assigns_id_terminate
+  category: Items
+  operation: POST /assigns/{id}/terminate
+  summary: Terminar una asignación de ítem
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: Assign
+    in: body
+    required: false
+    type: object
+- name: buk_get_employees_id_assigns
+  category: Items
+  operation: GET /employees/{id}/assigns
+  summary: Show employee's item assignments
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+  - name: date
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_jobs_events_hires
+  category: Jobs
+  operation: GET /jobs/events/hires
+  summary: List job records of the Colaboradores.
+  read_only: true
+  parameters:
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+  - name: sort
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_jobs_events_movements
+  category: Jobs
+  operation: GET /jobs/events/movements
+  summary: List the activity records for the jobs of the Colaboradores.
+  read_only: true
+  parameters:
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+  - name: sort
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_jobs_events_terminations
+  category: Jobs
+  operation: GET /jobs/events/terminations
+  summary: List terminations
+  read_only: true
+  parameters:
+  - name: start_date
+    in: query
+    required: false
+    type: string
+  - name: end_date
+    in: query
+    required: false
+    type: string
+  - name: sort
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_kpis
+  category: KPIs
+  operation: GET /kpis
+  summary: Listar tipos de KPI
+  read_only: true
+  parameters:
+  - name: name
+    in: query
+    required: false
+    type: string
+  - name: code
+    in: query
+    required: false
+    type: string
+  - name: related_to
+    in: query
+    required: false
+    type: string
+  - name: units
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_kpi_data
+  category: KPIs
+  operation: GET /kpi_data
+  summary: Listar datos de KPI
+  read_only: true
+  parameters:
+  - name: kpi_id
+    in: query
+    required: false
+    type: integer
+  - name: empresa_id
+    in: query
+    required: false
+    type: integer
+  - name: area_id
+    in: query
+    required: false
+    type: integer
+  - name: employee_id
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_kpi_data
+  category: KPIs
+  operation: POST /kpi_data
+  summary: Ingresar un dato de KPI
+  read_only: false
+  parameters:
+  - name: kpi_datum
+    in: body
+    required: true
+    type: object
+- name: buk_patch_kpi_data_id
+  category: KPIs
+  operation: PATCH /kpi_data/{id}
+  summary: Actualizar un dato de KPI
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: value
+    in: query
+    required: true
+    type: number
+- name: buk_get_locations_id
+  category: Localidades
+  operation: GET /locations/{id}
+  summary: Mostrar localidad
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_locations
+  category: Localidades
+  operation: GET /locations
+  summary: Mostrar localidades
+  read_only: true
+  parameters:
+  - name: depth
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_centro_costo_definitions_id
+  category: Centro de costo
+  operation: GET /centro_costo_definitions/{id}
+  summary: Mostrar centro de costo
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_patch_centro_costo_definitions_id
+  category: Centro de costo
+  operation: PATCH /centro_costo_definitions/{id}
+  summary: Actualizar un centro de costo por ID
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: body
+    in: body
+    required: true
+    type: object
+- name: buk_get_centro_costo_definitions
+  category: Centro de costo
+  operation: GET /centro_costo_definitions
+  summary: Mostrar centros de costo
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_post_centro_costo_definitions
+  category: Centro de costo
+  operation: POST /centro_costo_definitions
+  summary: Crear centro de costo
+  read_only: false
+  parameters:
+  - name: centro_costo_definition
+    in: body
+    required: true
+    type: object
+- name: buk_put_centro_costo_definitions_update
+  category: Centro de costo
+  operation: PUT /centro_costo_definitions/update
+  summary: Actualizar información centro de costo
+  read_only: false
+  parameters:
+  - name: centro_costo_definition
+    in: body
+    required: false
+    type: object
+- name: buk_post_centro_costo_definitions_centro_costo
+  category: Centro de costo
+  operation: POST /centro_costo_definitions/centro_costo
+  summary: Indicar centro de costo del trabajo
+  read_only: false
+  parameters:
+  - name: centro_costo
+    in: body
+    required: false
+    type: object
+- name: buk_get_credits
+  category: Créditos
+  operation: GET /credits
+  summary: Listar créditos
+  read_only: true
+  parameters:
+  - name: date
+    in: query
+    required: true
+    type: string
+  - name: name
+    in: query
+    required: false
+    type: string
+  - name: type
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_get_credits_id
+  category: Créditos
+  operation: GET /credits/{id}
+  summary: Mostrar un crédito
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: year
+    in: query
+    required: true
+    type: integer
+  - name: month
+    in: query
+    required: true
+    type: integer
+- name: buk_patch_credits_id
+  category: Créditos
+  operation: PATCH /credits/{id}
+  summary: Editar un crédito
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: Créditos
+    in: body
+    required: true
+    type: object
+- name: buk_delete_credits_id
+  category: Créditos
+  operation: DELETE /credits/{id}
+  summary: Eliminar un crédito
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_post_credits_id_suspend
+  category: Créditos
+  operation: POST /credits/{id}/suspend
+  summary: Suspender un crédito
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: Créditos
+    in: body
+    required: true
+    type: object
+- name: buk_post_credits_id_resume
+  category: Créditos
+  operation: POST /credits/{id}/resume
+  summary: reanudar un crédito
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: Créditos
+    in: body
+    required: false
+    type: object
+- name: buk_post_credits_create
+  category: Créditos
+  operation: POST /credits/create
+  summary: Asignar créditos
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: query
+    required: true
+    type: integer
+  - name: nombre
+    in: query
+    required: true
+    type: string
+  - name: tipo
+    in: query
+    required: true
+    type: string
+  - name: start_date
+    in: query
+    required: true
+    type: string
+  - name: moneda
+    in: query
+    required: true
+    type: string
+  - name: amount
+    in: query
+    required: true
+    type: integer
+  - name: cuota_actual
+    in: query
+    required: true
+    type: integer
+  - name: duracion
+    in: query
+    required: true
+    type: integer
+  - name: comentario
+    in: query
+    required: false
+    type: string
+  - name: dia_uf
+    in: query
+    required: false
+    type: string
+- name: buk_get_working_days
+  category: Days worked
+  operation: GET /working_days
+  summary: Show Worked Days
+  read_only: true
+  parameters:
+  - name: from
+    in: query
+    required: false
+    type: string
+  - name: to
+    in: query
+    required: false
+    type: string
+  - name: document_number
+    in: query
+    required: false
+    type: string
+  - name: code
+    in: query
+    required: false
+    type: string
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_post_working_days
+  category: Days worked
+  operation: POST /working_days
+  summary: Create worked days
+  read_only: false
+  parameters:
+  - name: WorkingDay
+    in: body
+    required: false
+    type: object
+- name: buk_delete_working_days_employee_id_monthyear
+  category: Days worked
+  operation: DELETE /working_days/{employee_id}/{monthyear}
+  summary: Delete worked days
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: integer
+  - name: monthyear
+    in: path
+    required: true
+    type: string
+- name: buk_get_recintos
+  category: Recintos
+  operation: GET /recintos
+  summary: Show Recintos
+  read_only: true
+  parameters:
+  - name: code
+    in: query
+    required: false
+    type: string
+- name: buk_post_recintos
+  category: Recintos
+  operation: POST /recintos
+  summary: Create Recinto
+  read_only: false
+  parameters:
+  - name: Recinto
+    in: body
+    required: true
+    type: object
+- name: buk_patch_recintos_code
+  category: Recintos
+  operation: PATCH /recintos/{code}
+  summary: Upgrade Recinto
+  read_only: false
+  parameters:
+  - name: code
+    in: path
+    required: true
+    type: string
+  - name: recinto
+    in: body
+    required: true
+    type: object
+- name: buk_get_unions_id
+  category: Unions
+  operation: GET /unions/{id}
+  summary: Show union
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_unions
+  category: Unions
+  operation: GET /unions
+  summary: Show unions
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_post_unions
+  category: Unions
+  operation: POST /unions
+  summary: Create a union
+  read_only: false
+  parameters:
+  - name: union
+    in: body
+    required: true
+    type: object
+- name: buk_put_unions_update
+  category: Unions
+  operation: PUT /unions/update
+  summary: Update union information
+  read_only: false
+  parameters:
+  - name: union
+    in: body
+    required: false
+    type: object
+- name: buk_get_versions
+  category: Versions
+  operation: GET /versions
+  summary: Show versions
+  read_only: true
+  parameters:
+  - name: event
+    in: query
+    required: false
+    type: integer
+  - name: item_type
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: page
+    in: query
+    required: false
+    type: integer
+- name: buk_get_substitutions
+  category: Substitutions
+  operation: GET /substitutions
+  summary: null
+  read_only: true
+  parameters:
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+- name: buk_post_substitutions
+  category: Substitutions
+  operation: POST /substitutions
+  summary: null
+  read_only: false
+  parameters:
+  - name: substitution
+    in: body
+    required: true
+    type: object
+- name: buk_patch_substitutions_id
+  category: Substitutions
+  operation: PATCH /substitutions/{id}
+  summary: null
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+  - name: substitution
+    in: body
+    required: true
+    type: object
+- name: buk_delete_substitutions_id
+  category: Substitutions
+  operation: DELETE /substitutions/{id}
+  summary: null
+  read_only: false
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_post_employees_employee_id_payment_data_period_id
+  category: Synchronization of payment data
+  operation: POST /employees/{employee_id}/payment_data/{period_id}
+  summary: Crea o actualiza las asignaciones y sobretiempos de un determinado Colaborador.
+  read_only: false
+  parameters:
+  - name: employee_id
+    in: path
+    required: true
+    type: integer
+  - name: period_id
+    in: path
+    required: true
+    type: integer
+  - name: body
+    in: body
+    required: false
+    type: object
+- name: buk_get_people_id
+  category: People
+  operation: GET /people/{id}
+  summary: Obtain basic data on a person
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_benefits_benefit_requests
+  category: Benefits
+  operation: GET /benefits/benefit_requests
+  summary: List all benefit requests
+  read_only: true
+  parameters:
+  - name: status
+    in: query
+    required: false
+    type: string
+  - name: person_id
+    in: query
+    required: false
+    type: integer
+  - name: available_version_id
+    in: query
+    required: false
+    type: integer
+  - name: requested_at_from
+    in: query
+    required: false
+    type: string
+  - name: requested_at_to
+    in: query
+    required: false
+    type: string
+  - name: page
+    in: query
+    required: false
+    type: integer
+  - name: per_page
+    in: query
+    required: false
+    type: integer
+  - name: sort_by
+    in: query
+    required: false
+    type: string
+  - name: sort_order
+    in: query
+    required: false
+    type: string
+- name: buk_get_benefits_benefit_requests_id
+  category: Benefits
+  operation: GET /benefits/benefit_requests/{id}
+  summary: Obtains a specific benefit request
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_benefits_benefit_versions_id
+  category: Benefits
+  operation: GET /benefits/benefit_versions/{id}
+  summary: Obtains information from a benefit version
+  read_only: true
+  parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_company_variables_empresa_id
+  category: Variables of the Empresas
+  operation: GET /company_variables/{empresa_id}
+  summary: Variables of the Empresas
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: empresa_id
+    in: path
+    required: true
+    type: integer
+- name: buk_get_company_variable_registries_id
+  category: Empresas Variable Records
+  operation: GET /company_variable_registries/{id}
+  summary: List variable records of Empresas
+  read_only: true
+  parameters:
+  - name: page_size
+    in: query
+    required: false
+    type: integer
+  - name: id
+    in: path
+    required: true
+    type: integer
+- name: buk_post_recruiting_notes
+  category: Notas
+  operation: POST /recruiting/notes
+  summary: Add comment
+  read_only: false
+  parameters:
+  - name: note
+    in: body
+    required: true
+    type: object
+- name: buk_asistencia_recinto
+  category: Recintos
+  operation: GET /informacionRecinto
+  summary: Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa
+    específica. Cada recinto incluye detalles como el nombre, dirección y ubicación.
+  read_only: true
+  operationId: recinto
+  surface: asistencia
+- name: buk_asistencia_nomina
+  category: Nómina Colaborador
+  operation: GET /obtenerNominaColaborador
+  summary: Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles
+    como DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado
+  read_only: true
+  operationId: nomina
+  surface: asistencia
+- name: buk_asistencia_asignacionturnos
+  category: Turnos
+  operation: GET /getAsignacionTurnos
+  summary: Retorna un listado de los datos de trabajador junto con toda la informacion sobre los
+    turnos. El endpoint esta paginado, con un máximo de 1000 elementos por página.
+  read_only: true
+  operationId: asignacionTurnos
+  surface: asistencia
+- name: buk_asistencia_inasistencia
+  category: Inasistencia
+  operation: GET /obtenerInasistencias
+  summary: Retorna un listado de las inasistencia de los trabajadores de un recinto especifico para
+    un rango de fechas. El periodo esta limitado a un máximo de 35 dias. Ademas, se puede filtr
+  read_only: true
+  operationId: inasistencia
+  surface: asistencia
+- name: buk_asistencia_horasextras
+  category: Horas extras
+  operation: GET /obtenerHorasExtras
+  summary: Retorna un listado de las horas extras aprobadas de los trabajadores de un recinto especifico
+    en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se pue
+  read_only: true
+  operationId: horasExtras
+  surface: asistencia
+- name: buk_asistencia_horasnotrabajadas
+  category: Horas no trabajadas
+  operation: GET /obtenerHorasNoTrabajadas
+  summary: Retorna un listado de las horas no trabajadas acumuladas de los trabajadores de un recinto
+    especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas
+  read_only: true
+  operationId: horasNoTrabajadas
+  surface: asistencia
+- name: buk_asistencia_asistencia_empresa
+  category: Registro de asistencia
+  operation: GET /v2/asistencia-empresa
+  summary: 'Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una
+    empresa y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas '
+  read_only: true
+  operationId: asistencia-empresa
+  surface: asistencia
+- name: buk_asistencia_registrar
+  category: Registro de asistencia
+  operation: POST /v2/registrar
+  summary: Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee
+    autenticación por token de empresa (header `token`). El recinto identificado por `id` debe
+  read_only: false
+  operationId: registrar
+  surface: asistencia
+- name: buk_asistencia_registroasistencia
+  category: Registro de asistencia
+  operation: GET /obtenerRegistroAsistencia
+  summary: Retorna un listado de las de los registros de los trabajadores de un recinto especifico
+    en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede fil
+  read_only: true
+  operationId: registroAsistencia
+  surface: asistencia
+- name: buk_asistencia_registroasistenciapost
+  category: Registro de asistencia
+  operation: POST /inyectarRegistroAsistencia
+  summary: Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada
+    o salida, para un trabajador específico en un recinto determinado. Requiere especificar el D
+  read_only: false
+  operationId: registroAsistenciaPost
+  surface: asistencia

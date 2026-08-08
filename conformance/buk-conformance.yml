@@ -1,0 +1,97 @@
+generated: '2026-08-08'
+method: searched
+source: https://trust.buk.cl/ + https://demo.buk.cl/apidocs + openapi/_original/*.json
+notes: >-
+  Buk's compliance surface is organisational (ISO 27001, SOC 2 Type 2, published on a SafeBase
+  trust center) rather than technical: none of the API-level interoperability standards below
+  are claimed or implemented. The HR/payroll domain has no cross-vendor API standard with the
+  reach of FHIR or FDX, so the honest reading is that Buk is conformant to nothing at the
+  protocol layer and conformant to the two security frameworks its buyers ask for.
+standards:
+- id: openapi
+  conforms: true
+  version: 'Swagger 2.0 (Data Access API); OpenAPI 3.0.0 (Asistencia); OpenAPI 3.0.3 (Biometrics)'
+  evidence: >-
+    Five Data Access contracts served unauthenticated from every tenant at
+    /api/{country}/{language}/api_docs; two contracts published on SwaggerHub under
+    BUKASISTENCIA. All seven parse. The Data Access contracts are Swagger 2.0 — two major
+    versions behind current OpenAPI — and omit info.title, info.version and every operationId.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document is published. A webhook catalog exists in prose only — see
+    asyncapi/buk-webhooks.yml.
+- id: json-schema
+  conforms: partial
+  evidence: Swagger 2.0 definitions (220 in the Chile contract) are JSON Schema draft-4 subset;
+    no standalone JSON Schema documents are published.
+- id: oauth2
+  conforms: false
+  evidence: No OAuth 2.0 flow is offered on any Buk API. Authentication is a static API key in
+    an auth_token header, issued per tenant.
+- id: oidc
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration on any Buk host. The one that answers 200 at
+    trust.buk.cl belongs to the SafeBase trust-center platform (issuer app.safebase.io), not
+    to Buk.
+- id: rfc9457
+  conforms: false
+  evidence: Errors are plain application/json with free-text descriptions; no
+    application/problem+json media type appears in any contract.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header is documented; no deprecation policy exists.
+- id: rfc9116
+  conforms: false
+  evidence: '/.well-known/security.txt returns 404 on www.buk.cl, demo.buk.cl,
+    supportcenter.buk.cl, trust.buk.cl, app.ctrlit.cl and zktc.prod.asis.buk.cl.'
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header or equivalent in any of the seven contracts. See
+    conventions/buk-conventions.yml.
+- id: pagination
+  conforms: true
+  style: page-number
+  evidence: page and page_size query parameters with a pagination object carrying next,
+    previous, count, page and totalPages. Consistent across both the Data Access and
+    Asistencia contracts.
+- id: rate-limiting
+  conforms: false
+  evidence: No 429 response in any of 217 operations and no rate-limit headers documented.
+- id: json-api
+  conforms: false
+- id: odata
+  conforms: false
+- id: scim
+  conforms: false
+  evidence: >-
+    Notable for an HR system of record — SCIM 2.0 (RFC 7643/7644) is the cross-vendor standard
+    for provisioning users and groups out of an HR system, and Buk implements none of it. Its
+    employee and area endpoints are a proprietary equivalent.
+- id: hr-open
+  conforms: false
+  evidence: No HR Open Standards (HR-XML) conformance is claimed.
+- id: fhir
+  conforms: false
+  applicable: false
+- id: psd2
+  conforms: false
+  applicable: false
+compliance_programs:
+- name: ISO/IEC 27001:2022
+  status: certified
+  source: https://trust.buk.cl/
+- name: SOC 2 Type 2
+  status: attested
+  source: https://trust.buk.cl/
+- name: B Corp
+  status: certified
+  source: https://trust.buk.cl/
+  note: Social/corporate certification, not an information-security framework.
+regulatory_context:
+  note: >-
+    Buk processes payroll and employment records in Chile, Peru, Mexico, Colombia and Brazil,
+    which puts it inside Chilean personal-data law (Ley 19.628, and Ley 21.719 as it comes into
+    force), Brazilian LGPD, Colombian Ley 1581 and Mexican LFPDPPP. The trust center publishes
+    a data-protection policy but makes no per-jurisdiction conformance statement, and the API
+    contracts carry no data-residency or consent metadata.

@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Buk Attendance — Biometric Integration API
+  version: 1.0.0
+extends: openapi/buk-attendance-biometrics-api-openapi.yml
+x-generated: '2026-08-08'
+x-method: generated
+x-source: openapi/_original/buk-attendance-biometrics-api-openapi.json (harvested verbatim from the
+  provider)
+actions:
+- target: $.paths.*.*.responses
+  description: No operation documents a 429 response and no rate-limit headers are described, so
+    a client cannot handle throttling by contract. Recorded as a gap rather than invented into the
+    spec.
+  x-api-evangelist-gap: no-rate-limit-response

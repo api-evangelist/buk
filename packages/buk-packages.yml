@@ -1,0 +1,76 @@
+generated: '2026-08-08'
+method: searched
+source: https://github.com/bukhr + https://rubygems.org/ + https://registry.npmjs.org/ +
+  https://pypi.org/ + https://demo.buk.cl/apidocs
+api_client_sdks:
+  count: 0
+  detail: >-
+    Buk publishes NO first-party client library for any of its APIs, in any language. Searched
+    npm, PyPI, RubyGems, Packagist, crates.io, pkg.go.dev, Maven Central and NuGet for a Buk
+    API client; searched all 38 public repositories in the bukhr GitHub organisation; and read
+    the /apidocs page and the support-center integration articles, which direct integrators to
+    Postman for manual testing rather than to a library. The only recommended tooling is
+    "software instalado para hacer consultas, como Postman". Every integration is hand-rolled
+    against the raw REST surface.
+  registries_searched:
+  - {registry: npm, query: 'buk / buk hr / buk-api', result: no first-party Buk API client}
+  - {registry: rubygems, query: 'buk, buk-api', result: no gem}
+  - {registry: pypi, query: 'buk-api', result: no package}
+  - {registry: packagist, result: no first-party package}
+  - {registry: 'crates.io / pkg.go.dev / Maven Central / NuGet', result: no first-party package}
+packages:
+- language: ruby
+  registry: rubygems
+  name: view_component_subtemplates
+  url: https://rubygems.org/gems/view_component_subtemplates
+  install: gem install view_component_subtemplates
+  official: true
+  api_client: false
+  repository: https://github.com/bukhr/view_component_subtemplates
+  description: Adds support for sub-templates with arguments to ViewComponent.
+- language: ruby
+  registry: rubygems
+  name: ruby-lsp-i18n
+  url: https://rubygems.org/gems/ruby-lsp-i18n
+  install: gem install ruby-lsp-i18n
+  official: true
+  api_client: false
+  repository: https://github.com/bukhr/ruby-lsp-i18n
+  description: Rails i18n support inside Ruby LSP.
+- language: ruby
+  registry: rubygems
+  name: linter_changes
+  url: https://rubygems.org/gems/linter_changes
+  install: gem install linter_changes
+  official: true
+  api_client: false
+  repository: https://github.com/bukhr/linter_changes
+  description: Runs linters only on the code a Git diff actually changed.
+- language: ruby
+  registry: github
+  name: bundler-conservative-update
+  url: https://github.com/bukhr/bundler-conservative-update
+  official: true
+  api_client: false
+  published_to_registry: false
+  description: A Bundler plugin that makes bundle update conservative by default.
+notes: >-
+  The packages above are genuine first-party open source from the Buk engineering
+  organisation, but none of them is a client for a Buk API — they are Rails/Ruby developer
+  tooling that Buk built for its own product and released. They are recorded here because they
+  are real and first-party, and explicitly marked api_client: false so they are never read as
+  SDK coverage. Consequently NO `type: SDKs` pointer is wired in apis.yml: the sdk_count check
+  would be scoring something that does not exist.
+recommended_tooling_published_by_provider:
+- name: Postman
+  url: https://www.postman.com/
+  note: Named in the support-center integration article as the tool to test the API with. Buk
+    publishes no public Postman workspace or collection of its own — searched, none found.
+engineering_presence:
+  github_org: https://github.com/bukhr
+  public_repos: 38
+  engineering_blog: https://buk.engineering/
+  note: Most of the 38 repositories are forks of upstream Ruby/Rails/JS libraries pinned for
+    internal use, plus a vendored copy of the Anthropic reference MCP servers (bukhr/MCPservers)
+    used for internal engineering tooling. bukhr/mcps, named "Model Context Protocol (MCP)
+    públicos de Buk", was created 2025-11-18 and is still empty.

@@ -1,0 +1,462 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Buk Attendance — Biometric Integration API",
+    "description": "Public Attendance API for integrating biometric devices from any manufacturer.\nExposes standardized endpoints that any middleware can consume to submit\nattendance clockings, register devices, and synchronize biometric templates.\n\nDesigned as a single, vendor-agnostic entry point: the manufacturer's middleware\nnormalizes its data to this API's generic format, and Attendance processes it\nthrough its internal flows without needing to know the originating manufacturer.\n",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Integrations Team"
+    }
+  },
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "https://virtserver.swaggerhub.com/BUKASISTENCIA/AttendanceBiometrics/1.0.0"
+    },
+    {
+      "url": "https://zktc.prod.asis.buk.cl/rest",
+      "description": "Specifically to receive clockings"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Clockings",
+      "description": "Attendance clocking ingestion from biometric devices."
+    }
+  ],
+  "paths": {
+    "/v1/clockings": {
+      "post": {
+        "tags": [
+          "Clockings"
+        ],
+        "summary": "Create attendance clocking",
+        "description": "Creates a new attendance clocking record from data sent by a biometric device middleware.\n\n### Authentication\n\nThis endpoint uses provider-based authentication via two custom headers:\n\n| Header             | Description                                      |\n|--------------------|--------------------------------------------------|\n| `x-provider-name`  | Registered provider name                         |\n| `x-provider-token` | Secret token assigned to the provider            |\n\nThe system validates that both headers are present, the provider exists, and the token matches.\n\n### Validation Rules\n\n| Field          | Required | Type              | Format / Constraint                              |\n|----------------|----------|-------------------|--------------------------------------------------|\n| serialNumber   | Yes      | String            | Alphanumeric with hyphens, 1-24 characters       |\n| idNumber       | Yes      | String            | Alphanumeric with hyphens, 1-24 characters       |\n| time           | Yes      | String            | `yyyy-MM-dd HH:mm:ss` (valid calendar date)     |\n| isEntry        | Yes      | Boolean / String  | `true` / `false` (case-insensitive)              |\n| verifyType     | No       | Integer           | Range 0-18                                       |\n| workCode       | No       | Integer           | >= 0                                             |\n| sensorNo       | No       | Integer           | >= 0                                             |\n| attFlag        | No       | Integer           | >= 0                                             |\n| mask           | No       | Integer           | 0 or 1                                           |\n| temperature    | No       | String            | Numeric (digits and dots), max 24 characters     |\n",
+        "operationId": "createClocking",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XProviderName"
+          },
+          {
+            "$ref": "#/components/parameters/XProviderToken"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClockingRequest"
+              },
+              "examples": {
+                "minimalRecord": {
+                  "summary": "Minimal record with required fields only",
+                  "description": "Example sending only required fields. Optional fields default to their predefined values.",
+                  "value": {
+                    "serialNumber": "CKOU214860011",
+                    "idNumber": "123123123K",
+                    "time": "2026-04-14 09:15:00",
+                    "isEntry": true
+                  }
+                },
+                "fullCheckIn": {
+                  "summary": "Full check-in record",
+                  "description": "Example with all fields, registering a check-in (entry).",
+                  "value": {
+                    "serialNumber": "CKOU214860011",
+                    "idNumber": "123123123K",
+                    "time": "2026-04-14 08:30:00",
+                    "isEntry": true,
+                    "verifyType": 5,
+                    "workCode": 0,
+                    "sensorNo": 0,
+                    "attFlag": 0,
+                    "mask": 0,
+                    "temperature": "36.5"
+                  }
+                },
+                "fullCheckOut": {
+                  "summary": "Full check-out record",
+                  "description": "Example with all fields, registering a check-out (exit).",
+                  "value": {
+                    "serialNumber": "CKOU214860011",
+                    "idNumber": "123123123K",
+                    "time": "2026-04-14 18:00:00",
+                    "isEntry": false,
+                    "verifyType": 1,
+                    "workCode": 0,
+                    "sensorNo": 0,
+                    "attFlag": 0,
+                    "mask": 1,
+                    "temperature": "36.2"
+                  }
+                },
+                "isEntryAsString": {
+                  "summary": "Record with isEntry as string",
+                  "description": "The isEntry field accepts both native JSON booleans and \"true\"/\"false\" strings (case-insensitive).",
+                  "value": {
+                    "serialNumber": "CKOU214860011",
+                    "idNumber": "123123123K",
+                    "time": "2026-04-14 08:30:00",
+                    "isEntry": "True"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Clocking record created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockingResponse"
+                },
+                "example": {
+                  "status": 201,
+                  "code": "CLOCKING_CREATED",
+                  "message": "Clocking record created successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error in the request body. Returned when any field does not meet the expected format or constraints.\n\n**Possible codes:**\n- `INVALID_SERIAL_NUMBER` — serialNumber is missing or invalid. Expected: alphanumeric string with hyphens, 1 to 24 characters (e.g., `CKOU214860011`)\n- `INVALID_ID_NUMBER` — idNumber is missing or invalid. Expected: alphanumeric string with hyphens, 1 to 24 characters (e.g., `123123123K`)\n- `INVALID_TIME_FORMAT` — time is missing or invalid. Expected format: `yyyy-MM-dd HH:mm:ss` with a valid calendar date (e.g., `2026-04-14 08:30:00`)\n- `INVALID_IS_ENTRY` — isEntry is missing or invalid. Expected: `true` or `false` (boolean or case-insensitive string)\n- `INVALID_VERIFY_TYPE` — verifyType is invalid. Expected: integer between 0 and 18\n- `INVALID_WORK_CODE` — workCode is invalid. Expected: integer greater than or equal to 0\n- `INVALID_SENSOR_NO` — sensorNo is invalid. Expected: integer greater than or equal to 0\n- `INVALID_ATT_FLAG` — attFlag is invalid. Expected: integer greater than or equal to 0\n- `INVALID_MASK` — mask is invalid. Expected: `0` (no mask) or `1` (wearing mask)\n- `INVALID_TEMPERATURE` — temperature is invalid. Expected: numeric string with digits and dots, up to 24 characters (e.g., `36.5`)\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockingResponse"
+                },
+                "examples": {
+                  "invalidSerialNumber": {
+                    "summary": "Invalid serialNumber",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_SERIAL_NUMBER",
+                      "message": "The serial number is missing or invalid, expected alphanumeric string (1-24 characters)"
+                    }
+                  },
+                  "invalidIdNumber": {
+                    "summary": "Invalid idNumber",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_ID_NUMBER",
+                      "message": "The ID Number is missing or invalid, expected alphanumeric string (1-24 characters)"
+                    }
+                  },
+                  "invalidTimeFormat": {
+                    "summary": "Invalid time format",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_TIME_FORMAT",
+                      "message": "The time format is missing or invalid, expected yyyy-MM-dd HH:mm:ss"
+                    }
+                  },
+                  "invalidIsEntry": {
+                    "summary": "Invalid isEntry",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_IS_ENTRY",
+                      "message": "The isEntry field is missing or invalid, expected true or false"
+                    }
+                  },
+                  "invalidVerifyType": {
+                    "summary": "Invalid verifyType",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_VERIFY_TYPE",
+                      "message": "The verify type value is invalid, expected integer between 0 and 18"
+                    }
+                  },
+                  "invalidWorkCode": {
+                    "summary": "Invalid workCode",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_WORK_CODE",
+                      "message": "The work code value is invalid, expected integer >= 0"
+                    }
+                  },
+                  "invalidSensorNo": {
+                    "summary": "Invalid sensorNo",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_SENSOR_NO",
+                      "message": "The sensor number value is invalid, expected integer >= 0"
+                    }
+                  },
+                  "invalidAttFlag": {
+                    "summary": "Invalid attFlag",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_ATT_FLAG",
+                      "message": "The attendance flag value is invalid, expected integer >= 0"
+                    }
+                  },
+                  "invalidMask": {
+                    "summary": "Invalid mask",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_MASK",
+                      "message": "The mask value is invalid, expected 0 or 1"
+                    }
+                  },
+                  "invalidTemperature": {
+                    "summary": "Invalid temperature",
+                    "value": {
+                      "status": 400,
+                      "code": "INVALID_TEMPERATURE",
+                      "message": "The temperature value is invalid, expected numeric string (max 24 characters)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error. Returned when provider credentials are invalid or missing.\n\n**Possible codes:**\n- `UNAUTHORIZED` — Authentication headers are missing, empty, or token is incorrect\n- `INVALID_PROVIDER_NAME` — The provider does not exist in the system\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockingResponse"
+                },
+                "examples": {
+                  "missingCredentials": {
+                    "summary": "Missing credentials or incorrect token",
+                    "value": {
+                      "status": 401,
+                      "code": "UNAUTHORIZED",
+                      "message": "Authentication credentials are missing or invalid"
+                    }
+                  },
+                  "unknownProvider": {
+                    "summary": "Unregistered provider",
+                    "value": {
+                      "status": 401,
+                      "code": "INVALID_PROVIDER_NAME",
+                      "message": "The provider name is missing or invalid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Duplicate conflict. Returned when a clocking record with the exact same data already exists (same device, user, timestamp, etc.).\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockingResponse"
+                },
+                "example": {
+                  "status": 409,
+                  "code": "CLOCKING_DUPLICATE",
+                  "message": "A clocking record with the same data already exists"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error. Returned when an unexpected error occurs during request processing.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClockingResponse"
+                },
+                "example": {
+                  "status": 500,
+                  "code": "INTERNAL_ERROR",
+                  "message": "An unexpected error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "XProviderName": {
+        "name": "x-provider-name",
+        "in": "header",
+        "required": true,
+        "description": "Registered provider name. Must match an existing provider in the system.\n",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "example": "bukwebapp"
+      },
+      "XProviderToken": {
+        "name": "x-provider-token",
+        "in": "header",
+        "required": true,
+        "description": "Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "example": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+      }
+    },
+    "schemas": {
+      "ClockingRequest": {
+        "type": "object",
+        "required": [
+          "serialNumber",
+          "idNumber",
+          "time",
+          "isEntry"
+        ],
+        "properties": {
+          "serialNumber": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-]{1,24}$",
+            "minLength": 1,
+            "maxLength": 24,
+            "description": "Serial number of the biometric device that recorded the clocking. Used to identify which physical device generated the attendance record.\nOnly alphanumeric characters and hyphens are allowed.\n\n**Note:** When stored, the authenticated provider's prefix is prepended in the format `{prefix}-{serialNumber}`. The total length must not exceed 24 characters.\n",
+            "example": "CKOU214860011"
+          },
+          "idNumber": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-]{1,24}$",
+            "minLength": 1,
+            "maxLength": 24,
+            "description": "User/employee identification number on the biometric device. Used to match the clocking to a specific employee in the Attendance system.\nOnly alphanumeric characters and hyphens are allowed.\n",
+            "example": "123123123K"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$",
+            "description": "Date and time when the attendance clocking was recorded. Used as the official timestamp of the employee's check-in or check-out.\nFormat: `yyyy-MM-dd HH:mm:ss`. Must be a valid calendar date (e.g., `2026-02-30` is rejected).\n",
+            "example": "2026-04-14 08:30:00"
+          },
+          "isEntry": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "True",
+                  "False",
+                  "TRUE",
+                  "FALSE"
+                ]
+              }
+            ],
+            "description": "Indicates whether the clocking is a check-in (`true`) or check-out (`false`). Used to determine the direction of the attendance record.\n\nAccepts both native JSON booleans (`true`/`false`) and strings `\"true\"`/`\"false\"` (case-insensitive).\n\n**Internal mapping:**\n- `true` (check-in / entry) → status = 0\n- `false` (check-out / exit) → status = 1\n",
+            "example": true
+          },
+          "verifyType": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18,
+            "default": 0,
+            "description": "Biometric verification type used for the clocking. Indicates which authentication method the device used to identify the employee. (Not sent to Attendance)\n\n| Value | Verification Type            |\n|-------|------------------------------|\n| 0     | Password                     |\n| 1     | Fingerprint                  |\n| 2     | RFID Card                    |\n| 3     | Password + Fingerprint       |\n| 4     | Fingerprint + Card           |\n| 5     | Password + Card              |\n| 6     | Fingerprint + Password + Card|\n| 7     | ID + Fingerprint             |\n| 8     | ID + Password                |\n| 9     | Face Recognition             |\n| 10    | Fingerprint + Face           |\n| 11    | Card + Face                  |\n| 12    | Palm                         |\n| 13    | Fingerprint + Palm           |\n| 14    | Face + Palm                  |\n| 15    | Card + Palm                  |\n| 16    | Fingerprint + Face + Palm    |\n| 17    | Finger Vein                  |\n| 18    | Iris                         |\n",
+            "example": 5
+          },
+          "workCode": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Work code that classifies the type of shift or activity. The specific meaning depends on the device configuration. (Not sent to Attendance)\n",
+            "example": 0
+          },
+          "sensorNo": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Sensor or reader number that captured the clocking. Identifies which sensor was used when the device has multiple readers. (Not sent to Attendance)\n",
+            "example": 0
+          },
+          "attFlag": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Special or exceptional attendance type indicator. The specific meaning depends on the device configuration. (Not sent to Attendance)\n",
+            "example": 0
+          },
+          "mask": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "default": 0,
+            "description": "Indicates whether the user was wearing a mask at the time of the clocking. (Not sent to Attendance)\n- `0` = No mask\n- `1` = Wearing mask\n",
+            "example": 0
+          },
+          "temperature": {
+            "type": "string",
+            "pattern": "^[0-9.]{0,24}$",
+            "maxLength": 24,
+            "default": "",
+            "description": "Body temperature reading recorded by the device at the time of the clocking. Expressed as a numeric string (digits and decimal dots). (Not sent to Attendance)\n",
+            "example": "36.5"
+          }
+        }
+      },
+      "ClockingResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "code",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code of the response.",
+            "example": 201
+          },
+          "code": {
+            "type": "string",
+            "description": "Operation result identifier code.\n\n**Possible values:**\n- `CLOCKING_CREATED` — Clocking created successfully (201)\n- `INVALID_SERIAL_NUMBER` — Invalid serialNumber (400)\n- `INVALID_ID_NUMBER` — Invalid idNumber (400)\n- `INVALID_TIME_FORMAT` — Invalid time format (400)\n- `INVALID_IS_ENTRY` — Invalid isEntry (400)\n- `INVALID_VERIFY_TYPE` — Invalid verifyType (400)\n- `INVALID_WORK_CODE` — Invalid workCode (400)\n- `INVALID_SENSOR_NO` — Invalid sensorNo (400)\n- `INVALID_ATT_FLAG` — Invalid attFlag (400)\n- `INVALID_MASK` — Invalid mask (400)\n- `INVALID_TEMPERATURE` — Invalid temperature (400)\n- `INVALID_PROVIDER_NAME` — Unregistered provider (401)\n- `UNAUTHORIZED` — Invalid credentials (401)\n- `CLOCKING_DUPLICATE` — Duplicate record (409)\n- `INTERNAL_ERROR` — Internal error (500)\n",
+            "enum": [
+              "CLOCKING_CREATED",
+              "INVALID_SERIAL_NUMBER",
+              "INVALID_ID_NUMBER",
+              "INVALID_TIME_FORMAT",
+              "INVALID_IS_ENTRY",
+              "INVALID_VERIFY_TYPE",
+              "INVALID_WORK_CODE",
+              "INVALID_SENSOR_NO",
+              "INVALID_ATT_FLAG",
+              "INVALID_MASK",
+              "INVALID_TEMPERATURE",
+              "INVALID_PROVIDER_NAME",
+              "UNAUTHORIZED",
+              "CLOCKING_DUPLICATE",
+              "INTERNAL_ERROR"
+            ],
+            "example": "CLOCKING_CREATED"
+          },
+          "message": {
+            "type": "string",
+            "description": "Descriptive message of the operation result.",
+            "example": "Clocking record created successfully"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ProviderAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-provider-name",
+        "description": "Provider name header used by the clocking ingestion endpoint.\nWorks in conjunction with `x-provider-token`.\n"
+      },
+      "ProviderToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-provider-token",
+        "description": "Provider secret token used by the clocking ingestion endpoint.\nWorks in conjunction with `x-provider-name`."
+      }
+    }
+  }
+}

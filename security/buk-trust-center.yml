@@ -1,0 +1,56 @@
+generated: '2026-08-08'
+method: searched
+source: https://trust.buk.cl/
+url: https://trust.buk.cl/
+x-evidence:
+  fetched: '2026-08-08'
+  url: https://trust.buk.cl/
+  http_status: 200
+platform:
+  vendor: SafeBase (by Drata)
+  hosted: true
+  note: >-
+    trust.buk.cl is a hosted SafeBase trust center, not a Buk-operated page. Its
+    /.well-known/openid-configuration, /.well-known/oauth-authorization-server and
+    /.well-known/oauth-protected-resource documents all answer 200 but describe SafeBase's
+    own platform MCP authorization server at app.safebase.io — they are NOT a Buk
+    authorization server and must not be read as one. See well-known/buk-well-known.yml.
+certifications:
+- name: ISO/IEC 27001:2022
+  status: certified
+- name: SOC 2 Type 2
+  status: attested
+- name: B Corp
+  status: certified
+  note: A corporate/social certification, not a security or privacy control framework.
+documents_published:
+- Política de Protección de Datos (Data Protection Policy)
+- Política de Seguridad de la Información (Information Security Policy)
+- Plan de Recuperación ante Desastres (Disaster Recovery Plan)
+- Política de Encriptación (Encryption Policy)
+document_access: >-
+  Documents are listed with a bulk-download option on the trust center. The page does not
+  state whether an NDA or an access request is required before download.
+controls_listed:
+- Role-based access control (RBAC)
+- Encryption at rest and in transit
+- Data deletion on request
+- AWS infrastructure within a Virtual Private Cloud
+- Anti-malware, disk encryption, host software firewall
+- Web application firewall
+- Continuous monitoring and audit logging
+- Documented incident reporting procedure
+- Documented data retention and cancellation policy
+gaps:
+- >-
+  No security contact address and no vulnerability-disclosure or bug-bounty link is published
+  on the trust center or anywhere else on the Buk surface — no /.well-known/security.txt on
+  any Buk host, no /security page, and no listing on HackerOne, Bugcrowd or Intigriti found.
+  A security researcher has no published route to report a finding.
+- >-
+  No PCI DSS, HIPAA or FedRAMP claim (none of which would be expected for a LatAm HR/payroll
+  SaaS), and no statement about Chilean Ley 19.628 / Ley 21.719 or Brazilian LGPD alignment
+  on the trust center itself.
+related:
+  vulnerability_disclosure: none-published
+  conformance: conformance/buk-conformance.yml

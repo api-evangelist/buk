@@ -1,0 +1,88 @@
+generated: '2026-08-08'
+method: searched
+source: https://www.buk.cl/productos/roadmap-novedades-productos
+x-evidence:
+  fetched: '2026-08-08'
+  url: https://www.buk.cl/productos/roadmap-novedades-productos
+  http_status: 200
+scope: product
+scheme:
+  cadence: monthly
+  format: Marketing page ("Lo nuevo de Buk") grouping shipped features by month, alongside a
+    forward-looking roadmap section.
+  machine_readable: false
+  rss: none found
+api_changelog:
+  exists: false
+  detail: >-
+    Buk publishes NO API-specific changelog, release notes or version history. The Data Access
+    contract carries no info.version, the Swagger 2.0 documents are regenerated per tenant with
+    no dated revision marker, and neither the /apidocs page nor the support-center integration
+    articles record when an endpoint was added, changed or removed. The only version signal an
+    integrator has is GET /versions, which reports what the tenant is currently running rather
+    than what changed. Breaking changes to the API would therefore reach integrators
+    unannounced. The entries below are PRODUCT release notes, not API release notes, and are
+    recorded as the nearest published equivalent.
+current_version: v1
+entries:
+- period: '2026-07'
+  type: product
+  highlights:
+  - 'Procesos en Buk: a single unified view for payroll process control.'
+  - Unified access profiles for the training (capacitaciones) module.
+- period: '2026-06'
+  type: product
+  highlights:
+  - Training integrated with onboarding.
+  - Team leadership view.
+  - Digital signature improvements.
+  - Notifications delivered via Slack and Microsoft Teams.
+  - Bulk onboarding.
+  - Training certificates.
+  - New financial expense-report (rendiciones) module.
+  - AI-assisted feedback in performance management.
+  - Benefits reporting.
+- period: '2026-05'
+  type: product
+  highlights:
+  - Survey customisation.
+  - Retroactive permission controls.
+  - In-person course attendance tracking.
+  - Psychometric testing.
+  - Retroactive payments.
+  - Public-sector compliance features.
+  - Consumer credit pre-offers.
+  - Salary advance history.
+  - Benefits eligibility validation.
+- period: '2026-04'
+  type: product
+  highlights:
+  - Public-sector DT (Dirección del Trabajo) records.
+  - Improved performance evaluation interface.
+  - Sentiment analysis over survey responses.
+  - Centralised payslip management.
+  - AI-assisted benefits analysis.
+  - Onboarding process improvements.
+  - Workflow automation for learning milestones.
+  - Notification failure handling.
+  - Asset management segmentation.
+  - Triggers on personal data changes.
+- period: '2026-03'
+  type: product
+  highlights:
+  - Recurring surveys.
+  - AI candidate filtering.
+  - Automatic item assignment.
+  - AI-powered filters.
+  - Notification read receipts.
+  - Permission hierarchy.
+  - Updated financial interfaces.
+  - Purchase order matching.
+  - Asset management enhancements.
+  - Insurance integrations (Vida Cámara, Bice Vida, eb Metrics).
+breaking_changes_recorded: none
+note: >-
+  Window captured is the five most recent months visible on the page at the date checked. The
+  page mixes shipped features with a forward roadmap; only the dated, shipped months are
+  recorded above. Nothing here is attributed to the API surface unless the provider attributed
+  it there, and none of these entries did.

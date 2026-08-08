@@ -1,23 +1,306 @@
 aid: buk
 name: Buk
-description: 'Buk is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
 url: https://raw.githubusercontent.com/api-evangelist/buk/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+description: >-
+  Buk (Buk SpA, Santiago, Chile) is a Latin American HR and payroll platform — "software de
+  gestión de personas" — covering payroll and settlement calculation, employee records,
+  contracts and digital signature, time and attendance, absence and vacation management,
+  benefits and salary advances, recruitment, onboarding, training and performance. Founded in
+  2017 and bootstrapped for its first five years, it raised a $50M Series A led by Greenoaks
+  and SoftBank in 2021 and a further $50M Series B in 2024, and now operates country editions
+  for Chile, Peru, Mexico, Colombia and Brazil. Its API posture is unusual for the region and
+  unusually good in one specific way: every customer tenant serves a complete, unauthenticated,
+  machine-readable Swagger 2.0 contract for the Buk Data Access API at
+  https://{tenant}.buk.cl/api/{country}/{language}/api_docs — 151 paths and 206 operations,
+  in five country variants and three languages — behind a Swagger UI at /apidocs, alongside a
+  documented webhook catalog. Two further contracts for Buk Asistencia (attendance) and its
+  vendor-agnostic biometric clocking ingestion endpoint are published publicly on SwaggerHub
+  under the BUKASISTENCIA account. What is missing is the developer-program scaffolding around
+  those contracts: there is no developer portal, no first-party SDK, no CLI, no Postman
+  workspace, no status page, no sandbox, no /.well-known/ surface, no MCP server, no
+  operationId on any of 206 operations, and no documented rate limit or 429 response. The
+  contract is public; the program around it is not built yet.
+image: https://www.buk.cl/hubfs/logo-buk.svg
+tags:
+- Human Resources
+- Payroll
+- HR Tech
+- Time and Attendance
+- Benefits
+- Recruiting
+- Performance Management
+- Employee Records
+- Latin America
+- Chile
+- SaaS
+- Webhooks
 created: '2026-08-08'
 modified: '2026-08-08'
-tags:
-- Company
-apis: []
+specificationVersion: '0.20'
+apis:
+- aid: buk:data-access-api
+  name: Buk Data Access API
+  description: >-
+    The Buk platform API — a tenant-scoped REST interface over the HR and payroll system of
+    record. 151 paths and 206 operations across 40 tag groups covering employees
+    (Colaboradores), jobs, people, companies, areas and sub-areas, roles, cost centres, unions,
+    work locations, payroll periods and processes, settlements (liquidaciones), payslips,
+    vacations, absences, medical leave, permissions, unworked and overtime hours, benefits,
+    salary advances and credits, accounting centralisation and accounting structures, items,
+    KPIs, labour suspensions, evaluations, substitutions, applicants and applications. Published
+    as a Swagger 2.0 contract served unauthenticated from every customer tenant in five country
+    variants (Chile, Colombia, Peru, Mexico, Brazil) and three languages (es, en, pt); the five
+    variants share identical paths and operations and differ only in their country-specific
+    definition sets. Authentication is an API key in an auth_token header, issued per tenant and
+    scoped per entity to read or read-and-modify.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Human Resources
+  - Payroll
+  - Employee Records
+  - Time and Attendance
+  - Benefits
+  - Recruiting
+  - Latin America
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-data-access-api-chile-openapi.yml
+    name: Buk Data Access API — Chile
+  - type: OpenAPI
+    url: openapi/buk-data-access-api-colombia-openapi.yml
+    name: Buk Data Access API — Colombia
+  - type: OpenAPI
+    url: openapi/buk-data-access-api-peru-openapi.yml
+    name: Buk Data Access API — Perú
+  - type: OpenAPI
+    url: openapi/buk-data-access-api-mexico-openapi.yml
+    name: Buk Data Access API — México
+  - type: OpenAPI
+    url: openapi/buk-data-access-api-brasil-openapi.yml
+    name: Buk Data Access API — Brasil
+  - type: OpenAPI
+    url: openapi/_original/buk-data-access-api-chile-openapi.json
+    name: Chile contract (verbatim source)
+  - type: OpenAPI
+    url: https://demo.buk.cl/api/chile/en/api_docs
+    name: Published Swagger 2.0 download (live provider URL, tenant-scoped)
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+    name: Swagger UI served from every Buk tenant
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+    name: Cómo integrarse a Buk a través de API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+    name: 15 named webhook event types across 5 resource families
+  - type: Overlay
+    url: overlays/buk-data-access-api-chile-overlay.yaml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+- aid: buk:asistencia-api
+  name: Buk Asistencia API
+  description: >-
+    The API for Buk Asistencia, Buk's time-and-attendance product, published as an OpenAPI 3.0.0
+    contract on SwaggerHub under the BUKASISTENCIA account. Ten operations across seven tag
+    groups: paginated listings of work sites (recintos), the collaborator roster, shift
+    assignments, absences, overtime and unworked hours, plus reading and injecting attendance
+    clocking records. Authentication is an API key in a token header, requested from the Buk
+    SAC team.
+  humanURL: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  baseURL: https://app.ctrlit.cl/ctrl/api
+  tags:
+  - Time and Attendance
+  - Human Resources
+  - Shifts
+  - Overtime
+  - Latin America
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-asistencia-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/_original/buk-asistencia-api-openapi.json
+    name: Buk Asistencia contract (verbatim source)
+  - type: OpenAPI
+    url: https://api.swaggerhub.com/apis/BUKASISTENCIA/ApiAsistencia/1.0.0
+    name: Published OpenAPI 3.0.0 download (live provider URL)
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+    name: APIs de Buk Asistencia
+  - type: Overlay
+    url: overlays/buk-asistencia-api-overlay.yaml
+- aid: buk:attendance-biometrics-api
+  name: Buk Attendance — Biometric Integration API
+  description: >-
+    A public, vendor-agnostic clocking ingestion API for biometric devices from any
+    manufacturer. A single POST /v1/clockings operation that any device middleware can consume
+    after normalising its data to Buk's generic format, so Buk Asistencia never needs to know
+    the originating manufacturer. Published as an OpenAPI 3.0.3 contract on SwaggerHub;
+    authenticated by a provider header pair (x-provider-name plus x-provider-token).
+  humanURL: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  baseURL: https://zktc.prod.asis.buk.cl/rest
+  tags:
+  - Time and Attendance
+  - Biometrics
+  - Device Integration
+  - Latin America
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-attendance-biometrics-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/_original/buk-attendance-biometrics-api-openapi.json
+    name: Biometric Integration contract (verbatim source)
+  - type: OpenAPI
+    url: https://api.swaggerhub.com/apis/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+    name: Published OpenAPI 3.0.3 download (live provider URL)
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: Overlay
+    url: overlays/buk-attendance-biometrics-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/buk-domain-security.yml
 - type: Website
-  url: https://www.hiive.com/securities/buk-stock
+  url: https://www.buk.cl/
+- type: Documentation
+  url: https://demo.buk.cl/apidocs
+  name: Buk API Swagger UI — served from every tenant at /apidocs
+- type: APIReference
+  url: https://demo.buk.cl/apidocs
+- type: GettingStarted
+  url: https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  name: Cómo integrarse a Buk a través de API
+- type: Support
+  url: https://supportcenter.buk.cl/hc/es-419
+  name: Buk Support Center (Zendesk)
+- type: HelpCenter
+  url: https://supportcenter.buk.cl/hc/es-419
+- type: Blog
+  url: https://www.buk.cl/blog
+- type: Blog
+  url: https://buk.engineering/
+  name: Buk Engineering blog
+- type: GitHubOrganization
+  url: https://github.com/bukhr
+  name: bukhr — 38 public repositories, mostly Ruby/Rails OSS and forks
+- type: Roadmap
+  url: https://www.buk.cl/productos/roadmap-novedades-productos
+  name: Lo nuevo de Buk — product roadmap and monthly release notes
+- type: ChangeLog
+  url: changelog/buk-changelog.yml
+  name: Structured product release notes captured from the Lo nuevo de Buk page
+- type: Pricing
+  url: https://www.buk.cl/precios
+- type: SignUp
+  url: https://www.buk.cl/starter
+  name: Buk Starter — self-serve sign-up tier
+- type: TermsOfService
+  url: https://www.buk.cl/starter/terminos-y-condiciones
+- type: PrivacyPolicy
+  url: https://www.buk.cl/privacidad
+- type: TrustCenter
+  url: security/buk-trust-center.yml
+- type: Trust
+  url: https://trust.buk.cl/
+  name: Buk Trust Center (SafeBase by Drata)
+- type: Compliance
+  url: security/buk-trust-center.yml
+  name: ISO/IEC 27001:2022, SOC 2 Type 2, B Corp — published on the trust center
+- type: Authentication
+  url: authentication/buk-authentication.yml
+- type: Conventions
+  url: conventions/buk-conventions.yml
+  name: Tenant/country URL model, auth_token header, page/page_size pagination, no idempotency
+- type: ErrorCatalog
+  url: errors/buk-problem-types.yml
+  name: HTTP-status-only error catalog derived from all seven contracts (not RFC 9457)
+- type: Lifecycle
+  url: lifecycle/buk-lifecycle.yml
+- type: DataModel
+  url: data-model/buk-data-model.yml
+  name: 220 definitions and 196 relationships derived from the Chile contract
+- type: Conformance
+  url: conformance/buk-conformance.yml
+- type: Webhooks
+  url: asyncapi/buk-webhooks.yml
+  name: 15 named webhook event types published in the Buk apidocs Webhooks tab
+- type: Packages
+  url: packages/buk-packages.yml
+  name: First-party open-source Ruby gems; no API client SDK in any registry
+- type: WellKnown
+  url: well-known/buk-well-known.yml
+  name: /.well-known/ probe results across six Buk hosts
+- type: MCPServer
+  url: mcp/buk-mcp.yml
+  name: Candidate MCP tool surface derived from the contracts (Buk publishes no MCP server)
+- type: ToolCrosswalk
+  url: mcp/buk-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+  name: Agent Skills index
+- type: AgentSkill
+  url: skills/buk-sync-employee-directory.md
+  name: Sync the employee directory out of Buk
+- type: AgentSkill
+  url: skills/buk-onboard-and-terminate-employees.md
+  name: Onboard a new employee and process a termination
+- type: AgentSkill
+  url: skills/buk-run-and-read-payroll.md
+  name: Run a payroll period and read the settlements
+- type: AgentSkill
+  url: skills/buk-absence-and-vacation-flows.md
+  name: Request, approve and reconcile vacations, absences and leave
+- type: AgentSkill
+  url: skills/buk-attendance-and-overtime.md
+  name: Read attendance, overtime and unworked hours
+- type: AgentSkill
+  url: skills/buk-consume-buk-webhooks.md
+  name: Consume Buk webhooks and reconcile against the API
+- type: Overlay
+  url: overlays/buk-data-access-api-chile-overlay.yaml
+  name: API Evangelist enhancements for the Chile contract
+- type: Overlay
+  url: overlays/buk-data-access-api-colombia-overlay.yaml
+- type: Overlay
+  url: overlays/buk-data-access-api-peru-overlay.yaml
+- type: Overlay
+  url: overlays/buk-data-access-api-mexico-overlay.yaml
+- type: Overlay
+  url: overlays/buk-data-access-api-brasil-overlay.yaml
+- type: Overlay
+  url: overlays/buk-asistencia-api-overlay.yaml
+- type: Overlay
+  url: overlays/buk-attendance-biometrics-api-overlay.yaml
+- type: LLMsTxt
+  url: llms/buk-llms.txt
+  name: Provider-published llms.txt harvested verbatim from www.buk.cl
+- type: LLMsTxt
+  url: llms/buk-api-llms.txt
+  name: API-surface llms.txt generated by API Evangelist (the provider's own covers marketing pages only)
+- type: LLMsText
+  url: https://www.buk.cl/llms.txt
+  name: Provider-published llms.txt (live provider URL)
+- type: Review
+  url: review.yml
+x-enrichment:
+  date: '2026-08-08'
+  status: enriched
+  artifacts_added: 48
+  pass: local-v1

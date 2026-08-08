@@ -1,0 +1,46 @@
+generated: '2026-08-08'
+method: derived
+source: openapi/buk-asistencia-api-openapi.yml, openapi/buk-attendance-biometrics-api-openapi.yml,
+  openapi/buk-data-access-api-brasil-openapi.yml, openapi/buk-data-access-api-chile-openapi.yml,
+  openapi/buk-data-access-api-colombia-openapi.yml, openapi/buk-data-access-api-mexico-openapi.yml,
+  openapi/buk-data-access-api-peru-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: token
+  sources:
+  - openapi/buk-asistencia-api-openapi.yml
+- name: ProviderAuth
+  type: apiKey
+  in: header
+  parameter: x-provider-name
+  description: |-
+    Provider name header used by the clocking ingestion endpoint.
+    Works in conjunction with `x-provider-token`.
+  sources:
+  - openapi/buk-attendance-biometrics-api-openapi.yml
+- name: ProviderToken
+  type: apiKey
+  in: header
+  parameter: x-provider-token
+  description: |-
+    Provider secret token used by the clocking ingestion endpoint.
+    Works in conjunction with `x-provider-name`.
+  sources:
+  - openapi/buk-attendance-biometrics-api-openapi.yml
+- name: auth_token
+  type: apiKey
+  in: header
+  parameter: auth_token
+  sources:
+  - openapi/buk-data-access-api-brasil-openapi.yml
+  - openapi/buk-data-access-api-chile-openapi.yml
+  - openapi/buk-data-access-api-colombia-openapi.yml
+  - openapi/buk-data-access-api-mexico-openapi.yml
+  - openapi/buk-data-access-api-peru-openapi.yml

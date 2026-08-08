@@ -1,0 +1,117 @@
+aid: buk
+name: Buk
+review:
+  question: Does Buk publish a real, reachable, machine-readable API surface, and what does a
+    developer actually have to do to call it?
+  answer: true
+  date: '2026-08-08'
+  reviewer: API Evangelist
+  homeMarket: Chile
+  tier: hr-payroll-system-of-record
+  legalEntity: Buk SpA, Santiago, Chile
+  headline: >-
+    Buk is the inverse of the usual LatAm SaaS profile. The contract is genuinely public — every
+    customer tenant serves a complete Swagger 2.0 document for 206 operations at
+    /api/{country}/{language}/api_docs with no credentials at all, in five country variants and
+    three languages, and two more contracts sit in the open on SwaggerHub. What does not exist
+    is the developer program around it: no portal, no SDK in any language, no CLI, no Postman
+    workspace, no sandbox, no status page, no /.well-known/ anything, no MCP server, no
+    deprecation policy, and no API changelog. The spec is two major versions behind (Swagger
+    2.0), omits info.title and info.version, declares its security scheme and then applies it to
+    nothing, and gives none of its 206 operations an operationId. An integrator can read
+    everything and generate almost nothing.
+
+surfaceDiscovery:
+  contractsFound: 7
+  route:
+    - probe: https://api.buk.cl/ and https://developers.buk.cl/ and https://docs.buk.cl/
+      result: NXDOMAIN on all three. There is no api or developer host.
+    - probe: https://www.buk.cl/api
+      result: 404. No developer section on the marketing site.
+    - probe: web search for the Buk API integration article
+      result: >-
+        Support-center article named the pattern — docs live at
+        https://{tenant}.buk.cl/apidocs, one per customer instance.
+    - probe: https://demo.buk.cl/apidocs
+      result: 200. Swagger UI shell with a country selector and a language selector.
+    - probe: https://demo.buk.cl/api/chile/en/api_docs
+      result: >-
+        200, 348 KB, parses as Swagger 2.0 with 151 paths and 206 operations. Anonymous.
+        Repeated for colombia, peru, mexico and brasil — all 200, all 151/206.
+    - probe: https://api.swaggerhub.com/apis/BUKASISTENCIA
+      result: >-
+        200. Two published contracts under the BUKASISTENCIA account — ApiAsistencia
+        (OpenAPI 3.0.0, 10 operations) and AttendanceBiometrics (OpenAPI 3.0.3, 1 operation).
+  note: >-
+    This is a STEP 0b win. Every conventional docs host missed. The contract was live the whole
+    time on the tenant host, one path segment away from a Swagger UI that a docs crawler would
+    have read as an empty HTML shell.
+
+accessGate:
+  contract: public, anonymous, no signup
+  data: >-
+    Tenant-issued API key. A Buk administrator or superadministrator creates it in the product
+    under Configuración → Acceso API, and scopes it per entity to Lectura or Lectura y
+    Modificación. Buk Asistencia tokens are not self-service — they are requested from the SAC
+    support team.
+  sandbox: none published
+  freeTier: >-
+    Buk Starter is a self-serve commercial tier at https://www.buk.cl/starter, not a developer
+    sandbox. There is no way for a non-customer to obtain a token.
+
+whatIsStrong:
+  - The contract is served anonymously from every tenant — no login, no sales form, no NDA.
+  - Five country variants published as separate contracts, which is the honest way to model
+    payroll law that genuinely differs per jurisdiction.
+  - Three languages (es, en, pt) of the same contract, which is rare anywhere.
+  - A complete, worked webhook catalog with payload fields, allowed values and examples, in the
+    same page as the reference.
+  - A real trust center with ISO/IEC 27001:2022 and SOC 2 Type 2.
+  - A vendor-agnostic biometric ingestion API — a genuinely good piece of design that removes
+    per-manufacturer middleware from Buk's own problem space.
+
+whatIsMissing:
+  - status: no status page and no SLA, for a payroll system of record on a legally-timed monthly
+      cycle. status.buk.cl is NXDOMAIN; buk.statuspage.io returns Atlassian's generic inactive page.
+  - security: no /.well-known/security.txt on any of six Buk hosts, and no published
+      vulnerability-disclosure or bug-bounty route. A researcher has nowhere to send a finding.
+  - sdks: zero first-party client libraries in any registry. The support center recommends
+      Postman. Buk publishes no Postman workspace either.
+  - idempotency: no Idempotency-Key or any equivalent on 217 operations, in a system where a
+      duplicated write changes what someone is paid.
+  - rateLimits: no 429 anywhere and no rate-limit headers documented.
+  - specQuality: Swagger 2.0; no info.title; no info.version; securityDefinitions declared but
+      never applied; zero operationIds across 206 operations.
+  - lifecycle: no deprecation policy, no Sunset/Deprecation headers, no API changelog. Product
+      release notes exist at /productos/roadmap-novedades-productos; API changes are unannounced.
+  - agents: no MCP server (bukhr/mcps is an empty repository created 2025-11-18), no A2A agent
+      card, no AsyncAPI, no /.well-known/ discovery, no agent skills.
+
+falsePositivesAvoided:
+  - probe: https://trust.buk.cl/.well-known/openid-configuration
+    status: 200
+    finding: >-
+      Belongs to SafeBase (issuer https://app.safebase.io/api/mcp), the hosted trust-center
+      platform — not a Buk authorization server. Recorded in well-known/buk-well-known.yml and
+      explicitly NOT credited to Buk as OIDC or OAuth support.
+  - probe: https://github.com/bukhr/MCPservers
+    status: 200
+    finding: >-
+      A vendored copy of the Anthropic reference MCP servers (git, github, gdrive, google
+      workspace, jenkins) for Buk's internal engineering tooling. It exposes no Buk product data
+      and is not a customer API surface.
+  - probe: https://www.hiive.com/.well-known/security.txt
+    status: 200
+    finding: >-
+      The stub apis.yml carried a Hiive secondary-market listing as the Website. The first
+      security-program probe run credited Buk with Hiive's vulnerability-disclosure programme.
+      Caught and deleted; the probes were re-run only after apis.yml carried real Buk hosts.
+
+openQuestions:
+  - Whether the bukhr/mcps repository — "Model Context Protocol (MCP) públicos de Buk", created
+    November 2025 and still empty — signals a planned public MCP server for the Buk API.
+  - Whether the private buk-developer-center repository referenced by a GitHub Actions workflow
+    in bukhr/MCPservers will ever become a public developer portal.
+  - Whether the anonymous tenant-served contract is deliberate or incidental. If deliberate it
+    is a genuine strength worth advertising; if incidental it may be closed without notice,
+    which is exactly the kind of change the missing deprecation policy would not announce.

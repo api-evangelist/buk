@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Buk Data Access API — México
+  version: 1.0.0
+extends: openapi/buk-data-access-api-mexico-openapi.yml
+x-generated: '2026-08-08'
+x-method: generated
+x-source: openapi/_original/buk-data-access-api-mexico-openapi.json (harvested verbatim from the
+  provider)
+actions:
+- target: $.info
+  description: The harvested contract carries no info.title and no info.version. Both are required
+    by the OpenAPI/Swagger specification and their absence breaks most generators and validators.
+  update:
+    title: Buk Data Access API — México
+    version: 1.0.0
+    x-api-evangelist-note: title and version supplied by API Evangelist; the provider contract omits
+      both.
+- target: $
+  description: The contract declares securityDefinitions.auth_token but applies no global or per-operation
+    security, so generated clients do not send the header. Apply it globally.
+  update:
+    security:
+    - auth_token: []
+- target: $.paths.*.*
+  description: 206 of 206 operations declare no operationId, so no generator can name a method and
+    no MCP tool can be stably keyed. Recorded as a gap; API Evangelist keys its derived tools on
+    METHOD + path instead (see mcp/buk-tool-crosswalk.yml).
+  x-api-evangelist-gap: missing-operationId
+- target: $.paths.*.*.responses
+  description: No operation documents a 429 response and no rate-limit headers are described, so
+    a client cannot handle throttling by contract. Recorded as a gap rather than invented into the
+    spec.
+  x-api-evangelist-gap: no-rate-limit-response

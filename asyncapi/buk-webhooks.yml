@@ -1,0 +1,138 @@
+generated: '2026-08-08'
+method: searched
+source: https://demo.buk.cl/apidocs (Webhooks tab, served from every Buk tenant)
+x-evidence:
+  fetched: '2026-08-08'
+  url: https://demo.buk.cl/apidocs
+  http_status: 200
+asyncapi_published: false
+notes: >-
+  Buk publishes no AsyncAPI document. It does publish a complete, human-readable webhook
+  catalog inside the Webhooks tab of the same /apidocs page that serves the Swagger UI —
+  event names, payload fields, allowed values and worked examples. That catalog is captured
+  verbatim in structure below. Buk webhooks are NOTIFICATION-ONLY by design: the payload
+  carries the record id, an ISO 8601 timestamp, the event_type and the tenant_url, and the
+  integrator must call the Data Access API to read the changed record. There is no
+  documented signature, secret, replay protection, retry policy or delivery guarantee, and
+  no subscription API — endpoints are configured by a tenant administrator in the Buk UI
+  under Configuración > Acceso API > Urls Webhooks.
+delivery:
+  transport: HTTP POST
+  content_type: application/json
+  envelope: '{"data": { ... }}'
+  configuration:
+    ui_path: Configuración > Acceso API > Urls Webhooks
+    role_required: administrador or superadministrador
+    fields:
+    - name: Webhook Url
+      covers: [Empleados, Áreas, Vacaciones, Licencias/Ausencias/Permisos]
+      constraint: Must be a public https:// URL
+    - name: Webhook Documentos Url
+      covers: [Documentos]
+      constraint: Must be a public https:// URL
+  security:
+    signature: not documented
+    shared_secret: not documented
+    replay_protection: not documented
+  reliability:
+    retries: not documented
+    ordering: not documented
+    at_least_once: not documented
+common_fields:
+- name: date
+  type: string
+  format: ISO 8601
+  description: Timestamp at which the change was recorded.
+- name: event_type
+  type: string
+  description: The event that triggered the notification.
+- name: tenant_url
+  type: string
+  description: Address of the customer instance that emitted the event.
+resources:
+- resource: employee
+  id_field: employee_id
+  extra_fields:
+  - name: employment_status
+    values: [activo, pendiente, terminado]
+  - name: metadata.relevant_for_bukas
+    description: Whether the change is relevant to Buk Asistencia (boolean).
+  - name: metadata.plan_id
+    description: Id of the modified pension/insurance plan — employee_plan_update only.
+  - name: metadata.responsibility_id
+    description: Id of the modified family group — employee_responsibility_update only.
+  events:
+  - name: employee_create
+    description: A new employee record was created.
+  - name: employee_update
+    description: Information on the employee record was modified.
+  - name: employee_plan_update
+    description: The employee's pension/social-security (previsional) information was modified.
+  - name: employee_responsibility_update
+    description: The employee's family group (grupo familiar) was modified.
+  - name: job_hire
+    description: A new job was created from the employee record.
+  - name: job_termination
+    description: A termination (finiquito), triggered individually or in bulk.
+  - name: job_movement
+    description: >-
+      Any change to the employee's job — undo, cancel, renew, bulk modification, or reversal
+      of a termination. Fires on any save of the job form even when nothing changed, so it
+      behaves as a touch on the employee.
+- resource: area
+  id_field: area_id
+  events:
+  - name: area_create
+    description: A new area or sub-area was created.
+  - name: area_update
+    description: Any modification to an area or sub-area.
+- resource: vacation
+  id_field: vacation_id
+  extra_fields:
+  - name: metadata.vacation_status
+    description: 'Vacation status in English, e.g. approved, submitted, rejected.'
+  events:
+  - name: vacation_create
+    description: A new vacation was created.
+  - name: vacation_update
+    description: Any modification to the vacation.
+  - name: vacation_destroy
+    description: The vacation was deleted.
+- resource: licence
+  id_field: licence_id
+  events:
+  - {name: licence_create, description: A new medical leave was created.}
+  - {name: licence_update, description: The medical leave was modified.}
+  - {name: licence_destroy, description: The medical leave was deleted.}
+- resource: absence
+  id_field: absence_id
+  events:
+  - {name: absence_create, description: A new absence was created.}
+  - {name: absence_update, description: The absence was modified.}
+  - {name: absence_destroy, description: The absence was deleted.}
+- resource: permission
+  id_field: permission_id
+  events:
+  - {name: permission_create, description: A new permission was created.}
+  - {name: permission_update, description: The permission was modified.}
+  - {name: permission_destroy, description: The permission was deleted.}
+- resource: document
+  id_field: document_id
+  events:
+  - name: document_create
+    description: A new document requiring signature was created.
+counts:
+  resources: 7
+  event_types: 18
+  note: >-
+    The provider documents licence/absence/permission as one templated family — "{tipo}" where
+    tipo may be licence, absence or permission — giving three named events each. Counted
+    expanded here; counted as 5 resource families and 15 distinct documented event names when
+    the templated family is collapsed.
+reconciliation:
+  pattern: notification-then-read
+  detail: >-
+    On receipt, call the Data Access API for the changed record — GET /employees/{id},
+    GET /areas/{id}, GET /vacations/{id} and so on — because the webhook body never carries
+    the record itself.
+  skill: skills/buk-consume-buk-webhooks.md

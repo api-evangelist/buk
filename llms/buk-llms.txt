@@ -1,0 +1,38 @@
+# llms.txt para buk.cl
+> Este archivo proporciona a los modelos de lenguaje (LLMs) información clara y estructurada sobre las secciones clave del sitio buk.cl.
+> La intención es facilitar el acceso a contenido útil, público y relevante para comprender nuestras soluciones, recursos y propósito.
+
+## Rutas clave del sitio
+
+### [/blog/]
+[https://www.buk.cl/blog/](https://www.buk.cl/blog/): Artículos sobre gestión de personas, tendencias laborales, cultura organizacional y herramientas para profesionales de RR.HH.
+
+### [/recursos/]
+[https://www.buk.cl/recursos/](https://www.buk.cl/recursos/): Ebooks, guías, estudios, calculadoras, podcasts y otros materiales educativos gratuitos diseñados para enriquecer el aprendizaje y las prácticas en RR.HH.
+
+### [/eventos/]
+[https://www.buk.cl/eventos/](https://www.buk.cl/eventos/): Webinars, charlas y capacitaciones —incluyendo Buk Academy— para aprender sobre la plataforma y tendencias del sector.
+
+### [/solucion/] o página principal
+[https://www.buk.cl/](https://www.buk.cl/): Plataforma integral de gestión de personas y finanzas que centraliza nómina, rendimiento, beneficios, finanzas y workflows en un solo lugar.
+
+### [/clientes/]
+[https://www.buk.cl/quienes-somos/clientes](https://www.buk.cl/quienes-somos/clientes): Empresas que han modernizado su gestión humana con la plataforma Buk, abarcando múltiples sectores en Chile.
+
+### [/nosotros/]
+[https://www.buk.cl/quienes-somos](https://www.buk.cl/quienes-somos): Propósito institucional, presencia regional y trayectoria corporativa de Buk en Chile.
+
+### [/terminos-y-condiciones/]
+[https://www.buk.cl/starter/terminos-y-condiciones](https://www.buk.cl/starter/terminos-y-condiciones): Condiciones de uso de la plataforma Buk Starter y relación legal entre usuario y empresa.
+
+### [/privacidad/]
+[https://www.buk.cl/privacidad](https://www.buk.cl/privacidad): Políticas de tratamiento y protección de datos personales conforme a normativa local.
+
+## Modelos LLM de referencia (acceso permitido o contextual)
+
+- OpenAI (ChatGPT)
+- Google-Extended (Gemini)
+- DeepSeek
+- Meta (LLaMA)
+- Perplexity AI
+- GitHub Copilot

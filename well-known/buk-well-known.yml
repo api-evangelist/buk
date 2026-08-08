@@ -1,0 +1,83 @@
+generated: '2026-08-08'
+method: probed
+source: https://www.buk.cl/ + https://demo.buk.cl/ + https://trust.buk.cl/ + https://app.ctrlit.cl/ + https://zktc.prod.asis.buk.cl/
+summary: >-
+  Buk publishes no /.well-known/ discovery surface on any of its own hosts — no
+  security.txt, no api-catalog, no OIDC/OAuth metadata, no ai-plugin.json and no
+  A2A agent card. The only /.well-known/ documents that answer 200 anywhere in the
+  Buk namespace belong to trust.buk.cl, which is a hosted SafeBase (by Drata) trust
+  center: its OIDC / OAuth metadata describes SafeBase's own platform MCP
+  authorization server at app.safebase.io, not a Buk API surface. Recorded here for
+  completeness and explicitly NOT credited to Buk as an authorization server.
+hosts:
+- host: https://www.buk.cl
+  role: Marketing site (Chile)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/buk-llms.txt, note: 'Provider-published
+      llms.txt (also served at buk.pe and buk.mx; absent on buk.co)'}
+  - {path: /robots.txt, status: 200}
+- host: https://demo.buk.cl
+  role: Tenant instance serving the public API docs (/apidocs) and the API itself
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - path: /apidocs
+    status: 200
+    note: 'Swagger UI shell; the machine-readable spec is at /api/{country}/{language}/api_docs'
+- host: https://supportcenter.buk.cl
+  role: Zendesk help center carrying the API integration articles
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://trust.buk.cl
+  role: SafeBase (by Drata) hosted trust center
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: buk-trust-openid-configuration.json
+    note: SafeBase platform MCP authorization server (issuer https://app.safebase.io/api/mcp)
+      — not a Buk-operated authorization server
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: buk-trust-oauth-authorization-server.json
+    note: RFC 8414 metadata, identical body to the OIDC document; SafeBase platform-wide
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: buk-trust-oauth-protected-resource.json
+    note: RFC 9728 metadata pointing at the same SafeBase MCP resource
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://app.ctrlit.cl
+  role: Buk Asistencia production API host (declared in the ApiAsistencia OpenAPI servers[])
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://zktc.prod.asis.buk.cl
+  role: Buk Attendance biometric clocking ingestion host
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+checked: '2026-08-08'

@@ -1,0 +1,59 @@
+generated: '2026-08-08'
+method: searched
+source: https://demo.buk.cl/apidocs + https://supportcenter.buk.cl/hc/es-419/articles/46268700701723--C%C3%B3mo-funciona-nuestra-API
+  + https://www.buk.cl/productos/roadmap-novedades-productos + openapi/_original/*.json
+versioning:
+  style: URL path major version
+  current: v1
+  pattern: https://{tenant}.buk.cl/api/v1/{country}
+  in_spec: >-
+    None of the five Data Access contracts declares info.version; the SwaggerHub contracts
+    declare 1.0.0 for both Buk Asistencia and the biometric integration API.
+  introspection:
+    operation: GET /versions
+    summary: Show versions
+    note: Returns the versions the tenant is running. It is a runtime read of the tenant, not
+      a published version history.
+  country_editions: [chile, colombia, peru, mexico, brasil]
+  languages: [es, en, pt]
+deprecation:
+  policy_published: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  rfc8594: false
+  deprecated_operations_in_spec: 0
+  detail: >-
+    No deprecation policy, notice period, sunset schedule or deprecation header is published
+    anywhere on the Buk surface, and no operation in any of the seven harvested contracts is
+    marked deprecated. Nothing tells an integrator how much warning they would get before an
+    endpoint or a field changes.
+changelog:
+  api_specific: false
+  product: https://www.buk.cl/productos/roadmap-novedades-productos
+  artifact: changelog/buk-changelog.yml
+roadmap:
+  published: true
+  url: https://www.buk.cl/productos/roadmap-novedades-productos
+  scope: product features, not API surface
+status_page:
+  published: false
+  probes:
+  - {url: 'https://status.buk.cl/', status: 000, note: NXDOMAIN}
+  - {url: 'https://buk.statuspage.io/', status: 200, note: 'Atlassian Statuspage returns its
+      generic "inactive" page — the subdomain is registered but no status page is published there.'}
+  detail: >-
+    Buk publishes no status page, no uptime history and no incident feed for the platform or
+    the API. There is no SLA document on the public site either. For a payroll system of record
+    whose customers must run a legally-timed monthly settlement cycle, this is the single
+    largest operational-transparency gap on the profile.
+sla:
+  published: false
+support:
+  channel: https://supportcenter.buk.cl/hc/es-419
+  note: Zendesk help center. API tokens for Buk Asistencia are requested from the SAC (support)
+    team; Data Access tokens are self-issued by a tenant administrator.
+gaps:
+- No status page and no SLA.
+- No deprecation policy, sunset header, or notice-period commitment.
+- No API changelog — product release notes only.
+- No info.version in the Data Access contracts, so a spec diff cannot be anchored to a version.

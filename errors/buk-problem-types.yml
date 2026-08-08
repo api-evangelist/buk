@@ -1,0 +1,146 @@
+generated: '2026-08-08'
+method: derived
+source: openapi/_original/*.json (all seven harvested Buk contracts)
+format: ad-hoc
+rfc9457: false
+notes: 'Buk does not publish an RFC 9457 problem+json envelope. Error bodies are plain application/json
+  objects; the Buk Asistencia contract uses a single "error" string field, and the Buk Data Access
+  API documents each error as a free-text description per operation with no shared error schema and
+  no machine-readable error code. There is no error-code registry: a client can only branch on the
+  HTTP status. Response descriptions are a mix of Spanish and English within the same contract.'
+envelope:
+  asistencia:
+    shape: '{"error": "<mensaje>"}'
+    source: openapi/buk-asistencia-api-openapi.yml
+  data_access:
+    shape: free-text JSON body; no shared error schema declared in the contract
+    source: openapi/buk-data-access-api-chile-openapi.yml
+errors:
+- status: 400
+  title: Bad Request — malformed payload, missing required field, or an out-of-range query parameter
+  occurrences: 580
+  documented_descriptions:
+  - There is an error with the data submitted
+  - Existe un error con los datos enviados
+  - The request sent does not respect the proper format
+  - When an error occurs while deleting a record
+  - Cuando hay un error al borrar un registro
+  - The request sent does not respect the proper format.
+  - Missing or invalid parameters
+  - The sent request does not comply with the required format
+  example_operations:
+  - POST /recruiting/applicants
+  - POST /recruiting/applicants/search_by_email
+  - GET /recruiting/applicants/{id}
+  - PATCH /recruiting/applicants/{id}
+- status: 401
+  title: Unauthorized — the auth_token header is missing, invalid, or the token has no read permission
+    on this entity
+  occurrences: 21
+  documented_descriptions:
+  - Unauthorized - No read permissions
+  - 'Authentication error. Returned when provider credentials are invalid or missing.
+
+
+    **Possible codes:**
+
+    - `UNAUTHORIZED` — Authentication headers are missing, empty, or token is incorrect
+
+    - `INVALID_PROVIDER_NAME` — The provider does not exist in the system'
+  example_operations:
+  - GET /accounting_structure/structures
+  - GET /accounting_structure/assignments
+  - GET /accounting_structure/export
+  - GET /accounting_structure/export_process_differences
+- status: 403
+  title: Documented error response
+  occurrences: 10
+  documented_descriptions:
+  - Acceso no autorizado. Se retorna cuando el token proporcionado es inválido, ha expirado o falta
+    en el encabezado de la solicitud.
+  - Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no
+    se ha proporcionado en la solicitud.
+  - Acceso prohibido. Token faltante, inválido o restringido (la obra pertenece a otra empresa).
+  example_operations:
+  - GET /informacionRecinto
+  - GET /obtenerNominaColaborador
+  - GET /getAsignacionTurnos
+  - GET /obtenerInasistencias
+- status: 404
+  title: Not Found — the requested record does not exist, or the endpoint is not enabled for this
+    tenant/country
+  occurrences: 327
+  documented_descriptions:
+  - Applicant not found
+  - The requested resource does not exist
+  - Performance evaluation not found
+  - empleados no encontrado
+  - No hiring processes flows found
+  - Grupo Familiar no encontrado
+  - There is no information for the month and year entered
+  - No se ha podido encontrar la vacación con los campos requeridos
+  example_operations:
+  - POST /recruiting/applicants/search_by_email
+  - GET /recruiting/applicants/{id}
+  - PATCH /recruiting/applicants/{id}
+  - GET /recruiting/applicants/
+- status: 405
+  title: Documented error response
+  occurrences: 9
+  documented_descriptions:
+  - Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+  - Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes POST.
+  example_operations:
+  - GET /informacionRecinto
+  - GET /obtenerNominaColaborador
+  - GET /obtenerInasistencias
+  - GET /obtenerHorasExtras
+- status: 409
+  title: Conflict — the record is being updated concurrently, or the operation is not permitted for
+    this record type
+  occurrences: 11
+  documented_descriptions:
+  - No se puede eliminar el proceso. Solo se permiten eliminar procesos de tipo Liquidación
+  - Records are being updated concurrently.
+  - Duplicate conflict. Returned when a clocking record with the exact same data already exists (same
+    device, user, timestamp, etc.).
+  example_operations:
+  - DELETE /process/{id}
+  - POST /employees/{id}/jobs
+  - DELETE /process/{id}
+  - POST /employees/{id}/jobs
+- status: 422
+  title: Unprocessable Entity — validation failed on an otherwise well-formed request
+  occurrences: 10
+  documented_descriptions:
+  - Error de validación
+  - It was not possible to eliminate the substitution
+  example_operations:
+  - PATCH /cargas/{id}
+  - DELETE /substitutions/{id}
+  - PATCH /cargas/{id}
+  - DELETE /substitutions/{id}
+- status: 500
+  title: Documented error response
+  occurrences: 2
+  documented_descriptions:
+  - Error interno del servidor.
+  - Internal server error. Returned when an unexpected error occurs during request processing.
+  example_operations:
+  - POST /v2/registrar
+  - POST /v1/clockings
+- status: 503
+  title: Service Unavailable — the request could not be processed; retry
+  occurrences: 5
+  documented_descriptions:
+  - No se pudo procesar la solicitud. Intente nuevamente.
+  example_operations:
+  - DELETE /assigns/{id}
+  - DELETE /assigns/{id}
+  - DELETE /assigns/{id}
+  - DELETE /assigns/{id}
+gaps:
+- No stable machine-readable error code — clients must parse Spanish/English prose.
+- No 429 documented anywhere in 206 operations, so a rate-limit response cannot be handled by contract.
+- No 500 documented; only a single 503 on one operation.
+- No components-level error schema, so error shapes are not reusable or generatable.
