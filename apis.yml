@@ -40,135 +40,2187 @@ created: '2026-08-08'
 modified: '2026-08-08'
 specificationVersion: '0.20'
 apis:
-- aid: buk:data-access-api
-  name: Buk Data Access API
-  description: >-
-    The Buk platform API — a tenant-scoped REST interface over the HR and payroll system of
-    record. 151 paths and 206 operations across 40 tag groups covering employees
-    (Colaboradores), jobs, people, companies, areas and sub-areas, roles, cost centres, unions,
-    work locations, payroll periods and processes, settlements (liquidaciones), payslips,
-    vacations, absences, medical leave, permissions, unworked and overtime hours, benefits,
-    salary advances and credits, accounting centralisation and accounting structures, items,
-    KPIs, labour suspensions, evaluations, substitutions, applicants and applications. Published
-    as a Swagger 2.0 contract served unauthenticated from every customer tenant in five country
-    variants (Chile, Colombia, Peru, Mexico, Brazil) and three languages (es, en, pt); the five
-    variants share identical paths and operations and differ only in their country-specific
-    definition sets. Authentication is an API key in an auth_token header, issued per tenant and
-    scoped per entity to read or read-and-modify.
+- aid: buk:buk-absences-requests-api
+  name: Buk Absences requests API
+  description: The Absences requests API from Buk — 4 operation(s) for absences requests.
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
-  - Human Resources
-  - Payroll
-  - Employee Records
-  - Time and Attendance
-  - Benefits
-  - Recruiting
-  - Latin America
+  - Absences requests
   properties:
   - type: OpenAPI
-    url: openapi/buk-data-access-api-chile-openapi.yml
-    name: Buk Data Access API — Chile
-  - type: OpenAPI
-    url: openapi/buk-data-access-api-colombia-openapi.yml
-    name: Buk Data Access API — Colombia
-  - type: OpenAPI
-    url: openapi/buk-data-access-api-peru-openapi.yml
-    name: Buk Data Access API — Perú
-  - type: OpenAPI
-    url: openapi/buk-data-access-api-mexico-openapi.yml
-    name: Buk Data Access API — México
-  - type: OpenAPI
-    url: openapi/buk-data-access-api-brasil-openapi.yml
-    name: Buk Data Access API — Brasil
-  - type: OpenAPI
-    url: openapi/_original/buk-data-access-api-chile-openapi.json
-    name: Chile contract (verbatim source)
-  - type: OpenAPI
-    url: https://demo.buk.cl/api/chile/en/api_docs
-    name: Published Swagger 2.0 download (live provider URL, tenant-scoped)
+    url: openapi/buk-absences-requests-api-openapi.yml
   - type: Documentation
     url: https://demo.buk.cl/apidocs
-    name: Swagger UI served from every Buk tenant
   - type: APIReference
     url: https://demo.buk.cl/apidocs
   - type: GettingStarted
-    url: https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
-    name: Cómo integrarse a Buk a través de API
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
   - type: Authentication
     url: authentication/buk-authentication.yml
   - type: Webhooks
     url: asyncapi/buk-webhooks.yml
-    name: 15 named webhook event types across 5 resource families
-  - type: Overlay
-    url: overlays/buk-data-access-api-chile-overlay.yaml
   - type: DataModel
     url: data-model/buk-data-model.yml
-- aid: buk:asistencia-api
-  name: Buk Asistencia API
-  description: >-
-    The API for Buk Asistencia, Buk's time-and-attendance product, published as an OpenAPI 3.0.0
-    contract on SwaggerHub under the BUKASISTENCIA account. Ten operations across seven tag
-    groups: paginated listings of work sites (recintos), the collaborator roster, shift
-    assignments, absences, overtime and unworked hours, plus reading and injecting attendance
-    clocking records. Authentication is an API key in a token header, requested from the Buk
-    SAC team.
-  humanURL: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  baseURL: https://app.ctrlit.cl/ctrl/api
-  tags:
-  - Time and Attendance
-  - Human Resources
-  - Shifts
-  - Overtime
-  - Latin America
-  properties:
-  - type: OpenAPI
-    url: openapi/buk-asistencia-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/buk-asistencia-api-openapi.json
-    name: Buk Asistencia contract (verbatim source)
-  - type: OpenAPI
-    url: https://api.swaggerhub.com/apis/BUKASISTENCIA/ApiAsistencia/1.0.0
-    name: Published OpenAPI 3.0.0 download (live provider URL)
   - type: Documentation
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
   - type: APIReference
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
   - type: GettingStarted
     url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
-    name: APIs de Buk Asistencia
-  - type: Overlay
-    url: overlays/buk-asistencia-api-overlay.yaml
-- aid: buk:attendance-biometrics-api
-  name: Buk Attendance — Biometric Integration API
-  description: >-
-    A public, vendor-agnostic clocking ingestion API for biometric devices from any
-    manufacturer. A single POST /v1/clockings operation that any device middleware can consume
-    after normalising its data to Buk's generic format, so Buk Asistencia never needs to know
-    the originating manufacturer. Published as an OpenAPI 3.0.3 contract on SwaggerHub;
-    authenticated by a provider header pair (x-provider-name plus x-provider-token).
-  humanURL: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-  baseURL: https://zktc.prod.asis.buk.cl/rest
-  tags:
-  - Time and Attendance
-  - Biometrics
-  - Device Integration
-  - Latin America
-  properties:
-  - type: OpenAPI
-    url: openapi/buk-attendance-biometrics-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/buk-attendance-biometrics-api-openapi.json
-    name: Biometric Integration contract (verbatim source)
-  - type: OpenAPI
-    url: https://api.swaggerhub.com/apis/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-    name: Published OpenAPI 3.0.3 download (live provider URL)
   - type: Documentation
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
   - type: APIReference
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-  - type: Overlay
-    url: overlays/buk-attendance-biometrics-api-overlay.yaml
+- aid: buk:buk-accounting-structures-api
+  name: Buk Accounting Structures API
+  description: The Accounting Structures API from Buk — 4 operation(s) for accounting structures.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Accounting Structures
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-accounting-structures-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-applicant-api
+  name: Buk Applicant API
+  description: The Applicant API from Buk — 1 operation(s) for applicant.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Applicant
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-applicant-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-application-api
+  name: Buk Application API
+  description: The Application API from Buk — 2 operation(s) for application.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Application
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-application-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-benefits-api
+  name: Buk Benefits API
+  description: The Benefits API from Buk — 3 operation(s) for benefits.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Benefits
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-benefits-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-capacitaciones-api
+  name: Buk Capacitaciones API
+  description: The Capacitaciones API from Buk — 2 operation(s) for capacitaciones.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Capacitaciones
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-capacitaciones-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-cargos-api
+  name: Buk Cargos API
+  description: The Cargos API from Buk — 1 operation(s) for cargos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Cargos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-cargos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-centralized-accounting-api
+  name: Buk Centralized accounting API
+  description: The Centralized accounting API from Buk — 7 operation(s) for centralized accounting.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Centralized accounting
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-centralized-accounting-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-centro-de-costo-api
+  name: Buk Centro de costo API
+  description: The Centro de costo API from Buk — 4 operation(s) for centro de costo.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Centro de costo
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-centro-de-costo-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-clockings-api
+  name: Buk Clockings API
+  description: Attendance clocking ingestion from biometric devices.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Clockings
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-clockings-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-colaboradores-api
+  name: Buk Colaboradores API
+  description: The Colaboradores API from Buk — 23 operation(s) for colaboradores.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Colaboradores
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-colaboradores-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-cr-ditos-api
+  name: Buk Créditos API
+  description: The Créditos API from Buk — 5 operation(s) for créditos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Créditos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-cr-ditos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-days-worked-api
+  name: Buk Days worked API
+  description: The Days worked API from Buk — 2 operation(s) for days worked.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Days worked
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-days-worked-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-dismissal-api
+  name: Buk Dismissal API
+  description: The Dismissal API from Buk — 1 operation(s) for dismissal.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Dismissal
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-dismissal-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-documents-api
+  name: Buk Documents API
+  description: The Documents API from Buk — 5 operation(s) for documents.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-documents-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-empresas-api
+  name: Buk Empresas API
+  description: The Empresas API from Buk — 1 operation(s) for empresas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Empresas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-empresas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-empresas-variable-records-api
+  name: Buk Empresas Variable Records API
+  description: >-
+    The Empresas Variable Records API from Buk — 1 operation(s) for empresas variable records.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Empresas Variable Records
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-empresas-variable-records-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-evaluations-api
+  name: Buk Evaluations API
+  description: The Evaluations API from Buk — 3 operation(s) for evaluations.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Evaluations
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-evaluations-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-feriados-api
+  name: Buk Feriados API
+  description: The Feriados API from Buk — 1 operation(s) for feriados.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Feriados
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-feriados-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-grupo-familiar-api
+  name: Buk Grupo Familiar API
+  description: The Grupo Familiar API from Buk — 1 operation(s) for grupo familiar.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Grupo Familiar
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-grupo-familiar-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-grupos-api
+  name: Buk Grupos API
+  description: The Grupos API from Buk — 2 operation(s) for grupos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Grupos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-grupos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-horas-extras-api
+  name: Buk Horas extras API
+  description: The Horas extras API from Buk — 1 operation(s) for horas extras.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Horas extras
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-horas-extras-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-horas-no-trabajadas-api
+  name: Buk Horas no trabajadas API
+  description: The Horas no trabajadas API from Buk — 3 operation(s) for horas no trabajadas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Horas no trabajadas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-horas-no-trabajadas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-inasistencia-api
+  name: Buk Inasistencia API
+  description: The Inasistencia API from Buk — 1 operation(s) for inasistencia.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Inasistencia
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-inasistencia-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-items-api
+  name: Buk Items API
+  description: The Items API from Buk — 4 operation(s) for items.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-items-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-job-titles-api
+  name: Buk Job Titles API
+  description: The Job Titles API from Buk — 3 operation(s) for job titles.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Job Titles
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-job-titles-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-jobs-api
+  name: Buk Jobs API
+  description: The Jobs API from Buk — 6 operation(s) for jobs.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-kpis-api
+  name: Buk KP Is API
+  description: The KPIs API from Buk — 3 operation(s) for kpis.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - KPIs
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-kpis-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-labores-api
+  name: Buk Labores API
+  description: The Labores API from Buk — 1 operation(s) for labores.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Labores
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-labores-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-leaves-api
+  name: Buk Leaves API
+  description: The Leaves API from Buk — 4 operation(s) for leaves.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Leaves
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-leaves-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-localidades-api
+  name: Buk Localidades API
+  description: The Localidades API from Buk — 2 operation(s) for localidades.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Localidades
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-localidades-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-lugares-de-trabajo-api
+  name: Buk Lugares de Trabajo API
+  description: The Lugares de Trabajo API from Buk — 1 operation(s) for lugares de trabajo.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Lugares de Trabajo
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-lugares-de-trabajo-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-n-mina-colaborador-api
+  name: Buk Nómina Colaborador API
+  description: The Nómina Colaborador API from Buk — 1 operation(s) for nómina colaborador.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Nómina Colaborador
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-n-mina-colaborador-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-non-worked-hours-api
+  name: Buk Non-Worked Hours API
+  description: The Non-Worked Hours API from Buk — 2 operation(s) for non-worked hours.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Non-Worked Hours
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-non-worked-hours-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-notas-api
+  name: Buk Notas API
+  description: The Notas API from Buk — 1 operation(s) for notas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Notas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-notas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-overtime-api
+  name: Buk Overtime API
+  description: The Overtime API from Buk — 3 operation(s) for overtime.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Overtime
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-overtime-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-pay-stubs-api
+  name: Buk Pay stubs API
+  description: The Pay stubs API from Buk — 5 operation(s) for pay stubs.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Pay stubs
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-pay-stubs-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-payment-documents-api
+  name: Buk Payment documents API
+  description: The Payment documents API from Buk — 5 operation(s) for payment documents.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Payment documents
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-payment-documents-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-payrolls-api
+  name: Buk Payrolls API
+  description: The Payrolls API from Buk — 1 operation(s) for payrolls.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Payrolls
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-payrolls-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-people-api
+  name: Buk People API
+  description: The People API from Buk — 1 operation(s) for people.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - People
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-people-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-per-odos-api
+  name: Buk Períodos API
+  description: The Períodos API from Buk — 1 operation(s) for períodos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Períodos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-per-odos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-postulante-api
+  name: Buk Postulante API
+  description: The Postulante API from Buk — 5 operation(s) for postulante.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Postulante
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-postulante-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-procesos-api
+  name: Buk Procesos API
+  description: The Procesos API from Buk — 2 operation(s) for procesos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Procesos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-procesos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-productos-api
+  name: Buk Productos API
+  description: The Productos API from Buk — 1 operation(s) for productos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Productos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-productos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-reas-api
+  name: Buk Áreas API
+  description: The Áreas API from Buk — 5 operation(s) for áreas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Áreas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-reas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-recintos-api
+  name: Buk Recintos API
+  description: The Recintos API from Buk — 3 operation(s) for recintos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Recintos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-recintos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-registro-de-asistencia-api
+  name: Buk Registro de asistencia API
+  description: The Registro de asistencia API from Buk — 4 operation(s) for registro de asistencia.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Registro de asistencia
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-registro-de-asistencia-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-registros-de-trabajo-api
+  name: Buk Registros de Trabajo API
+  description: The Registros de Trabajo API from Buk — 2 operation(s) for registros de trabajo.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Registros de Trabajo
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-registros-de-trabajo-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-selection-process-api
+  name: Buk Selection process API
+  description: The Selection process API from Buk — 1 operation(s) for selection process.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Selection process
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-selection-process-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-substitutions-api
+  name: Buk Substitutions API
+  description: The Substitutions API from Buk — 2 operation(s) for substitutions.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Substitutions
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-substitutions-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-synchronization-of-payment-data-api
+  name: Buk Synchronization of payment data API
+  description: >-
+    The Synchronization of payment data API from Buk — 1 operation(s) for synchronization of payment data.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Synchronization of payment data
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-synchronization-of-payment-data-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-tarifas-api
+  name: Buk Tarifas API
+  description: The Tarifas API from Buk — 1 operation(s) for tarifas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Tarifas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-tarifas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-tems-api
+  name: Buk Ítems API
+  description: The Ítems API from Buk — 1 operation(s) for ítems.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Ítems
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-tems-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-termination-processes-api
+  name: Buk Termination processes API
+  description: The Termination processes API from Buk — 1 operation(s) for termination processes.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Termination processes
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-termination-processes-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-time-off-leaves-api
+  name: Buk Time Off Leaves API
+  description: The Time Off Leaves API from Buk — 1 operation(s) for time off leaves.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Time Off Leaves
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-time-off-leaves-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-turnos-api
+  name: Buk Turnos API
+  description: The Turnos API from Buk — 1 operation(s) for turnos.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Turnos
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-turnos-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-unexcused-absence-api
+  name: Buk Unexcused absence API
+  description: The Unexcused absence API from Buk — 4 operation(s) for unexcused absence.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Unexcused absence
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-unexcused-absence-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-unidades-api
+  name: Buk Unidades API
+  description: The Unidades API from Buk — 1 operation(s) for unidades.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Unidades
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-unidades-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-unions-api
+  name: Buk Unions API
+  description: The Unions API from Buk — 3 operation(s) for unions.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Unions
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-unions-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-users-and-profiles-api
+  name: Buk Users and profiles API
+  description: The Users and profiles API from Buk — 2 operation(s) for users and profiles.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Users and profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-users-and-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-usuarios-y-perfiles-api
+  name: Buk Usuarios y perfiles API
+  description: The Usuarios y perfiles API from Buk — 1 operation(s) for usuarios y perfiles.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Usuarios y perfiles
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-usuarios-y-perfiles-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-vacaciones-api
+  name: Buk Vacaciones API
+  description: The Vacaciones API from Buk — 4 operation(s) for vacaciones.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Vacaciones
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-vacaciones-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-vacation-policies-api
+  name: Buk Vacation Policies API
+  description: The Vacation Policies API from Buk — 1 operation(s) for vacation policies.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Vacation Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-vacation-policies-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-variables-of-the-empresas-api
+  name: Buk Variables of the Empresas API
+  description: >-
+    The Variables of the Empresas API from Buk — 1 operation(s) for variables of the empresas.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Variables of the Empresas
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-variables-of-the-empresas-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-versions-api
+  name: Buk Versions API
+  description: The Versions API from Buk — 1 operation(s) for versions.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-versions-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+- aid: buk:buk-workflows-api
+  name: Buk Workflows API
+  description: The Workflows API from Buk — 1 operation(s) for workflows.
+  humanURL: https://demo.buk.cl/apidocs
+  baseURL: https://demo.buk.cl/api/v1/chile
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/buk-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://demo.buk.cl/apidocs
+  - type: APIReference
+    url: https://demo.buk.cl/apidocs
+  - type: GettingStarted
+    url: >-
+      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
+  - type: Authentication
+    url: authentication/buk-authentication.yml
+  - type: Webhooks
+    url: asyncapi/buk-webhooks.yml
+  - type: DataModel
+    url: data-model/buk-data-model.yml
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
+  - type: GettingStarted
+    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
+  - type: Documentation
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
+  - type: APIReference
+    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
