@@ -1,0 +1,21 @@
+{
+  "repo": "buk",
+  "feeds": [
+    {
+      "source": "https://supportcenter.buk.cl/hc/es-419",
+      "feed_url": "https://supportcenter.buk.cl/hc/es-419",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://www.buk.cl/blog",
+      "feed_url": "https://www.buk.cl/blog/rss.xml",
+      "title": "",
+      "saved": 5,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 5,
+  "fetched": "2026-08-15T12:22:01Z"
+}
