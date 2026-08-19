@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Overtime API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Overtime",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List overtime",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/attendances/overtime",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the  search query period  in YYYY-MM-DD format."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "View overtime records\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Add overtime",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/attendances/overtime"
+          },
+          "docs": "Prefer to use the **Payment Data Sync** endpoint\n\nAllows adding overtime to a Colaborador for a given month.\n\nAn object of type Overtime must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the overtime belongs (optional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Number of overtime hours to add\n- employee_id: ID of the Colaborador to whom to associate overtime.\n- type_id: ID of the type of o"
+        },
+        {
+          "info": {
+            "name": "Add overtime",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/attendances/overtime"
+          },
+          "docs": "Prefer to use the **Payment Data Sync** endpoint\n\nAllows to indicate the number of overtime hours that a Colaborador worked during a given month. This method **replaces** the amount of overtime, it does not add to existing overtime.\n\n\nAn object of type Overtime must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the overtime belongs (optional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Numbe"
+        },
+        {
+          "info": {
+            "name": "View an overtime record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/attendances/overtime/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the overtime"
+              }
+            ]
+          },
+          "docs": "View an overtime record based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List types of overtime hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/attendances/overtime/types"
+          },
+          "docs": "Generates a list of the types of overtime that exist in the system.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,369 @@
+{
+  "item": [
+    {
+      "id": "a4917df5-1ed9-4d03-a988-e4a434b1f07c",
+      "name": "Unions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a2abf5b-2fa2-4a04-9a44-5edd758d241f",
+          "name": "Show union",
+          "request": {
+            "name": "Show union",
+            "description": {
+              "content": "We received the information related to the union whose ID we sent in the query.\nEste endpoint no requiere permisos especiales.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Union ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "786aeefb-438d-483d-a82c-74b2d3f28a86",
+              "name": "As a response, we received the information corresponding to the queried union",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Union ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b9dd068-3dae-49c2-a392-965b02b4998d",
+          "name": "Show unions",
+          "request": {
+            "name": "Show unions",
+            "description": {
+              "content": "We received information related to unions\n\nEste endpoint no requiere permisos especiales.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Page size",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "868c835c-822f-4c82-a384-54c87a54a724",
+              "name": "As a response, we received the corresponding information for all unions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f81dae71-6856-4381-8b01-adaf5241a31d",
+          "name": "Create a union",
+          "request": {
+            "name": "Create a union",
+            "description": {
+              "content": "Create a new union in the system. The parameters are: \n\n - id : Union ID\n\n - name: Union name\n\n - rut: Union's RUT\n\nEste endpoint no requiere permisos especiales.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "206a5856-7b4a-4eed-b3c6-2b8514538c3e",
+              "name": "Response in case a union has been successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09569baf-5ff2-403e-b806-f2709fbaeddb",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee95c65e-f666-497a-bba6-c74833ed83ea",
+          "name": "Update union information",
+          "request": {
+            "name": "Update union information",
+            "description": {
+              "content": "Allows you to specify the new name and RUT of a union.\n\nEste endpoint no requiere permisos especiales.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unions",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aabc6076-9b35-4a06-bc4f-c7e139f5eabf",
+              "name": "Response to union replacement",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e680ed80-b091-45f5-987e-0fe1bfe7d522",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unions",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d35f3317-9ca5-4298-b546-4bf955adeed5",
+    "name": "Buk Unions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Unions across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

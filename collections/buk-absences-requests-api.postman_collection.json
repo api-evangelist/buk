@@ -1,0 +1,1277 @@
+{
+  "item": [
+    {
+      "id": "34a634b6-c11c-4456-94a6-92ae93e1deea",
+      "name": "Absences requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c82135b-c699-4370-a9a1-130b2bec6dee",
+          "name": "List absence request types",
+          "request": {
+            "name": "List absence request types",
+            "description": {
+              "content": "Displays the list of absence request types in the system.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) paid?",
+                    "type": "text/plain"
+                  },
+                  "key": "with_pay",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Absence Request type (This can only be one of per_day,per_hour,both)",
+                    "type": "text/plain"
+                  },
+                  "key": "time_measure",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa146340-6f75-4c9c-b69a-3818118d545e",
+              "name": "As a response, we receive an array (data) with absence requests types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_pay",
+                      "value": ""
+                    },
+                    {
+                      "key": "time_measure",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "187c9846-3e6b-4dd9-b53f-13412db40351",
+          "name": "Create an absence request type",
+          "request": {
+            "name": "Create an absence request type",
+            "description": {
+              "content": "Creates an absence request type in the system.\n\nA LicenceType object must be sent as a JSON object in the\nthe body of the request, composed of the following attributes:\n - code: Unique code that identifies the absence request\n - name: Name of type of absence request\n - description: Description of type of absence request\n with_pay: whether it includes salary payment or not (optional, by default is false)\n requestable: whether the type of absence request can be requested by the Colaborador (optional, by default is false)\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b33a44f-0721-45ba-9825-3dd4ab189d2b",
+              "name": "API response after creating an absence request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efacc367-e986-43c7-a04a-ada2c8019871",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0433715a-c645-4127-ab8f-3886c724cde4",
+          "name": "View an absence request type",
+          "request": {
+            "name": "View an absence request type",
+            "description": {
+              "content": "View an absence request type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the absence request type"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90426fe0-30fd-44ad-ab5b-8721ece95e11",
+              "name": "As a response, we receive the information of the requested absence request type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f000c993-7eaf-4a6f-ab24-b7086468e655",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3358a537-93d8-48f7-80fc-c88d15b77e5d",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1cc61d9-8699-4d9d-bf48-fcbefdcf5873",
+          "name": "Delete an absence request type",
+          "request": {
+            "name": "Delete an absence request type",
+            "description": {
+              "content": "Delete a absence request type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the absence request type"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af739894-aa4a-426c-8fd8-a6194c78430f",
+              "name": "As a response, we confirm that the resource has been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3e527eb-7370-4b99-b65b-730c1c5c1baf",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f3ecdc33-d861-42c4-8621-0b82147c7afb",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request type"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05446f91-f55c-4097-9bcd-731e26c45212",
+          "name": "List absence requests",
+          "request": {
+            "name": "List absence requests",
+            "description": {
+              "content": "Displays the absence requests registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Absence Request. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Absence Request (opcional). - custom_attributes: Custom attributes (optional). - justification: Supplementary justification text (optional). - permission_type_id: Id of the type of absence request to which it corresponds, these can be seen with the GET operation for \"List types of absence request\". - permission_type_code: Code of the type of absence request to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Start date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Absence Request type (This can only be one of per_day,per_hour,both)",
+                    "type": "text/plain"
+                  },
+                  "key": "time_measure",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start time",
+                    "type": "text/plain"
+                  },
+                  "key": "start_time",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End time",
+                    "type": "text/plain"
+                  },
+                  "key": "end_time",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page for query",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f534459-0c75-4e37-93c9-6044e993e8a6",
+              "name": "As a response, we receive an array (data) with the absence requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "time_measure",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_time",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5849fae-2c30-460d-856f-eb20c9d5d07f",
+          "name": "Delete Absence Requests",
+          "request": {
+            "name": "Delete Absence Requests",
+            "description": {
+              "content": "Delete permissions using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_ids",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "731dc0c7-004f-40ec-b0b4-ff1f7686ee6d",
+              "name": "As a response, we confirm that all the resources have been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3fde1f2-c4ca-4cd3-8ed3-7ea2421132e9",
+              "name": "When an error occurs while deleting a record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7312529a-a468-4be4-be6b-236762dad812",
+              "name": "When there are no allowed resources to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a90794f-00ed-4668-b6ca-0fe7783c6af7",
+          "name": "Create Absence Request",
+          "request": {
+            "name": "Create Absence Request",
+            "description": {
+              "content": "Creates a new paid or unpaid Absence Request in the system. Se debe enviar como JSON un objeto tipo Permiso en el cuerpo de la petición.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Absence Request. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Absence Request (opcional). - custom_attributes: Custom attributes (optional). - justification: Texto complementario de justificación (opcional). - permission_type_id: Id del tipo de permiso al que corresponde, estas se pueden ver con la operacion GET para \"Listar tipos permisos\".\n\n- justification: Supplementary text for justification of the absence request (optional). - medic_rut: Doctor's RUT (optional). - licence_number: Leave number (optional). - medic_name: Doctor's name (optional).\n- time_measure: (Optional) Absence Request type ['per_day', 'per_hour', 'both']\n\n- <b>per_day:</b> Per day\n\n- <b>per_hour:</b> Per hour\n\n- <b>both:</b> Both.\n\n- start_time: Time out. Formato hh:mm - end_time: Return time. Formato hh:mm\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e29b2868-7662-44ac-8e6b-5e40045cc65e",
+              "name": "API response after creating Absence Requests Leave.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f3845a14-fa07-4c02-bc6c-736971de7722",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3aa52ab-f4a6-4ec9-984c-d6b79d0437f9",
+          "name": "View an absence request",
+          "request": {
+            "name": "View an absence request",
+            "description": {
+              "content": "Displays the absence requests registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Absence Request. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Absence Request (opcional). - custom_attributes: Custom attributes (optional). - justification: Supplementary justification text (optional). - permission_type_id: Id of the type of absence request to which it corresponds, these can be seen with the GET operation for \"List types of absence request\". - permission_type_code: Code of the type of absence request to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the absence request"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6580dff9-c6ec-4ba3-a3de-b5f2fcb449ae",
+              "name": "As a response, we received the information of the requested absence",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6776b3f7-81f7-434f-8bd9-8242d3e55d14",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2974fe2-76a7-4e0a-8165-841d12b360bd",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the absence request"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8c69744-9b5d-4600-99be-e55da5b26082",
+          "name": "Delete absence request",
+          "request": {
+            "name": "Delete absence request",
+            "description": {
+              "content": "Delete an absence request based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "permission",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the Absence Request"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53126f80-fa01-4ec1-8a57-564a9f0b23d8",
+              "name": "As a response, we confirm that the resource has been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the Absence Request"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b3c3fd6-7616-4bd6-a68c-bce70f68cfbd",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the Absence Request"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7f5777b-540d-4a84-8dd1-c01722d0dd96",
+              "name": "When the resource being deleted does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "permission",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the Absence Request"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c29cdafe-78f7-41af-94b4-eb9df151ff70",
+    "name": "Buk Absences requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Absences requests across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

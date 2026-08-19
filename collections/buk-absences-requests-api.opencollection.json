@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Absences requests API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Absences requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List absence request types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/permission/types",
+            "params": [
+              {
+                "name": "with_pay",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) paid?"
+              },
+              {
+                "name": "time_measure",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Absence Request type"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "Displays the list of absence request types in the system.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Create an absence request type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/absences/permission/types"
+          },
+          "docs": "Creates an absence request type in the system.\n\nA LicenceType object must be sent as a JSON object in the\nthe body of the request, composed of the following attributes:\n - code: Unique code that identifies the absence request\n - name: Name of type of absence request\n - description: Description of type of absence request\n with_pay: whether it includes salary payment or not (optional, by default is false)\n requestable: whether the type of absence request can be requested by the Colaborador (option"
+        },
+        {
+          "info": {
+            "name": "View an absence request type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/permission/types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the absence request type"
+              }
+            ]
+          },
+          "docs": "View an absence request type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Delete an absence request type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/permission/types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the absence request type"
+              }
+            ]
+          },
+          "docs": "Delete a absence request type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List absence requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/permission",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "time_measure",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Absence Request type"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Start time"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "End time"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page for query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Displays the absence requests registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted "
+        },
+        {
+          "info": {
+            "name": "Create Absence Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/absences/permission"
+          },
+          "docs": "Creates a new paid or unpaid Absence Request in the system. Se debe enviar como JSON un objeto tipo Permiso en el cuerpo de la petición.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stag"
+        },
+        {
+          "info": {
+            "name": "Delete Absence Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/permission",
+            "params": [
+              {
+                "name": "employee_ids",
+                "value": "",
+                "type": "query",
+                "description": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD format."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Delete permissions using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "View an absence request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/permission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the absence request"
+              }
+            ]
+          },
+          "docs": "Displays the absence requests registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Absence Request. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted "
+        },
+        {
+          "info": {
+            "name": "Delete absence request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/permission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Absence Request"
+              }
+            ]
+          },
+          "docs": "Delete an absence request based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

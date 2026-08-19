@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk People API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain basic data on a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/people/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the individual"
+              }
+            ]
+          },
+          "docs": "Returns basic information about a specific person, including their id, first name, last name and ID number.\n\n**Permisos requeridos para utilizar este endpoint:** \n* People permissions en: 'Lectura'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

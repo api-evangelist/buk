@@ -1,0 +1,573 @@
+{
+  "item": [
+    {
+      "id": "b3f536a1-9595-43e0-ab7e-fb61090fe26c",
+      "name": "Centro de costo",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92b04ba0-ca5a-4751-bee0-9bc98b891fdc",
+          "name": "Mostrar centro de costo",
+          "request": {
+            "name": "Mostrar centro de costo",
+            "description": {
+              "content": "Recibimos la información relacionada al centro de costo cuyo ID enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del centro de costo"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59cb235c-ad03-4bdd-8373-9213016d7a90",
+              "name": "Como respuesta recibimos la información correspondiente al centro de costo buscado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del centro de costo"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7bf3643-b557-465d-96dd-bbf21d390d2f",
+          "name": "Actualizar un centro de costo por ID",
+          "request": {
+            "name": "Actualizar un centro de costo por ID",
+            "description": {
+              "content": "Permite indicar el nuevo código, código previred y atributos personalizados de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del centro de costo"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3a73ce9-5118-48d0-a6ea-c9c8f19e6bef",
+              "name": "Respuesta al reemplazar centro de costo",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del centro de costo"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "599937f4-b9f9-438c-8737-d20f9669e9f7",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del centro de costo"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "881bc002-8af0-4daf-af21-d7d6e3a81d8e",
+          "name": "Mostrar centros de costo",
+          "request": {
+            "name": "Mostrar centros de costo",
+            "description": {
+              "content": "Recibimos la información relacionada a los centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Tamaño de la página",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Nro de página",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af07f3d1-80f8-4e39-a5f2-060989f6d05d",
+              "name": "Como respuesta recicibimos la información correspondiente a todos los centro de costo",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5426f319-a53c-4be4-a4cd-3ad13d17593d",
+          "name": "Crear centro de costo",
+          "request": {
+            "name": "Crear centro de costo",
+            "description": {
+              "content": "Crea un nuevo centro de costo en el sistema. Los parámetros son\n\n- code : Código del centro de costo\n- previred_code : Código para previred del centro de costo\n- custom_attributes: Código y valor de atributos personalizados del centro de costo\n:\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c0e81e3-9450-4d8a-a5e0-fb56928349f0",
+              "name": "Respuesta en caso de haber creado un centro de costo de forma exitosa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d83c8eb-9795-4a4b-959b-64bff722a79f",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b2f0cfa-f504-4b9b-bdc0-63915c347d08",
+          "name": "Actualizar información centro de costo",
+          "request": {
+            "name": "Actualizar información centro de costo",
+            "description": {
+              "content": "Permite indicar el nuevo código y código previred de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6129b20d-ba9c-442d-830a-a4199b7b9ab1",
+              "name": "Respuesta al reemplazar centro de costo",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc2f2c35-e5c4-46c8-bfbb-fcb839efc35b",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "955a9431-98ba-46c7-b8f5-c251459a5191",
+          "name": "Indicar centro de costo del trabajo",
+          "request": {
+            "name": "Indicar centro de costo del trabajo",
+            "description": {
+              "content": "Permite indicar el centro de costo relacionado a un trabajo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "centro_costo_definitions",
+                "centro_costo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68d84666-b3d0-4339-b16e-152e53b1edfc",
+              "name": "Respuesta al crear centro de costo de trabajo",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    "centro_costo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0aa7eb56-4644-4591-8b3a-280557f246b0",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "centro_costo_definitions",
+                    "centro_costo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5fcc1f9e-8ef0-4a6a-a92f-cbd5fe95bb49",
+    "name": "Buk Centro de costo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Centro de costo across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

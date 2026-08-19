@@ -1,0 +1,242 @@
+openapi: 3.2.0
+info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints
+
+    '
+  title: Buk Dismissal API
+servers:
+- url: https://demo.buk.cl/api/v1/mexico
+tags:
+- name: Dismissal
+paths:
+  /jobs/{id}/termination:
+    get:
+      summary: Obtain dismissal
+      description: "Obtain dismissal using the job ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+      tags:
+      - Dismissal
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Job ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: As a response we receive an object of type dismissal
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Finiquito'
+            application/pdf:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Finiquito'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+            application/pdf:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+    post:
+      summary: Create dismissal
+      description: "Create a dismissal using an ID from Job and the data from dismissal.\n\nreason must be one of the following values: mutuo_acuerdo, renuncia, muerte, vencimiento_plazo, fin_servicio, :caso_fortuito, falta_probidad, acoso_sexual, vias_de_hecho, injurias, conducta_inmoral, acoso_laboral, negociaciones_prohibidas, no_concurrencia, abandonar_trabajo, faltas_seguridad, perjuicio_material, incumplimiento, necesidades_empresa, desahucio_gerente\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Dismissal
+      parameters:
+      - description: Job ID
+        name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Object of type dismissal
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Finiquito'
+            application/pdf:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Finiquito'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiniquitoInputCountry'
+        description: Parameters of dismissal
+        required: true
+components:
+  schemas:
+    FiniquitoHaberes:
+      properties:
+        nombre:
+          type: number
+        monto:
+          type: number
+    FiniquitoBase:
+      properties:
+        fecha:
+          type: string
+          format: date
+        fecha_aviso:
+          type: string
+          format: date
+        fecha_pago:
+          type: string
+          format: date
+        razon:
+          type: string
+        anos_de_servicio:
+          type: number
+        indemnizacion_legal_por_anos_servicios:
+          type: number
+        indemnizacion_legal_por_meses_obra:
+          type: number
+        indemnizacion_sustitutiva_previo_aviso:
+          type: number
+        indemnizacion_pactada_contractualmente:
+          type: number
+        indemnizacion_voluntaria:
+          type: number
+        indemnizacion_vacaciones:
+          type: number
+        descuento_seguro_cesantia:
+          type: number
+        otros_descuentos:
+          type: number
+        monto_indemnizacion_no_renta:
+          type: number
+        reajuste_indemnizacion:
+          type: number
+        interes_indemnizacion:
+          type: number
+        en_liquidacion:
+          type: boolean
+        custom_attributes:
+          type: object
+    Finiquito:
+      allOf:
+      - $ref: '#/components/schemas/FiniquitoBase'
+      properties:
+        id:
+          type: integer
+        fecha_inicio:
+          type: string
+          format: date
+        monto:
+          type: number
+        monto_sin_liquidacion:
+          type: number
+        razon_print:
+          type: string
+        dias_indemnizacion_por_obra:
+          type: number
+        dias_feriados_corridos:
+          type: number
+        descuentos:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiniquitoDescuentos'
+        haberes:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiniquitoHaberes'
+        indemnizacion_tributable:
+          type: number
+        impuesto_indemnizacion:
+          type: number
+        remuneraciones_pendientes:
+          type: number
+        asignaciones_no_imponibles_pendientes:
+          type: number
+        employee_id:
+          type: integer
+        rfc:
+          type: string
+        name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        curp:
+          type: string
+        social_security:
+          type: string
+        daily_wage:
+          type: number
+        monthly_wage:
+          type: number
+        sbc:
+          type: number
+        integration_factor:
+          type: number
+        antiquity:
+          type: integer
+        antiquity_current_year:
+          type: integer
+        separation_payments:
+          type: number
+        twenty_days_compensation:
+          type: number
+        ninety_days_compensation:
+          type: number
+        vacation_balance:
+          type: number
+        seniority_bonus:
+          type: number
+        pending_vacations:
+          type: number
+        proportionals_vacations:
+          type: number
+        aguinaldo:
+          type: number
+        deactivated_account:
+          type: boolean
+    FiniquitoDescuentos:
+      properties:
+        nombre:
+          type: number
+        monto:
+          type: number
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

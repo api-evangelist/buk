@@ -1,0 +1,433 @@
+openapi: 3.2.0
+info:
+  title: Buk Selection process API
+  version: '1.0'
+  description: 'Operations tagged Selection process across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Selection process
+paths:
+  /recruiting/selection_processes:
+    get:
+      summary: 'List selection processes '
+      description: "It displays all selection processes in the system\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Selection process
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      - name: from
+        in: query
+        type: string
+        format: date
+        description: (OPTIONAL) Search for selection processes starting from this date. If not specified, selection processes from the beginning are used. Format YYYY-MM-DD
+      - name: to
+        in: query
+        type: string
+        format: date
+        description: (OPTIONAL) Search for selection processes up to this date. If not specified, selection processes up to the current date are used. Format YYYY-MM-DD
+      responses:
+        '200':
+          description: As a response we receive an array (selection_processes) with the information of the selection processes
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/SelectionProcess'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    post:
+      summary: Selection Process
+      description: "Creates a new selection process based on the parameters provided. If a template_id is not specified, the default template is used.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Selection process
+      parameters:
+      - name: selection_process
+        in: body
+        description: Parameters of a selection process
+        required: true
+        schema:
+          title: RequestBody
+          required:
+          - selection_process
+          properties:
+            selection_process:
+              $ref: '#/definitions/SelectionProcessInput'
+      responses:
+        '201':
+          description: API response to the creation of a selection process.
+          schema:
+            title: ResponseBody
+            properties:
+              selection_process:
+                $ref: '#/definitions/SelectionProcess'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  SelectionProcessBase:
+    properties:
+      name:
+        example: {}
+        type: string
+        description: {}
+      workday:
+        example: full-time
+        type: string
+        enum:
+        - full-time
+        - part-time
+        default: full-time
+        description: {}
+      hours_by_week:
+        example: 10
+        type: integer
+        default: 45
+        description: {}
+      available_positions:
+        example: 10
+        type: integer
+        default: 1
+        description: {}
+      minimum_salary:
+        example: 10
+        type: integer
+        description: {}
+      maximum_salary:
+        example: 10
+        type: integer
+        description: {}
+      published_in_applications_portal:
+        example: true
+        type: boolean
+        default: true
+        description: {}
+      search_scope:
+        example:
+        - external
+        type: array
+        enum:
+        - external
+        - internal
+        items:
+          type: string
+        default:
+        - external
+        - internal
+        description: {}
+      description:
+        example: {}
+        type: string
+        description: {}
+      status:
+        example: pendiente
+        type: string
+        enum:
+        - pendiente
+        - iniciado
+        - cerrado
+        - cancelado
+        description: {}
+      requirements:
+        example: {}
+        type: string
+        description: {}
+      buk_ai_analysis:
+        example: true
+        type: boolean
+        description: {}
+      criterios_internos:
+        example: {}
+        type: string
+        description: {}
+      template_id:
+        example: 123
+        type: integer
+        description: {}
+      custom_attributes:
+        example:
+          clave: valor
+        type: object
+        description: {}
+      reason:
+        example: replacement
+        type: string
+        enum:
+        - replacement
+        - new_vacancy
+        - internship
+        - temporary_replacement
+        - other
+        default: replacement
+        items:
+          type: string
+        description: {}
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  SelectionProcessRecruiter:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+  SelectionProcessCompany:
+    properties:
+      cpf:
+        example: '123456789'
+        type: string
+        description: {}
+      id:
+        example: 123
+        type: integer
+        description: {}
+    type: object
+  SelectionProcessInput:
+    required:
+    - area_id
+    - role_id
+    - company_id
+    allOf:
+    - $ref: '#/definitions/SelectionProcessBase'
+    - $ref: '#/definitions/Article22'
+    - $ref: '#/definitions/CamposBrasil'
+    - properties:
+        area_id:
+          example: 123
+          type: integer
+          description: {}
+        role_id:
+          example: 123
+          type: integer
+          description: {}
+        company_id:
+          example: 123
+          type: integer
+          description: {}
+        location_id:
+          example: 123
+          type: integer
+          description: {}
+  SelectionProcess:
+    allOf:
+    - $ref: '#/definitions/SelectionProcessBase'
+    - $ref: '#/definitions/Article22'
+    - $ref: '#/definitions/CamposBrasil'
+    - properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        area:
+          $ref: '#/definitions/SelectionProcessArea'
+        role:
+          $ref: '#/definitions/SelectionProcessRole'
+        company:
+          $ref: '#/definitions/SelectionProcessCompany'
+        location:
+          $ref: '#/definitions/SelectionProcessLocation'
+        process_stages:
+          example: {}
+          type: array
+          description: {}
+          items:
+            $ref: '#/definitions/SelectionProcessStage'
+        public_token:
+          example: token123
+          type: string
+          description: {}
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: {}
+          example: '2024-01-01'
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: {}
+          example: '2024-01-01'
+        created_at:
+          type: string
+          format: date-time
+          description: {}
+          example: '2024-01-01T12:00:00Z'
+        hired_count:
+          example: 10
+          type: integer
+          description: {}
+        supervisor:
+          $ref: '#/definitions/SelectionProcessSupervisor'
+        recruiters:
+          example: {}
+          type: array
+          items:
+            $ref: '#/definitions/SelectionProcessRecruiter'
+          description: {}
+  SelectionProcessLocation:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  CamposBrasil:
+    properties:
+      regimen_laboral:
+        example: general_employee
+        type: string
+        enum:
+        - general_employee
+        - intermitent_employee
+        - domestic_employee
+        - rural_employee
+        - apprentice
+        - fixed_term_employee
+        - temporary_employee
+        - estagiario
+        - prolabore_722
+        - prolabore_723
+        - no_reportable_esocial_work_category
+        description: Categoría Laboral
+      tipo_jornada:
+        example: workday_12x36
+        type: string
+        enum:
+        - workday_12x36
+        - workday_variable_free_time
+        - workday_fixed_free_time
+        - workday_fixed_free_time_except_sunday
+        - workday_fixed_time_additional_sunday
+        - workday_uninterrupted
+        - other_workday
+        description: Tipo de jornada
+      work_day_description:
+        example: Ejemplo
+        type: string
+        description: Descripción de jornada
+      otros_tipo_jornada:
+        example: subject_to_workday
+        type: string
+        enum:
+        - subject_to_workday
+        - external_forseen_activity
+        - forseen_function
+        - remote_work
+        - no_reportable_esocial_workday
+        description: Régimen de jornada
+      admission_type:
+        example: admission
+        type: string
+        enum:
+        - admission
+        - transference_company_same_group
+        - transferencia_company_consortium
+        - transferencia_succesion_incorporation_fusion
+        - transferencia_domestinc_employee
+        - cpf_movement
+        - transference_company_unexistence
+        description: Tipo de admisión
+      admission_indicative:
+        example: normal
+        type: string
+        enum:
+        - normal
+        - fiscal_action
+        - judicial_action
+        description: Indicativo de admisión
+  SelectionProcessArea:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+  Article22: {}
+  SelectionProcessStage:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+  SelectionProcessSupervisor:
+    type:
+    - object
+    - 'null'
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+  SelectionProcessRole:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: {}
+      name:
+        example: {}
+        type: string
+        description: {}
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

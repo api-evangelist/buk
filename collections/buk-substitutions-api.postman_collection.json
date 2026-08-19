@@ -1,0 +1,507 @@
+{
+  "item": [
+    {
+      "id": "37d0bd0a-810c-4dcd-bb42-e265be21293f",
+      "name": "Substitutions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9dc1de7e-044c-416f-8eaf-a691fed3f6ba",
+          "name": "Obtain substitutions\n\nAttributes description:\n- `id`: Unique identifier of the substitution.\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Cause of the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+          "request": {
+            "name": "Obtain substitutions\n\nAttributes description:\n- `id`: Unique identifier of the substitution.\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Cause of the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+            "description": {
+              "content": "Obtain substitutions\n\nAttributes description:\n- `id`: Unique identifier of the substitution.\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Cause of the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "substitutions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Optional query parameters to filter and label substitutions.\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Optional query parameters to filter and label substitutions.\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5345699c-5254-4b20-9b96-7e5730e2bf92",
+              "name": "API response when retrieving substitutions with labels and details of each substitution.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c221ed1f-5f91-4339-8caf-d6980cd1e6b4",
+          "name": "Create a new substitution\n\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+          "request": {
+            "name": "Create a new substitution\n\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+            "description": {
+              "content": "Create a new substitution\n\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "substitutions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c240d6f7-58d6-4912-a3d8-27ed1c80d06c",
+              "name": "API response upon creating a new substitution, including details of the created substitution.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd8a2ab4-6e65-4eba-b1cd-412b8f7f03dc",
+              "name": "Invalid entry\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edebd798-3812-4fc8-b7a9-88971103e848",
+          "name": "Updates a specific substitution\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+          "request": {
+            "name": "Updates a specific substitution\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+            "description": {
+              "content": "Updates a specific substitution\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "substitutions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Substitution ID to be updated\n"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a61eb7d5-62fa-428a-9adc-8f35840cfd1d",
+              "name": "API response after successful update of a substitution\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be updated\n"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11c5aa08-a613-40af-92c6-6368f019d8a2",
+              "name": "Invalid entry\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be updated\n"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0ed44ddd-0a5e-4c58-b310-aa965f1c4c6a",
+              "name": "Substitution not found\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be updated\n"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18b6b7a8-cbcc-4c3a-855c-1ceaad7ab4a3",
+          "name": "Eliminate a specific substitution\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+          "request": {
+            "name": "Eliminate a specific substitution\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+            "description": {
+              "content": "Eliminate a specific substitution\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "substitutions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Substitution ID to be deleted\n"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e90dd59-ea8d-4fdd-9511-0c731951947f",
+              "name": "API response after successful deletion of a substitution\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be deleted\n"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25cc002e-b714-436c-aa21-f0a4273e5d49",
+              "name": "Substitution not found\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be deleted\n"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c36fe9b0-0bcd-4d3c-815f-68d55ac2a29e",
+              "name": "It was not possible to eliminate the substitution\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substitutions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Substitution ID to be deleted\n"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f806140-b186-4fd4-a290-8d78dcb6d06f",
+    "name": "Buk Substitutions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Substitutions across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

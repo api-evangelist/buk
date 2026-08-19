@@ -1,0 +1,352 @@
+openapi: 3.2.0
+info:
+  title: Buk Recintos API
+  version: '1.0'
+  description: 'Operations tagged Recintos across 6 of this provider''s published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Recintos
+paths:
+  /informacionRecinto:
+    servers:
+    - description: Production server
+      url: https://app.ctrlit.cl/ctrl/api
+    - description: Production server app2
+      url: https://app2.ctrlit.cl/ctrl/api
+    get:
+      tags:
+      - Recintos
+      description: Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa específica. Cada recinto incluye detalles como el nombre, dirección y ubicación.
+      operationId: recinto
+      parameters:
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa que contiene la lista de recintos de una empresa. La respuesta está paginada y cada página incluye un subconjunto de recintos junto con información detallada de cada uno.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: https://api.ejemplo.com/informacionRecinto?page=2
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 34
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        obra_id:
+                          type: integer
+                          example: 123
+                        nombre:
+                          type: string
+                          example: Nombre de la obra
+                        direccion:
+                          type: string
+                          example: Calle Falsa 123
+                        comuna:
+                          type: string
+                          example: Comuna
+                        region:
+                          type: string
+                          example: Region
+                        pais:
+                          type: string
+                          example: Pais
+        '400':
+          description: 'Solicitud incorrecta. Este error se devuelve si unos de los parámetrros de la consulta no son válidos.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El tamaño de página (page_size) no está en el rango permitido.'
+        '403':
+          description: Acceso no autorizado. Se retorna cuando el token proporcionado es inválido, ha expirado o falta en el encabezado de la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+  /recintos:
+    get:
+      summary: Show Recintos
+      description: 'Retrieve information for each Recinto
+
+
+        A Recinto has the following attributes::
+
+        - name: Recinto name
+
+        - code: Recinto code
+
+        - location_id: ID of the Commune where the Recinto is located (you can check the endpoint GET /locations))
+
+        - city: City
+
+        - address_name: Street name of the Recinto
+
+        - address_number: Street number of the Recinto
+
+        - address_optional: Description of the address
+
+        - latitude: Latitude of the Recinto
+
+        - longitude: Recinto longitude
+
+        - postcode: Recinto Zip Code
+
+        - integrated_with_ctrl: Integration with CTRL
+
+        - establishment_code: Recinto Code
+
+
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Recintos
+      parameters:
+      - name: code
+        in: query
+        type: string
+        description: '- code: Recinto code (OPTIONAL)'
+      responses:
+        '200':
+          description: An array (data) with the information of the Recintos.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/RecintoIndex'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    post:
+      summary: Create Recinto
+      description: "Create a new Recinto in the system. The parameters are:\n\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations)\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto \n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Recintos
+      parameters:
+      - name: Recinto
+        in: body
+        description: Recinto object type.
+        required: true
+        schema:
+          $ref: '#/definitions/Recinto::Create'
+      responses:
+        '201':
+          description: Recinto created.
+          schema:
+            title: ResponseBody
+            properties:
+              data:
+                $ref: '#/definitions/Recinto::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /recintos/{code}:
+    patch:
+      summary: Upgrade Recinto
+      description: "Updates an existing Recinto in the system. The parameters are:\n\nThe entered values will overwrite the data of the Recinto being edited.\n\n- identifier: ID of existing Recinto\n- name: Recinto name (OPTIONAL)\n- code: Recinto code (OPTIONAL)\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations) (OPTIONAL)\n- address_name: Street name of the Recinto (OPTIONAL)\n- address_number: Street number of the Recinto \\ (OPTIONAL)\n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Recintos
+      parameters:
+      - name: code
+        in: path
+        description: '- Existing Recinto code'
+        required: true
+        type: string
+      - name: recinto
+        in: body
+        description: Recinto object type.
+        required: true
+        schema:
+          $ref: '#/definitions/Recinto::Update'
+      responses:
+        '202':
+          schema:
+            title: ResponseBody
+            description: Updated Recinto.
+            properties:
+              data:
+                $ref: '#/definitions/Recinto::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token
+definitions:
+  Recinto::Response:
+    properties:
+      id:
+        type: integer
+        description: Identificador interno
+    allOf:
+    - $ref: '#/definitions/Recinto'
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Recinto::Create:
+    allOf:
+    - $ref: '#/definitions/Recinto'
+  RecintoIndex:
+    properties:
+      name:
+        type: string
+        description: Nombre
+      code:
+        type: string
+        description: Código
+      location_id:
+        type: integer
+        description: Localidad
+      city:
+        type: string
+        description: Ciudad
+      address_name:
+        type: string
+        description: Calle
+      address_number:
+        type: string
+        description: Número
+      address_optional:
+        type: string
+        description: Descripción
+      latitude:
+        type: float
+        description: Latitud
+      longitude:
+        type: float
+        description: Longitud
+      postcode:
+        type: string
+        description: Código Postal
+      integrated_with_ctrl:
+        type: boolean
+        description: Integrado con CTRL
+      codigo_establecimiento:
+        type: string
+        description: Código Establecimiento
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  Recinto:
+    properties:
+      name:
+        type: string
+        description: Nombre
+      code:
+        type: string
+        description: Código
+      location_id:
+        type: integer
+        description: Localidad
+      address_name:
+        type: string
+        description: Calle
+      address_number:
+        type: string
+        description: Número
+      address_optional:
+        type: string
+        description: Descripción
+      latitude:
+        type: number
+        description: Latitud
+      longitude:
+        type: number
+        description: Longitud
+      postcode:
+        type: string
+        description: Código Postal
+      codigo_establecimiento:
+        type: string
+        description: Código Establecimiento
+  Recinto::Update:
+    allOf:
+    - $ref: '#/definitions/Recinto'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-asistencia-api-openapi.yml
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

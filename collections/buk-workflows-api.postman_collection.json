@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "d53009b4-3c34-440f-91b2-9c26463af294",
+      "name": "Workflows",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "902866e1-a085-4599-99b1-24e8d84e152d",
+          "name": "Obtain hiring processes flows",
+          "request": {
+            "name": "Obtain hiring processes flows",
+            "description": {
+              "content": "Displays hiring processes requests of the Colaboradores.\n**Permisos requeridos para utilizar este endpoint:** \n* Workflow permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workflow",
+                "alta",
+                "processes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Request status. In Progress(1), Approved(2), Error(4), Canceled(5) (This can only be one of 1,2,4,5)",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Request creation date (From), in format YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "creation_start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Request creation date (To), in format YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "creation_end_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5667f035-3594-4ca5-8293-463022eba38c",
+              "name": "Response with the data of the hiring processes flows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflow",
+                    "alta",
+                    "processes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_end_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e16491ce-da22-4fc1-934b-230e30cf578a",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflow",
+                    "alta",
+                    "processes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_end_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "458a09ac-26ae-4642-ab23-30c715277a23",
+              "name": "No hiring processes flows found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflow",
+                    "alta",
+                    "processes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "creation_end_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fef19e25-59c5-4494-a732-e1554d6322a9",
+    "name": "Buk Workflows API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Workflows across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

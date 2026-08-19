@@ -1,0 +1,1276 @@
+{
+  "item": [
+    {
+      "id": "e3de7bb6-93c0-4480-9419-45d4b11f447d",
+      "name": "Unexcused absence",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57a0c0c1-2b3e-433a-86f4-f14768381551",
+          "name": "List time off types",
+          "request": {
+            "name": "List time off types",
+            "description": {
+              "content": "Displays the list of types of time off leaves in the system.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) paid?",
+                    "type": "text/plain"
+                  },
+                  "key": "with_pay",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32359fa5-9660-4c26-90ad-ad4d1ab353d9",
+              "name": "As a response, we receive an array (data) with time off types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_pay",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "458a5e1b-0e02-4f28-b72d-21c12a7819cd",
+          "name": "Create a time off type",
+          "request": {
+            "name": "Create a time off type",
+            "description": {
+              "content": "Creates a type of time off in the system.\n\nA LicenceType object must be sent as a JSON object in the\nthe body of the request, composed of the following attributes:\n - code: Unique code that identifies the time off\n - name: Name of type of time off\n - description: Description of type of time off\n with_pay: whether it includes salary payment or not (optional, by default is false)\n requestable: whether the type of time off can be requested by the Colaborador (optional, by default is false)\n\n\n **Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11080eb7-f6a9-413c-b04e-0297874ea3b3",
+              "name": "API response after creating an absence request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5857b64c-25b2-40ab-9a6a-e8aeb576ae87",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "048bff40-07b1-4f2e-9e32-a70d8d1c2ac8",
+          "name": "View a time off type",
+          "request": {
+            "name": "View a time off type",
+            "description": {
+              "content": "View a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "Time off type ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d7db382-01a8-470f-bf8c-a891f70385f6",
+              "name": "As a response, we receive the information of the requested time off type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98a0afa9-7414-46a2-9d67-c90d9da18027",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58470169-3866-4261-bacb-9c6a2bd4e1e0",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "774708ab-8b2d-44e4-8fcd-7b5d3e789aa2",
+          "name": "Delete a time off type",
+          "request": {
+            "name": "Delete a time off type",
+            "description": {
+              "content": "Delete a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "Time off type ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29f32b8e-c3be-40cf-9f9d-121ffdb86b29",
+              "name": "As a response, we confirm that the resource has been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2039e1ba-72fe-4745-b3f7-695e4003a25c",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2dbe94a-e643-4ecf-8879-4645efbc8898",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Time off type ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1c67ba4-f8f1-4f39-ac73-d597d156f1d6",
+          "name": "List time off leaves",
+          "request": {
+            "name": "List time off leaves",
+            "description": {
+              "content": "Displays the time off registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Supplementary justification text (optional). - absence_type_id: Id of the type of time off to which it corresponds, these can be seen with the GET operation for \"List types of time off\". - absence_type_code: Code of the type of time off to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Start date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page for query",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "560f6892-f50e-4613-b0e9-f79074e1ce5e",
+              "name": "As a response, we receive an array (data) with the time off leaves.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfdb89f9-4e8d-4456-b566-7ef775088379",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48558dda-3726-424a-9b68-88cb206c17ad",
+          "name": "Delete Time Off Leaves",
+          "request": {
+            "name": "Delete Time Off Leaves",
+            "description": {
+              "content": "Delete absences using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_ids",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f21b6860-8a86-45ab-9e09-caccb0d74f38",
+              "name": "As a response, we confirm that all the resources have been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cb6da36-0ec3-4b43-b4dc-33e1263e97af",
+              "name": "When an error occurs while deleting a record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4faafd4-fa6f-4003-9b10-f119db4fd757",
+              "name": "When there are no allowed resources to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b96037d0-7f71-41ee-a7a4-f979e14893d3",
+          "name": "Create unjustified Time Off",
+          "request": {
+            "name": "Create unjustified Time Off",
+            "description": {
+              "content": "Create a new unexcused absence time off leave type in the system.\nSe debe enviar como JSON un objeto tipo Ausencia en el cuerpo de la petición.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Texto complementario de justificación (opcional). - absence_type_id: Id del tipo de permiso al que corresponde, estas se pueden ver con la operacion GET para \"Listar tipos inasistencias\".\n- justification: Supplementary text for justification of the absence request (optional). - medic_rut: Doctor's RUT (optional). - licence_number: Leave number (optional). - medic_name: Doctor's name (optional).\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7f2ea67-0d07-4a1a-b851-bf2a02dbca72",
+              "name": "API response after creating Time Off",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21b666ea-d5bc-4bd6-a54e-e77af8285ad8",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05c0927d-a07b-46d8-aa0d-3639024277c0",
+          "name": "View a time off",
+          "request": {
+            "name": "View a time off",
+            "description": {
+              "content": "View a time off given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Complementary justification text (optional). - absence_type_id: Id of the type of time off to which it corresponds, these can be seen with the GET operation for \"List time off types\". - absence_type_code: Code of the corresponding time opff type.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the time off"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a05ea205-6b6e-47ca-a71e-c89ba1af34e3",
+              "name": "As a response, we received the information of the requested time off",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "08487f8d-4b5e-4713-b380-5c24745ffb63",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c29484c7-7db9-40fd-9ec8-fdce83e756c7",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66e51570-f46c-4418-8baf-cc7fa8a32660",
+          "name": "Delete time off leaves",
+          "request": {
+            "name": "Delete time off leaves",
+            "description": {
+              "content": "Delete time off based on its ID.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "absence",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID of the time off"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb2e46d2-b991-4b33-a52d-c88799418acf",
+              "name": "As a response, we confirm that the resource has been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "976a7f95-9a75-4740-b269-5976ec266cb9",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "503f658f-ad82-43dc-8783-4315da03dce7",
+              "name": "When the resource being deleted does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "absence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID of the time off"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5c616d3-78ac-4a37-888c-ee6d614e7867",
+    "name": "Buk Unexcused absence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Unexcused absence across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

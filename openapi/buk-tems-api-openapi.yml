@@ -1,0 +1,154 @@
+openapi: 3.2.0
+info:
+  title: Buk Ítems API
+  version: '1.0'
+  description: 'Operations tagged Ítems across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Ítems
+paths:
+  /items:
+    get:
+      summary: Listar ítems
+      description: "Retorna todos los ítems registrados en el sistema\n\nSe cada ítem se compone de\n - id: identificador único del ítem\n - name: nombre descriptivo\n - amount: es la cantidad a asignar del ítem, este puede ser vacío\n - income_tax: si es o no tributable\n - created_at: fecha de creación\n - updated_at: última fecha de actualización\n - type: [descuento, haber, aporte, informativo]\n - start_date: fecha de inicio\n - end_date: fecha de fin\n - calculation_method: [fijo, proporcional, proporcional ausencia, porcentaje sueldo base, líquido, formulado]\n - base_extra_hours: afecta el cálculo de base de las horas extra\n - currency: tipo de moneda referida\n - gratification: afecta el cálculo de base de las horas extra\n - base_seventh_work_day: afecta el cálculo de base de las horas extra\n - advance_payment_day: si es o no anticipo\n - uf_day: dia de la UF\n - taxable: si es o no tributable\n - base_contribution_license: afecta el cálculo de base de las horas extra\n - amount_type: [unico, variable, formulado]\n - formula: formula para el caso de ítem formulado\n - blocked: para no ser modificado\n - group_ine: código para encuesta coyuntural\n - affects_overdraft: si afecta o no el sobregiro\n - remuneration_type: tipo de remuneración para el finiquito\n - previous_bono_id: ítem anterior, en caso de haber terminado uno y comenzando otro nuevo\n - editable: si es o no editable\n - limit_areas: si está o no limitado por areas\n - order_section: para ítems acumulativos, sección de la liquidación se va a calcular el acumulador\n - order_number:  para ítems acumulativos, orden se va a calcular el concepto dentro de la liquidación\n - requestable: solicitable en el flujo de solicitud de ítem\n - assignable: si es o no asignable a un empleado\n - after_section: para ítems acumulativos, si ocurrirá después de dicha sección\n - code: codigo identificador\n - agrupacion_lre: agrupación para libro de remuneraciones electrónico\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Ítems
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: Filtra los ítems que son vigentes para esta fecha
+      - name: name
+        in: query
+        type: string
+        description: Filtra los ítems con este nombre
+      - name: code
+        in: query
+        type: string
+        description: Filtra los ítems con este código
+      - name: type
+        in: query
+        type: string
+        description: Filtra los ítems del tipo especificado ('haber', 'descuento', 'anticipo', 'aporte', 'informativo')
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información de los ítems
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Bono'
+        '400':
+          description: La petición enviada no cumple con el formato adecuado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  Bono:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      start_date:
+        type: string
+      end_date:
+        type: string
+      type:
+        type: string
+      remuneration_type:
+        type: string
+      amount:
+        type: string
+      income_tax:
+        type: boolean
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      calculation_method:
+        type: string
+      base_extra_hours:
+        type: boolean
+      currency:
+        type: string
+      gratification:
+        type: boolean
+      base_seventh_work_day:
+        type: boolean
+      advance_payment_day:
+        type: boolean
+      uf_day:
+        type: string
+      taxable:
+        type: boolean
+      base_contribution_license:
+        type: boolean
+      amount_type:
+        type: string
+      formula:
+        type: string
+      calculation_description:
+        type: string
+      blocked:
+        type: boolean
+      group_ine:
+        type: string
+      affects_overdraft:
+        type: boolean
+      previous_bono_id:
+        type: string
+      editable:
+        type: string
+      limit_areas:
+        type: boolean
+      order_section:
+        type: string
+      order_number:
+        type: string
+      requestable:
+        type: boolean
+      assignable:
+        type: string
+      after_section:
+        type: boolean
+      code:
+        type: string
+      agrupacion_lre:
+        type: string
+      version_number:
+        type: integer
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

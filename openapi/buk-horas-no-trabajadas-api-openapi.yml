@@ -1,0 +1,253 @@
+openapi: 3.2.0
+info:
+  title: Buk Horas no trabajadas API
+  version: '1.0'
+  description: 'Operations tagged Horas no trabajadas across 6 of this provider''s published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Horas no trabajadas
+paths:
+  /obtenerHorasNoTrabajadas:
+    servers:
+    - description: Production server
+      url: https://app.ctrlit.cl/ctrl/api
+    - description: Production server app2
+      url: https://app2.ctrlit.cl/ctrl/api
+    get:
+      tags:
+      - Horas no trabajadas
+      description: Retorna un listado de las horas no trabajadas acumuladas de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador.
+      operationId: horasNoTrabajadas
+      parameters:
+      - in: query
+        name: obra_id
+        description: Identificador único del recinto asociado a los trabajadores.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: from
+        description: Fecha de inicio del rango de consulta para las inasistencias. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Fecha finalización del rango de consulta para las inasistencia. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: dni_colaborador
+        description: DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores.
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa con el listado de horas no trabajadas de los trabajadores dentro del rango de fechas especificado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: https://api.ejemplo.com/informacionRecinto?page=2
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 342
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        obra_id:
+                          type: integer
+                          example: 123
+                        DNI:
+                          type: integer
+                          example: 123456789
+                        horas_no_trabajadas:
+                          type: integer
+                          example: 0.85
+        '400':
+          description: Solicitud incorrecta debido a parámetros inválidos o mal formateados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El ID del recinto es inválido.'
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+  /attendances/non-worked-hours/types:
+    get:
+      summary: Listar tipos de horas no trabajadas
+      description: "'Obtiene la lista de tipos de horas no trabajadas'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Horas no trabajadas
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con los tipos de horas no trabajadas
+          name: data
+          schema:
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Attendances::NonWorkedHours::Type'
+    post:
+      summary: Crear una tipo de Hora no Trabajada
+      description: "Crea un nuevo tipo de hora no trabajada en el sistema.\n\nSe debe enviar como JSON un objeto tipo NonWorkedHourType en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n - name: Nombre del tipo de hora no trabajada\n - paid_leave: Boolean indicando si es con o sin goce de sueldo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Horas no trabajadas
+      parameters:
+      - name: NonWorkedHourType
+        description: 'Objeto de tipo NonWorkedHourType '
+        in: body
+        schema:
+          $ref: '#/definitions/Attendances::NonWorkedHours::TypeModel::Request'
+      responses:
+        '201':
+          description: Respuesta de la api ante la creación de NonWorkedHourType.
+          schema:
+            properties:
+              message:
+                type: string
+              non_worked_hour_type:
+                $ref: '#/definitions/Attendances::NonWorkedHours::TypeModel::Response'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /attendances/non-worked-hours/types/{id}:
+    delete:
+      summary: Borrar un tipo de hora no trabajada
+      description: "Borrar un tipo de hora no trabajado dado su identificador\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Horas no trabajadas
+      parameters:
+      - name: id
+        description: ID del tipo de hora no trabajada
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: Se entrega un mensaje de que el recurso ha sido eliminado exitosamente
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token
+definitions:
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Attendances::NonWorkedHours::Type:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      paid_leave:
+        type: boolean
+  Attendances::NonWorkedHours::TypeModel::Response:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      paid_leave:
+        type: boolean
+  Attendances::NonWorkedHours::TypeModel::Request:
+    properties:
+      name:
+        type: string
+      paid_leave:
+        type: boolean
+    required:
+    - name
+    - paid_leave
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-asistencia-api-openapi.yml
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

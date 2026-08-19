@@ -1,0 +1,792 @@
+{
+  "item": [
+    {
+      "id": "99672c65-7278-4ca1-8832-3093c87e669b",
+      "name": "Vacaciones",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2260bd8-c608-4f64-bf4d-bc17e0db4fa1",
+          "name": "Listar vacaciones",
+          "request": {
+            "name": "Listar vacaciones",
+            "description": {
+              "content": "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que terminaron despues de una fecha en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "end_after",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "start_before",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f469f6d-d448-470a-9b86-e410613c4226",
+              "name": "Como respuesta recibimos un arreglo (data) con la información particular de las vacaciones",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_after",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_before",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0da2d2a-0908-4cdf-b15a-0745dec44484",
+          "name": "Crear una vacacion",
+          "request": {
+            "name": "Crear una vacacion",
+            "description": {
+              "content": "Crea una nueva vacación en el sistema. Los parámetros son:\n\n- employee_id : Id del empleado\n- start_date : Fecha de inicio del periodo de vacaciones en formato YYYY-MM-DD\n- end_date : Fecha de término del periodo de vacaciones en formato YYYY-MM-DD\n- type: Corresponde al tipo de vacaciones, puede ser: legales, progresivas o dias_administrativos (en caso de estar activadas).\n- percent_day : Corresponde a la fracción del último día del periodo de vacaciones que se considera como tal.\n  Mayor a 0 y menor o igual a 1. Se envía 1 para indicar que el último día es completo\n- workday_stage : Indica la parte de la jornada que será parcial si es que percent_day es distinto de 1.\n  Puede ser start_working_day si es al inicio de la jornada o end_working_day si es al final. Si percent_day\n  es 1, sólo puede ser full_working_day. Este campo es opcional. Si no se envía se asignará automáticamente a\n  partir del valor de percent_day (full_working_day si es 1 o start_working_day si es menor).\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88d379f2-187b-4c74-bba7-2dfee08e90a5",
+              "name": "Respuesta en caso de haber creado una vacación de forma exitosa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f573c217-deb2-424b-a55c-46f634107540",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01c8150d-e098-42c1-a1d8-e8b91f58c95b",
+          "name": "Borrar una vacación",
+          "request": {
+            "name": "Borrar una vacación",
+            "description": {
+              "content": "Borrar una vacación específica de acuerdo a el id del empleado, fecha inicio y fecha de término.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) ID del empleado",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Fecha de inicio de la vacación",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Fecha de término de la vacación",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7aa9b2cb-ab77-4b63-9ae1-366fe91e5b56",
+              "name": "Se entrega un mensaje de que el recurso ha sido eliminado exitosamente",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bbebb6d1-c630-4706-b3c2-c428ef013051",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "045eef35-07e6-4511-9968-e34d6f17b9ec",
+              "name": "No se ha podido encontrar la vacación con los campos requeridos",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7714989e-5115-412a-b0c1-254be6f0dd99",
+          "name": "Mostrar una vacación",
+          "request": {
+            "name": "Mostrar una vacación",
+            "description": {
+              "content": "Se muestran toda la información relacionada a vacación solicitada.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID de la vacación a consultar"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fce81e19-850d-4f2b-bff9-fa42928ac6e9",
+              "name": "Como respuesta recibimos todos los campos correspondiente a la información del empleado consultado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID de la vacación a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b32e626d-9852-4519-86a0-ba4b97493a4d",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID de la vacación a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00436cef-27ee-4f04-9282-39fcbe4d102b",
+          "name": "Mostrar cantidad de días hábiles",
+          "request": {
+            "name": "Mostrar cantidad de días hábiles",
+            "description": {
+              "content": "Recibimos el rango fechas a calcular.\n\nEste endpoint no requiere permisos especiales.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations",
+                "business_days"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Fecha de inicio (inclusive, formato YYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Fecha de término (inclusive, formato YYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c1ea01a-acea-44e9-9d78-eb999c31cb66",
+              "name": "Como respuesta recibimos la cantidad de días hábiles en el rango de fecha dado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations",
+                    "business_days"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f91d5ab-4e94-4d89-b3b2-f17c99832bb2",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations",
+                    "business_days"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3308006-a38a-4c38-8986-f53db3df4c8b",
+          "name": "Listar Vacaciones",
+          "request": {
+            "name": "Listar Vacaciones",
+            "description": {
+              "content": "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vacations",
+                "requested"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) La fecha tope del periodo de consulta de las vacaciones en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que terminaron después de una fecha en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "end_after",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "start_before",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Busca las vacaciones que tienen como status algunos de los valores permitidos (submitted, approved, rejected, pre_approved, signature_required) (This can only be one of submitted,approved,rejected,pre_approved,signature_required)",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27d3d9bf-c29d-4d79-84c5-7be84ee9323f",
+              "name": "Como respuesta recibimos un arreglo (data) con la información particular de las vacaciones.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vacations",
+                    "requested"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_after",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_before",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "status",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3ff51487-000e-48af-8874-71964fd849c6",
+    "name": "Buk Vacaciones API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Vacaciones across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

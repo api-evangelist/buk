@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Unexcused absence API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Unexcused absence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List time off types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/absence/types",
+            "params": [
+              {
+                "name": "with_pay",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) paid?"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "Displays the list of types of time off leaves in the system.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Create a time off type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/absences/absence/types"
+          },
+          "docs": "Creates a type of time off in the system.\n\nA LicenceType object must be sent as a JSON object in the\nthe body of the request, composed of the following attributes:\n - code: Unique code that identifies the time off\n - name: Name of type of time off\n - description: Description of type of time off\n with_pay: whether it includes salary payment or not (optional, by default is false)\n requestable: whether the type of time off can be requested by the Colaborador (optional, by default is false)\n\n\n **Per"
+        },
+        {
+          "info": {
+            "name": "View a time off type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/absence/types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Time off type ID"
+              }
+            ]
+          },
+          "docs": "View a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a time off type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/absence/types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Time off type ID"
+              }
+            ]
+          },
+          "docs": "Delete a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List time off leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/absence",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page for query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Displays the time off registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"fu"
+        },
+        {
+          "info": {
+            "name": "Create unjustified Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/absences/absence"
+          },
+          "docs": "Create a new unexcused absence time off leave type in the system.\nSe debe enviar como JSON un objeto tipo Ausencia en el cuerpo de la petición.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stag"
+        },
+        {
+          "info": {
+            "name": "Delete Time Off Leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/absence",
+            "params": [
+              {
+                "name": "employee_ids",
+                "value": "",
+                "type": "query",
+                "description": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD format."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Delete absences using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "View a time off",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/absence/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the time off"
+              }
+            ]
+          },
+          "docs": "View a time off given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to "
+        },
+        {
+          "info": {
+            "name": "Delete time off leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/absence/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the time off"
+              }
+            ]
+          },
+          "docs": "Delete time off based on its ID.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

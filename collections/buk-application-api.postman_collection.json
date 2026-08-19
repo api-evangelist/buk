@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "0aeebccc-9962-4716-a859-f959c03f22f4",
+      "name": "Application",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc21f06b-434c-487c-88d5-af696f1567a9",
+          "name": "Add applications",
+          "request": {
+            "name": "Add applications",
+            "description": {
+              "content": "Create an application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recruiting",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa93290e-6c86-4b17-a186-df8118996a77",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9da63fd-f347-45de-9fa7-efa16d9237ac",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e363314-47b2-4771-9517-5632281c7486",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0955d11a-7673-467b-a400-387e5b60db0c",
+          "name": "List the applications.",
+          "request": {
+            "name": "List the applications.",
+            "description": {
+              "content": "Display application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recruiting",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Optional) IDs of the selection processes to be queried. (Returns applications if they are in at least one selection process)",
+                    "type": "text/plain"
+                  },
+                  "key": "selection_processes[]",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Indicate the date of application to be consulted (Format YYYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "application_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Indica la fecha inicial de actualización a consultar (Formato YYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "updated_from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Indica la fecha final de actualización a consultar (Formato YYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "updated_to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f1f4edd-5516-449a-a206-74c09dcef5b4",
+              "name": "A list of applications that meet the search criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selection_processes[]",
+                      "value": ""
+                    },
+                    {
+                      "key": "application_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "updated_from",
+                      "value": ""
+                    },
+                    {
+                      "key": "updated_to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1329842e-5054-4775-b5b5-9ef2c8673a9a",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selection_processes[]",
+                      "value": ""
+                    },
+                    {
+                      "key": "application_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "updated_from",
+                      "value": ""
+                    },
+                    {
+                      "key": "updated_to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b80c2c6-244e-447a-bd57-28c703377cc7",
+          "name": "Update applications",
+          "request": {
+            "name": "Update applications",
+            "description": {
+              "content": "Update application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recruiting",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the application to be updated"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a7358f0-934c-4305-9dcb-b5d6d96b578f",
+              "name": "Information of the updated application.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the application to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa19f460-e53c-48b5-8b92-a631a14ba2f2",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the application to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05dc730c-5300-4d40-a33c-326c8fd32e0a",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recruiting",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the application to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab0dd2c4-426c-47f8-b7d3-306f7dd0a56c",
+    "name": "Buk Application API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Application across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

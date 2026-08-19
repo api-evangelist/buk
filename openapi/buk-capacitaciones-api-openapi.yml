@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  title: Buk Capacitaciones API
+  version: '1.0'
+  description: 'Operations tagged Capacitaciones across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Capacitaciones
+paths:
+  /training/sence_percents:
+    get:
+      summary: Mostrar tramo sence de todos los empleados
+      description: "Retorna un listado con el id, rut y tramo sence de cada empleados del sistema que tenga una liquidación del mes abierto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Capacitaciones
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Respuesta con el id, rut y porcentaje de tramo sence de cada empleados.
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/SencePercentIndex'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /training/sence_percents/{employee_id}:
+    get:
+      summary: Mostrar el tramo sence de un empleados
+      description: "Recibimos la información específica del empleados cuya ID o RUT enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Capacitaciones
+      parameters:
+      - name: employee_id
+        in: path
+        description: ' ID o RUT sin puntos del empleados a consultar'
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Retorna el porcentaje de tramo sence del empleados por medio del  ID o RUT.
+          schema:
+            $ref: '#/definitions/SencePercent'
+        '404':
+          description: empleados no encontrado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Employee::Response::Simple:
+    properties:
+      id:
+        type: integer
+        description: ID del empleado
+      rut:
+        type: string
+    allOf:
+    - $ref: '#/definitions/BasePersonIdentifier'
+  BasePersonIdentifier:
+    properties:
+      document_number:
+        type: string
+        description: Document Number of  Colaborador.
+      document_type:
+        type: string
+        description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+  SencePercentIndex:
+    properties:
+      employee:
+        $ref: '#/definitions/Employee::Response::Simple'
+      sence_percent:
+        type: string
+        description: Porcentaje de tramo sence del empleado
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  SencePercent:
+    properties:
+      sence_percent:
+        type: string
+        description: Porcentaje de tramo sence del empleado
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

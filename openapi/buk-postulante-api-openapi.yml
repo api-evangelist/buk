@@ -1,0 +1,452 @@
+openapi: 3.2.0
+info:
+  title: Buk Postulante API
+  version: '1.0'
+  description: 'Operations tagged Postulante across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Postulante
+paths:
+  /recruiting/applicants:
+    post:
+      summary: Add applicant
+      description: "Create a new applicant.\n\nFor parameters with values in square brackets, choose 1. e.g. document_type\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Postulante
+      parameters:
+      - name: Applicant
+        in: body
+        description: Applicant parameters
+        required: true
+        schema:
+          title: RequestBody
+          properties:
+            applicant:
+              $ref: '#/definitions/ApplicantInput'
+      responses:
+        '201':
+          description: Applicant created.
+          schema:
+            title: ResponseBody
+            properties:
+              applicant:
+                $ref: '#/definitions/Applicant'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /recruiting/applicants/search_by_email:
+    post:
+      summary: Display Applicant
+      description: "Return the applicant by their ID or RUT.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Postulante
+      parameters:
+      - name: email
+        in: body
+        description: Applicant email
+        required: true
+        schema:
+          title: RequestBody
+          properties:
+            applicant:
+              $ref: '#/definitions/SearchApplicantByEmail'
+      responses:
+        '200':
+          description: Answer with the data of the queried applicant
+          schema:
+            title: ResponseBody
+            properties:
+              applicant:
+                $ref: '#/definitions/Applicant'
+        '404':
+          description: Applicant not found
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /recruiting/applicants/{id}:
+    get:
+      summary: Display Applicant
+      description: "Return the applicant by their ID or RUT.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Postulante
+      parameters:
+      - name: id
+        in: path
+        description: ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character.
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Answer with the data of the queried applicant
+          schema:
+            title: ResponseBody
+            properties:
+              applicant:
+                $ref: '#/definitions/Applicant'
+        '404':
+          description: Applicant not found
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /recruiting/applicants/:
+    get:
+      summary: Create Applicants
+      description: "Return the list of applicants\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Postulante
+      parameters:
+      - name: selection_processes[]
+        in: query
+        type: array
+        description: (Optional) IDs of the selection processes to be queried. (Returns applicants if they are at least in one selection process)
+        collectionFormat: multi
+        items:
+          type: integer
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      responses:
+        '200':
+          description: Response with the list of queried applicants
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              applicants:
+                type: array
+                items:
+                  $ref: '#/definitions/Applicant'
+        '404':
+          description: 'The requested resource does not exist  '
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /recruiting/applicants/{id}/applications:
+    get:
+      summary: List applications by applicant
+      description: "Return all applications associated with the applicant, using their ID or RUT number.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Postulante
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character.
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, an array (applications) is received with the information of the applications submitted by the queried applicant.
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              applications:
+                type: array
+                items:
+                  $ref: '#/definitions/ApplicationForApplicant'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  BasePersonIdentifier:
+    properties:
+      document_number:
+        type: string
+        description: Document Number of  Colaborador.
+      document_type:
+        type: string
+        description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+  StudiesLevel:
+    properties:
+      studies_level:
+        example: universitario
+        type: string
+        description: Nivel de estudios
+        enum:
+        - Analfabeto, incluidos los que, aunque han recibido instrucción, no han llegado a ser alfabetizados.
+        - Hasta el 5° año incompleto de la educación primaria (antiguo 4° año) o alfabetizado.
+        - 5° año completo de educación primaria
+        - Del 6° al 9° año de educación primaria incompleta (antigos 5° a 8° años)
+        - Educación primaria completa
+        - Educación secundaria incompleta
+        - Educación secundaria completa
+        - Educación superior incompleta
+        - Educación superior completa
+        - Postgraduación completa
+        - Maestría completa
+        - Doctorado completo
+  ApplicantLocationInput:
+    properties:
+      location_id:
+        example: '123'
+        type: string
+        description: ID or name of the Municipality
+  ApplicationApplicantIdentifier:
+    properties:
+      document_number:
+        example: '123456789'
+        type: string
+        description: Número de documento del postulante
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  ApplicantBase:
+    properties:
+      first_name:
+        example: {}
+        type: string
+        description: Name
+      surname:
+        example: {}
+        type: string
+        description: Surname
+      second_surname:
+        example: {}
+        type: string
+        description: Second Surname
+      birthday:
+        type: string
+        format: date
+        example: YYYY-MM-DD
+        description: Date of birth
+      email:
+        example: {}
+        type: string
+        description: E-mail address
+      phone:
+        example: '+56912345678'
+        type: string
+        description: Phone Number
+      address:
+        example: {}
+        type: string
+        description: Address
+      gender:
+        example: M
+        type: string
+        description: Gender
+        enum:
+        - M
+        - F
+      university:
+        example: {}
+        type: string
+        description: University
+      academic_degree:
+        example: {}
+        type: string
+        description: Professional degree
+      experience_years:
+        example: 10
+        type: integer
+        description: Years of experience
+      linkedin_url:
+        type: string
+        description: Applicant's LinkedIn URL
+        example: https://www.linkedin.com/in/usuario
+      cv_url:
+        $ref: '#/definitions/ApplicantCv'
+      seleccion_processes:
+        $ref: '#/definitions/ApplicantSelectionProcess'
+      custom_attributes:
+        example:
+          clave: valor
+        type: object
+        description: Customized applicant attributes. (Check with the administrator for available custom attributes)
+  Applicant:
+    allOf:
+    - $ref: '#/definitions/ApplicantBase'
+    - properties:
+        location:
+          $ref: '#/definitions/ApplicantLocation'
+        id:
+          example: 123
+          type: integer
+          description: ID del postulante
+    - $ref: '#/definitions/StudiesLevel'
+    - $ref: '#/definitions/ApplicantIdentifier'
+  ApplicantSelectionProcess:
+    type: array
+    items:
+      type: object
+      description: Selection process
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: Selection Process ID
+        name:
+          example: {}
+          type: string
+          description: Title of the selection process
+  ApplicationProcessStage:
+    type: object
+    description: Etapa del proceso de selección
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: ID de la etapa del proceso de selección
+      name:
+        example: {}
+        type: string
+        description: Nombre de la etapa del proceso de selección
+  ApplicantLocation:
+    type: object
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: ID of the Municipality
+      name:
+        example: {}
+        type: string
+        description: Name of the Municipality
+  ApplicantIdentifier:
+    allOf:
+    - $ref: '#/definitions/BasePersonIdentifier'
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  ApplicantCv:
+    properties:
+      cv_url:
+        example: https://ejemplo.com
+        type: file
+        description: Applicant's CV
+  ApplicationBase:
+    properties:
+      selection_process_id:
+        example: 123
+        type: integer
+        description: ID del proceso de selección
+      referrer:
+        example: internal
+        type: string
+        description: Origen de la postulación
+        enum:
+        - internal
+        - external
+        - genoma
+        - trabajando
+        - aira
+        - portal
+        - talent
+      integration_url:
+        example: https://ejemplo.com
+        type: string
+        description: URL asociada al origen de la postulación
+      salary_expectation:
+        example: 10
+        type: integer
+        description: Expectativa salarial específica para la postulación
+      custom_attributes:
+        example:
+          clave: valor
+        type: object
+        description: Atributos personalizados de la postulación. (Consultar con administrador cuales son los atributos personalizados disponibles)
+      application_date:
+        type: string
+        format: date
+        description: Fecha de postulación
+        example: '2024-01-01'
+      updated_at:
+        example: '2024-01-01T12:00:00Z'
+        type: string
+        format: date-time
+        description: Fecha de actualización
+  SearchApplicantByEmail:
+    properties:
+      email:
+        example: {}
+        type: string
+        description: Email
+  ApplicationForApplicant:
+    allOf:
+    - properties:
+        id:
+          example: 123
+          type: integer
+          description: ID de la postulación
+        applicant:
+          $ref: '#/definitions/ApplicationApplicant'
+        process_stage:
+          $ref: '#/definitions/ApplicationProcessStage'
+    - $ref: '#/definitions/ApplicationBase'
+  ApplicantInput:
+    required:
+    - first_name
+    - surname
+    allOf:
+    - $ref: '#/definitions/ApplicantBase'
+    - $ref: '#/definitions/StudiesLevel'
+    - $ref: '#/definitions/ApplicantIdentifier'
+    - $ref: '#/definitions/ApplicantLocationInput'
+  ApplicationApplicant:
+    type: object
+    description: Postulante
+    allOf:
+    - properties:
+        id:
+          example: 123
+          type: integer
+          description: ID del postulante
+    - $ref: '#/definitions/ApplicationApplicantIdentifier'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

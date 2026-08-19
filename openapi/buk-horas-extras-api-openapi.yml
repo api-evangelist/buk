@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.
+  title: Buk Horas extras API
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Horas extras
+paths:
+  /obtenerHorasExtras:
+    get:
+      tags:
+      - Horas extras
+      description: Retorna un listado de las horas extras aprobadas de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador. El reporte presenta los tipos de horas extras y el total de horas extras en el intervalo indicado.
+      operationId: horasExtras
+      parameters:
+      - in: query
+        name: obra_id
+        description: Identificador único del recinto asociado a los trabajadores.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: from
+        description: Fecha de inicio del rango de consulta para las inasistencias. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Fecha finalización del rango de consulta para las inasistencia. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: dni_colaborador
+        description: DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores.
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa con el listado de horas extras de los trabajadores dentro del rango de fechas especificado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: https://api.ejemplo.com/informacionRecinto?page=2
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 342
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        obra_id:
+                          type: integer
+                          example: 123
+                        DNI:
+                          type: integer
+                          example: 123456789
+                        Horas Extras 50%:
+                          type: integer
+                          example: 3.0
+                        Horas Extras 100%:
+                          type: integer
+                          example: 1.5
+                        total_horas_extras:
+                          type: integer
+                          example: 4.5
+        '400':
+          description: Solicitud incorrecta debido a parámetros inválidos o mal formateados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El ID del recinto es inválido.'
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token

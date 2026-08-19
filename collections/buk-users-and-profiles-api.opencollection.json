@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Users and profiles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users and profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "Employee ID (Found in the employee endpoint)"
+              },
+              {
+                "name": "permission_role_id",
+                "value": "",
+                "type": "query",
+                "description": "Profile ID"
+              },
+              {
+                "name": "limit_areas",
+                "value": "",
+                "type": "query",
+                "description": "Limited by areas?"
+              },
+              {
+                "name": "limit_realms",
+                "value": "",
+                "type": "query",
+                "description": "Limited by Data set?"
+              },
+              {
+                "name": "realm_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the data set"
+              },
+              {
+                "name": "limited_by_area_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Area for which the users are limited"
+              },
+              {
+                "name": "activated",
+                "value": "",
+                "type": "query",
+                "description": "Active user?"
+              },
+              {
+                "name": "rol_visible",
+                "value": "",
+                "type": "query",
+                "description": "Role Limits"
+              }
+            ]
+          },
+          "docs": "Delivers the information of all users.\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Create users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users"
+          },
+          "docs": "Create a user and send the invitation to them.\nEach record consists of: - person_id: ID of the person to link with the user (If this parameter is sent, the name and corporate email of the person are used)\n  It can be found in the Colaboradores API.\n\n- name: Name of the user - email: Email of the user (If person_id is sent, uses the person's email if they have one) - activated: Determines whether the user can log in to the application - area_ids: List of area IDs to limit the user - limit_areas: "
+        },
+        {
+          "info": {
+            "name": "Show user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              }
+            ]
+          },
+          "docs": "Delivers a user's information.\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Edit user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to edit"
+              }
+            ]
+          },
+          "docs": "Edit a user\nThe fields that we can edit are the following (It is not necessary to send the fields that are not going to be modified): - person_id: ID of the person to relate to the user (If this parameter is sent, the person's name and corporate email is used).\n\n  It can be found in the Colaboradores api.\n\n\n- name: User’s name - email: User's email (If person_id is sent, it uses the person's email if available) - area_ids: List of area ids to limit the user - activated: Determines whether the us"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

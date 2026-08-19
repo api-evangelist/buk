@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: Buk Vacaciones API
+  version: '1.0'
+  description: 'Operations tagged Vacaciones across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Vacaciones
+paths:
+  /vacations:
+    get:
+      summary: Listar vacaciones
+      description: "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Vacaciones
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD
+      - name: end_after
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) Busca las vacaciones que terminaron despues de una fecha en YYYY-MM-DD
+      - name: start_before
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información particular de las vacaciones
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Vacation'
+    post:
+      summary: Crear una vacacion
+      description: "Crea una nueva vacación en el sistema. Los parámetros son:\n\n- employee_id : Id del empleado\n- start_date : Fecha de inicio del periodo de vacaciones en formato YYYY-MM-DD\n- end_date : Fecha de término del periodo de vacaciones en formato YYYY-MM-DD\n- type: Corresponde al tipo de vacaciones, puede ser: legales, progresivas o dias_administrativos (en caso de estar activadas).\n- percent_day : Corresponde a la fracción del último día del periodo de vacaciones que se considera como tal.\n  Mayor a 0 y menor o igual a 1. Se envía 1 para indicar que el último día es completo\n- workday_stage : Indica la parte de la jornada que será parcial si es que percent_day es distinto de 1.\n  Puede ser start_working_day si es al inicio de la jornada o end_working_day si es al final. Si percent_day\n  es 1, sólo puede ser full_working_day. Este campo es opcional. Si no se envía se asignará automáticamente a\n  partir del valor de percent_day (full_working_day si es 1 o start_working_day si es menor).\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Vacaciones
+      parameters:
+      - name: vacation
+        in: body
+        description: Parámetros de una vacación
+        required: true
+        schema:
+          $ref: '#/definitions/approved_vacation'
+      responses:
+        '201':
+          description: Respuesta en caso de haber creado una vacación de forma exitosa
+          schema:
+            properties:
+              vacation:
+                $ref: '#/definitions/vacation_detail'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Borrar una vacación
+      description: "Borrar una vacación específica de acuerdo a el id del empleado, fecha inicio y fecha de término.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Vacaciones
+      parameters:
+      - name: employee_id
+        in: query
+        description: ID del empleado
+        required: true
+        type: integer
+      - name: start_date
+        in: query
+        description: Fecha de inicio de la vacación
+        required: true
+        type: string
+      - name: end_date
+        in: query
+        description: Fecha de término de la vacación
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Se entrega un mensaje de que el recurso ha sido eliminado exitosamente
+          schema:
+            properties:
+              message:
+                type: string
+                description: Se entrega un mensaje de que el recurso ha sido eliminado exitosamente
+                example: Vacación eliminada exitosamente
+        '404':
+          description: No se ha podido encontrar la vacación con los campos requeridos
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /vacations/{id}:
+    get:
+      summary: Mostrar una vacación
+      description: "Se muestran toda la información relacionada a vacación solicitada.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Vacaciones
+      parameters:
+      - name: id
+        in: path
+        description: ID de la vacación a consultar
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Como respuesta recibimos todos los campos correspondiente a la información del empleado consultado
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Vacation'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /vacations/business_days:
+    get:
+      summary: Mostrar cantidad de días hábiles
+      description: 'Recibimos el rango fechas a calcular.
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+        '
+      tags:
+      - Vacaciones
+      parameters:
+      - name: start_date
+        in: query
+        type: string
+        format: date
+        required: true
+        description: Fecha de inicio (inclusive, formato YYYY-MM-DD)
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        required: true
+        description: Fecha de término (inclusive, formato YYYY-MM-DD)
+      responses:
+        '200':
+          description: Como respuesta recibimos la cantidad de días hábiles en el rango de fecha dado
+          name: business_days
+          schema:
+            properties:
+              business_days:
+                type: number
+                description: Como respuesta recibimos la cantidad de días hábiles en el rango de fecha dado
+                example: 5
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /vacations/requested:
+    get:
+      summary: Listar Vacaciones
+      description: "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Vacaciones
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) La fecha tope del periodo de consulta de las vacaciones en YYYY-MM-DD
+      - name: end_after
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) Busca las vacaciones que terminaron después de una fecha en YYYY-MM-DD
+      - name: start_before
+        in: query
+        type: string
+        format: date
+        description: (OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      - name: status
+        description: (OPCIONAL) Busca las vacaciones que tienen como status algunos de los valores permitidos (submitted, approved, rejected, pre_approved, signature_required)
+        in: query
+        type: string
+        enum:
+        - submitted
+        - approved
+        - rejected
+        - pre_approved
+        - signature_required
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información particular de las vacaciones.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Vacation'
+definitions:
+  Vacation:
+    properties:
+      id:
+        type: integer
+        description: ID de la vacación
+        example: 1
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 123
+      approved_by_id:
+        type: integer
+        description: ID del empleado que aprobó la vacación
+        example: 456
+      working_days:
+        type: number
+        description: Días hábiles de la vacación
+        example: 10.0
+      calendar_days:
+        type: integer
+        description: Días corridos de la vacación
+        example: 12
+      workday_stage:
+        type: string
+        description: Etapa de la jornada laboral
+        example: full_working_day
+      start_date:
+        type: string
+        format: date
+        description: Fecha de inicio de la vacación
+        example: '2024-01-15'
+      end_date:
+        type: string
+        format: date
+        description: Fecha de término de la vacación
+        example: '2024-01-26'
+      requested_at:
+        type: string
+        format: date
+        description: Fecha en que se solicitó la vacación
+        example: '2024-01-10'
+      approved_at:
+        type: string
+        format: date
+        description: Fecha en que se aprobó la vacación
+        example: '2024-01-12'
+      type:
+        type: string
+        description: Tipo de vacación
+        example: legales
+      status:
+        type: string
+        description: Estado de la solicitud de vacación
+        example: approved
+      vacation_type_id:
+        type: integer
+        description: ID del tipo de vacación
+        example: 2
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  approved_vacation:
+    properties:
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 123
+      type:
+        type: string
+        enum:
+        - legales
+        - progresivas
+        - dias_administrativos
+        description: Tipo de vacación
+        example: legales
+      start_date:
+        type: string
+        format: date
+        description: Fecha de inicio de la vacación
+        example: '2024-01-15'
+      end_date:
+        type: string
+        format: date
+        description: Fecha de término de la vacación
+        example: '2024-01-26'
+      percent_day:
+        type: integer
+        description: Porcentaje del día trabajado
+        example: 100
+      workday_stage:
+        type: string
+        description: Etapa de la jornada laboral
+        example: full_working_day
+    required:
+    - employee_id
+    - type
+    - start_date
+    - end_date
+    - percent_day
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  vacation_detail:
+    properties:
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 123
+      type:
+        type: string
+        enum:
+        - legales
+        - progresivas
+        - dias_administrativos
+        description: Tipo de vacación
+        example: legales
+      start_date:
+        type: string
+        format: date
+        description: Fecha de inicio de la vacación
+        example: '2024-01-15'
+      end_date:
+        type: string
+        format: date
+        description: Fecha de término de la vacación
+        example: '2024-01-26'
+      working_days:
+        type: integer
+        description: Días hábiles de vacación
+        example: 10
+      calendar_days:
+        type: integer
+        description: Días corridos de vacación
+        example: 12
+      workday_stage:
+        type: string
+        description: Etapa de la jornada laboral
+        example: full_working_day
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

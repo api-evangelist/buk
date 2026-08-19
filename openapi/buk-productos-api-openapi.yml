@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Buk Productos API
+  version: '1.0'
+  description: 'Operations tagged Productos across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Productos
+paths:
+  /piecework/products:
+    get:
+      summary: Listar Productos
+      description: "'Retornar Productos'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Productos
+      parameters:
+      - name: page_size
+        type: integer
+        in: query
+        description: '(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+
+          '
+    post:
+      summary: Crear Productos
+      description: "Crea un nuevo Producto en el sistema. Los parámetros son:\n\n  - name : Nombre del Producto.\n  - code : Código del Producto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Productos
+      parameters:
+      - name: Producto
+        description: Objeto de tipo Producto
+        in: body
+        required: true
+        schema:
+          properties:
+            product:
+              $ref: '#/definitions/Piecework::Product::Request'
+definitions:
+  Piecework::Product::Request:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    required:
+    - code
+    - name
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

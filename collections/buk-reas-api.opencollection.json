@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Áreas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Áreas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar áreas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/areas",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Filtra los resultados por el estado del área."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de página"
+              }
+            ]
+          },
+          "docs": "Crea una nueva Área en el sistema.\n\nEste endpoint no requiere permisos especiales.\n\n"
+        },
+        {
+          "info": {
+            "name": "Obtener un área en especifico por ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/areas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del área a consultar"
+              }
+            ]
+          },
+          "docs": "Retorna el área correspodiente al ID\nEste endpoint no requiere permisos especiales.\n"
+        },
+        {
+          "info": {
+            "name": "Listar áreas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/organization/areas/",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Filtra los resultados por el estado del área."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de página"
+              }
+            ]
+          },
+          "docs": "Retorna todas las áreas, incluyendo las de nivel 0 y nivel 1.\n\n\nDescripción de Atributos:\n- `id`: [string] Id del Área.\n- `name`: [string] Nombre del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `children_area`: [object] Objeto con Área hijas.\n- `parent_area`: [object] Objeto con Área padre.\n- `first_level_id`: [string] Id del área de primer nivel del Área.\n- `first_level_name`: [string] Nombre del área de primer nivel del Área.\n- `second_level_id`: [string] Id del área de segund"
+        },
+        {
+          "info": {
+            "name": "Obtener un área en especifico por ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/organization/areas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del área a consultar"
+              }
+            ]
+          },
+          "docs": "Retorna el área correspodiente al ID, incluyendo aquellas de nivel 0 y nivel 1.\n\n\nDescripción de Atributos:\n- `id`: [string] Id del Área.\n- `name`: [string] Nombre del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `children_area`: [object] Objeto con Área hijas.\n- `parent_area`: [object] Objeto con Área padre.\n- `first_level_id`: [string] Id del área de primer nivel del Área.\n- `first_level_name`: [string] Nombre del área de primer nivel del Área.\n- `second_level_id`: [string] Id "
+        },
+        {
+          "info": {
+            "name": "Actualizar un área por ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/organization/areas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del área a consultar"
+              }
+            ]
+          },
+          "docs": "Edita un Área en el sistema.\n- `name`: [string] Nombre del Área.\n- `accounting_prefix`: [string] Prefijo costos.\n- `city`: [string] Ciudad del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `cost_center_id`: [string] Id del centro de costo [string] Dirección del Área.\n- `location_id`: [integer] Id de la Location del Área.\n- `role_ids`: [array] Ids de los roles del Área.\n- `custom_attrs`: [object] Objeto con atributo custom y valor.\n- `active`: [boolean] Estado del Área.\n\nEste endpo"
+        },
+        {
+          "info": {
+            "name": "Crear Área",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/organization/areas"
+          },
+          "docs": "Crea una nueva Área en el sistema.\n- `parent_id`: [string] Id del Área padre.\n- `name`: [string] Nombre del Área a crear.\n- `accounting_prefix`: [string] Prefijo costos.\n- `city`: [string] Ciudad del Área a crear.\n- `address`: (opcional) [string] Dirección del Área a crear.\n- `cost_center_id`: [string] Id del centro de costo.\n- `location_id`: [integer] Id de la Location del Área a crear.\n- `role_ids`: [array] Ids de los roles del Área a crear.\n- `custom_attrs`: [object] Objeto con atributo custo"
+        },
+        {
+          "info": {
+            "name": "Eliminar áreas por ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/organization/areas",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Elimina Áreas en el sistema. - `id`: Id del Área."
+              }
+            ]
+          },
+          "docs": "Elimina Áreas en el sistema. - `id`: Id del Área.\nEste endpoint no requiere permisos especiales.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

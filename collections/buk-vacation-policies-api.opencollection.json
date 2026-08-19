@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Vacation Policies API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vacation Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Vacation Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vacation_definitions",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Displays all vacation policies and their associated vacation type.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Vacation permissions en: 'Lectura'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

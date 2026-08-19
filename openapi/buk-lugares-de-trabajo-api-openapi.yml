@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Buk Lugares de Trabajo API
+  version: '1.0'
+  description: 'Operations tagged Lugares de Trabajo across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Lugares de Trabajo
+paths:
+  /piecework/places:
+    get:
+      summary: Listar Lugares de Trabajo
+      description: '#<Proc:0x00007f0ab3db4ba0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:10 (lambda)>
+
+        '
+      tags:
+      - Lugares de Trabajo
+      parameters:
+      - name: empresa_id
+        description: {}
+        in: query
+        type: integer
+      - name: page_size
+        type: integer
+        in: query
+        description: '(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+
+          '
+    post:
+      summary: Crear Lugares de Trabajo
+      description: '#<Proc:0x00007f0ab3db3cf0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:30 (lambda)>
+
+        '
+      tags:
+      - Lugares de Trabajo
+      parameters:
+      - name: Lugar de Trabajo
+        description: Objeto de tipo Lugar de Trabajo
+        in: body
+        required: true
+        schema:
+          properties:
+            place:
+              $ref: '#/definitions/Piecework::Place::Request'
+definitions:
+  Piecework::Place::Request:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      empresa_id:
+        type: integer
+      centro_costo_definition_id:
+        type: integer
+    required:
+    - code
+    - name
+    - empresa_id
+    - centro_costo_definition_id
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

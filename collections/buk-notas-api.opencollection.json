@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Notas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recruiting/notes"
+          },
+          "docs": "Create a new comment associated with an applicant using their email\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

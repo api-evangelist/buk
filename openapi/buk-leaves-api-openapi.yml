@@ -1,0 +1,435 @@
+openapi: 3.2.0
+info:
+  title: Buk Leaves API
+  version: '1.0'
+  description: 'Operations tagged Leaves across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Leaves
+paths:
+  /absences/licence/types:
+    get:
+      summary: Listar tipos de leaves
+      description: "Retorna el listado de tipos de leaves en el sistema.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: with_pay
+        description: (OPTIONAL) paid?
+        in: query
+        type: boolean
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con los tipo de leaves
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/LicenceType::Response'
+  /absences/licence/types/{id}:
+    get:
+      summary: Ver un tipo de licencia
+      description: "View a licencia type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: id
+        description: Id del tipo de licencia
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: Como respuesta recibimos la información del tipo de licencia solicitada
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/LicenceType::Response'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /absences/licence:
+    get:
+      summary: List leaves
+      description: "Returns the leaves registered in the system in a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional). - reason: Reason for the causal contingency. - format: Format in which it is found, it can take electronic value (for electronic leaves ) or \"physical\" (for physical leaves ). - license_type_id: Id of the type of leaves to which it corresponds, these can be seen with the GET operation for \"List types  leaves\". - licence_type_code: Code of the type of leaves to which it corresponds.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: from
+        description: Start date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: to
+        description: End date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page for query
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the leaves
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Absences::Licence::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    post:
+      summary: Create a leave
+      description: "Crea una nueva inasistencia de tipo leave en el sistema.\nSe debe enviar como JSON un objeto tipo leave en el cuerpo de la petición. Description of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional). - format: Formato en que se encuentra, puede tomar valor electrónica (para leave electrónica) o \"física\" (para leave física). - licence_type_id: Id del tipo de leave al que corresponde, estas se pueden ver con la operacion GET para \"Listar tipos  leave\".\n- justification: Supplementary text for justification of the absence request (optional). - medic_rut: Doctor's RUT (optional). - licence_number: Leave number (optional). - medic_name: Doctor's name (optional).\n\nThe Leaves Types are as follows: - <b>Chile:</b> accidente_comun, prorroga, pre_natal, post_natal, parental, niño_menor, accidente_trabajo, accidente_trayecto, enfermedad_profesional, embarazo - <b>Peru:</b> paternidad, luto, descanso_medico, subsidio_incapacidad_temporal, subsidio_maternidad, subsidio_incapacidad_no_computable_para_cts, cargo_civico, servicio_militar, sindical, violencia_familiar, comite_seguridad_salud, cuidador_familiar_paciente, compensacion_dias_sobretiempo, adopcion, medida_cautelar, representacion_estado, asistencia_medica, enfermedad_grave_familiar, citacion_judicial, otros_motivos_con_goce - <b>Mexico:</b> riesgo_trabajo, enfermedad_general, maternidad, licencia_cuidado_hijos - <b>Colombia:</b> remunerada, no_remunerada, maternidad_paternidad, luto, calamidad_domestica, suspension, dia_familia\n\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: leaves
+        description: Object type leave
+        in: body
+        schema:
+          $ref: '#/definitions/Absences::Licence::Request'
+      responses:
+        '201':
+          description: API response to the creation of %{licences}
+          schema:
+            properties:
+              message:
+                type: string
+              licence:
+                $ref: '#/definitions/Absences::Licence::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Delete leaves
+      description: "Delete leaves using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: employee_ids
+        description: 'Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3'
+        in: query
+        type: array
+      - name: start_date
+        description: Start date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: end_date
+        description: End date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      responses:
+        '200':
+          description: As a response, we confirm that all the resources have been successfully deleted.
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: When there are no allowed resources to delete
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+        '400':
+          description: When an error occurs while deleting a record
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+              errors:
+                type: object
+                properties:
+                  record_id:
+                    type: integer
+                    description: ID of the resource that generated the error
+                  msj:
+                    type: string
+                    description: Error description
+  /absences/licence/{id}:
+    get:
+      summary: View leave
+      description: "See a leave given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional).\n- reason: Reason for the causal contingency. - format: Format in which it is found, it can take electronic value (for electronic leave) or \"physical\" (for physical leave). - license_type_id: Id of the type of leave to which it corresponds, these can be seen with the GET operation for \"List types  leave\". - licence_type_code: Code of the type of leave to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: id
+        description: leave ID
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As response, we received the requested leave information
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Absences::Licence::Response'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Delete a leave
+      description: "Borrar una leave dado su identificador.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Leaves
+      parameters:
+      - name: id
+        description: '%{licence} ID'
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we confirm that the resource has been successfully deleted.
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: When the resource being deleted does not exist
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Absences::Licence::Response:
+    allOf:
+    - $ref: '#/definitions/LicenceBase'
+    - $ref: '#/definitions/LicenceType'
+    - properties:
+        licence_type_code:
+          type: string
+        licence_number:
+          type: string
+        medic_name:
+          type: string
+        custom_attributes:
+          type: object
+    - $ref: '#/definitions/MedicIdentifier'
+    - $ref: '#/definitions/Absence::Response'
+  Absences::Licence::Request:
+    allOf:
+    - $ref: '#/definitions/LicenceBase'
+    - $ref: '#/definitions/LicenceType'
+    - $ref: '#/definitions/Absence::Request'
+    - properties:
+        custom_attributes:
+          type: object
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  LicenceType::Response:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      kind:
+        type: string
+        enum:
+        - licencia
+        - ausencia
+        - permiso
+      with_pay:
+        type: boolean
+      time_measure:
+        type: string
+        enum:
+        - per_day
+        - per_hour
+        - both
+      requestable:
+        type: boolean
+      editable:
+        type: boolean
+      created_at:
+        type: string
+        format: date
+      updated_at:
+        type: string
+        format: date
+  Absence::Request:
+    properties:
+      start_date:
+        type: string
+        format: date
+      days_count:
+        type: integer
+      day_percent:
+        type: string
+        default: '1'
+      workday_stage:
+        type: string
+      application_date:
+        type: string
+        format: date
+      justification:
+        type: string
+      employee_id:
+        type: integer
+      medic_rut:
+        type: string
+      licence_number:
+        type: string
+      medic_name:
+        type: string
+    required:
+    - start_date
+    - days_count
+  LicenceBase:
+    required:
+    - type
+    - format
+    properties:
+      licence_type_id:
+        type: integer
+      contribution_days:
+        type: integer
+      format:
+        type: string
+        enum:
+        - electronica
+        - fisica
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  MedicIdentifier:
+    properties:
+      medic_rut:
+        type: string
+  LicenceType:
+    properties:
+      type:
+        type: string
+        enum:
+        - accidente_comun
+        - prorroga
+        - pre_natal
+        - post_natal
+        - parental
+        - niño_menor
+        - accidente_trabajo
+        - accidente_trayecto
+        - enfermedad_profesional
+        - embarazo
+  Absence::Response:
+    properties:
+      id:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      days_count:
+        type: integer
+      day_percent:
+        type: number
+        format: float
+      contribution_days:
+        type: number
+        format: float
+      workday_stage:
+        type: string
+      application_date:
+        type: string
+        format: date
+      application_end_date:
+        type: string
+        format: date
+      justification:
+        type: string
+      employee_id:
+        type: integer
+      status:
+        type: string
+      created_at:
+        type: string
+        format: date
+      updated_at:
+        type: string
+        format: date
+    required:
+    - start_date
+    - days_count
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

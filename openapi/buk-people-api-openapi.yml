@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: Buk People API
+  version: '1.0'
+  description: 'Operations tagged People across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: People
+paths:
+  /people/{id}:
+    get:
+      summary: Obtain basic data on a person
+      description: "Returns basic information about a specific person, including their id, first name, last name and ID number.\n\n**Permisos requeridos para utilizar este endpoint:** \n* People permissions en: 'Lectura'.\n"
+      tags:
+      - People
+      parameters:
+      - name: id
+        in: path
+        description: ID of the individual
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Offer details
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/PersonResponse'
+        '404':
+          description: Page not found
+definitions:
+  PersonResponse:
+    properties:
+      id:
+        type: integer
+        description: Identificador único de la persona
+      first_name:
+        type: string
+        description: Nombre de la persona
+      last_name:
+        type: string
+        description: Apellido de la persona
+      dni:
+        type: string
+        description: Número de identificación (RUT, DNI, CORP, etc.)
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

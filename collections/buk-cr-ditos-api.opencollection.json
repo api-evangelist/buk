@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Créditos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Créditos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar créditos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/credits",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los créditos que son vigentes para esta fecha"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los créditos con este nombre"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los créditos del tipo especificado ([\"credito_personal\", \"dental\", \"leasing\", \"seguro_vida\", \"credito_otro\"])"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todos los descuentos de caja y créditos\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar un crédito",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/credits/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del crédito a consultar"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Año a consultar en YYYY"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Mes a consultar (1 - 12)"
+              }
+            ]
+          },
+          "docs": "Se muestra toda la información relacionada a un crédito dado un año y un mes\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Editar un crédito",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/credits/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id del crédito a editar"
+              }
+            ]
+          },
+          "docs": "Edita un crédito. Los campos fecha_primera_cuota y end_date no son editables. Si se edita alguno de los campos start_date o duracion, el campo end_date se calculará y actualizará\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Eliminar un crédito",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/credits/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id del crédito a eliminar"
+              }
+            ]
+          },
+          "docs": "Elimina un crédito\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Suspender un crédito",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/credits/:id/suspend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del crédito a consultar"
+              }
+            ]
+          },
+          "docs": "Suspende un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "reanudar un crédito",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/credits/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del crédito a consultar"
+              }
+            ]
+          },
+          "docs": "reanudar un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Asignar créditos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/credits/create",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "ID del Empleado al cual se le asigna el crédito"
+              },
+              {
+                "name": "nombre",
+                "value": "",
+                "type": "query",
+                "description": "Nombre -humano- para identificar el crédito"
+              },
+              {
+                "name": "tipo",
+                "value": "",
+                "type": "query",
+                "description": "Tipo de crédito a asignar"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del periodo donde aplica el crédito, formato YYYY-MM-DD"
+              },
+              {
+                "name": "moneda",
+                "value": "",
+                "type": "query",
+                "description": "Si usa peso(0) o UF(1)"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Valor de la cuota"
+              },
+              {
+                "name": "cuota_actual",
+                "value": "",
+                "type": "query",
+                "description": "periodo actual en el que se encuentra, default 1"
+              },
+              {
+                "name": "duracion",
+                "value": "",
+                "type": "query",
+                "description": "Cantidad de periodos a descontar"
+              },
+              {
+                "name": "comentario",
+                "value": "",
+                "type": "query",
+                "description": "Comentario"
+              },
+              {
+                "name": "dia_uf",
+                "value": "",
+                "type": "query",
+                "description": "Dia del cual tomar la uf en caso de ser cobrado en uf"
+              }
+            ]
+          },
+          "docs": "Crear asignaciones de créditos a un employee_id\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

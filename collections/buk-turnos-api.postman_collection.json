@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "843c9440-524d-4a07-bc68-91d09e8660b3",
+      "name": "Turnos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a72604a-76c8-44b9-a444-7d63eeb5e2da",
+          "name": "asignacion Turnos",
+          "request": {
+            "name": "asignacion Turnos",
+            "description": {
+              "content": "Retorna un listado de los datos de trabajador junto con toda la informacion sobre los turnos. El endpoint esta paginado, con un máximo de 1000 elementos por página.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getAsignacionTurnos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) Identificador de la empresa"
+                },
+                {
+                  "disabled": false,
+                  "key": "desde",
+                  "value": "<string>",
+                  "description": "Fecha de incio de la busqueda en formato dia-mes-año. En el caso de omitirlo se tomara el dia de ayer por defecto."
+                },
+                {
+                  "disabled": false,
+                  "key": "hasta",
+                  "value": "<string>",
+                  "description": "Fecha de finalización de la busqueda en formato dia-mes-año. En el caso de omitirlo se tomara el dia de hoy por defecto."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Cantidad de resultados por página."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e8ce674e-6334-4d6c-8f62-66b2ee5a1946",
+              "name": "Respuesta exitosa con el listado de los turnos de los trabajadores dentro del rango de fechas especificado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAsignacionTurnos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"idRecinto\": 123,\n  \"nombreRecinto\": \"Nombre Recinto\",\n  \"codigoRecinto\": \"Código recinto\",\n  \"dni\": \"string\",\n  \"nombreTrabajador\": \"Nombre trabajador\",\n  \"areaTrabajador\": \"Area\",\n  \"art22Trabajador\": \"string\",\n  \"tipoTrabajador\": \"Trabajador\",\n  \"idTurno\": \"TFTT\",\n  \"nombreTurno\": \"Nombre turno\",\n  \"diaTurno\": \"Día turno\",\n  \"tipoTurno\": \"Diurno\",\n  \"horarioTurno\": \"08:00-18:00\",\n  \"colacionTurno\": \"13:00-14:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f414f4d-ca02-4293-94ac-f74d49ab329e",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAsignacionTurnos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10760b30-7703-4622-916b-3fcf6992a3fd",
+              "name": "Servicio no encontrado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAsignacionTurnos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "69ceedef-4ab1-4a92-a577-8346caae9b03",
+    "name": "Buk Turnos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.",
+      "type": "text/plain"
+    }
+  }
+}

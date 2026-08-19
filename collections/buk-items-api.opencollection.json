@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Items API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Asignar un ítem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/assigns"
+          },
+          "docs": "No se recomienda el uso de este endpoint para cliente grandes. Para operaciones masivas se recomienda usar el endpoint de **Sincronización datos de pago**.\n\nAsigna un nuevo ítem a un empleado en el sistema.\n\n  - `employee_id`: Id del empleado al cual se asignará un ítem.\n  - `item_id`: Id del ítem el cual se asignará al usuario.\n  - `start_date`: Mes de inicio para esta asignación.\n  - `end_date`: (opcional) Mes de término para esta asignación.\n  - `description`: (opcional) Descripción a mostrar"
+        },
+        {
+          "info": {
+            "name": "Editar una asignación",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/assigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id de la asignación"
+              }
+            ]
+          },
+          "docs": "Prefiera el uso del endpoint de **Sincronización datos de pago**\n\nSe modifica una Asignación del sistema.\n\nSe debe enviar como JSON un objeto tipo Assign en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n  - `cost_center`: (opcional) [string] Código de la definición de centro de costos, debe estar habilitada la general Habilitar Centro Costo Bonos.\n  - `amount`: Monto de la asignación. Requerido solo para ítems de tipo variable\n  - `custom_attrs`: (opcional) [object] Atributos"
+        },
+        {
+          "info": {
+            "name": "Eliminar una asignación",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/assigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id de la asignación"
+              }
+            ]
+          },
+          "docs": "Elimina una asignación.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Terminar una asignación de ítem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/assigns/:id/terminate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id de la asignación"
+              }
+            ]
+          },
+          "docs": "Termina la asignación de un ítem.\n\nSe debe enviar como JSON la fecha de término (opcional) en el cuerpo de la petición,\nen caso de no enviarla su valor será el período actual.\n\nLa fechas deben estar en formato YYYY-MM-DD.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Show employee's item assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/employees/:id/assigns",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the employee to be queried"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter the active added items for this date"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].\n"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Returns the current assignments of an employee along with basic information of the assigned item.\n\nEach assignment consists of:\n- id: unique identifier of the assignment\n- item: item assigned to the employee\n- amount: for items configured with \"different amount per person\", this value corresponds to that entered in the assignment, and for items configured with \"same amount for all\" this value will be the amount of the item entered at its creation. For a formulated item, it represents the value o"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

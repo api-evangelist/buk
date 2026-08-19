@@ -1,0 +1,406 @@
+{
+  "item": [
+    {
+      "id": "7b36dadd-dc2e-44e4-905e-98e25c893528",
+      "name": "Days worked",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79572799-ee7e-48bd-bc2e-dabb1ba53818",
+          "name": "Show Worked Days",
+          "request": {
+            "name": "Show Worked Days",
+            "description": {
+              "content": "Provides information about the days worked for each Colaborador.\n\nA type of Worked Day has the following attributes:\n- employee_id: unique identifier of the Colaborador\n- document_number: Document Number of the Colaborador\n- document_type: Type of Document of the Colaborador\n- code: file code of the Colaborador\n- working_days: total number of days worked\n- working_days_dates: dates of the days worked\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "working_days"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Indicates the starting date of the worked days (Format YYYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Indicates the end date of the worked days (Format YYYYY-MM-DD)",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Document Number of the Colaborador",
+                    "type": "text/plain"
+                  },
+                  "key": "document_number",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Colaborador file code",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c221b675-4d8b-41fa-a541-f66da7ae9830",
+              "name": "A list of days worked for each Colaborador.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "working_days"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "document_number",
+                      "value": ""
+                    },
+                    {
+                      "key": "code",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "664cfca7-1e83-40b6-88a9-e2ff0d16b3a2",
+          "name": "Create worked days",
+          "request": {
+            "name": "Create worked days",
+            "description": {
+              "content": "Save worked days for each Colaborador. The parameters are:\n\n- employee_id: ID of the Colaborador\n- month: Number of the month to which the worked days will be added\n- working_days: a list of worked days for the indicated month. This list should be a sequence of integers, where each number represents a day of the month, separated by commas.\n\nPlease note that the worked days will be saved for the specified month, overwriting the existing entry. In other words, each request will overwrite the worked days.\n\nPlease note that if the employee's pay stub is closed for that month, worked days cannot be added.\n\nPlease note that worked days can only be added in open months.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "working_days"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "506a873e-ce11-4941-a3ea-493030cf522b",
+              "name": "Response in case of successful creation of worked days",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "working_days"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fa04202-5b46-4028-abf5-7df6271a9d07",
+          "name": "Delete worked days",
+          "request": {
+            "name": "Delete worked days",
+            "description": {
+              "content": "Deletes the days worked for an Colaborador. The parameters are:\n\n- employee_id: ID of the Colaborador\n- Date for deleting worked days (Format MM-YYYY)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "working_days",
+                ":employee_id",
+                ":monthyear"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) - employee_id: ID of the Colaborador"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "monthyear",
+                  "description": "(Required) - Date for deleting worked days (Format MM-YYYY)"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9799d2d4-1e84-4895-9df6-796b263f2dcd",
+              "name": "Response in case of successful deletion of the worked days",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "working_days",
+                    ":employee_id",
+                    ":monthyear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) - employee_id: ID of the Colaborador"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "monthyear",
+                      "description": "(Required) - Date for deleting worked days (Format MM-YYYY)"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "835bf63f-b7aa-4e67-ae56-a19ee816067b",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "working_days",
+                    ":employee_id",
+                    ":monthyear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) - employee_id: ID of the Colaborador"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "monthyear",
+                      "description": "(Required) - Date for deleting worked days (Format MM-YYYY)"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "068ddc12-c403-48da-b9e4-65388f5c8d9b",
+              "name": "When there are no allowed resources to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "working_days",
+                    ":employee_id",
+                    ":monthyear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) - employee_id: ID of the Colaborador"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "monthyear",
+                      "description": "(Required) - Date for deleting worked days (Format MM-YYYY)"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f4f0e12-590d-40c9-bc97-5eaa1e1aa76a",
+    "name": "Buk Days worked API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Days worked across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

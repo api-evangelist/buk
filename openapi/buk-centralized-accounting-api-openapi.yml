@@ -1,0 +1,399 @@
+openapi: 3.2.0
+info:
+  title: Buk Centralized accounting API
+  version: '1.0'
+  description: 'Operations tagged Centralized accounting across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Centralized accounting
+paths:
+  /accounting:
+    get:
+      summary: Centralized accounting
+      description: "It allows to obtain the accounting information corresponding to a specific month.\nThe items are grouped by the pay stub to which they belong.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: month
+        description: Queried Month (1 - 12) MANDATORY if process_id is not specified. If process_id is specified, MONTH will be ignored.
+        in: query
+        type: integer
+      - name: year
+        description: Queried Year MANDATORY if process_id is not specified. If process_id is specified, YEAR will be ignored.
+        in: query
+        type: integer
+      - name: process_id
+        description: ID of the process to be queried. MANDATORY if year and month is not specified
+        in: query
+        type: integer
+      - name: company_id
+        description: ID or RUT of the Empresa to be queried.
+        in: query
+        type: string
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: Returns the accounting information for the month, grouped by pay stub. Each group has an ID code of the pay stub that create it.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Accounting'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: There is no information for the month and year entered.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /accounting/export:
+    get:
+      summary: Accounting
+      description: "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: month
+        description: Queried Month (1 - 12)
+        in: query
+        type: integer
+        required: true
+      - name: year
+        description: Queried Year
+        in: query
+        type: integer
+        required: true
+      - name: company_id
+        description: ID or RUT of the Empresa to be queried.
+        in: query
+        type: string
+      - name: subprocess_id
+        description: (OPTIONAL) Sub-process ID
+        in: query
+        type: integer
+      - name: page
+        in: query
+        type: integer
+        description: (OPCIONAL) Número de la página a consultar. Por defecto, la primera página.
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página.
+      responses:
+        '200':
+          description: Displays the accounting information for the month.
+          type: array
+        '404':
+          description: This method is not available
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /accounting/export_period:
+    get:
+      summary: Accounting
+      description: "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: process_id
+        description: Process ID
+        in: query
+        type: integer
+        required: true
+      - name: company_id
+        description: {}
+        in: query
+        type: string
+      - name: subprocess_id
+        description: (OPTIONAL) Sub-process ID
+        in: query
+        type: integer
+      - name: page
+        in: query
+        type: integer
+        description: (OPCIONAL) Número de la página a consultar. Por defecto, la primera página.
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página.
+      responses:
+        '200':
+          description: Displays the accounting information corresponding to the period of the process.
+          type: array
+        '404':
+          description: This method is not available
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /accounting/export_detail:
+    get:
+      summary: Accounting by Pay Stub
+      description: "Obtains in JSON format the accounting data, but processing for each pay stub separately.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: month
+        description: Queried Month (1 - 12)
+        in: query
+        type: integer
+        required: true
+      - name: year
+        description: Queried Year
+        in: query
+        type: integer
+        required: true
+      - name: company_id
+        description: ID or RUT of the Empresa to be queried.
+        in: query
+        type: string
+      - name: page
+        in: query
+        type: integer
+        description: (OPCIONAL) Número de la página a consultar. Por defecto, la primera página.
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página.
+      responses:
+        '200':
+          description: Displays the accounting information for the month, grouped by pay stub and Empresa. Each group has an ID code of the pay stub that create it.
+          type: array
+        '404':
+          description: This method is not available
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /accounting/vacations/balance:
+    get:
+      summary: Show vacation balance by month
+      description: "We receive the month from which to get the vacation balances from the Colaboradores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: employee_id
+        description: ID of the Colaborador
+        in: query
+        type: integer
+      - name: year
+        description: Queried Year
+        in: query
+        required: true
+        type: integer
+      - name: month
+        description: Queried Month (1 - 12)
+        in: query
+        required: true
+        type: integer
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the specified vacation information.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/VacationBalance'
+  /accounting/export_process_differences:
+    get:
+      summary: Reprocess accounting
+      description: "Obtains in JSON format the accounting data for the differences created in a subprocess as a result of a reprocess.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: process_id
+        description: Subprocess ID. REQUIRED
+        in: query
+        type: integer
+        required: true
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: Displays the accounting information corresponding to the reprocessing of compensations.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Accounting'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: There is no information for the month and year entered.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /ledger_account:
+    get:
+      summary: List accounts
+      description: "Displays all the accounts registered in the system.\n\nEach account consists of\n  - id: unique ID\n  - created_at: creation date\n  - updated_at: date of updating process\n  - name: name associated with the payroll item\n  - number: number\n  - type: [general, bono, descuento, credito, aporte, tipo_sobretiempo]\n  - format: [detalle, resumen]\n  - document_type: document type\n  - group_code: grouping code\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'."
+      tags:
+      - Centralized accounting
+      parameters:
+      - name: page
+        in: query
+        type: integer
+        description: Número de página
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with information about accounts
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/CuentaContable'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  VacationBalance:
+    properties:
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 123
+      initial_vacation_balance:
+        type: number
+        description: Saldo inicial de vacaciones en días
+        example: 12.5
+      final_vacation_balance:
+        type: number
+        description: Saldo final de vacaciones en días
+        example: 10.0
+      difference:
+        type: number
+        description: Diferencia entre saldo final e inicial
+        example: -2.5
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  EmployeePersonIdentifier:
+    properties:
+      employee_document_number:
+        type: string
+        description: Document Number of  Colaborador.
+      employee_document_type:
+        type: string
+        description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"rut":"RUT","otro":"Other"}'
+  Accounting:
+    properties:
+      id:
+        type: integer
+      rut_health_company:
+        type: string
+      rut_afp:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/AccountingItem'
+  AccountingItem:
+    properties:
+      description:
+        type: string
+      amount:
+        type: integer
+      entry_type:
+        type: string
+        enum:
+        - debit
+        - credit
+      account:
+        type: string
+      account_doc_type:
+        type: string
+      account_group_code:
+        type: string
+      cost_center:
+        type: string
+      comment:
+        type: string
+      employee_rut:
+        type: string
+    allOf:
+    - $ref: '#/definitions/EmployeePersonIdentifier'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

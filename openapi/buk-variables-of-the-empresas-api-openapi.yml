@@ -1,0 +1,68 @@
+openapi: 3.2.0
+info:
+  title: Buk Variables of the Empresas API
+  version: '1.0'
+  description: 'Operations tagged Variables of the Empresas across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Variables of the Empresas
+paths:
+  /company_variables/{empresa_id}:
+    get:
+      summary: Variables of the Empresas
+      description: 'Displays all variables of the Empresas by Empresas registered in the system.
+
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Variables of the Empresas
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].
+      - name: empresa_id
+        in: path
+        type: integer
+        description: ID of the Empresa of which you want to list its variables from Empresa
+        required: true
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with information from the Empresas
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/CompanyVariable'
+definitions:
+  CompanyVariable:
+    properties:
+      id:
+        type: integer
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

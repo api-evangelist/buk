@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Cargos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cargos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar familia de cargos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/role_families",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filtra las familias de cargos por nombre"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "'Retorna todas las familias de cargos registradas en el sistema'\n\nEste endpoint no requiere permisos especiales.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

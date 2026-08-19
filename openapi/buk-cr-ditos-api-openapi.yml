@@ -1,0 +1,440 @@
+openapi: 3.2.0
+info:
+  title: Buk Créditos API
+  version: '1.0'
+  description: 'Operations tagged Créditos across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Créditos
+paths:
+  /credits:
+    get:
+      summary: Listar créditos
+      description: "Retorna todos los descuentos de caja y créditos\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        required: true
+        description: Filtra los créditos que son vigentes para esta fecha
+      - name: name
+        in: query
+        type: string
+        description: Filtra los créditos con este nombre
+      - name: type
+        in: query
+        type: string
+        description: Filtra los créditos del tipo especificado (["credito_personal", "dental", "leasing", "seguro_vida", "credito_otro"])
+      - name: page_size
+        in: query
+        type: integer
+        description: Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información de los créditos
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Credit'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /credits/{id}:
+    get:
+      summary: Mostrar un crédito
+      description: "Se muestra toda la información relacionada a un crédito dado un año y un mes\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: id
+        in: path
+        description: ID del crédito a consultar
+        required: true
+        type: integer
+      - name: year
+        in: query
+        description: Año a consultar en YYYY
+        required: true
+        type: integer
+      - name: month
+        in: query
+        description: Mes a consultar (1 - 12)
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Como respuesta recibimos todos los campos correspondiente a la información del crédito
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Credit'
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+    patch:
+      summary: Editar un crédito
+      description: "Edita un crédito. Los campos fecha_primera_cuota y end_date no son editables. Si se edita alguno de los campos start_date o duracion, el campo end_date se calculará y actualizará\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: id
+        in: path
+        description: id del crédito a editar
+        required: true
+        type: integer
+      - name: Créditos
+        description: Objeto de tipo crédito
+        in: body
+        required: true
+        schema:
+          properties:
+            nombre:
+              type: string
+            tipo:
+              type: string
+            moneda:
+              type: string
+            dia_uf:
+              type: string
+            amount:
+              type: integer
+              format: integer
+            duracion:
+              type: integer
+              format: integer
+            comentario:
+              type: string
+            start_date:
+              type: string
+      responses:
+        '200':
+          description: Como respuesta recibimos la información del crédito editado
+          schema:
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              employee_id:
+                type: integer
+              created_at:
+                type: string
+              updated_at:
+                type: string
+              start_date:
+                type: string
+              tipo:
+                type: string
+              moneda:
+                type: string
+              dia_uf:
+                type: string
+              amount:
+                type: integer
+              duracion:
+                type: integer
+              comentario:
+                type: string
+              end_date:
+                type: string
+              fecha_primera_cuota:
+                type: string
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Eliminar un crédito
+      description: "Elimina un crédito\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: id
+        in: path
+        description: id del crédito a eliminar
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Como respuesta recibimos un mensaje indicando que el crédito se eliminó exitosamente
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /credits/{id}/suspend:
+    post:
+      summary: Suspender un crédito
+      description: "Suspende un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: id
+        in: path
+        description: ID del crédito a consultar
+        required: true
+        type: integer
+      - name: Créditos
+        description: Objeto de tipo crédito
+        in: body
+        required: true
+        schema:
+          properties:
+            suspend_periods:
+              type: integer
+            variable_id:
+              type: integer
+              description: ID del período de nómina a usar como referencia para la fecha de suspensión. Si se omite, se usa el primer período abierto del sistema.
+      responses:
+        '200':
+          description: Crédito suspendido
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /credits/{id}/resume:
+    post:
+      summary: reanudar un crédito
+      description: "reanudar un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: id
+        in: path
+        description: ID del crédito a consultar
+        required: true
+        type: integer
+      - name: Créditos
+        in: body
+        required: false
+        schema:
+          properties:
+            variable_id:
+              type: integer
+              description: ID del período de nómina a usar como referencia para la fecha de reanudación. Si se omite, se usa el primer período abierto del sistema.
+      responses:
+        '200':
+          description: Crédito reanudado
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /credits/create:
+    post:
+      summary: Asignar créditos
+      description: "Crear asignaciones de créditos a un employee_id\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Créditos
+      parameters:
+      - name: employee_id
+        in: query
+        type: integer
+        format: date
+        required: true
+        description: ID del Empleado al cual se le asigna el crédito
+      - name: nombre
+        in: query
+        type: string
+        required: true
+        description: Nombre -humano- para identificar el crédito
+      - name: tipo
+        in: query
+        type: string
+        required: true
+        description: Tipo de crédito a asignar
+        enum:
+        - credito_personal
+        - dental
+        - leasing
+        - seguro_vida
+        - credito_otro
+      - name: start_date
+        in: query
+        type: string
+        format: date
+        required: true
+        description: Fecha de inicio del periodo donde aplica el crédito, formato YYYY-MM-DD
+      - name: moneda
+        in: query
+        type: string
+        required: true
+        description: Si usa peso(0) o UF(1)
+        enum:
+        - peso
+        - uf
+      - name: amount
+        in: query
+        type: integer
+        required: true
+        description: Valor de la cuota
+      - name: cuota_actual
+        in: query
+        type: integer
+        required: true
+        description: periodo actual en el que se encuentra, default 1
+      - name: duracion
+        in: query
+        type: integer
+        required: true
+        description: Cantidad de periodos a descontar
+      - name: comentario
+        in: query
+        type: string
+        description: Comentario
+      - name: dia_uf
+        in: query
+        type: string
+        description: Dia del cual tomar la uf en caso de ser cobrado en uf
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información de los créditos
+          schema:
+            $ref: '#/definitions/Credit'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  Credit:
+    properties:
+      id:
+        type: integer
+      employee_id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+        format: float
+      term:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      initial_payment_date:
+        type: string
+        format: date
+      paid_amount:
+        type: number
+        format: float
+      remaining_balance:
+        type: number
+        format: float
+      current_fee:
+        type: integer
+      status:
+        type: string
+      type:
+        type: string
+      currency:
+        type: string
+      uf_day:
+        type: string
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

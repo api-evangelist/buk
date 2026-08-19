@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  title: Buk Grupos API
+  version: '1.0'
+  description: 'Operations tagged Grupos across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Grupos
+paths:
+  /groups:
+    get:
+      summary: List groups
+      description: "Returns the list of available groups\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n"
+      tags:
+      - Grupos
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: Number of records per page
+      - name: page
+        in: query
+        type: integer
+        description: Page number
+      responses:
+        '200':
+          description: List of groups
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/FilterQueryModel'
+  /groups/{id}:
+    get:
+      summary: Show group
+      description: "Returns the information of a group and its participants\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n"
+      tags:
+      - Grupos
+      parameters:
+      - name: id
+        in: path
+        description: Group ID
+        required: true
+        type: integer
+      - name: page_size
+        in: query
+        type: integer
+        description: Number of records per page
+      - name: page
+        in: query
+        type: integer
+        description: Page number
+      responses:
+        '200':
+          description: Group information with its participants
+          name: data
+          schema:
+            properties:
+              id:
+                type: integer
+                description: Group ID
+              group_name:
+                type: string
+                description: Group Name
+              updated_at:
+                type: string
+                format: date-time
+                description: Last update
+              pagination:
+                $ref: '#/definitions/Pagination'
+              participants:
+                type: array
+                items:
+                  $ref: '#/definitions/FilterQueryParticipant'
+definitions:
+  FilterQueryParticipant:
+    properties:
+      id:
+        type: integer
+        description: ID del participante
+      full_name:
+        type: string
+        description: Nombre completo del participante
+      document_number:
+        type: string
+        description: Número de documento del participante
+  FilterQueryModel:
+    properties:
+      id:
+        type: integer
+        description: ID del grupo
+      group_name:
+        type: string
+        description: Nombre del grupo
+      updated_at:
+        type: string
+        format: date-time
+        description: Última actualización
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

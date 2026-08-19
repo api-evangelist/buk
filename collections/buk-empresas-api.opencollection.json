@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Empresas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Empresas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Empresas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/companies",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "\nReturns all the Empresas registered in the system.\n\nEste endpoint no requiere permisos especiales.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

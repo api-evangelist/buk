@@ -1,0 +1,1185 @@
+{
+  "item": [
+    {
+      "id": "986e4146-dc0b-4ebb-acfd-79347b7dc534",
+      "name": "Centralized accounting",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad8343c3-08a8-4377-a0a5-b0efc5808192",
+          "name": "Centralized accounting",
+          "request": {
+            "name": "Centralized accounting",
+            "description": {
+              "content": "It allows to obtain the accounting information corresponding to a specific month.\nThe items are grouped by the pay stub to which they belong.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Queried Month (1 - 12) MANDATORY if process_id is not specified. If process_id is specified, MONTH will be ignored.",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Queried Year MANDATORY if process_id is not specified. If process_id is specified, YEAR will be ignored.",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID of the process to be queried. MANDATORY if year and month is not specified",
+                    "type": "text/plain"
+                  },
+                  "key": "process_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID or RUT of the Empresa to be queried.",
+                    "type": "text/plain"
+                  },
+                  "key": "company_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d4faa74-76ea-4643-af0e-17c1afb5b2ae",
+              "name": "Returns the accounting information for the month, grouped by pay stub. Each group has an ID code of the pay stub that create it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e31950d-95da-4b58-99fe-24841ab9eafd",
+              "name": "The request sent does not respect the proper format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84051b0a-674a-4bdf-9a1e-04d77d1eb892",
+              "name": "There is no information for the month and year entered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9eef201c-1b3e-4603-a624-f5e18f239df6",
+          "name": "Accounting",
+          "request": {
+            "name": "Accounting",
+            "description": {
+              "content": "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Queried Month (1 - 12)",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Queried Year",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID or RUT of the Empresa to be queried.",
+                    "type": "text/plain"
+                  },
+                  "key": "company_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Sub-process ID",
+                    "type": "text/plain"
+                  },
+                  "key": "subprocess_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b87697f0-fa85-423c-ad11-2cc5dd766cd3",
+              "name": "Displays the accounting information for the month.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "subprocess_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32f6e058-8aa5-4645-8615-feb5f50aa625",
+              "name": "This method is not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "subprocess_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91b7b0c3-b12f-47e1-bd6a-528d2d19360c",
+          "name": "Accounting",
+          "request": {
+            "name": "Accounting",
+            "description": {
+              "content": "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "export_period"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Process ID",
+                    "type": "text/plain"
+                  },
+                  "key": "process_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "[object Object]",
+                    "type": "text/plain"
+                  },
+                  "key": "company_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Sub-process ID",
+                    "type": "text/plain"
+                  },
+                  "key": "subprocess_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "450ea1c0-4ece-4896-81d6-87a1c2dd0b8f",
+              "name": "Displays the accounting information corresponding to the period of the process.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "subprocess_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2dde3dd-9530-4171-b22a-6020e92aac8e",
+              "name": "This method is not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "subprocess_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1d9f37d-4054-4a2b-b9b4-056c395316e5",
+          "name": "Accounting by Pay Stub",
+          "request": {
+            "name": "Accounting by Pay Stub",
+            "description": {
+              "content": "Obtains in JSON format the accounting data, but processing for each pay stub separately.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "export_detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Queried Month (1 - 12)",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Queried Year",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID or RUT of the Empresa to be queried.",
+                    "type": "text/plain"
+                  },
+                  "key": "company_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página.",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73dce8c0-9cc1-4248-a08e-5247c828d7eb",
+              "name": "Displays the accounting information for the month, grouped by pay stub and Empresa. Each group has an ID code of the pay stub that create it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1615d732-8e6e-46fd-bf16-aa0ba1144aa1",
+              "name": "This method is not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e7f3637-4ce8-48e4-ba32-99f9fbf3c7af",
+          "name": "Show vacation balance by month",
+          "request": {
+            "name": "Show vacation balance by month",
+            "description": {
+              "content": "We receive the month from which to get the vacation balances from the Colaboradores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "vacations",
+                "balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "ID of the Colaborador",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Queried Year",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Queried Month (1 - 12)",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bcd6e33-b683-4d85-945e-7a0da780792c",
+              "name": "As a response, we receive an array (data) with the specified vacation information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "vacations",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0efed1a-9c92-4885-b6d7-1de068e24f6b",
+          "name": "Reprocess accounting",
+          "request": {
+            "name": "Reprocess accounting",
+            "description": {
+              "content": "Obtains in JSON format the accounting data for the differences created in a subprocess as a result of a reprocess.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "export_process_differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Subprocess ID. REQUIRED",
+                    "type": "text/plain"
+                  },
+                  "key": "process_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b759b17f-1ffe-488a-a39b-5ba53747f6f2",
+              "name": "Displays the accounting information corresponding to the reprocessing of compensations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6dd0f475-a6d6-408d-a896-cda8b9248f28",
+              "name": "The request sent does not respect the proper format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4f4a423-5d08-4e3f-ac54-408ff2a19fce",
+              "name": "There is no information for the month and year entered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc3c631b-70de-45c7-bfee-2bdf1e14d895",
+          "name": "List accounts",
+          "request": {
+            "name": "List accounts",
+            "description": {
+              "content": "Displays all the accounts registered in the system.\n\nEach account consists of\n  - id: unique ID\n  - created_at: creation date\n  - updated_at: date of updating process\n  - name: name associated with the payroll item\n  - number: number\n  - type: [general, bono, descuento, credito, aporte, tipo_sobretiempo]\n  - format: [detalle, resumen]\n  - document_type: document type\n  - group_code: grouping code\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ledger_account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Número de página",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0c9464b-0870-4b43-9953-70367c937503",
+              "name": "As a response, we receive an array (data) with information about accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ledger_account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd75bd23-116e-41c0-b0f2-58ad74598cd9",
+              "name": "The request sent does not respect the proper format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ledger_account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4bafd900-93f6-4e88-ba74-221f0a04c1bd",
+    "name": "Buk Centralized accounting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Centralized accounting across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

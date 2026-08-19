@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Grupo Familiar API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Grupo Familiar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Actualizar Grupo Familiar",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/cargas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del Grupo Familiar a actualizar"
+              }
+            ]
+          },
+          "docs": "Actualizar Grupo Familiar existente y sus detalles asociados\n\nEn el caso de relation: Recibimos el tipo de relación a asignar, este puede ser un string de la siguiente lista:\n\n- Chile/Colombia/México: child, husband, father, mother, other\n- Perú: spouse, concubine, minor_child, student_adult_child, disability_adult_child, pregnant, son_or_daughter, mother, father, other\n- Brasil: spouse, partner_with_children_or_lived_five_years_or_stable_union, child_stepchild, child_stepchild_university_studen"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

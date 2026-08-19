@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Time Off Leaves API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off Leaves",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List unexcused absences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Unexcused absence type"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Displays the unexcused absence of each type registered in the system within a date range (optional).\nThe unexcused absences types are:\n\n- leave: Para una leave Médica\n- absence: For an unexcused absence\n- leave: For an unpaid absence request\n- paid_leave: For a paid absence request\n\nDates must be in YYYYY-MM-DD format.\nFilters by type and date are optional.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

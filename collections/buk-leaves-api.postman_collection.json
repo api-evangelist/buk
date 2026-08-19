@@ -1,0 +1,1023 @@
+{
+  "item": [
+    {
+      "id": "631ac000-0701-4e55-81d7-7f4c85e42d6b",
+      "name": "Leaves",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6801289e-1538-438d-9d63-db544a65fb71",
+          "name": "Listar tipos de leaves",
+          "request": {
+            "name": "Listar tipos de leaves",
+            "description": {
+              "content": "Retorna el listado de tipos de leaves en el sistema.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) paid?",
+                    "type": "text/plain"
+                  },
+                  "key": "with_pay",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dad8250-6cb7-4aab-9960-b32b6edffae2",
+              "name": "Como respuesta recibimos un arreglo (data) con los tipo de leaves",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_pay",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12e9245a-8797-4021-b0d0-cfa0a6e1f01f",
+          "name": "Ver un tipo de licencia",
+          "request": {
+            "name": "Ver un tipo de licencia",
+            "description": {
+              "content": "View a licencia type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "Id del tipo de licencia"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e73752d8-6b2d-46ec-a172-0a482ebe94d4",
+              "name": "Como respuesta recibimos la información del tipo de licencia solicitada",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Id del tipo de licencia"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77f244d8-6d26-43ba-b977-5f6418b29bd2",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Id del tipo de licencia"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2bb68469-d5ba-49f0-86d0-3be5ea97ec3f",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "Id del tipo de licencia"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4baa8f4e-9e2f-4f46-98d2-eac86750e7e9",
+          "name": "List leaves",
+          "request": {
+            "name": "List leaves",
+            "description": {
+              "content": "Returns the leaves registered in the system in a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional). - reason: Reason for the causal contingency. - format: Format in which it is found, it can take electronic value (for electronic leaves ) or \"physical\" (for physical leaves ). - license_type_id: Id of the type of leaves to which it corresponds, these can be seen with the GET operation for \"List types  leaves\". - licence_type_code: Code of the type of leaves to which it corresponds.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Start date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the range in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page for query",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1351734c-14f0-4458-ab36-c2018434e0fb",
+              "name": "As a response, we receive an array (data) with the leaves",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9653228f-0b22-4d8b-8c0d-dc47e5490413",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e41eddf-a19a-49fd-8040-50e186df121a",
+          "name": "Create a leave",
+          "request": {
+            "name": "Create a leave",
+            "description": {
+              "content": "Crea una nueva inasistencia de tipo leave en el sistema.\nSe debe enviar como JSON un objeto tipo leave en el cuerpo de la petición. Description of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional). - format: Formato en que se encuentra, puede tomar valor electrónica (para leave electrónica) o \"física\" (para leave física). - licence_type_id: Id del tipo de leave al que corresponde, estas se pueden ver con la operacion GET para \"Listar tipos  leave\".\n- justification: Supplementary text for justification of the absence request (optional). - medic_rut: Doctor's RUT (optional). - licence_number: Leave number (optional). - medic_name: Doctor's name (optional).\n\nThe Leaves Types are as follows: - <b>Chile:</b> accidente_comun, prorroga, pre_natal, post_natal, parental, niño_menor, accidente_trabajo, accidente_trayecto, enfermedad_profesional, embarazo - <b>Peru:</b> paternidad, luto, descanso_medico, subsidio_incapacidad_temporal, subsidio_maternidad, subsidio_incapacidad_no_computable_para_cts, cargo_civico, servicio_militar, sindical, violencia_familiar, comite_seguridad_salud, cuidador_familiar_paciente, compensacion_dias_sobretiempo, adopcion, medida_cautelar, representacion_estado, asistencia_medica, enfermedad_grave_familiar, citacion_judicial, otros_motivos_con_goce - <b>Mexico:</b> riesgo_trabajo, enfermedad_general, maternidad, licencia_cuidado_hijos - <b>Colombia:</b> remunerada, no_remunerada, maternidad_paternidad, luto, calamidad_domestica, suspension, dia_familia\n\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1a49e50-5516-4615-a52a-63674909a354",
+              "name": "API response to the creation of %{licences}",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1bae16f1-f9f1-43e0-8166-e5c66dd94d81",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30e69221-d787-4768-86aa-e12533a545d3",
+          "name": "Delete leaves",
+          "request": {
+            "name": "Delete leaves",
+            "description": {
+              "content": "Delete leaves using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_ids",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "End date of the search query period in YYYY-MM-DD format.",
+                    "type": "text/plain"
+                  },
+                  "key": "end_date",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "430de2f6-cb38-4c4b-9bb0-2d010a82949b",
+              "name": "As a response, we confirm that all the resources have been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5cf1902d-3c5c-481f-ac40-52da71003d2f",
+              "name": "When an error occurs while deleting a record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50b46877-bb5a-40df-9962-45811884695f",
+              "name": "When there are no allowed resources to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_ids",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e33e867-5600-4470-ac0a-97a87e55aee1",
+          "name": "View leave",
+          "request": {
+            "name": "View leave",
+            "description": {
+              "content": "See a leave given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional).\n- reason: Reason for the causal contingency. - format: Format in which it is found, it can take electronic value (for electronic leave) or \"physical\" (for physical leave). - license_type_id: Id of the type of leave to which it corresponds, these can be seen with the GET operation for \"List types  leave\". - licence_type_code: Code of the type of leave to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "leave ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69e7495e-08d6-426c-a6bf-839a8e9b208d",
+              "name": "As response, we received the requested leave information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "leave ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e91e6dd-6d3c-4e80-84c4-0812e1cb7894",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "leave ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd09ce62-6a86-4081-9c52-91005a8f8b33",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "leave ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "471ab7ee-8792-4faf-a7bb-853f812285bc",
+          "name": "Delete a leave",
+          "request": {
+            "name": "Delete a leave",
+            "description": {
+              "content": "Borrar una leave dado su identificador.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "absences",
+                "licence",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "%{licence} ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7751b9c-b6db-49c4-8492-0fdd3ec42298",
+              "name": "As a response, we confirm that the resource has been successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "%{licence} ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6e05a3f9-0f19-4aed-95f0-6ec3768dec2a",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "%{licence} ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f69bf41d-97bf-4244-bbb0-26380b5adde4",
+              "name": "When the resource being deleted does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "absences",
+                    "licence",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "%{licence} ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f66ece9f-66f5-497a-b43f-8e87c1019b1d",
+    "name": "Buk Leaves API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Leaves across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

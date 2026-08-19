@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  title: Buk Períodos API
+  version: '1.0'
+  description: 'Operations tagged Períodos across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Períodos
+paths:
+  /process_periods:
+    get:
+      summary: Listar períodos
+      description: 'Retorna todos los períodos de la aplicación con sus datos y estado correspondiente.
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+        '
+      tags:
+      - Períodos
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con todos los períodos de la aplicación
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Variable'
+definitions:
+  Variable:
+    properties:
+      id:
+        type: integer
+        description: Identificador del periodo
+        example: 123
+      month:
+        type: string
+        description: Mes del periodo en formato YYYY-MM
+        example: 2024-01
+      end_date:
+        type: string
+        description: Fecha de fin del periodo en formato YYYY-MM-DD
+        example: '2024-01-31'
+      status:
+        type: string
+        description: Estado del periodo
+        example: abierto
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

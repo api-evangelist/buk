@@ -1,0 +1,589 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.
+  title: Buk Registro de asistencia API
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Registro de asistencia
+paths:
+  /v2/asistencia-empresa:
+    get:
+      tags:
+      - Registro de asistencia
+      description: Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una empresa y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas con gran cantidad de trabajadores y marcas es posible que se deba usar rangos de fecha mas acotados.
+      operationId: asistencia-empresa
+      parameters:
+      - in: header
+        name: token
+        description: Token de acceso de la empresa.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: desde
+        description: Fecha de inicio del rango de consulta. Formato esperado "DD-MM-AAAA". Por defecto se usará el dia de ayer.
+        schema:
+          type: string
+      - in: query
+        name: hasta
+        description: Fecha finalización del rango de consulta. Formato esperado "DD-MM-AAAA". Por defecto se usará el dia de hoy.
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (100).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa con el listado de registro de asistencia de los trabajadores dentro del rango de fechas especificado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type:
+                        - string
+                        - 'null'
+                        example: https://app.ctrlit.buk.cl/ctrl/api/v2/asistencia-empresa/?page_size=4&page=3&desde=01-06-2024&hasta=08-07-2024
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 291
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 6527
+                        rut_trabajador:
+                          type: string
+                          example: 123456789
+                        nombre:
+                          type: string
+                          example: Nombre trabajador
+                        apellido_materno:
+                          type: string
+                          example: Apellido materno
+                        apellido_paterno:
+                          type: string
+                          example: Apellido paterno
+                        id_recinto:
+                          type: integer
+                          example: 123
+                        nombre_recinto:
+                          type: string
+                          example: Nombre recinto
+                        codigo_recinto:
+                          type: string
+                          example: Código Recinto
+                        rut_empleado:
+                          type: string
+                          example: Rut empleador
+                        especialidad:
+                          type: string
+                          example: ESPECIALIDAD
+                        area:
+                          type: string
+                          example: AREA
+                        contrato:
+                          type: string
+                          example: CONTRATO
+                        supervisor:
+                          type: string
+                          example: SUPERVISOR
+                        entrada:
+                          type: string
+                          example: '2024-03-04T16:04:12Z'
+                        turno_noche:
+                          type: boolean
+                          example: false
+                        salida:
+                          type: string
+                          example: '2024-03-05T00:30:21Z'
+                        entrada_turno:
+                          type: string
+                          example: '2024-03-04T16:00:00Z'
+                        salida_turno:
+                          type: string
+                          example: '2024-03-05T00:30:00Z'
+        '400':
+          description: Solicitud incorrecta debido a parámetros inválidos o mal formateados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El ID del recinto es inválido.'
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '404':
+          description: Página no encontrada. Se devuelve cuando el token ingresado es inválido o no se encontro una empresa con ese token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+  /v2/registrar:
+    post:
+      tags:
+      - Registro de asistencia
+      description: 'Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee autenticación por token de empresa (header `token`). El recinto identificado por `id` debe pertenecer a la misma empresa que el token, en caso contrario se devuelve 403.
+
+
+        ### Comportamiento de fecha/hora/utc
+
+
+        Los parámetros `fecha` y `hora` son obligatorios. El parámetro `utc` es opcional pero, cuando se envía, **prevalece** sobre `fecha`/`hora` para determinar el instante del marcaje:
+
+
+        - Si se envía `utc` (formato RFC 1123: `E, dd MMM yyyy HH:mm:ss ''GMT''`), el instante se interpreta en GMT y luego se le suma el offset configurado en el recinto. El resultado es la hora local del recinto. En este caso `fecha` y `hora` se ignoran (pero deben enviarse igual para pasar la validación del request).
+
+        - Si NO se envía `utc`, se concatenan `fecha` (`d/M/yyyy`) y `hora` (`H:m:s`) y se parsean en la zona horaria del servidor, sin aplicar conversión por GMT.
+
+        - Si el formato de cualquiera de los tres es inválido, se responde 400.
+
+
+        ### Identificador del dispositivo
+
+
+        El campo `mov` se persiste con el prefijo `API-`. Si no se envía, queda como `API-sin-dispositivo`.
+
+        '
+      operationId: registrar
+      parameters:
+      - in: header
+        name: token
+        description: Token de acceso de la empresa.
+        required: true
+        schema:
+          type: string
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - id
+              - rut
+              - i
+              - fecha
+              - hora
+              properties:
+                id:
+                  type: string
+                  description: Clave del recinto. Debe pertenecer a la empresa del token.
+                  example: 7QUoB9uV
+                rut:
+                  type: string
+                  description: RUT del trabajador.
+                  example: 12345678-9
+                i:
+                  type: string
+                  description: Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.
+                  example: entrada
+                fecha:
+                  type: string
+                  description: Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.
+                  example: 15/5/2025
+                hora:
+                  type: string
+                  description: Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.
+                  example: '9:0:0'
+                utc:
+                  type: string
+                  description: Instante UTC del marcaje(`E, dd MMM yyyy HH:mm:ss 'GMT'`). Si se envía, prevalece sobre `fecha`/`hora` y se ajusta al GMT del recinto.
+                  example: Thu, 15 May 2025 12:00:00 GMT
+                mov:
+                  type: string
+                  description: Identificador del dispositivo emisor. Se persiste con prefijo `API-`.
+                  example: terminal-01
+                lat:
+                  type: string
+                  description: Latitud decimal del marcaje. Rango válido [-90, 90]; fuera de rango se descarta.
+                  example: '-33.4489'
+                lng:
+                  type: string
+                  description: Longitud decimal del marcaje. Rango válido [-180, 180]; fuera de rango se descarta.
+                  example: '-70.6693'
+            examples:
+              conFechaHora:
+                summary: Marcaje usando fecha y hora locales del recinto
+                value:
+                  id: 7QUoB9uV
+                  rut: 12345678-9
+                  i: entrada
+                  fecha: 15/5/2025
+                  hora: '9:0:0'
+                  mov: terminal-01
+              conUtc:
+                summary: Marcaje usando UTC (se recalcula con el GMT del recinto)
+                value:
+                  id: 7QUoB9uV
+                  rut: 12345678-9
+                  i: salida
+                  fecha: 15/5/2025
+                  hora: '18:0:0'
+                  utc: Thu, 15 May 2025 21:00:00 GMT
+                  mov: terminal-01
+      responses:
+        '200':
+          description: Registro creado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tipo:
+                    type: string
+                    example: ok
+                  mensaje:
+                    type: string
+                    example: Exito
+        '400':
+          description: Solicitud incorrecta. Parámetros inválidos, formato de fecha inválido, u obra (`id`) no encontrada.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tipo:
+                    type: string
+                    example: error
+                  mensaje:
+                    type: string
+                    example: Parámetros inválidos
+        '403':
+          description: Acceso prohibido. Token faltante, inválido o restringido (la obra pertenece a otra empresa).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tipo:
+                    type: string
+                    example: error
+                  mensaje:
+                    type: string
+                    example: El token es inválido.
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes POST.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tipo:
+                    type: string
+                    example: error
+                  mensaje:
+                    type: string
+                    example: Hubo un error al procesar el registro
+  /obtenerRegistroAsistencia:
+    get:
+      tags:
+      - Registro de asistencia
+      description: Retorna un listado de las de los registros de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador.
+      operationId: registroAsistencia
+      parameters:
+      - in: header
+        name: token
+        description: Token de acceso de la empresa.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: obra_id
+        description: Identificador único del recinto asociado a los trabajadores.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: from
+        description: Fecha de inicio del rango de consulta para las inasistencias. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Fecha finalización del rango de consulta para las inasistencia. Formato esperado "DD-MM-AAAA"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: dni_colaborador
+        description: DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores.
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa con el listado de registro de asistencia de los trabajadores dentro del rango de fechas especificado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: https://api.ejemplo.com/informacionRecinto?page=2
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 342
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        obra_id:
+                          type: integer
+                          example: 123
+                        DNI:
+                          type: integer
+                          example: 123456789
+                        ano:
+                          type: integer
+                          example: 2023
+                        mes:
+                          type: integer
+                          example: 11
+                        dia:
+                          type: integer
+                          example: 5
+                        hora:
+                          type: integer
+                          example: 15
+                        minutos:
+                          type: integer
+                          example: 13
+                        segundos:
+                          type: integer
+                          example: 40
+                        sentido:
+                          type: string
+                          example: entrada
+                        latitud:
+                          type: integer
+                          example: '-33.45694'
+                        longitud:
+                          type: integer
+                          example: '-70.64827'
+                        origen:
+                          type: string
+                          example: QR
+                        dispositivo:
+                          type: string
+                          example: appEmpresa-XYZ
+        '400':
+          description: Solicitud incorrecta debido a parámetros inválidos o mal formateados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El ID del recinto es inválido.'
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+  /inyectarRegistroAsistencia:
+    post:
+      tags:
+      - Registro de asistencia
+      description: Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada o salida, para un trabajador específico en un recinto determinado. Requiere especificar el DNI del colaborador, la fecha y hora de la marca, y si se trata de una entrada o salida. Este endpoint solo se puede usar si se tiene el flujo de marca inactivo (confirmación de marca para el trabajador).
+      operationId: registroAsistenciaPost
+      parameters:
+      - in: query
+        name: obra_id
+        description: Identificador único del recinto asociado a los trabajadores.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: dni_colaborador
+        description: DNI del trabajador a quien se le efectuara la marca.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: jornada
+        description: Fecha de inicio del turno del trabajador. Este parámetro define el día en que comienza el turno laboral, independientemente de si el turno se extiende al día siguiente (como en turnos nocturnos). Se espera que la fecha se proporcione en el formato "DD-MM-AAAA". Este parámetro es crucial para identificar correctamente el ciclo de trabajo al que la marca pertenece.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: fecha
+        description: Fecha real en la que se realiza la marca en el registro de asistencia. Para turnos que no se extienden más allá de la medianoche, este parámetro será el mismo que el de la jornada. Sin embargo, en el caso de turnos que cruzan la medianoche, este parámetro debe reflejar el día siguiente al de la jornada. También se espera en formato "DD-MM-AAAA".
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: hora
+        description: Hora en la cual se ejecuta la marca Formato esperado "HH:MM"
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: sentido
+        description: Sentido en cual se efectuara la marca.
+        schema:
+          type: string
+          enum:
+          - entrada
+          - salida
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: La marca se creo satisfactoriamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: ok
+        '400':
+          description: Solicitud incorrecta debido a parámetros inválidos o mal formateados.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El ID del recinto es inválido.'
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token

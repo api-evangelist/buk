@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Dismissal API"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dismissal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain dismissal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.buk.cl/api/v1/mexico/jobs/:id/termination",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ]
+          },
+          "docs": "Obtain dismissal using the job ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Create dismissal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.buk.cl/api/v1/mexico/jobs/:id/termination",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a dismissal using an ID from Job and the data from dismissal.\n\nreason must be one of the following values: mutuo_acuerdo, renuncia, muerte, vencimiento_plazo, fin_servicio, :caso_fortuito, falta_probidad, acoso_sexual, vias_de_hecho, injurias, conducta_inmoral, acoso_laboral, negociaciones_prohibidas, no_concurrencia, abandonar_trabajo, faltas_seguridad, perjuicio_material, incumplimiento, necesidades_empresa, desahucio_gerente\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Emp"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

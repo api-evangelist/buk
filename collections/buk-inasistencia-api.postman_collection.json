@@ -1,0 +1,392 @@
+{
+  "item": [
+    {
+      "id": "a6765434-b226-4438-9b90-7b903dca96c8",
+      "name": "Inasistencia",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "297b693d-3ad9-4818-88db-f94e4e78c9ec",
+          "name": "inasistencia",
+          "request": {
+            "name": "inasistencia",
+            "description": {
+              "content": "Retorna un listado de las inasistencia de los trabajadores de un recinto especifico para un rango de fechas. El periodo esta limitado a un máximo de 35 dias. Ademas, se puede filtrar la lista por el DNI del colaborador.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "obtenerInasistencias"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "obra_id",
+                  "value": "<integer>",
+                  "description": "(Required) Identificador único del recinto asociado a los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "dni_colaborador",
+                  "value": "<string>",
+                  "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4d96b3db-5928-4e62-96ef-d9c53395994e",
+              "name": "Respuesta exitosa con el listado de inasistencias de trabajadores dentro del rango de fechas especificado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerInasistencias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://api.ejemplo.com/informacionRecinto?page=2\",\n    \"previous\": null,\n    \"count\": 342,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"ano\": 2023,\n      \"mes\": 4,\n      \"dia\": 11,\n      \"motivo\": \"L\"\n    },\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"ano\": 2023,\n      \"mes\": 4,\n      \"dia\": 11,\n      \"motivo\": \"L\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b763c8d4-4fda-4485-9116-e559d05f978d",
+              "name": "Solicitud incorrecta debido a parámetros inválidos o mal formateados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerInasistencias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El ID del recinto es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b982cc1f-f7ab-472d-b610-745687bbad4f",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerInasistencias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1a6ccbd-66aa-4bb3-be7d-8984ab1b3ac9",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerInasistencias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "defaf928-a48f-4593-88b6-34649e61df5f",
+    "name": "Buk Inasistencia API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.",
+      "type": "text/plain"
+    }
+  }
+}

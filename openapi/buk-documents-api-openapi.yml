@@ -1,0 +1,324 @@
+openapi: 3.2.0
+info:
+  title: Buk Documents API
+  version: '1.0'
+  description: 'Operations tagged Documents across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Documents
+paths:
+  /employees/{id}/docs:
+    post:
+      summary: Add a document to employee
+      description: "We receive a document, which will be related to the employee.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n"
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID of the employee to be queried.
+      - name: file
+        in: formData
+        description: Document to be uploaded.
+        required: false
+        type: file
+      - name: file_base64
+        in: formData
+        description: 'Document (base64 encoded) to be uploaded.
+
+
+          An object composed of the following attributes must be sent as JSON:
+
+          - content: Base64 encoded content.
+
+          - filename: Name that the uploaded document will have along with the extension (e.g. filename.pdf).
+
+          '
+        required: false
+        schema:
+          type: object
+          $ref: '#/definitions/EmployeeFileBase64'
+      - name: visible
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Visible to the employee. Default: false'
+      - name: signable_by_employee
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Requires employee signature. Default: false'
+      - name: signable_by_legal_agent
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Requires the signature of the legal representative. Default: false'
+      - name: signable_by_second_legal_agent
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Requires the signature of a second legal representative. Default: false'
+      - name: overwrite
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Overwrite file. Applies only to documents that do not have all required signatures. Default: false'
+      - name: start_signature_workflow
+        in: query
+        type: boolean
+        enum:
+        - true
+        - false
+        description: 'Start automatic signature flow The document must be visible and must have signature or review requirements to select this option. Default: false'
+      - name: path
+        in: query
+        description: 'Path where the file will be saved. If left blank it will be created in the employee''s root folder. Example: personal/security'
+        required: false
+        type: string
+      - name: signatures
+        in: query
+        description: Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account.
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/DocumentSignature'
+      - name: reviewer_id
+        in: query
+        description: Person's ID of the reviewer. This is an optional parameter, if you do not want to assign a reviewer, leave this field empty
+        required: false
+        type: integer
+      consumes:
+      - multipart/form-data
+      responses:
+        '201':
+          description: API response after creating documents.
+          schema:
+            properties:
+              employee_id:
+                type: integer
+              employee_file:
+                $ref: '#/definitions/EmployeeFileDetail'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    get:
+      summary: Obtain employee documents
+      description: "Information is obtained from the employee's documents according to the date filters entered\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n"
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID of the employee to be queried.
+      - name: from
+        in: query
+        type: string
+        format: date
+        description: 'From - Date range of document creation. Example: 2020/12/10'
+      - name: to
+        in: query
+        type: string
+        format: date
+        description: To - Date range of document creation. Example 2020/12/11
+      responses:
+        '200':
+          description: As a response, we receive an array with the employee's documents
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EmployeeFileListDetail'
+  /employees/{id}/docs/{file_id}:
+    get:
+      summary: Obtains an employee document
+      description: "The possible file IDs are in the GET `/employees/{id}/docs` endpoint.\n\nThe redirection for the entered document of file_id is returned, hence it must be followed.\n\n* To follow the redirection, add the ‘-L’ option.\n* To save the response in a file, add the ‘-o’ option and pass the file name.\n\n**Example**\n````curl -L -X GET --header 'Accept: */*' --header 'auth_token: [AUTH TOKEN]' 'http://www.[COMPANY SUBDOMAIN].buk.cl/api/v1/employees/1/docs/1156' -o [FILE NAME]````\n\nTest with ‘curl’, the Try It button does not work for documents.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n"
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        description: Employee ID
+        required: true
+        type: string
+      - name: file_id
+        in: path
+        description: Document ID
+        required: true
+        type: string
+      responses:
+        '200':
+          description: As a response, we received an employee document
+          schema:
+            $ref: '#/definitions/EmployeeFileDetail'
+  /docs/{id}:
+    get:
+      tags:
+      - Documents
+      summary: Obtain document detailed information
+      description: "Receives the ID of a document and provides the specifications associated with that document.\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n"
+      parameters:
+      - name: id
+        in: path
+        description: Document ID
+        type: integer
+        required: true
+      responses:
+        '200':
+          description: As a response, we received an employee document
+          schema:
+            properties:
+              employee_id:
+                type: integer
+              employee_file:
+                $ref: '#/definitions/EmployeeFileDetail'
+  /docs/{id}/signatures/process:
+    post:
+      summary: Start document signature workflow
+      tags:
+      - Documents
+      description: "We receive a document ID, and the signature process begins. If the document had already started the signature process, an error with status 409 is displayed.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n"
+      parameters:
+      - name: id
+        in: path
+        description: Document ID
+        required: true
+        type: integer
+  /docs/{id}/signatures:
+    put:
+      summary: Add signers to a document
+      description: "We receive the signatures or reviewer to be assigned. Changes will only be made to parameters that are submitted.\n- In the case of signatures:\n\n  We receive the type of signature to assign, this can be a string from the following list:\n  - employee_signature\n  - legal_agent_signature\n  - second_legal_agent_signature\n  - supervisor_signature\n  - other_signature\n  - second_other_signature    \n\n  Along with a valid person id with a user. In case of choosing the type of signature legal_agent_signature\n  or second_legal_agent_signature, the person ID must be of a legal representative configured. If choosing the type of signature employee_signature or supervisor_signature, it's not necessary to add the person ID.\n\n  If you want to add an order to the signatures, you should add the attribute \"position\" within each signature. Where you must indicate the order of the signatures to assign with numerical values from 1 up to the number of signatures, these values cannot be repeated. If you do not want an order for the signatures, do not send the \"position\" attribute.\n  \n  To remove the signatures from a document, you must send an empty list.\n\n- In the case of the reviewer:\n\n  We receive the person ID of the reviewer. To be valid, it must have an active user and at least one active job. To remove a reviewer, you must send null in the field.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n\nIf you are reassigning a signer to a document generated from a template, the template will not be modified. The reassignment will apply only to the selected document and it will be reloaded with the current content of the template.\n"
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        description: Document ID
+        required: true
+        type: integer
+      - name: Signature specifications
+        in: body
+        description: Signature specification object
+        required: true
+        schema:
+          $ref: '#/definitions/Signature'
+      responses:
+        '201':
+          description: As a response we received the information of the signatures and the document reviewer.
+          schema:
+            properties:
+              employee_file_id:
+                $ref: '#/definitions/Signature'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  EmployeeFileBase64:
+    properties:
+      content:
+        type: string
+      filename:
+        type: string
+  EmployeeFileListDetail:
+    properties:
+      file_id:
+        type: integer
+      filename:
+        type: string
+      path:
+        type: string
+      created_at:
+        type: string
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  DocumentSignature:
+    properties:
+      signature_type:
+        type: string
+      person_id:
+        type: number
+      position:
+        type: number
+      status:
+        type: string
+      signed_at:
+        type: string
+      confirmation_code_channel:
+        type: string
+      created_at:
+        type: string
+  EmployeeFileDetail:
+    properties:
+      id:
+        type: integer
+      employee_folder_id:
+        type: integer
+      document_template_id:
+        type: integer
+      original_filename:
+        type: string
+      is_visible:
+        type: boolean
+      settings:
+        type: object
+        properties:
+          pdf_orientation:
+            type: string
+          employee_sign:
+            type: boolean
+          legal_agent_sign:
+            type: boolean
+          second_legal_agent_sign:
+            type: boolean
+          is_external:
+            type: boolean
+      signatures:
+        type: array
+        items:
+          $ref: '#/definitions/DocumentSignature'
+      reviewer_id:
+        type: integer
+  Signature:
+    properties:
+      signatures:
+        type: array
+        items:
+          properties:
+            signature_type:
+              type: string
+            person_id:
+              type: integer
+            position:
+              type: integer
+      reviewer_id:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

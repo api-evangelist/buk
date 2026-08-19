@@ -1,0 +1,99 @@
+{
+  "item": [
+    {
+      "id": "c3bfbccb-2f55-46a6-bf11-06f90191b4d6",
+      "name": "Productos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "293b937a-e4ca-48a8-88a3-892ca45d66cc",
+          "name": "Listar Productos",
+          "request": {
+            "name": "Listar Productos",
+            "description": {
+              "content": "'Retornar Productos'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "411571bd-196c-477a-ada0-94b12b32e0ad",
+          "name": "Crear Productos",
+          "request": {
+            "name": "Crear Productos",
+            "description": {
+              "content": "Crea un nuevo Producto en el sistema. Los parámetros son:\n\n  - name : Nombre del Producto.\n  - code : Código del Producto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7618f835-1a5e-451e-a7ee-88dee4affbeb",
+    "name": "Buk Productos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Productos across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

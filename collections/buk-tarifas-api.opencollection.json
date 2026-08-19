@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Tarifas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tarifas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar Tarifas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/executions",
+            "params": [
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Fecha en que fue creada la tarifa en YYYY-MM-DD."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "'Retornar tarifas desde la fecha de creación dada'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear tarifa",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/executions"
+          },
+          "docs": "Crea una nueva tarifa en el sistema. Los parámetros son:\n\n- piecework_place_id : Id del lugar.\n- piecework_task_id : Id del labor.\n- piecework_unit_id : Id del unidad.\n- piecework_product_id: Id del producto.\n- formula : Valor de la tarifa, si la tarifa es simple no se requiere.\n- start_date : Fecha de inicio de la tarifa.\n- end_date: Fecha de finalización de la tarifa. OPCIONAL\n- type_rate : Tipo de tarifa, normal(0) o simple(1). Por defecto es 0.\n- monetary_floor : Se define piso de la tarifa "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

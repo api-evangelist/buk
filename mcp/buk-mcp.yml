@@ -6,25 +6,24 @@ first_party_server: null
 first_party_evidence:
 - url: https://github.com/bukhr/mcps
   status: 200
-  note: Repository named "Model Context Protocol (MCP) públicos de Buk" — created 2025-11-18 and
-    still empty apart from .gitignore and LICENSE. No server, no manifest, no tools.
+  note: Repository named "Model Context Protocol (MCP) públicos de Buk" — created 2025-11-18 and still
+    empty apart from .gitignore and LICENSE. No server, no manifest, no tools.
 - url: https://github.com/bukhr/MCPservers
   status: 200
-  note: A vendored copy of the Anthropic reference servers (git, github, gdrive, google workspace,
-    jenkins) used for Buk internal engineering tooling. It exposes no Buk product data and is not
-    an API surface for customers.
+  note: A vendored copy of the Anthropic reference servers (git, github, gdrive, google workspace, jenkins)
+    used for Buk internal engineering tooling. It exposes no Buk product data and is not an API surface
+    for customers.
 - url: https://trust.buk.cl/.well-known/oauth-protected-resource
   status: 200
-  note: Points at https://app.safebase.io/api/mcp — the SafeBase trust-center platform MCP, not a
-    Buk-operated server. tools/list against https://trust.buk.cl/api/mcp returned a Cloudflare challenge.
-notes: Buk publishes no MCP server for its own HR/payroll API. The tool surface below is a candidate
-  derived by API Evangelist from the published contracts — it is not offered by Buk and has not been
-  deployed. Every tool inherits its input schema from the backing operation. Because the Buk Data
-  Access API declares no operationId on any of its 206 operations, tools are keyed on METHOD + path
-  instead.
+  note: Points at https://app.safebase.io/api/mcp — the SafeBase trust-center platform MCP, not a Buk-operated
+    server. tools/list against https://trust.buk.cl/api/mcp returned a Cloudflare challenge.
+notes: Buk publishes no MCP server for its own HR/payroll API. The tool surface below is a candidate derived
+  by API Evangelist from the published contracts — it is not offered by Buk and has not been deployed.
+  Every tool inherits its input schema from the backing operation. Because the Buk Data Access API declares
+  no operationId on any of its 206 operations, tools are keyed on METHOD + path instead.
 transport_recommendation: streamable-http
-auth_recommendation: Pass the tenant auth_token header through per session; the token is already
-  entity-scoped to Lectura or Lectura y Modificación.
+auth_recommendation: Pass the tenant auth_token header through per session; the token is already entity-scoped
+  to Lectura or Lectura y Modificación.
 counts:
   tools: 216
   read_only: 127
@@ -3165,32 +3164,32 @@ tools:
 - name: buk_asistencia_recinto
   category: Recintos
   operation: GET /informacionRecinto
-  summary: Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa
-    específica. Cada recinto incluye detalles como el nombre, dirección y ubicación.
+  summary: Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa específica.
+    Cada recinto incluye detalles como el nombre, dirección y ubicación.
   read_only: true
   operationId: recinto
   surface: asistencia
 - name: buk_asistencia_nomina
   category: Nómina Colaborador
   operation: GET /obtenerNominaColaborador
-  summary: Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles
-    como DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado
+  summary: Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles como
+    DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado
   read_only: true
   operationId: nomina
   surface: asistencia
 - name: buk_asistencia_asignacionturnos
   category: Turnos
   operation: GET /getAsignacionTurnos
-  summary: Retorna un listado de los datos de trabajador junto con toda la informacion sobre los
-    turnos. El endpoint esta paginado, con un máximo de 1000 elementos por página.
+  summary: Retorna un listado de los datos de trabajador junto con toda la informacion sobre los turnos.
+    El endpoint esta paginado, con un máximo de 1000 elementos por página.
   read_only: true
   operationId: asignacionTurnos
   surface: asistencia
 - name: buk_asistencia_inasistencia
   category: Inasistencia
   operation: GET /obtenerInasistencias
-  summary: Retorna un listado de las inasistencia de los trabajadores de un recinto especifico para
-    un rango de fechas. El periodo esta limitado a un máximo de 35 dias. Ademas, se puede filtr
+  summary: Retorna un listado de las inasistencia de los trabajadores de un recinto especifico para un
+    rango de fechas. El periodo esta limitado a un máximo de 35 dias. Ademas, se puede filtr
   read_only: true
   operationId: inasistencia
   surface: asistencia
@@ -3213,32 +3212,38 @@ tools:
 - name: buk_asistencia_asistencia_empresa
   category: Registro de asistencia
   operation: GET /v2/asistencia-empresa
-  summary: 'Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una
-    empresa y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas '
+  summary: 'Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una empresa
+    y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas '
   read_only: true
   operationId: asistencia-empresa
   surface: asistencia
 - name: buk_asistencia_registrar
   category: Registro de asistencia
   operation: POST /v2/registrar
-  summary: Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee
-    autenticación por token de empresa (header `token`). El recinto identificado por `id` debe
+  summary: Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee autenticación
+    por token de empresa (header `token`). El recinto identificado por `id` debe
   read_only: false
   operationId: registrar
   surface: asistencia
 - name: buk_asistencia_registroasistencia
   category: Registro de asistencia
   operation: GET /obtenerRegistroAsistencia
-  summary: Retorna un listado de las de los registros de los trabajadores de un recinto especifico
-    en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede fil
+  summary: Retorna un listado de las de los registros de los trabajadores de un recinto especifico en
+    un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede fil
   read_only: true
   operationId: registroAsistencia
   surface: asistencia
 - name: buk_asistencia_registroasistenciapost
   category: Registro de asistencia
   operation: POST /inyectarRegistroAsistencia
-  summary: Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada
-    o salida, para un trabajador específico en un recinto determinado. Requiere especificar el D
+  summary: Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada o salida,
+    para un trabajador específico en un recinto determinado. Requiere especificar el D
   read_only: false
   operationId: registroAsistenciaPost
   surface: asistencia
+deployment:
+  mode: none
+  verified: derived
+  tools: 216
+  checked: '2026-08-12'
+  source: catalog MCP census

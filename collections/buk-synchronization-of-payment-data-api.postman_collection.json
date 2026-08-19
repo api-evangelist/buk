@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "70893e06-f793-459a-a63e-95ca8ad1c921",
+      "name": "Synchronization of payment data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "492d0e59-df12-4d0c-8a92-505fea03d807",
+          "name": "Crea o actualiza las asignaciones y sobretiempos de un determinado Colaborador.",
+          "request": {
+            "name": "Crea o actualiza las asignaciones y sobretiempos de un determinado Colaborador.",
+            "description": {
+              "content": "Se guardarán los datos enviados solo si ningún objeto presenta errores.\nDe lo contrario, se retornarán los objetos que posean uno o más errores.\nEn el caso de que el objeto ya exista previamente, este será actualizado con los datos enviados.\n\nEach assignment is composed of\n- id: ID of the Added Item to be deleted (optional)\n- _destroy: boolean (optional) (in order to delete a Added Item there must be id and _destroy in the object in question)\n- item_id: item assigned to Colaborador\n- amount: for items configured with amount \"different per person\", this value corresponds to the one entered\n  in the assignment and for items configured with amount \"equal for all\" this value will be the amount of the\n  item entered in its creation. For a formulated item, it represents the value of `item.monto`\n- end_date: end period for the assignment. If not sent, the assignment will be considered in force indefinitely\n- custom_attrs: object with custom attribute and value\n\n\nEach overtime consists of:\n- day: Día el cual se realizó las horas extras (opcional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Number of overtime hours to add\n- employee_id: ID of the Colaborador to whom to associate overtime.\n- type_id: ID of the type of overtime to add\n- centro_costo: Cost center code to which the overtime will be charged\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Item permissions en: 'Lectura y Modificación'.\n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "payment_data",
+                ":period_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "period_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "606787c1-a094-4224-9f4a-0b53589fab0a",
+              "name": "Se devuelve data con asignaciones y sobretiempos creados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "payment_data",
+                    ":period_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "period_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7351f15a-564f-44ba-9748-20a1b87c9373",
+              "name": "El Colaborador 'employee_id' no existen.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "payment_data",
+                    ":period_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "period_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd6f511b-464c-4739-86e2-57e65dd168c0",
+    "name": "Buk Synchronization of payment data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Synchronization of payment data across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

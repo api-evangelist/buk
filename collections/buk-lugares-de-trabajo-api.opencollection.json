@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Lugares de Trabajo API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lugares de Trabajo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar Lugares de Trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/places",
+            "params": [
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "query",
+                "description": {}
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "#<Proc:0x00007f0ab3db4ba0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:10 (lambda)>\n"
+        },
+        {
+          "info": {
+            "name": "Crear Lugares de Trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/places"
+          },
+          "docs": "#<Proc:0x00007f0ab3db3cf0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:30 (lambda)>\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

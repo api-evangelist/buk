@@ -1,0 +1,3786 @@
+{
+  "item": [
+    {
+      "id": "644072d7-f609-44cb-a6b4-367451b1e8b6",
+      "name": "Colaboradores",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bb67607-efa8-4aed-99ca-e6af6ae2d7c5",
+          "name": "Display Translation missing: en-br.{custom_translations.models.employee.other",
+          "request": {
+            "name": "Display Translation missing: en-br.{custom_translations.models.employee.other",
+            "description": {
+              "content": "Provides information of all Colaboradores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Status of the Colaborador. allowed values are: active, inactive, pending",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Document number",
+                    "type": "text/plain"
+                  },
+                  "key": "document_numberdocument_number",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Colaborador profile code",
+                    "type": "text/plain"
+                  },
+                  "key": "code_sheet",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID of the Empresa",
+                    "type": "text/plain"
+                  },
+                  "key": "company_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Update date. If the company_id attribute is used, it will validate the active job at that date to determine the information to display. If empty, the current date will be considered",
+                    "type": "text/plain"
+                  },
+                  "key": "update_start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Name of the custom job attribute",
+                    "type": "text/plain"
+                  },
+                  "key": "custom_attr_job_name",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Value of the custom Job attribute (if more than one, separate them by ::, e.g. Value1::Value2)",
+                    "type": "text/plain"
+                  },
+                  "key": "custom_attr_job_value",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Work email of the Colaborador",
+                    "type": "text/plain"
+                  },
+                  "key": "email",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Code of the Recinto",
+                    "type": "text/plain"
+                  },
+                  "key": "code_recinto",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Size of the page",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Parameter to sort records, the only possible value is \"id\"; if not sent, it is sorted by name",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e78117ac-10b8-4168-8ce7-0a415e0973e1",
+              "name": "A list of Colaboradores that meet the search criteria.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "document_numberdocument_number",
+                      "value": ""
+                    },
+                    {
+                      "key": "code_sheet",
+                      "value": ""
+                    },
+                    {
+                      "key": "company_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "update_start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "custom_attr_job_name",
+                      "value": ""
+                    },
+                    {
+                      "key": "custom_attr_job_value",
+                      "value": ""
+                    },
+                    {
+                      "key": "email",
+                      "value": ""
+                    },
+                    {
+                      "key": "code_recinto",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9804063-45a3-4993-83e5-d37aab6100b8",
+          "name": "Create an Colaborador",
+          "request": {
+            "name": "Create an Colaborador",
+            "description": {
+              "content": "Stores information of the Colaboradores. If the active key with value true is not sent, it will be created as inactive. The \"code_sheet\" identifier is optional; it will be autogenerated if not sent and the person does not previously exist (personal data sent are not used by another Colaborador).\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5ff8533-fe7c-4ee4-91b5-b62db5a65181",
+              "name": "Colaborador created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01c79d67-d5a3-43c0-978a-1997c2438f68",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "220f9ddd-e50d-44d0-99fa-d688c7243b01",
+          "name": "Create a new profile for an Translation missing: en-br.{custom_translations.models.employee.one",
+          "request": {
+            "name": "Create a new profile for an Translation missing: en-br.{custom_translations.models.employee.one",
+            "description": {
+              "content": "Allows creating a new record based on an existing one. This includes the details of each dependent family member. It receives the fields that will be different; the others will be copied from the reference record.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "clone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador to be cloned."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16770192-fc5a-414a-a77d-bdcc42da24cd",
+              "name": "Colaborador created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be cloned."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c0a8f6f-0e20-438c-89c3-254ed3d31524",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be cloned."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0c474aa-da37-43b1-b3a1-06508a365aca",
+          "name": "List Colaboradores",
+          "request": {
+            "name": "List Colaboradores",
+            "description": {
+              "content": "Returns all the active Colaboradores in the system. An active Colaborador is a Colaborador with an active plan and job on the selected date.<br><br> Optionally, it receives the date (in YYYY-MM-DD format) on which they must have an active contract as a parameter. If this parameter is not provided, today\\'s date from the open month in the application will be used.<br> Additionally, it can receive an optional parameter to exclude Colaboradores who are pending.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                "active"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "RUT",
+                    "type": "text/plain"
+                  },
+                  "key": "RUT",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Colaborador profile code",
+                    "type": "text/plain"
+                  },
+                  "key": "code_sheet",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Date to evaluate if the Colaboradores have an active contract, in YYYY-MM-DD format. If not entered, today's date on the platform will be used by default",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Excludes pending Colaboradores if this parameter is sent as `true`",
+                    "type": "text/plain"
+                  },
+                  "key": "exclude_pending",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb2260c6-2eea-410d-8332-ac5a29dcc048",
+              "name": "As a response, we receive an array (data) with the information of the other Colaboradores'.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "RUT",
+                      "value": ""
+                    },
+                    {
+                      "key": "code_sheet",
+                      "value": ""
+                    },
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "exclude_pending",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ac5c4be-0be6-4de9-81ef-5d70be2b4029",
+          "name": "Display Translation missing: en-br.{custom_translations.models.employee.one",
+          "request": {
+            "name": "Display Translation missing: en-br.{custom_translations.models.employee.one",
+            "description": {
+              "content": "We receive specific information of the Colaborador whose ID or RUT we sent in the search query.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5500116e-3f5e-4536-9f26-c6052d79381c",
+              "name": "'As a response we receive all the fields corresponding to the information of the queried Colaborador'\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d5ff309-c4c7-4b09-b3e8-1da4cecc102c",
+          "name": "Update Colaborador",
+          "request": {
+            "name": "Update Colaborador",
+            "description": {
+              "content": "Update the information of the Colaborador.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5695db3-a400-4ca0-b694-9811f4cc78a1",
+              "name": "Colaborador updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "911fc8cd-9560-4d29-b4d7-c2733c4b63f5",
+          "name": "Display Colaboradores subordinate to other Colaborador",
+          "request": {
+            "name": "Display Colaboradores subordinate to other Colaborador",
+            "description": {
+              "content": "We receive a list of subordinate Colaboradores\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "subordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Date to evaluate if subordinate Colaboradores have an active contract, in YYYY-MM-DD format. If not entered, today's date on the platform will be used by default.",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de774537-f7c7-4206-b590-90fd46b4ef3c",
+              "name": "As a response, we receive an array (data) with the information of the other Colaboradores'.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "subordinates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c74f5a91-c38c-449e-aaea-4b5680d9ee6b",
+          "name": "Display number of days available for vacation",
+          "request": {
+            "name": "Display number of days available for vacation",
+            "description": {
+              "content": "We received the number of days.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Vacation permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "vacations_available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Deduct future vacation taken (true, false). (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "discount",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Date to calculate pending vacations (Format: DD-MM-YYYY); default is the last day of the open month",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "215ab3f1-f2ec-47f4-8599-1cd4d1e507a9",
+              "name": "‘As a response, we receive an array (data) with the information of the Colaborador and their vacations'\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacations_available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "discount",
+                      "value": ""
+                    },
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cd56a3b-a4ab-4ed2-95d5-2a84a67e2bd1",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacations_available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "discount",
+                      "value": ""
+                    },
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2414cfcd-5db8-43ad-845f-86a5ad1793a8",
+          "name": "Show details of accrued vacation and proportional simulation",
+          "request": {
+            "name": "Show details of accrued vacation and proportional simulation",
+            "description": {
+              "content": "Displays details of accrued vacations and proportional simulation up to a certain date.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Vacation permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "earned_vacations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Date to calculate accrued vacations and simulate proportionals (Format: DD-MM-YYYY); default is today\n",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page for query",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "989b1d8f-e01b-4e06-98bf-db3311c41d03",
+              "name": "As a response, we receive an array (data) with information about accrued and proportional vacations of the Colaborador\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "earned_vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85ac3979-2499-4bae-b25a-4122e2dd3b41",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "earned_vacations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID or Document Number of the Colaborador to query. If it is Document Number, it must not contain dots or hyphens."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d267f95-8629-4b2e-a58f-ed3d66419467",
+          "name": "Display Dependents of a Colaborador",
+          "request": {
+            "name": "Display Dependents of a Colaborador",
+            "description": {
+              "content": "Returns information of a Dependents associated with a Colaborador.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n\n**General requerida para utilizar este endpoint:** \n* Habilitar grupo familiar, valor: true.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "family_responsibilities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Dependents to query."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf351b88-0ecf-4aa4-b05b-1add9086e729",
+              "name": "Information of the Dependents associated with the Colaborador.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "family_responsibilities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Dependents to query."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9470f0e4-8d90-4891-8653-d1e22bdc3669",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "family_responsibilities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Dependents to query."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8605c98-4cac-4330-90c9-513de8e8c8f5",
+          "name": "View pension savings",
+          "request": {
+            "name": "View pension savings",
+            "description": {
+              "content": "Obtain pension savings using the ID of an Colaborador\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Item permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "pension_savings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Filter the pension savings that are current for this date",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Colaborador ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "affc4f74-90de-4ecb-a019-4b4bc149ba77",
+              "name": "As a response, we receive a list of objects of pension savings type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "pension_savings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Colaborador ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2971607-c531-4c26-ae8a-9181e2106ed0",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "pension_savings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Colaborador ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5ee9fa5-84d4-42a6-a066-83b2b1a3cd0b",
+          "name": "Display an employee's plans",
+          "request": {
+            "name": "Display an employee's plans",
+            "description": {
+              "content": "Displays the information of the plans associated to a Colaborador.\n(endpoint not implemented for Mexico)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa8e6eef-a772-49f6-8df5-27993932e861",
+              "name": "An array (data) with the information of the plans associated to the Colaborador.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "710fd8a5-870a-4700-b055-a2f1077c480c",
+          "name": "Add a plan to an employee",
+          "request": {
+            "name": "Add a plan to an employee",
+            "description": {
+              "content": "Creates a new plan for the Colaborador in the system\n(endpoint not implemented for Mexico)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c32c78a1-dba0-4e21-8704-422c8856995a",
+              "name": "As a response, we receive an array (data) with the information of the created plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "201c6a28-ab60-43a0-8f3d-f102de159df1",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b0372a9-1d66-43c8-88d7-5d5b814ad22c",
+          "name": "Display an employee's plan",
+          "request": {
+            "name": "Display an employee's plan",
+            "description": {
+              "content": "Returns the information of a plan associated with a Colaborador.\n(endpoint not implemented for Mexico)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the plan to query."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8af167a8-d207-4d43-9f1a-569d217fc318",
+              "name": "The information of the plan associated with the Colaborador.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the plan to query."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b0f2b38-f1ad-46c8-a730-a027565d56f2",
+          "name": "Update a plan to an employee",
+          "request": {
+            "name": "Update a plan to an employee",
+            "description": {
+              "content": "Updates a plan linked with an Colaborador in the system\n(endpoint not implemented for Mexico)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) ID of the Colaborador to be updated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the plan to be updated."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6467e8a-2de0-477a-b3f8-8c5ee5ec9a7b",
+              "name": "As a response, we receive an array (data) with the information of the updated plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the plan to be updated."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e959932-f5c4-4a60-84db-700157f66c07",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the plan to be updated."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7aab5cdc-f56f-4139-8e3a-98b4a6b1023b",
+          "name": "Display jobs of a Colaborador",
+          "request": {
+            "name": "Display jobs of a Colaborador",
+            "description": {
+              "content": "Displays the job information associated with a Colaborador.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "218545b0-f2f1-4a3d-8b65-2e44dc6ce441",
+              "name": "An array (data) with the information of the jobs associated to the Colaborador.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fed360ec-f2bc-48b1-8af3-bb8945d2d9ff",
+          "name": "Add a job to Colaborador",
+          "request": {
+            "name": "Add a job to Colaborador",
+            "description": {
+              "content": "Creates a new job for the Colaborador in the system\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador to be queried."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ffe6406-c140-467f-91b2-bf0cfd32f5fb",
+              "name": "As a response, we receive an array (data) with the information of the created job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "775491bd-bb5e-4223-b205-0a69cc6bc566",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24403a61-f40e-4867-b2f8-f8dd5a2ac8f3",
+              "name": "Records are being updated concurrently.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "976d4c93-2232-4bf7-8f29-d96ab23f4306",
+          "name": "Update a job for a Colaborador",
+          "request": {
+            "name": "Update a job for a Colaborador",
+            "description": {
+              "content": "Creates a new job for the Colaborador in the system\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) ID of the Colaborador to be updated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the job to be updated."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6f5b925-4c1e-4b59-b481-685a2e7a8eb2",
+              "name": "As a response, we receive an array (data) with the information of the updated job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the job to be updated."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a1cbe88-77a4-4a32-aea9-2f245813428c",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID of the Colaborador to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the job to be updated."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78d3c7ef-070c-4435-bd2c-5315306b01df",
+          "name": "Update the cost center in a job for a Colaborador",
+          "request": {
+            "name": "Update the cost center in a job for a Colaborador",
+            "description": {
+              "content": "The cost centers of a job are replaced, i.e., existing ones are deleted and new ones are added.\n\n\n\nRemember that the weights must sum up to 100.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "jobs",
+                ":job_id",
+                "cost_centers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "job_id"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9735f77-4dfe-4094-88ae-f3850de70edd",
+              "name": "As a response, the information of the updated job cost centers is received.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "jobs",
+                    ":job_id",
+                    "cost_centers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "job_id"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1a3cb35-218b-437c-aa4b-8dc750fdb27a",
+          "name": "Add a document to employee",
+          "request": {
+            "name": "Add a document to employee",
+            "description": {
+              "content": "We receive a document, which will be related to the employee.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Visible to the employee. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "visible",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires employee signature. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_employee",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires the signature of the legal representative. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_legal_agent",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires the signature of a second legal representative. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_second_legal_agent",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Overwrite file. Applies only to documents that do not have all required signatures. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "overwrite",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start automatic signature flow The document must be visible and must have signature or review requirements to select this option. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "start_signature_workflow",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Path where the file will be saved. If left blank it will be created in the employee's root folder. Example: personal/security",
+                    "type": "text/plain"
+                  },
+                  "key": "path",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "signatures",
+                  "value": "{\"value\":\"reference #/definitions/DocumentSignature not found in the OpenAPI spec\"}",
+                  "description": "Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account."
+                },
+                {
+                  "disabled": false,
+                  "key": "signatures",
+                  "value": "{\"value\":\"reference #/definitions/DocumentSignature not found in the OpenAPI spec\"}",
+                  "description": "Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account."
+                },
+                {
+                  "description": {
+                    "content": "Person's ID of the reviewer. This is an optional parameter, if you do not want to assign a reviewer, leave this field empty",
+                    "type": "text/plain"
+                  },
+                  "key": "reviewer_id",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the employee to be queried."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38ee2de7-2732-4b45-9103-b1d92b9be753",
+              "name": "API response after creating documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visible",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_employee",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_second_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_signature_workflow",
+                      "value": ""
+                    },
+                    {
+                      "key": "path",
+                      "value": ""
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "reviewer_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32651c85-5b5a-47ab-9c1d-34d393d01f91",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visible",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_employee",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_second_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_signature_workflow",
+                      "value": ""
+                    },
+                    {
+                      "key": "path",
+                      "value": ""
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "reviewer_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5fdca3f7-3dcc-40f7-8658-4fdb9cebd5b7",
+          "name": "Obtain employee documents",
+          "request": {
+            "name": "Obtain employee documents",
+            "description": {
+              "content": "Information is obtained from the employee's documents according to the date filters entered\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "From - Date range of document creation. Example: 2020/12/10",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "To - Date range of document creation. Example 2020/12/11",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the employee to be queried."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd3bd20d-0543-4bc3-b71d-0c6f9bcdcbd4",
+              "name": "As a response, we receive an array with the employee's documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fd9ae55-df10-4078-ac81-a434402e4219",
+          "name": "Obtains an employee document",
+          "request": {
+            "name": "Obtains an employee document",
+            "description": {
+              "content": "The possible file IDs are in the GET `/employees/{id}/docs` endpoint.\n\nThe redirection for the entered document of file_id is returned, hence it must be followed.\n\n* To follow the redirection, add the ‘-L’ option.\n* To save the response in a file, add the ‘-o’ option and pass the file name.\n\n**Example**\n````curl -L -X GET --header 'Accept: */*' --header 'auth_token: [AUTH TOKEN]' 'http://www.[COMPANY SUBDOMAIN].buk.cl/api/v1/employees/1/docs/1156' -o [FILE NAME]````\n\nTest with ‘curl’, the Try It button does not work for documents.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Employee ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "file_id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b5849fb-a884-4c68-a94f-967c24d36143",
+              "name": "As a response, we received an employee document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "file_id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f71de6d3-ca86-4895-8573-5a19f325d7e2",
+          "name": "Obtain document detailed information",
+          "request": {
+            "name": "Obtain document detailed information",
+            "description": {
+              "content": "Receives the ID of a document and provides the specifications associated with that document.\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "docs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fb2c34e-c0c4-42aa-be54-97e91e50a483",
+              "name": "As a response, we received an employee document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "docs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d15e5f2-94f8-40d5-874c-ab5eaf1ab765",
+          "name": "List vacation policies associated with the employee.",
+          "request": {
+            "name": "List vacation policies associated with the employee.",
+            "description": {
+              "content": "Displays an array with vacation policies associated with an employee\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Vacation permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "vacation_definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Employee ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "384e29c6-2a86-4f5b-8b8b-359da3f7a134",
+              "name": "As a response, we receive a list of vacation policies associated with the employee.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3d21cbaf-71ce-4c78-9fa8-3a3c6605ecdc",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13eef3e-287e-45c5-98f5-dd2a1120e3f6",
+          "name": "Add a vacation policy to the employees",
+          "request": {
+            "name": "Add a vacation policy to the employees",
+            "description": {
+              "content": "Assign a vacation policy to employees. The parameters are:\n- employee_id : (REQUIRED) ID of the employee\n- body : (REQUIRED) JSON with the code of the vacation policy to assign.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n* Vacation permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "vacation_definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Employee ID"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6042a378-a4ca-4111-b124-c8555d605429",
+              "name": "As a response, we receive a confirmation message.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0dc89ecd-ad4a-45d1-8746-b689864c7659",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d1f6155-1d2a-405f-8655-434fc6d93ab3",
+          "name": "Unassign an employee vacation policy",
+          "request": {
+            "name": "Unassign an employee vacation policy",
+            "description": {
+              "content": "Unassign a vacation policy for an employee. The parameters are:\n- employee_id: (REQUIRED) Employee ID\n- code: (REQUIRED) Vacation policy code to unassign.\n- date: (OPTIONAL) Unassignment date in YYYY-MM-DD format. If not provided, today's date is used.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n* Vacation permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "vacation_definitions",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Unassignment date (format YYYY-MM-DD). If not provided, today's date is used.",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Employee ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "code",
+                  "description": "(Required) Code of the vacation policy."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "905a9c09-6f83-47df-8f05-b666433faa5e",
+              "name": "As a response, we receive a confirmation message.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "code",
+                      "description": "(Required) Code of the vacation policy."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46e1586e-9d82-4964-bda6-e8476eca10fa",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "vacation_definitions",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "code",
+                      "description": "(Required) Code of the vacation policy."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ef03217-ed9f-42be-b13a-4aa54258e0b3",
+          "name": "Ver leaves de Colaboradores",
+          "request": {
+            "name": "Ver leaves de Colaboradores",
+            "description": {
+              "content": "See the leaves associated with Colaboradores.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de leave. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la leave (opcional). - custom_attributes: Custom attributes (optional). - format: Format in which it is found, it can take electronic value (for electronic leaves ) or \"physical\" (for physical leaves ). - license_type_id: Id of the type of leaves to which it corresponds, these can be seen with the GET operation for \"List types  leaves\". - licence_type_code: Code of the type of leaves to which it corresponds.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                "absences",
+                "licences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "IDs of Colaboradores",
+                    "type": "text/plain"
+                  },
+                  "key": "employees_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b017edc0-fc6a-400d-a842-b8e57cc6b4c2",
+              "name": "Como respuesta recibimos la información de la leaves solicitadas de los Colaboradores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "licences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd4d3347-e5a3-481e-b67f-4c262de04292",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "licences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bffb4dd-a7fc-4589-922c-21791bb0a85e",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "licences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd901cd9-38bf-4448-91d2-373c0e6fe756",
+          "name": "View Colaboradores's time off leave",
+          "request": {
+            "name": "View Colaboradores's time off leave",
+            "description": {
+              "content": "View time off leaves associated with the Colaboradores.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - format: Format in which it is found, it can take electronic value (for electronic time off) or \"physical\" (for physical time off). - absence_type_id: Id of the type of time off to which it corresponds, these can be seen with the GET operation for \"List types of time off\". - absence_type_code: Code of the type of time off to which it corresponds.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                "absences",
+                "absences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "IDs of Colaboradores",
+                    "type": "text/plain"
+                  },
+                  "key": "employees_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f6aef8b-88fb-46c5-b5f5-e58c10a8d416",
+              "name": "As a response, we receive the information of the time off leave by the Colaboradores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06e5499b-95e4-4f15-a484-fd3977475faa",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "808eb993-e84a-43b0-a573-2245b1a44488",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "absences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91e98475-3df6-4464-83bf-934f4d57a4b8",
+          "name": "View absence requests of the Colaboradores.",
+          "request": {
+            "name": "View absence requests of the Colaboradores.",
+            "description": {
+              "content": "See the absence request associated with Colaboradores.\n - format: Format in which it is found, it can take electronic value (for electronic absence requests) or \"physical\" (for physical absence request). - permission_type_id: Id of the type of absence request to which it corresponds, these can be seen with the GET operation for \"List types of absence request\". - permission_type_code: Code of the type of absence request to which it corresponds.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                "absences",
+                "permissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "IDs of Colaboradores",
+                    "type": "text/plain"
+                  },
+                  "key": "employees_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39cd38ed-197d-480f-aaff-a5ec8ef6f173",
+              "name": "As a response, we receive the information of the absence requests leave requested by the Colaboradores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39cdaa46-4b91-4bc0-952d-8de91cc8a756",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "097e937a-5941-49ca-a095-16c25e24e1cc",
+              "name": "The requested resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "absences",
+                    "permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d09cfc86-e9f8-48fc-8baf-cea177fbc4ae",
+          "name": "List overtime associated with Colaboradores.",
+          "request": {
+            "name": "List overtime associated with Colaboradores.",
+            "description": {
+              "content": "View overtime records associated with certain Translation missing: en-br.{custom_translations.models.employee.other\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                "overtimes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "IDs of Colaboradores",
+                    "type": "text/plain"
+                  },
+                  "key": "employees_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Optional) Overtime type ID",
+                    "type": "text/plain"
+                  },
+                  "key": "overtime_type_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e383ccf-651d-4c53-9d53-496ab128bc79",
+              "name": "As a response, we receive an array (data) with the overtime hours of the Colaboradores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    "overtimes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employees_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "overtime_type_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74fddfd8-3d43-409d-8568-9ecf4efc6f17",
+    "name": "Buk Colaboradores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Colaboradores across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

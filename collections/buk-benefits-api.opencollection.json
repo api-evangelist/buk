@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Benefits API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Benefits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all benefit requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/benefits/benefit_requests",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Request status. Allowed values: in_process, approved, rejected, pre_approved, incomplete, cancel_request, canceled"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) ID of the person who requested the benefit. Used to filter requests from a specific person."
+              },
+              {
+                "name": "available_version_id",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) ID of the specific version of the requested benefit."
+              },
+              {
+                "name": "requested_at_from",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Date from which to filter requests (format: YYYY-MM-DD). Allows searching for requests made from a specific date onwards"
+              },
+              {
+                "name": "requested_at_to",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Date up to which to filter requests (format: YYYY-MM-DD). Allows searching for requests made up to a specific date"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number for result pagination. Defaults to 1 if not specified"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of records per page (maximum 100). Default is 25 if not specified"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Field by which to sort the results. Allowed values: id, person_id, approver_id, available_version_id, status, points_cost, requested_at, status_date, created_at"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Sort direction. Allowed values: asc (ascending), desc (descending). Default is desc"
+              }
+            ]
+          },
+          "docs": "This endpoint returns all benefit requests.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Obtains a specific benefit request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/benefits/benefit_requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Benefit request ID"
+              }
+            ]
+          },
+          "docs": "This endpoint returns a profit request according to its ID\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Obtains information from a benefit version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/benefits/benefit_versions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Benefit version ID"
+              }
+            ]
+          },
+          "docs": "Returns the information of a specific benefit version\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

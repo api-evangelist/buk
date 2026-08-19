@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Centralized accounting API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Centralized accounting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Centralized accounting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting",
+            "params": [
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Queried Month (1 - 12) MANDATORY if process_id is not specified. If process_id is specified, MONTH will be ignored."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Queried Year MANDATORY if process_id is not specified. If process_id is specified, YEAR will be ignored."
+              },
+              {
+                "name": "process_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the process to be queried. MANDATORY if year and month is not specified"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "ID or RUT of the Empresa to be queried."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "It allows to obtain the accounting information corresponding to a specific month.\nThe items are grouped by the pay stub to which they belong.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Accounting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/export",
+            "params": [
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Queried Month (1 - 12)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Queried Year"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "ID or RUT of the Empresa to be queried."
+              },
+              {
+                "name": "subprocess_id",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Sub-process ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página."
+              }
+            ]
+          },
+          "docs": "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Accounting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/export_period",
+            "params": [
+              {
+                "name": "process_id",
+                "value": "",
+                "type": "query",
+                "description": "Process ID"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": {}
+              },
+              {
+                "name": "subprocess_id",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Sub-process ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página."
+              }
+            ]
+          },
+          "docs": "Obtains in JSON format the accounting data.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Accounting by Pay Stub",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/export_detail",
+            "params": [
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Queried Month (1 - 12)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Queried Year"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "ID or RUT of the Empresa to be queried."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de la página a consultar. Por defecto, la primera página."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página."
+              }
+            ]
+          },
+          "docs": "Obtains in JSON format the accounting data, but processing for each pay stub separately.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Show vacation balance by month",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/vacations/balance",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the Colaborador"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Queried Year"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Queried Month (1 - 12)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "We receive the month from which to get the vacation balances from the Colaboradores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Reprocess accounting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting/export_process_differences",
+            "params": [
+              {
+                "name": "process_id",
+                "value": "",
+                "type": "query",
+                "description": "Subprocess ID. REQUIRED"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Obtains in JSON format the accounting data for the differences created in a subprocess as a result of a reprocess.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "List accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ledger_account",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de página"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Displays all the accounts registered in the system.\n\nEach account consists of\n  - id: unique ID\n  - created_at: creation date\n  - updated_at: date of updating process\n  - name: name associated with the payroll item\n  - number: number\n  - type: [general, bono, descuento, credito, aporte, tipo_sobretiempo]\n  - format: [detalle, resumen]\n  - document_type: document type\n  - group_code: grouping code\n\n**Permisos requeridos para utilizar este endpoint:** \n* Accounting permissions en: 'Lectura'."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,370 @@
+{
+  "item": [
+    {
+      "id": "437150b3-10c3-4514-abfe-8ad90df9d640",
+      "name": "Nómina Colaborador",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1f8cf4e-4ff0-4a66-b341-f3ee53d7d0e3",
+          "name": "nomina",
+          "request": {
+            "name": "nomina",
+            "description": {
+              "content": "Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles como DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado del vínculo laboral y por un trabajador.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "obtenerNominaColaborador"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "obra_id",
+                  "value": "<integer>",
+                  "description": "Identificador único del recinto asociado a los trabajadores. Si se omite, la búsqueda incluirá todos los recintos."
+                },
+                {
+                  "disabled": false,
+                  "key": "dni_colaborador",
+                  "value": "<string>",
+                  "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Estado de vinculación de los trabajadores con la empresa."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7adf9b5d-ee26-4c73-9c5f-ff3773a991e6",
+              "name": "Respuesta exitosa que contiene la lista de recintos de una empresa. La respuesta está paginada y cada página incluye un subconjunto de recintos junto con información detallada de cada uno.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerNominaColaborador"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://api.ejemplo.com/informacionRecinto?page=2\",\n    \"previous\": null,\n    \"count\": 342,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"empresa\": \"Empresa Ejemplo\",\n      \"contrato\": \"CONTRATO\",\n      \"especialidad\": \"ESPECIALIDAD\",\n      \"estado\": \"vinculado\"\n    },\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"empresa\": \"Empresa Ejemplo\",\n      \"contrato\": \"CONTRATO\",\n      \"especialidad\": \"ESPECIALIDAD\",\n      \"estado\": \"vinculado\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c31f4616-9554-4a89-9f6c-c3abcf9f0d8a",
+              "name": "Solicitud incorrecta. Este error se devuelve si unos de los parámetrros de la consulta no son válidos.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerNominaColaborador"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El tamaño de página (page_size) no está en el rango permitido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fa7682f-0df9-4654-847d-05df6c1e3919",
+              "name": "Acceso no autorizado. Se retorna cuando el token proporcionado es inválido, ha expirado o falta en el encabezado de la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerNominaColaborador"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bc75b09-8273-4c48-932c-b21ec97c9e12",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerNominaColaborador"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f56e66f0-7cfd-48b4-ac7b-06e70d4ea5ea",
+    "name": "Buk Nómina Colaborador API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.",
+      "type": "text/plain"
+    }
+  }
+}

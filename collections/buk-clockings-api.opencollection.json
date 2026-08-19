@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Attendance — Biometric Integration Clockings API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clockings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create attendance clocking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://virtserver.swaggerhub.com/BUKASISTENCIA/AttendanceBiometrics/1.0.0/v1/clockings",
+            "headers": [
+              {
+                "name": "x-provider-name",
+                "value": "bukwebapp"
+              },
+              {
+                "name": "x-provider-token",
+                "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new attendance clocking record from data sent by a biometric device middleware.\n\n### Authentication\n\nThis endpoint uses provider-based authentication via two custom headers:\n\n| Header             | Description                                      |\n|--------------------|--------------------------------------------------|\n| `x-provider-name`  | Registered provider name                         |\n| `x-provider-token` | Secret token assigned to the provider            |\n\nThe system validat"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

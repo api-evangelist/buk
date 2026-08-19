@@ -1,0 +1,1861 @@
+{
+  "item": [
+    {
+      "id": "f5a5d033-5690-455d-b2cd-2a2952688382",
+      "name": "Registro de asistencia",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "189c379d-9644-408e-a52c-b17c230dc8bf",
+          "name": "asistencia-empresa",
+          "request": {
+            "name": "asistencia-empresa",
+            "description": {
+              "content": "Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una empresa y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas con gran cantidad de trabajadores y marcas es posible que se deba usar rangos de fecha mas acotados.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "asistencia-empresa"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "desde",
+                  "value": "<string>",
+                  "description": "Fecha de inicio del rango de consulta. Formato esperado \"DD-MM-AAAA\". Por defecto se usará el dia de ayer."
+                },
+                {
+                  "disabled": false,
+                  "key": "hasta",
+                  "value": "<string>",
+                  "description": "Fecha finalización del rango de consulta. Formato esperado \"DD-MM-AAAA\". Por defecto se usará el dia de hoy."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (100)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Token de acceso de la empresa.",
+                "key": "token",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b1988795-f6e9-40a2-b5f4-e8fe35236112",
+              "name": "Respuesta exitosa con el listado de registro de asistencia de los trabajadores dentro del rango de fechas especificado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "asistencia-empresa"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://app.ctrlit.buk.cl/ctrl/api/v2/asistencia-empresa/?page_size=4&page=3&desde=01-06-2024&hasta=08-07-2024\",\n    \"previous\": null,\n    \"count\": 291,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"id\": 6527,\n      \"rut_trabajador\": \"string\",\n      \"nombre\": \"Nombre trabajador\",\n      \"apellido_materno\": \"Apellido materno\",\n      \"apellido_paterno\": \"Apellido paterno\",\n      \"id_recinto\": 123,\n      \"nombre_recinto\": \"Nombre recinto\",\n      \"codigo_recinto\": \"Código Recinto\",\n      \"rut_empleado\": \"Rut empleador\",\n      \"especialidad\": \"ESPECIALIDAD\",\n      \"area\": \"AREA\",\n      \"contrato\": \"CONTRATO\",\n      \"supervisor\": \"SUPERVISOR\",\n      \"entrada\": \"2024-03-04T16:04:12Z\",\n      \"turno_noche\": false,\n      \"salida\": \"2024-03-05T00:30:21Z\",\n      \"entrada_turno\": \"2024-03-04T16:00:00Z\",\n      \"salida_turno\": \"2024-03-05T00:30:00Z\"\n    },\n    {\n      \"id\": 6527,\n      \"rut_trabajador\": \"string\",\n      \"nombre\": \"Nombre trabajador\",\n      \"apellido_materno\": \"Apellido materno\",\n      \"apellido_paterno\": \"Apellido paterno\",\n      \"id_recinto\": 123,\n      \"nombre_recinto\": \"Nombre recinto\",\n      \"codigo_recinto\": \"Código Recinto\",\n      \"rut_empleado\": \"Rut empleador\",\n      \"especialidad\": \"ESPECIALIDAD\",\n      \"area\": \"AREA\",\n      \"contrato\": \"CONTRATO\",\n      \"supervisor\": \"SUPERVISOR\",\n      \"entrada\": \"2024-03-04T16:04:12Z\",\n      \"turno_noche\": false,\n      \"salida\": \"2024-03-05T00:30:21Z\",\n      \"entrada_turno\": \"2024-03-04T16:00:00Z\",\n      \"salida_turno\": \"2024-03-05T00:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b46b4b8c-4787-433d-8d3b-c02896320d9f",
+              "name": "Solicitud incorrecta debido a parámetros inválidos o mal formateados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "asistencia-empresa"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El ID del recinto es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef659471-e8a3-47e6-9065-546604d51646",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "asistencia-empresa"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5ab73fc-5ad2-49e0-817c-a243035a66b0",
+              "name": "Página no encontrada. Se devuelve cuando el token ingresado es inválido o no se encontro una empresa con ese token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "asistencia-empresa"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b669e25b-dedb-43e5-baee-823951bf640b",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "asistencia-empresa"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desde",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hasta",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7569ba68-31df-4558-8cad-3522960cc4e5",
+          "name": "registrar",
+          "request": {
+            "name": "registrar",
+            "description": {
+              "content": "Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee autenticación por token de empresa (header `token`). El recinto identificado por `id` debe pertenecer a la misma empresa que el token, en caso contrario se devuelve 403.\n\n### Comportamiento de fecha/hora/utc\n\nLos parámetros `fecha` y `hora` son obligatorios. El parámetro `utc` es opcional pero, cuando se envía, **prevalece** sobre `fecha`/`hora` para determinar el instante del marcaje:\n\n- Si se envía `utc` (formato RFC 1123: `E, dd MMM yyyy HH:mm:ss 'GMT'`), el instante se interpreta en GMT y luego se le suma el offset configurado en el recinto. El resultado es la hora local del recinto. En este caso `fecha` y `hora` se ignoran (pero deben enviarse igual para pasar la validación del request).\n- Si NO se envía `utc`, se concatenan `fecha` (`d/M/yyyy`) y `hora` (`H:m:s`) y se parsean en la zona horaria del servidor, sin aplicar conversión por GMT.\n- Si el formato de cualquiera de los tres es inválido, se responde 400.\n\n### Identificador del dispositivo\n\nEl campo `mov` se persiste con el prefijo `API-`. Si no se envía, queda como `API-sin-dispositivo`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Token de acceso de la empresa.",
+                "key": "token",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Clave del recinto. Debe pertenecer a la empresa del token."
+                },
+                {
+                  "disabled": false,
+                  "key": "rut",
+                  "value": "<string>",
+                  "description": "(Required) RUT del trabajador."
+                },
+                {
+                  "disabled": false,
+                  "key": "i",
+                  "value": "<string>",
+                  "description": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida."
+                },
+                {
+                  "disabled": false,
+                  "key": "fecha",
+                  "value": "<string>",
+                  "description": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse."
+                },
+                {
+                  "disabled": false,
+                  "key": "hora",
+                  "value": "<string>",
+                  "description": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse."
+                },
+                {
+                  "disabled": false,
+                  "key": "utc",
+                  "value": "<string>",
+                  "description": "Instante UTC del marcaje(`E, dd MMM yyyy HH:mm:ss 'GMT'`). Si se envía, prevalece sobre `fecha`/`hora` y se ajusta al GMT del recinto."
+                },
+                {
+                  "disabled": false,
+                  "key": "mov",
+                  "value": "<string>",
+                  "description": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<string>",
+                  "description": "Latitud decimal del marcaje. Rango válido [-90, 90]; fuera de rango se descarta."
+                },
+                {
+                  "disabled": false,
+                  "key": "lng",
+                  "value": "<string>",
+                  "description": "Longitud decimal del marcaje. Rango válido [-180, 180]; fuera de rango se descarta."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "324f2a51-5207-4d9b-bee2-cd65ca712cf3",
+              "name": "Registro creado exitosamente.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Clave del recinto. Debe pertenecer a la empresa del token.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "7QUoB9uV"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) RUT del trabajador.",
+                        "type": "text/plain"
+                      },
+                      "key": "rut",
+                      "value": "12345678-9"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.",
+                        "type": "text/plain"
+                      },
+                      "key": "i",
+                      "value": "entrada"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "fecha",
+                      "value": "15/5/2025"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "hora",
+                      "value": "9:0:0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`.",
+                        "type": "text/plain"
+                      },
+                      "key": "mov",
+                      "value": "terminal-01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tipo\": \"ok\",\n  \"mensaje\": \"Exito\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9997049b-79e0-43eb-8144-f8c7a03a48fb",
+              "name": "Solicitud incorrecta. Parámetros inválidos, formato de fecha inválido, u obra (`id`) no encontrada.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Clave del recinto. Debe pertenecer a la empresa del token.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "7QUoB9uV"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) RUT del trabajador.",
+                        "type": "text/plain"
+                      },
+                      "key": "rut",
+                      "value": "12345678-9"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.",
+                        "type": "text/plain"
+                      },
+                      "key": "i",
+                      "value": "entrada"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "fecha",
+                      "value": "15/5/2025"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "hora",
+                      "value": "9:0:0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`.",
+                        "type": "text/plain"
+                      },
+                      "key": "mov",
+                      "value": "terminal-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tipo\": \"error\",\n  \"mensaje\": \"Parámetros inválidos\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d840df3-e7fa-4305-baa4-9225cbb91e54",
+              "name": "Acceso prohibido. Token faltante, inválido o restringido (la obra pertenece a otra empresa).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Clave del recinto. Debe pertenecer a la empresa del token.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "7QUoB9uV"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) RUT del trabajador.",
+                        "type": "text/plain"
+                      },
+                      "key": "rut",
+                      "value": "12345678-9"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.",
+                        "type": "text/plain"
+                      },
+                      "key": "i",
+                      "value": "entrada"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "fecha",
+                      "value": "15/5/2025"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "hora",
+                      "value": "9:0:0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`.",
+                        "type": "text/plain"
+                      },
+                      "key": "mov",
+                      "value": "terminal-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tipo\": \"error\",\n  \"mensaje\": \"El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe0ffefb-1aed-44b5-9a79-f0540342cabf",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes POST.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Clave del recinto. Debe pertenecer a la empresa del token.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "7QUoB9uV"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) RUT del trabajador.",
+                        "type": "text/plain"
+                      },
+                      "key": "rut",
+                      "value": "12345678-9"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.",
+                        "type": "text/plain"
+                      },
+                      "key": "i",
+                      "value": "entrada"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "fecha",
+                      "value": "15/5/2025"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "hora",
+                      "value": "9:0:0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`.",
+                        "type": "text/plain"
+                      },
+                      "key": "mov",
+                      "value": "terminal-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e75bb865-5bca-423a-a30d-8da8ed7eabce",
+              "name": "Error interno del servidor.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Clave del recinto. Debe pertenecer a la empresa del token.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "7QUoB9uV"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) RUT del trabajador.",
+                        "type": "text/plain"
+                      },
+                      "key": "rut",
+                      "value": "12345678-9"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Tipo de movimiento. `entrada` (case-sensitive) ⇒ entrada; cualquier otro valor (por convención `salida`) ⇒ salida.",
+                        "type": "text/plain"
+                      },
+                      "key": "i",
+                      "value": "entrada"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Fecha del marcaje en formato `d/M/yyyy`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "fecha",
+                      "value": "15/5/2025"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Hora del marcaje en formato `H:m:s`. Se ignora si se envía `utc`, pero igual debe enviarse.",
+                        "type": "text/plain"
+                      },
+                      "key": "hora",
+                      "value": "9:0:0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Identificador del dispositivo emisor. Se persiste con prefijo `API-`.",
+                        "type": "text/plain"
+                      },
+                      "key": "mov",
+                      "value": "terminal-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tipo\": \"error\",\n  \"mensaje\": \"Hubo un error al procesar el registro\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "463c5fa5-4334-46c3-ba20-6f8d74eceeb2",
+          "name": "registro Asistencia",
+          "request": {
+            "name": "registro Asistencia",
+            "description": {
+              "content": "Retorna un listado de las de los registros de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "obtenerRegistroAsistencia"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "obra_id",
+                  "value": "<integer>",
+                  "description": "(Required) Identificador único del recinto asociado a los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "dni_colaborador",
+                  "value": "<string>",
+                  "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Token de acceso de la empresa.",
+                "key": "token",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2f31b487-a0be-4426-a289-ffc167adc6c6",
+              "name": "Respuesta exitosa con el listado de registro de asistencia de los trabajadores dentro del rango de fechas especificado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://api.ejemplo.com/informacionRecinto?page=2\",\n    \"previous\": null,\n    \"count\": 342,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"ano\": 2023,\n      \"mes\": 11,\n      \"dia\": 5,\n      \"hora\": 15,\n      \"minutos\": 13,\n      \"segundos\": 40,\n      \"sentido\": \"entrada\",\n      \"latitud\": 8973,\n      \"longitud\": 9098,\n      \"origen\": \"QR\",\n      \"dispositivo\": \"appEmpresa-XYZ\"\n    },\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"ano\": 2023,\n      \"mes\": 11,\n      \"dia\": 5,\n      \"hora\": 15,\n      \"minutos\": 13,\n      \"segundos\": 40,\n      \"sentido\": \"entrada\",\n      \"latitud\": 3314,\n      \"longitud\": 4957,\n      \"origen\": \"QR\",\n      \"dispositivo\": \"appEmpresa-XYZ\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d638dfd9-f356-40e3-942e-d7906c25f59a",
+              "name": "Solicitud incorrecta debido a parámetros inválidos o mal formateados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El ID del recinto es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eef56887-6242-4b79-9052-077c3efa4c48",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a831fa7-2fe2-4f19-9cd1-3843530c56ea",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Token de acceso de la empresa.",
+                    "key": "token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb2a1482-5aaa-4696-a12f-a44cf11e626b",
+          "name": "registro Asistencia Post",
+          "request": {
+            "name": "registro Asistencia Post",
+            "description": {
+              "content": "Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada o salida, para un trabajador específico en un recinto determinado. Requiere especificar el DNI del colaborador, la fecha y hora de la marca, y si se trata de una entrada o salida. Este endpoint solo se puede usar si se tiene el flujo de marca inactivo (confirmación de marca para el trabajador).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inyectarRegistroAsistencia"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "obra_id",
+                  "value": "<integer>",
+                  "description": "(Required) Identificador único del recinto asociado a los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "dni_colaborador",
+                  "value": "<string>",
+                  "description": "(Required) DNI del trabajador a quien se le efectuara la marca."
+                },
+                {
+                  "disabled": false,
+                  "key": "jornada",
+                  "value": "<string>",
+                  "description": "(Required) Fecha de inicio del turno del trabajador. Este parámetro define el día en que comienza el turno laboral, independientemente de si el turno se extiende al día siguiente (como en turnos nocturnos). Se espera que la fecha se proporcione en el formato \"DD-MM-AAAA\". Este parámetro es crucial para identificar correctamente el ciclo de trabajo al que la marca pertenece."
+                },
+                {
+                  "disabled": false,
+                  "key": "fecha",
+                  "value": "<string>",
+                  "description": "(Required) Fecha real en la que se realiza la marca en el registro de asistencia. Para turnos que no se extienden más allá de la medianoche, este parámetro será el mismo que el de la jornada. Sin embargo, en el caso de turnos que cruzan la medianoche, este parámetro debe reflejar el día siguiente al de la jornada. También se espera en formato \"DD-MM-AAAA\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "hora",
+                  "value": "<string>",
+                  "description": "(Required) Hora en la cual se ejecuta la marca Formato esperado \"HH:MM\""
+                },
+                {
+                  "disabled": false,
+                  "key": "sentido",
+                  "value": "<string>",
+                  "description": "Sentido en cual se efectuara la marca."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bbda86fb-0bc5-4a4c-8ec0-beaae4d6845a",
+              "name": "La marca se creo satisfactoriamente.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inyectarRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jornada",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fecha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hora",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sentido",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mensaje\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2b1d55d-befe-4958-bd2b-3c59dae95c19",
+              "name": "Solicitud incorrecta debido a parámetros inválidos o mal formateados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inyectarRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jornada",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fecha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hora",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sentido",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El ID del recinto es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c0dcaaf-9654-4d37-8baa-5159829c4dd9",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inyectarRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jornada",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fecha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hora",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sentido",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96971848-ddb5-426d-a903-39356c970eea",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inyectarRegistroAsistencia"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jornada",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fecha",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hora",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sentido",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0becda58-204e-4d27-9fac-7a18325f0b7e",
+    "name": "Buk Registro de asistencia API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.",
+      "type": "text/plain"
+    }
+  }
+}

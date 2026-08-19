@@ -1,0 +1,313 @@
+openapi: 3.2.0
+info:
+  title: Buk Termination processes API
+  version: '1.0'
+  description: 'Operations tagged Termination processes across 3 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Termination processes
+paths:
+  /jobs/{id}/termination:
+    get:
+      summary: Obtain termination process
+      description: "Obtain termination process using the job ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+      tags:
+      - Termination processes
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: Job ID
+      responses:
+        '200':
+          description: As a response we receive an object of type termination process
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Finiquito'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: Create Termination process
+      description: "Create a Termination process using an ID from Job and the data from Termination process.\n\nreason must be one of the following values: mutuo_acuerdo, renuncia, muerte, vencimiento_plazo, fin_servicio, :caso_fortuito, falta_probidad, acoso_sexual, vias_de_hecho, injurias, conducta_inmoral, acoso_laboral, negociaciones_prohibidas, no_concurrencia, abandonar_trabajo, faltas_seguridad, perjuicio_material, incumplimiento, necesidades_empresa, desahucio_gerente\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Termination processes
+      parameters:
+      - description: Job ID
+        name: id
+        in: path
+        type: string
+        required: true
+      - name: Termination process
+        in: body
+        description: Parameters of Termination process
+        required: true
+        schema:
+          $ref: '#/definitions/FiniquitoInputCountry'
+      responses:
+        '201':
+          description: Object of type Termination process
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Finiquito'
+definitions:
+  Finiquito:
+    allOf:
+    - $ref: '#/definitions/FiniquitoBase'
+    properties:
+      id:
+        type: integer
+      fecha_inicio:
+        type: string
+        format: date
+      monto:
+        type: number
+      monto_sin_liquidacion:
+        type: number
+      razon_print:
+        type: string
+      dias_indemnizacion_por_obra:
+        type: number
+      dias_feriados_corridos:
+        type: number
+      descuentos:
+        type: array
+        items:
+          $ref: '#/definitions/FiniquitoDescuentos'
+      haberes:
+        type: array
+        items:
+          $ref: '#/definitions/FiniquitoHaberes'
+      indemnizacion_tributable:
+        type: number
+      impuesto_indemnizacion:
+        type: number
+      remuneraciones_pendientes:
+        type: number
+      asignaciones_no_imponibles_pendientes:
+        type: number
+      cpf:
+        type: string
+      unemployment_insurance_balance:
+        type: number
+      indemnizacion_sustitutiva_previo_aviso_method:
+        type: string
+        enum:
+        - discount
+        - compensate
+        - worked
+        - mixed
+        - not_eligible
+      dias_indemnizacion:
+        type: number
+      numero_proceso_judicial:
+        type: string
+  FiniquitoBase_2:
+    properties:
+      fecha:
+        type: string
+        format: date
+      fecha_aviso:
+        type: string
+        format: date
+      fecha_pago:
+        type: string
+        format: date
+      razon:
+        type: string
+      anos_de_servicio:
+        type: number
+      indemnizacion_legal_por_anos_servicios:
+        type: number
+      indemnizacion_legal_por_meses_obra:
+        type: number
+      indemnizacion_sustitutiva_previo_aviso:
+        type: number
+      indemnizacion_pactada_contractualmente:
+        type: number
+      indemnizacion_voluntaria:
+        type: number
+      indemnizacion_vacaciones:
+        type: number
+      descuento_seguro_cesantia:
+        type: number
+      otros_descuentos:
+        type: number
+      monto_indemnizacion_no_renta:
+        type: number
+      reajuste_indemnizacion:
+        type: number
+      interes_indemnizacion:
+        type: number
+      en_liquidacion:
+        type: boolean
+      custom_attributes:
+        type: object
+      payment_detail:
+        $ref: '#/definitions/PaymentDetail'
+      termination_fundaments:
+        type: string
+        description: 'termination_fundaments: Termination reasons requested by the DT for the Art. 160 and Art. 161 termination reasons and must explain the reasons for the contract termination. If you do not have the DT Records solution, it is not mandatory.'
+  FiniquitoDescuentos:
+    properties:
+      nombre:
+        type: number
+      monto:
+        type: number
+  AsignacionFiniquito:
+    properties:
+      codigo:
+        type: string
+      monto:
+        type: number
+  FiniquitoHaberes:
+    properties:
+      nombre:
+        type: number
+      monto:
+        type: number
+  PaymentDetail:
+    properties:
+      payment_method:
+        type: string
+        enum:
+        - Cheque
+        - Servipag
+        - Vale Vista
+        - Transferencia Bancaria
+        - Transferencia Internacional
+        - Transferencia ACH
+      bank:
+        type: string
+        enum:
+        - Prex Chile S.A.
+        - HSBC
+        - Itau
+        - BBVA
+        - BCI
+        - BICE
+        - Banco de Chile
+        - Consorcio
+        - COOPEUCH
+        - Corpbanca
+        - CrediChile
+        - Banco Estado
+        - Falabella
+        - Internacional
+        - Rabobank
+        - BTG Pactual
+        - Ripley
+        - Santander
+        - Santander Hub de Pago V2
+        - Scotiabank
+        - Security
+        - The Bank of Tokyo-Mitsubishi
+        - Sociedad Emisora de Tarjetas Los Heroes S.A.
+        - Tenpo Prepago SA
+        - Global 66
+        - Mercadopago Emisora S.A.
+        - Los Andes Tarjetas de Prepago
+        - JP Morgan Chase Bank
+        - Banco Deutsche
+        - Copec Pay
+        - MACH
+      account_type:
+        type: string
+        enum:
+        - Corriente
+        - Vista
+        - Ahorro
+        - Chequera Electrónica
+      account_number:
+        type: string
+      codigo_sucursal_retiro:
+        type: string
+      tipo_vale_vista:
+        type: number
+        enum:
+        - vale_vista_direccionado_entrega_al_beneficiario
+        - vale_vista_custodia_electronica
+        - vale_vista_direccionado_entrega_al_tomador
+        - vale_vista_entrega_meson
+        - vale_vista_entrega_empresa
+        - vale_vista_impresion_centralizada
+        - vale_vista_pago_cash
+        - vale_vista_santander
+  FiniquitoBase:
+    properties:
+      fecha:
+        type: string
+        format: date
+      fecha_aviso:
+        type: string
+        format: date
+      fecha_pago:
+        type: string
+        format: date
+      razon:
+        type: string
+      anos_de_servicio:
+        type: number
+      indemnizacion_legal_por_anos_servicios:
+        type: number
+      indemnizacion_legal_por_meses_obra:
+        type: number
+      indemnizacion_sustitutiva_previo_aviso:
+        type: number
+      indemnizacion_pactada_contractualmente:
+        type: number
+      indemnizacion_voluntaria:
+        type: number
+      indemnizacion_vacaciones:
+        type: number
+      descuento_seguro_cesantia:
+        type: number
+      otros_descuentos:
+        type: number
+      monto_indemnizacion_no_renta:
+        type: number
+      reajuste_indemnizacion:
+        type: number
+      interes_indemnizacion:
+        type: number
+      en_liquidacion:
+        type: boolean
+      custom_attributes:
+        type: object
+  FiniquitoInputCountry:
+    allOf:
+    - $ref: '#/definitions/FiniquitoBase_2'
+    required:
+    - en_liquidacion
+    - fecha_pago
+    properties:
+      template_documento_id:
+        type: number
+      documento_visible:
+        type: boolean
+      descuentos:
+        type: array
+        items:
+          $ref: '#/definitions/AsignacionFiniquito'
+      haberes:
+        type: array
+        items:
+          $ref: '#/definitions/AsignacionFiniquito'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml

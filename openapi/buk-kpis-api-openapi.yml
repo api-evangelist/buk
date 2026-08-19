@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  title: Buk KP Is API
+  version: '1.0'
+  description: 'Operations tagged KPIs across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: KPIs
+paths:
+  /kpis:
+    get:
+      summary: Listar tipos de KPI
+      description: "Retorna todos los tipos de KPI registrados en el sistema\n\nUn tipo de KPI posee los siguientes atributos\n- id: identificador único del tipo de KPI\n- name: nombre descriptivo\n- code: código interno\n- related_to: nombre de entidad a la que se asocia el tipo de KPI\n- units: unidad de medida del tipo de KPI\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tipos de KPI en: 'Lectura'.\n"
+      tags:
+      - KPIs
+      parameters:
+      - name: name
+        in: query
+        type: string
+        description: Filtra los tipos de KPI con este nombre
+      - name: code
+        in: query
+        type: string
+        description: Filtra los tipos de KPI con este código
+      - name: related_to
+        in: query
+        type: string
+        description: Filtra los tipos de KPI con esta entidad asociada
+      - name: units
+        in: query
+        type: string
+        description: Filtra los tipos de KPI con esta unidad de medida
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información de los tipos de KPI
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/KPI'
+  /kpi_data:
+    get:
+      summary: Listar datos de KPI
+      description: "#<Proc:0x00007f0ab3ad1b68 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:10 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - KPIs
+      parameters:
+      - name: kpi_id
+        in: query
+        type: integer
+        description: Filtra los datos de KPI asociados con el tipo de KPI indicado
+      - name: empresa_id
+        in: query
+        type: integer
+        description: {}
+      - name: area_id
+        in: query
+        type: integer
+        description: Filtra los datos de KPI asociados con la área indicada
+      - name: employee_id
+        in: query
+        type: integer
+        description: Filtra los datos de KPI asociados con el empleado indicado
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con la información de los datos de KPI
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/KPIDatum'
+    post:
+      summary: Ingresar un dato de KPI
+      description: "#<Proc:0x00007f0ab3aced28 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:66 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n"
+      tags:
+      - KPIs
+      parameters:
+      - name: kpi_datum
+        in: body
+        description: Atributos del nuevo dato de KPI
+        required: true
+        schema:
+          $ref: '#/definitions/KPIDatum'
+      responses:
+        '201':
+          description: Respuesta en caso de haber registrado un dato de KPI de forma exitosa
+          schema:
+            properties:
+              message:
+                type: string
+              kpi_datum:
+                $ref: '#/definitions/KPIDatum'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /kpi_data/{id}:
+    patch:
+      summary: Actualizar un dato de KPI
+      description: "Actualiza el dato de un KPI.\n\nSe debe enviar en el body de la request un objeto tipo JSON el siguiente parámetro:\n- **value:** Valor a sobreescribir en KPI.\n\nUn ejemplo puede ser:\n\n**PATH:** `/kpi_data/1`\n\n**BODY:**\n```json\n  {\n    \"value\": 100\n  }\n```\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n"
+      tags:
+      - KPIs
+      parameters:
+      - name: id
+        in: path
+        description: ID del kpi_data a modificar.
+        required: true
+        type: integer
+      - name: value
+        in: query
+        description: Valor a sobrescribir en KPI.
+        required: true
+        type: number
+        format: float
+      responses:
+        '200':
+          description: Como respuesta obtenemos el KPI con los valores actualizados
+          schema:
+            $ref: '#/definitions/KPIDatum'
+definitions:
+  KPIDatum:
+    properties:
+      id:
+        type: integer
+      kpi_id:
+        type: integer
+      empresa_id:
+        type: integer
+      area_id:
+        type: integer
+      employee_id:
+        type: integer
+      value:
+        type: number
+      period_type:
+        type: string
+        description: 'Frecuencia de pago: monthly, semi_monthly o weekly. Requerido para KPIs de tipo Área o Empresa (Solo se puede usar frecuencias de pago que se tengan habilitadas en el tenant)'
+      date:
+        type: string
+        description: Fecha del período para el dato KPI, debe ser un período abierto
+        format: date
+    required:
+    - kpi_id
+    - value
+  KPI:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      code:
+        type: string
+      related_to:
+        type: string
+      units:
+        type: string
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

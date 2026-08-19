@@ -1,0 +1,422 @@
+{
+  "item": [
+    {
+      "id": "ef4f0501-0577-4cf2-b143-d1defb838236",
+      "name": "Users and profiles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c30db46-dc83-4251-971a-768eba0d8d1e",
+          "name": "Show users",
+          "request": {
+            "name": "Show users",
+            "description": {
+              "content": "Delivers the information of all users.\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Name",
+                    "type": "text/plain"
+                  },
+                  "key": "name",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Email",
+                    "type": "text/plain"
+                  },
+                  "key": "email",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Employee ID (Found in the employee endpoint)",
+                    "type": "text/plain"
+                  },
+                  "key": "person_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Profile ID",
+                    "type": "text/plain"
+                  },
+                  "key": "permission_role_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Limited by areas? (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "limit_areas",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Limited by Data set? (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "limit_realms",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Name of the data set (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "realm_name",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "ID of the Area for which the users are limited",
+                    "type": "text/plain"
+                  },
+                  "key": "limited_by_area_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Active user? (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "activated",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Role Limits (This can only be one of ve_publico,ve_privado,ve_ambos)",
+                    "type": "text/plain"
+                  },
+                  "key": "rol_visible",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e5c76d4-e6d1-4190-ada7-a3ecbe2f1d21",
+              "name": "A list of users that meet the search criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "email",
+                      "value": ""
+                    },
+                    {
+                      "key": "person_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "permission_role_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit_areas",
+                      "value": ""
+                    },
+                    {
+                      "key": "limit_realms",
+                      "value": ""
+                    },
+                    {
+                      "key": "realm_name",
+                      "value": ""
+                    },
+                    {
+                      "key": "limited_by_area_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "activated",
+                      "value": ""
+                    },
+                    {
+                      "key": "rol_visible",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd2e4805-e8cd-4cf0-835a-df9e7d31f595",
+          "name": "Create users",
+          "request": {
+            "name": "Create users",
+            "description": {
+              "content": "Create a user and send the invitation to them.\nEach record consists of: - person_id: ID of the person to link with the user (If this parameter is sent, the name and corporate email of the person are used)\n  It can be found in the Colaboradores API.\n\n- name: Name of the user - email: Email of the user (If person_id is sent, uses the person's email if they have one) - activated: Determines whether the user can log in to the application - area_ids: List of area IDs to limit the user - limit_areas: Whether the user will be limited by areas - permission_role_id: ID of the profile to assign to the user.\n  (If this field is left empty, the user will have the Normal Profile)\n\n(Only available if the general 'Enable data sets' is active) - realm_ids: List of IDs of data sets to limit - limit_realms: Whether the user is limited by data set\n(Only available if the general 'Enable Private Role' is active) - rol_visible: Allows limiting whether the user can see private profiles, public profiles, or both (see_public, see_private, see_both)\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1b00e78-bb74-465c-a97d-6e0817a72b24",
+              "name": "User created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b40ff23c-26f7-4cef-8110-3a7360232204",
+          "name": "Show user",
+          "request": {
+            "name": "Show user",
+            "description": {
+              "content": "Delivers a user's information.\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) User ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "faffa004-6dd6-4eef-8b77-e788b5202d32",
+              "name": "A user with the corresponding ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) User ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6710036-2bbd-4650-99e2-97b7f25f4f2c",
+          "name": "Edit user",
+          "request": {
+            "name": "Edit user",
+            "description": {
+              "content": "Edit a user\nThe fields that we can edit are the following (It is not necessary to send the fields that are not going to be modified): - person_id: ID of the person to relate to the user (If this parameter is sent, the person's name and corporate email is used).\n\n  It can be found in the Colaboradores api.\n\n\n- name: User’s name - email: User's email (If person_id is sent, it uses the person's email if available) - area_ids: List of area ids to limit the user - activated: Determines whether the user can log in to the application - limit_areas: Whether the user will be limited by areas or not - permission_role_id: ID of the profile to be assigned to the user.\n\n  (If this field is left empty, the user will have a Normal Profile).\n\n\n(Only available if General parameters 'Enable Data Sets' is active) - realm_ids: List of Data set IDs to limit - limit_realms: If the user is limited by data set\n(Only available if the general parameters 'Enable Private Role' is active) - visible_role: Allows to limit whether the user can view private, public or both profiles (view_public, view_private, ve_both).\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* User and profile permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the user to edit"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20e3d212-49dd-4395-80ab-238f5b2be631",
+              "name": "User edited.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the user to edit"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "95748ae0-33ba-42e5-ac30-6aff08d684ab",
+    "name": "Buk Users and profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Users and profiles across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

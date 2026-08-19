@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Productos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Productos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar Productos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/products",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "'Retornar Productos'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear Productos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/products"
+          },
+          "docs": "Crea un nuevo Producto en el sistema. Los parámetros son:\n\n  - name : Nombre del Producto.\n  - code : Código del Producto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

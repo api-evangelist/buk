@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Accounting Structures API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounting Structures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get accounting structures for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting_structure/structures",
+            "params": [
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "query",
+                "description": "Company ID"
+              }
+            ]
+          },
+          "docs": "Returns the accounting structures assigned to a company"
+        },
+        {
+          "info": {
+            "name": "Get accounting structure assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting_structure/assignments",
+            "params": [
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "query",
+                "description": "Company ID (required if accounting_structure_id is not provided)"
+              },
+              {
+                "name": "accounting_structure_id",
+                "value": "",
+                "type": "query",
+                "description": "Accounting structure ID (required if company_id is not provided)"
+              }
+            ]
+          },
+          "docs": "Returns assignments filtered by company_id or accounting_structure_id"
+        },
+        {
+          "info": {
+            "name": "Export accounting data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting_structure/export",
+            "params": [
+              {
+                "name": "accounting_structure_assignment_id",
+                "value": "",
+                "type": "query",
+                "description": "Accounting structure assignment ID"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Month (1-12)"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Year"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Size of the page"
+              }
+            ]
+          },
+          "docs": "Exports the accounting data of an assignment. Supports optional pagination."
+        },
+        {
+          "info": {
+            "name": "Accounting of the reprocessing with accounting structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounting_structure/export_process_differences",
+            "params": [
+              {
+                "name": "accounting_structure_assignment_id",
+                "value": "",
+                "type": "query",
+                "description": "Accounting structure assignment ID. REQUIRED"
+              },
+              {
+                "name": "process_id",
+                "value": "",
+                "type": "query",
+                "description": "Subprocess ID. REQUIRED"
+              }
+            ]
+          },
+          "docs": "Obtains in JSON format the accounting data for the differences generated in a subprocess as a result of a reprocess, using the assigned accounting structure"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

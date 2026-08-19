@@ -1,0 +1,234 @@
+openapi: 3.2.0
+info:
+  title: Buk Overtime API
+  version: '1.0'
+  description: 'Operations tagged Overtime across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Overtime
+paths:
+  /attendances/overtime:
+    get:
+      summary: List overtime
+      description: "View overtime records\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Overtime
+      parameters:
+      - name: from
+        description: Start date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: to
+        description: End date of the  search query period  in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with overtime
+          name: data
+          schema:
+            $ref: '#/definitions/Attendances::Overtime::Index'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    post:
+      summary: Add overtime
+      description: "Prefer to use the **Payment Data Sync** endpoint\n\nAllows adding overtime to a Colaborador for a given month.\n\nAn object of type Overtime must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the overtime belongs (optional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Number of overtime hours to add\n- employee_id: ID of the Colaborador to whom to associate overtime.\n- type_id: ID of the type of overtime to add\n- centro_costo: Cost center code to which the overtime will be charged\n\n(Important) Payment documents. will not be updated automatically after adding overtime. They must be recalculated in the Colaborador tab or in the corresponding process.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Overtime
+      deprecated: true
+      parameters:
+      - name: Overtime
+        description: Overtime type object
+        in: body
+        schema:
+          $ref: '#/definitions/Attendances::Overtime::Request'
+      responses:
+        '200':
+          description: Response when replacing overtime
+          schema:
+            properties:
+              message:
+                type: string
+              horas_extra:
+                $ref: '#/definitions/Attendances::Overtime::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    put:
+      summary: Add overtime
+      description: "Prefer to use the **Payment Data Sync** endpoint\n\nAllows to indicate the number of overtime hours that a Colaborador worked during a given month. This method **replaces** the amount of overtime, it does not add to existing overtime.\n\n\nAn object of type Overtime must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the overtime belongs (optional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Number of overtime hours to add\n- employee_id: ID of the Colaborador to whom to associate overtime.\n- type_id: ID of the type of overtime to add\n- centro_costo: Cost center code to which the overtime will be charged}\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Overtime
+      deprecated: true
+      parameters:
+      - name: Overtime
+        description: Overtime type object
+        in: body
+        schema:
+          $ref: '#/definitions/Attendances::Overtime::Request'
+      responses:
+        '200':
+          description: Response when replacing overtime
+          schema:
+            properties:
+              message:
+                type: string
+              horas_extra:
+                $ref: '#/definitions/Attendances::Overtime::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /attendances/overtime/{id}:
+    get:
+      summary: View an overtime record
+      description: "View an overtime record based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Overtime
+      parameters:
+      - name: id
+        description: ID of the overtime
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we received the information of the overtime
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Attendances::Overtime::Response'
+        '404':
+          description: When the resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /attendances/overtime/types:
+    get:
+      summary: List types of overtime hours
+      description: "Generates a list of the types of overtime that exist in the system.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Overtime
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with types of overtime hours.
+          name: data
+          schema:
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Attendances::Overtime::Type'
+definitions:
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Attendances::Overtime::Request:
+    properties:
+      day:
+        type: integer
+      month:
+        type: integer
+      year:
+        type: integer
+      hours:
+        type: number
+        format: float
+      employee_id:
+        type: integer
+      type_id:
+        type: integer
+      centro_costo:
+        type: string
+    required:
+    - hours
+    - employee_id
+    - type_id
+    - day
+    - month
+    - year
+  Attendances::Overtime::Type:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      factor:
+        type: number
+        format: float
+      category:
+        type: integer
+        enum:
+        - 0
+        - 1
+        description: 0 = hora_extra, 1 = recargo
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  Attendances::Overtime::Index:
+    properties:
+      pagination:
+        $ref: '#/definitions/Pagination'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Attendances::Overtime::Response'
+  Attendances::Overtime::Response:
+    properties:
+      day:
+        type: integer
+      month:
+        type: integer
+      year:
+        type: integer
+      hours:
+        type: number
+        format: float
+      id:
+        type: integer
+      employee_id:
+        type: integer
+      type_id:
+        type: integer
+      centro_costo:
+        type: string
+      centro_costo_code:
+        type: string
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

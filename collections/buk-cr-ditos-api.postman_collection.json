@@ -1,0 +1,1368 @@
+{
+  "item": [
+    {
+      "id": "908327d4-544d-4097-9365-629c78f066da",
+      "name": "Créditos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "72ba408d-88a2-4b28-8d08-fc3080330040",
+          "name": "Listar créditos",
+          "request": {
+            "name": "Listar créditos",
+            "description": {
+              "content": "Retorna todos los descuentos de caja y créditos\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Filtra los créditos que son vigentes para esta fecha",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los créditos con este nombre",
+                    "type": "text/plain"
+                  },
+                  "key": "name",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los créditos del tipo especificado ([\"credito_personal\", \"dental\", \"leasing\", \"seguro_vida\", \"credito_otro\"])",
+                    "type": "text/plain"
+                  },
+                  "key": "type",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6aaf338-d576-45f4-972e-50166a2e3bdf",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de los créditos",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "type",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78dbb936-6a6d-4a96-8756-a789a40778f9",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "type",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b49bebb-3f2d-4429-a901-25905134f46c",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "type",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca168c61-a983-4b68-947e-96abddfc2b6c",
+          "name": "Mostrar un crédito",
+          "request": {
+            "name": "Mostrar un crédito",
+            "description": {
+              "content": "Se muestra toda la información relacionada a un crédito dado un año y un mes\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Año a consultar en YYYY",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Mes a consultar (1 - 12)",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del crédito a consultar"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "602c8cec-8352-4e4f-985e-9e7519d186d1",
+              "name": "Como respuesta recibimos todos los campos correspondiente a la información del crédito",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9128e06b-5444-47d9-9e64-93e56f1450d2",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c04ba83a-13dd-435f-9c4c-be042afd9fd1",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f55679f-5a5d-4d3c-9e0d-da7eeec64964",
+          "name": "Editar un crédito",
+          "request": {
+            "name": "Editar un crédito",
+            "description": {
+              "content": "Edita un crédito. Los campos fecha_primera_cuota y end_date no son editables. Si se edita alguno de los campos start_date o duracion, el campo end_date se calculará y actualizará\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) id del crédito a editar"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d5a77bb-12e9-4d45-affe-843debb25bc3",
+              "name": "Como respuesta recibimos la información del crédito editado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a editar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c06174f-ef88-4c0c-9e4c-b4486f809efe",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a editar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d418b6d2-0518-43bc-bf46-068574c7e695",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a editar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c9e45a9-4210-42b8-b9cf-18e02f9aabbe",
+          "name": "Eliminar un crédito",
+          "request": {
+            "name": "Eliminar un crédito",
+            "description": {
+              "content": "Elimina un crédito\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) id del crédito a eliminar"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04019180-02a9-4a8a-85cf-0f175078672c",
+              "name": "Como respuesta recibimos un mensaje indicando que el crédito se eliminó exitosamente",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a eliminar"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c962b04b-feda-48e5-8a47-9edd5cad7899",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a eliminar"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6309edb8-e80d-41cf-9648-10788a695153",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id del crédito a eliminar"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "297435c5-d5c0-451f-b5fd-3dc3adeb609d",
+          "name": "Suspender un crédito",
+          "request": {
+            "name": "Suspender un crédito",
+            "description": {
+              "content": "Suspende un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                ":id",
+                "suspend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del crédito a consultar"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2375f9f-80c0-4527-90dd-e8431bbe6e52",
+              "name": "Crédito suspendido",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e83318ec-81f0-46b9-8540-d6c433cc9792",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7dfa4ebd-abe9-4f4b-a82e-905a0f96af63",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c57e7fe-649b-46e3-80a2-df320f86e383",
+          "name": "reanudar un crédito",
+          "request": {
+            "name": "reanudar un crédito",
+            "description": {
+              "content": "reanudar un crédito.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del crédito a consultar"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8314aa5e-b065-41b7-9eb5-fcf0e25bfd5e",
+              "name": "Crédito reanudado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a1083b4-a97f-48b1-8394-f560e2f03f37",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6de3122-703a-4119-90e4-082ecd2587ff",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del crédito a consultar"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa1a12c1-def6-4ffa-ab2c-8933804e9b1b",
+          "name": "Asignar créditos",
+          "request": {
+            "name": "Asignar créditos",
+            "description": {
+              "content": "Crear asignaciones de créditos a un employee_id\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) ID del Empleado al cual se le asigna el crédito",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Nombre -humano- para identificar el crédito",
+                    "type": "text/plain"
+                  },
+                  "key": "nombre",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Tipo de crédito a asignar (This can only be one of credito_personal,dental,leasing,seguro_vida,credito_otro)",
+                    "type": "text/plain"
+                  },
+                  "key": "tipo",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Fecha de inicio del periodo donde aplica el crédito, formato YYYY-MM-DD",
+                    "type": "text/plain"
+                  },
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Si usa peso(0) o UF(1) (This can only be one of peso,uf)",
+                    "type": "text/plain"
+                  },
+                  "key": "moneda",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Valor de la cuota",
+                    "type": "text/plain"
+                  },
+                  "key": "amount",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) periodo actual en el que se encuentra, default 1",
+                    "type": "text/plain"
+                  },
+                  "key": "cuota_actual",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Cantidad de periodos a descontar",
+                    "type": "text/plain"
+                  },
+                  "key": "duracion",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Comentario",
+                    "type": "text/plain"
+                  },
+                  "key": "comentario",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Dia del cual tomar la uf en caso de ser cobrado en uf",
+                    "type": "text/plain"
+                  },
+                  "key": "dia_uf",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e3ff435-d3b6-44e3-a840-31d0fc39d15e",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de los créditos",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "nombre",
+                      "value": ""
+                    },
+                    {
+                      "key": "tipo",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "moneda",
+                      "value": ""
+                    },
+                    {
+                      "key": "amount",
+                      "value": ""
+                    },
+                    {
+                      "key": "cuota_actual",
+                      "value": ""
+                    },
+                    {
+                      "key": "duracion",
+                      "value": ""
+                    },
+                    {
+                      "key": "comentario",
+                      "value": ""
+                    },
+                    {
+                      "key": "dia_uf",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6dc639bd-5308-45dd-908f-fd3e8a1685b8",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "nombre",
+                      "value": ""
+                    },
+                    {
+                      "key": "tipo",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "moneda",
+                      "value": ""
+                    },
+                    {
+                      "key": "amount",
+                      "value": ""
+                    },
+                    {
+                      "key": "cuota_actual",
+                      "value": ""
+                    },
+                    {
+                      "key": "duracion",
+                      "value": ""
+                    },
+                    {
+                      "key": "comentario",
+                      "value": ""
+                    },
+                    {
+                      "key": "dia_uf",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1dac5e48-da5e-43e4-869c-ce7f0ca3d065",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "nombre",
+                      "value": ""
+                    },
+                    {
+                      "key": "tipo",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": ""
+                    },
+                    {
+                      "key": "moneda",
+                      "value": ""
+                    },
+                    {
+                      "key": "amount",
+                      "value": ""
+                    },
+                    {
+                      "key": "cuota_actual",
+                      "value": ""
+                    },
+                    {
+                      "key": "duracion",
+                      "value": ""
+                    },
+                    {
+                      "key": "comentario",
+                      "value": ""
+                    },
+                    {
+                      "key": "dia_uf",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "61c6ce21-72f5-402a-a4ad-0a4d405298da",
+    "name": "Buk Créditos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Créditos across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

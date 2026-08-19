@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Centro de costo API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Centro de costo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mostrar centro de costo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/centro_costo_definitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del centro de costo"
+              }
+            ]
+          },
+          "docs": "Recibimos la información relacionada al centro de costo cuyo ID enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Actualizar un centro de costo por ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/centro_costo_definitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del centro de costo"
+              }
+            ]
+          },
+          "docs": "Permite indicar el nuevo código, código previred y atributos personalizados de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar centros de costo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/centro_costo_definitions",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Nro de página"
+              }
+            ]
+          },
+          "docs": "Recibimos la información relacionada a los centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Crear centro de costo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/centro_costo_definitions"
+          },
+          "docs": "Crea un nuevo centro de costo en el sistema. Los parámetros son\n\n- code : Código del centro de costo\n- previred_code : Código para previred del centro de costo\n- custom_attributes: Código y valor de atributos personalizados del centro de costo\n:\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Actualizar información centro de costo",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/centro_costo_definitions/update"
+          },
+          "docs": "Permite indicar el nuevo código y código previred de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Indicar centro de costo del trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/centro_costo_definitions/centro_costo"
+          },
+          "docs": "Permite indicar el centro de costo relacionado a un trabajo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

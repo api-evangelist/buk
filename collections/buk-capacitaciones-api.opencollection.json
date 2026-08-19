@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Capacitaciones API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capacitaciones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mostrar tramo sence de todos los empleados",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/training/sence_percents",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna un listado con el id, rut y tramo sence de cada empleados del sistema que tenga una liquidación del mes abierto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar el tramo sence de un empleados",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/training/sence_percents/:employee_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": " ID o RUT sin puntos del empleados a consultar"
+              }
+            ]
+          },
+          "docs": "Recibimos la información específica del empleados cuya ID o RUT enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

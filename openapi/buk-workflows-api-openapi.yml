@@ -1,0 +1,263 @@
+openapi: 3.2.0
+info:
+  title: Buk Workflows API
+  version: '1.0'
+  description: 'Operations tagged Workflows across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Workflows
+paths:
+  /workflow/alta/processes:
+    get:
+      summary: Obtain hiring processes flows
+      description: "Displays hiring processes requests of the Colaboradores.\n**Permisos requeridos para utilizar este endpoint:** \n* Workflow permissions en: 'Lectura'.\n"
+      tags:
+      - Workflows
+      parameters:
+      - name: status
+        in: query
+        description: (OPTIONAL) Request status. In Progress(1), Approved(2), Error(4), Canceled(5)
+        required: false
+        type: integer
+        enum:
+        - 1
+        - 2
+        - 4
+        - 5
+      - name: creation_start_date
+        in: query
+        description: (OPCIONAL) Request creation date (From), in format YYYY-MM-DD
+        required: false
+        type: string
+        format: date
+      - name: creation_end_date
+        in: query
+        description: (OPTIONAL) Request creation date (To), in format YYYY-MM-DD
+        required: false
+        type: string
+        format: date
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      responses:
+        '200':
+          description: Response with the data of the hiring processes flows.
+          name: data
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/WorkflowProcessAlta'
+        '404':
+          description: No hiring processes flows found
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  BasePersonIdentifier:
+    properties:
+      document_number:
+        type: string
+        description: Document Number of  Colaborador.
+      document_type:
+        type: string
+        description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"rut":"RUT","otro":"Other"}'
+  WorkflowProcessBase:
+    properties:
+      id:
+        type: integer
+        description: Id de la solicitud
+      title:
+        type: string
+        description: Título de la solicitud
+      kind:
+        type: string
+        enum:
+        - Alta
+        description: Tipo de Flujo
+      status:
+        type: string
+        enum:
+        - Finalizado
+        - En Progreso
+        - Cancelado
+        - Error
+        description: Estado de la solicitud
+      created_at:
+        type: string
+        format: date
+        example: YYYY-MM-DD
+        description: Fecha de creación de la solicitud
+      created_by:
+        $ref: '#/definitions/WorkflowProcessBaseEmployee'
+        description: Usuario creador de la solicitud
+  WorkflowProcessAlta:
+    allOf:
+    - $ref: '#/definitions/WorkflowProcessBase'
+    - properties:
+        job:
+          $ref: '#/definitions/WorkflowProcessAltaJob'
+    - properties:
+        employee:
+          $ref: '#/definitions/WorkflowProcessAltaEmployee'
+    - properties:
+        operations:
+          type: array
+          items:
+            $ref: '#/definitions/WorkflowProcessAltaOperation'
+  WorkflowProcessAltaEmployee:
+    allOf:
+    - $ref: '#/definitions/WorkflowProcessBaseEmployee'
+    - properties:
+        start_date:
+          type: string
+          format: date
+          description: Fecha de Ingreso del empleado
+        birthday:
+          type: string
+          format: date
+          description: Fecha de nacimiento del empleado
+        private_role:
+          type: boolean
+          default: false
+          description: ¿Tiene rol privado el empleado?
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  WorkflowProcessAltaJobArea:
+    properties:
+      id:
+        type: integer
+        description: Id del área
+      nombre:
+        type: string
+        description: Nombre del área
+  WorkflowProcessAltaJobSupervisor:
+    allOf:
+    - properties:
+        first_name:
+          type: string
+          description: Nombre del supervisor
+        last_name:
+          type: string
+          description: Apellido del supervisor
+    - $ref: '#/definitions/BasePersonIdentifier'
+    - properties:
+        email:
+          type: string
+          description: Email del supervisor
+  WorkflowProcessAltaOperation:
+    properties:
+      title:
+        type: string
+        description: Título de la operación
+      completed_at:
+        type: string
+        format: date
+        description: Fecha en que se completó de la operación
+      completed_by:
+        $ref: '#/definitions/WorkflowProcessAltaUser'
+        description: Usuario que completó la operación
+  WorkflowProcessAltaJobCompany:
+    allOf:
+    - $ref: '#/definitions/WorkflowCompanyIdentifier'
+    - properties:
+        nombre:
+          type: string
+          description: Nombre de la compañia
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  WorkflowProcessBaseEmployee:
+    allOf:
+    - properties:
+        first_name:
+          type: string
+          description: Nombre del empleado
+        last_name:
+          type: string
+          description: Apellido del empleado
+        segundo_apellido:
+          type: string
+          description: Apellido Materno del empleado
+    - $ref: '#/definitions/BasePersonIdentifier'
+    - properties:
+        email:
+          type: string
+          description: Email del empleado
+  WorkflowProcessAltaJobRole:
+    properties:
+      id:
+        type: integer
+        description: Id del cargo
+      nombre:
+        type: string
+        description: Nombre del cargo
+  WorkflowProcessAltaJob:
+    properties:
+      company:
+        $ref: '#/definitions/WorkflowProcessAltaJobCompany'
+      area:
+        $ref: '#/definitions/WorkflowProcessAltaJobArea'
+      role:
+        $ref: '#/definitions/WorkflowProcessAltaJobRole'
+      supervisor:
+        $ref: '#/definitions/WorkflowProcessAltaJobSupervisor'
+  WorkflowCompanyIdentifier:
+    properties:
+      rut:
+        type: string
+  WorkflowProcessAltaUser:
+    allOf:
+    - properties:
+        first_name:
+          type: string
+          description: Nombre del usuario
+        last_name:
+          type: string
+          description: Apellido del usuario
+        rut:
+          type: string
+    - $ref: '#/definitions/BasePersonIdentifier'
+    - properties:
+        email:
+          type: string
+          description: Email del usuario
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

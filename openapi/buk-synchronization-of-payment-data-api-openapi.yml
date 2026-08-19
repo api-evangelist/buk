@@ -1,0 +1,132 @@
+openapi: 3.2.0
+info:
+  title: Buk Synchronization of payment data API
+  version: '1.0'
+  description: 'Operations tagged Synchronization of payment data across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Synchronization of payment data
+paths:
+  /employees/{employee_id}/payment_data/{period_id}:
+    post:
+      summary: Crea o actualiza las asignaciones y sobretiempos de un determinado Colaborador.
+      description: "Se guardarán los datos enviados solo si ningún objeto presenta errores.\nDe lo contrario, se retornarán los objetos que posean uno o más errores.\nEn el caso de que el objeto ya exista previamente, este será actualizado con los datos enviados.\n\nEach assignment is composed of\n- id: ID of the Added Item to be deleted (optional)\n- _destroy: boolean (optional) (in order to delete a Added Item there must be id and _destroy in the object in question)\n- item_id: item assigned to Colaborador\n- amount: for items configured with amount \"different per person\", this value corresponds to the one entered\n  in the assignment and for items configured with amount \"equal for all\" this value will be the amount of the\n  item entered in its creation. For a formulated item, it represents the value of `item.monto`\n- end_date: end period for the assignment. If not sent, the assignment will be considered in force indefinitely\n- custom_attrs: object with custom attribute and value\n\n\nEach overtime consists of:\n- day: Día el cual se realizó las horas extras (opcional)\n- month: The month corresponding to overtime\n- year: The year the overtime corresponds to\n- hours: Number of overtime hours to add\n- employee_id: ID of the Colaborador to whom to associate overtime.\n- type_id: ID of the type of overtime to add\n- centro_costo: Cost center code to which the overtime will be charged\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Item permissions en: 'Lectura y Modificación'.\n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Synchronization of payment data
+      parameters:
+      - name: employee_id
+        in: path
+        type: integer
+        required: true
+      - name: period_id
+        in: path
+        type: integer
+        required: true
+      - name: body
+        description: Objeto con asignaciones y sobretiempos.
+        in: body
+        schema:
+          properties:
+            overtimes:
+              type: array
+              items:
+                $ref: '#/definitions/Attendances::Overtime::PaymentDetail'
+            assigns:
+              type: array
+              items:
+                $ref: '#/definitions/Assign::PaymentDetail'
+      responses:
+        '200':
+          description: Se devuelve data con asignaciones y sobretiempos creados.
+          schema:
+            properties:
+              data:
+                properties:
+                  assigns:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Assign::PaymentDetailResponse'
+                  overtimes:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Attendances::Overtime::PaymentDetail'
+        '404':
+          description: El Colaborador 'employee_id' no existen.
+definitions:
+  Assign::PaymentDetail:
+    properties:
+      id:
+        required: false
+        type: integer
+      employee_id:
+        required: true
+        type: integer
+      item_id:
+        required: true
+        type: integer
+      end_date:
+        type: string
+        format: date
+      description:
+        type: string
+      amount:
+        required: true
+        type: integer
+      cost_center:
+        type: string
+      _destroy:
+        type: boolean
+        default: false
+      custom_attrs:
+        type: object
+  Attendances::Overtime::PaymentDetail:
+    properties:
+      day:
+        type: integer
+      hours:
+        type: number
+        format: float
+      employee_id:
+        type: integer
+      type_id:
+        type: integer
+      centro_costo:
+        type: string
+    required:
+    - hours
+    - employee_id
+    - type_id
+  Assign::PaymentDetailResponse:
+    properties:
+      id:
+        required: false
+        type: integer
+      employee_id:
+        required: true
+        type: integer
+      item_id:
+        required: true
+        type: integer
+      end_date:
+        type: string
+        format: date
+      description:
+        type: string
+      amount:
+        required: true
+        type: integer
+      cost_center:
+        type: string
+      custom_attrs:
+        type: object
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

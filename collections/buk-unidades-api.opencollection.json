@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Unidades API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Unidades",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar Unidades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/units",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "'Retornar Unidades'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear Unidades",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/units"
+          },
+          "docs": "Crea una nueva Unidad en el sistema. Los parámetros son:\n\n  - name : Nombre de la Unidad.\n  - code : Código de la Unidad.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

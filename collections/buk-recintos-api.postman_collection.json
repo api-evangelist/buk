@@ -1,0 +1,615 @@
+{
+  "item": [
+    {
+      "id": "84e71452-6b9e-4b4c-98b0-5db45e26877e",
+      "name": "Recintos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0bb527e-60d0-418e-8877-e571ec79f147",
+          "name": "recinto",
+          "request": {
+            "name": "recinto",
+            "description": {
+              "content": "Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa específica. Cada recinto incluye detalles como el nombre, dirección y ubicación.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "informacionRecinto"
+              ],
+              "host": [
+                "{{informacionRecinto-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b0fc081e-17f3-4362-b335-2f4777939568",
+              "name": "Respuesta exitosa que contiene la lista de recintos de una empresa. La respuesta está paginada y cada página incluye un subconjunto de recintos junto con información detallada de cada uno.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "informacionRecinto"
+                  ],
+                  "host": [
+                    "{{informacionRecinto-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://api.ejemplo.com/informacionRecinto?page=2\",\n    \"previous\": null,\n    \"count\": 34,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"obra_id\": 123,\n      \"nombre\": \"Nombre de la obra\",\n      \"direccion\": \"Calle Falsa 123\",\n      \"comuna\": \"Comuna\",\n      \"region\": \"Region\",\n      \"pais\": \"Pais\"\n    },\n    {\n      \"obra_id\": 123,\n      \"nombre\": \"Nombre de la obra\",\n      \"direccion\": \"Calle Falsa 123\",\n      \"comuna\": \"Comuna\",\n      \"region\": \"Region\",\n      \"pais\": \"Pais\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afc79502-ddb1-4ac6-93ab-cadc6143cf03",
+              "name": "Solicitud incorrecta. Este error se devuelve si unos de los parámetrros de la consulta no son válidos.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "informacionRecinto"
+                  ],
+                  "host": [
+                    "{{informacionRecinto-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El tamaño de página (page_size) no está en el rango permitido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ffa847f-e4ac-44fa-b336-ac8dc6b565b5",
+              "name": "Acceso no autorizado. Se retorna cuando el token proporcionado es inválido, ha expirado o falta en el encabezado de la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "informacionRecinto"
+                  ],
+                  "host": [
+                    "{{informacionRecinto-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2f6d073-d049-44d6-b1c3-73e3d6342ffe",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "informacionRecinto"
+                  ],
+                  "host": [
+                    "{{informacionRecinto-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f39fbd18-601c-4a15-90c2-55254b577173",
+          "name": "Show Recintos",
+          "request": {
+            "name": "Show Recintos",
+            "description": {
+              "content": "Retrieve information for each Recinto\n\nA Recinto has the following attributes::\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Commune where the Recinto is located (you can check the endpoint GET /locations))\n- city: City\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto\n- address_optional: Description of the address\n- latitude: Latitude of the Recinto\n- longitude: Recinto longitude\n- postcode: Recinto Zip Code\n- integrated_with_ctrl: Integration with CTRL\n- establishment_code: Recinto Code\n\n\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recintos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "- code: Recinto code (OPTIONAL)",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "676d19a9-15eb-4b96-8352-3c734f9212e6",
+              "name": "An array (data) with the information of the Recintos.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88c41cba-669c-431e-918d-23f26ef6e59e",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "053689eb-4638-42dc-8ced-6413dd95dfcc",
+          "name": "Create Recinto",
+          "request": {
+            "name": "Create Recinto",
+            "description": {
+              "content": "Create a new Recinto in the system. The parameters are:\n\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations)\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto \n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recintos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3a5611c-4fe9-46f3-8d42-13699f5c2bf5",
+              "name": "Recinto created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb2ed9b0-2953-486f-81ea-28f1d41845b3",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8830622f-2444-42da-9aad-8379c3af8846",
+          "name": "Upgrade Recinto",
+          "request": {
+            "name": "Upgrade Recinto",
+            "description": {
+              "content": "Updates an existing Recinto in the system. The parameters are:\n\nThe entered values will overwrite the data of the Recinto being edited.\n\n- identifier: ID of existing Recinto\n- name: Recinto name (OPTIONAL)\n- code: Recinto code (OPTIONAL)\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations) (OPTIONAL)\n- address_name: Street name of the Recinto (OPTIONAL)\n- address_number: Street number of the Recinto \\ (OPTIONAL)\n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recintos",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "code",
+                  "description": "(Required) - Existing Recinto code"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09c46177-2130-4a49-9227-6c54bf06dd8e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "code",
+                      "description": "(Required) - Existing Recinto code"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8dbc3e85-10fe-46bd-9621-eb6ad9301f32",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recintos",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "code",
+                      "description": "(Required) - Existing Recinto code"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "informacionRecinto-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "32ae7766-85eb-454d-9ce2-cd0c86ab3e12",
+    "name": "Buk Recintos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Recintos across 6 of this provider's published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

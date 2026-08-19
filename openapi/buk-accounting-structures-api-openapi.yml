@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  title: Buk Accounting Structures API
+  version: '1.0'
+  description: 'Operations tagged Accounting Structures across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Accounting Structures
+paths:
+  /accounting_structure/structures:
+    get:
+      summary: Get accounting structures for a company
+      description: Returns the accounting structures assigned to a company
+      tags:
+      - Accounting Structures
+      parameters:
+      - name: empresa_id
+        description: Company ID
+        in: query
+        type: integer
+        required: true
+      responses:
+        '200':
+          description: Accounting structures successfully found
+          schema:
+            properties:
+              data:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      description: Accounting structure code
+                    codigo:
+                      type: string
+                      description: Unique code of the structure
+                    nombre:
+                      type: string
+                      description: Scale name
+                    separador:
+                      type: string
+                      description: Separator type (semicolon, comma, etc.)
+                    extension_archivo:
+                      type: string
+                      description: File extension (xlsx, csv, txt, etc.)
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+        '400':
+          description: Missing or invalid parameters
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Company not found
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized - No read permissions
+  /accounting_structure/assignments:
+    get:
+      summary: Get accounting structure assignments
+      description: Returns assignments filtered by company_id or accounting_structure_id
+      tags:
+      - Accounting Structures
+      parameters:
+      - name: empresa_id
+        description: Company ID (required if accounting_structure_id is not provided)
+        in: query
+        type: integer
+        required: false
+      - name: accounting_structure_id
+        description: Accounting structure ID (required if company_id is not provided)
+        in: query
+        type: integer
+        required: false
+      responses:
+        '200':
+          description: Allocations approved successfully
+          schema:
+            properties:
+              data:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    accounting_structure_id:
+                      type: integer
+                    empresa_id:
+                      type: integer
+                    accounting_structure:
+                      properties:
+                        id:
+                          type: integer
+                        codigo:
+                          type: string
+                        nombre:
+                          type: string
+                        separador:
+                          type: string
+                        extension_archivo:
+                          type: string
+                    empresa:
+                      properties:
+                        id:
+                          type: integer
+                        nombre:
+                          type: string
+                        rut:
+                          type: string
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+        '400':
+          description: Missing or invalid parameters
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Company or structure not found
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized - No read permissions
+  /accounting_structure/export:
+    get:
+      summary: Export accounting data
+      description: Exports the accounting data of an assignment. Supports optional pagination.
+      tags:
+      - Accounting Structures
+      parameters:
+      - name: accounting_structure_assignment_id
+        description: Accounting structure assignment ID
+        in: query
+        type: integer
+        required: true
+      - name: month
+        description: Month (1-12)
+        in: query
+        type: integer
+        required: true
+      - name: year
+        description: Year
+        in: query
+        type: integer
+        required: true
+      - name: page
+        description: Page number
+        in: query
+        type: integer
+        required: false
+      - name: page_size
+        description: Size of the page
+        in: query
+        type: integer
+        required: false
+      responses:
+        '200':
+          description: Accounting data successfully exported
+          schema:
+            properties:
+              data:
+                type: object
+                description: Hash where the key is the unique identifier of the company and the value is an array of objects with the accounting data
+                example:
+                  12.345.678-9:
+                  - Column0: '92101'
+                    Column1: Base salary
+                    Column2: '500000'
+                    Column3: '101'
+              pagination:
+                description: Added Item Information
+                properties:
+                  current_page:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  total_count:
+                    type: integer
+        '400':
+          description: Missing or invalid parameters
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Assignment not found or variable not found for the specified period
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized - No read permissions
+  /accounting_structure/export_process_differences:
+    get:
+      summary: Accounting of the reprocessing with accounting structure
+      description: Obtains in JSON format the accounting data for the differences generated in a subprocess as a result of a reprocess, using the assigned accounting structure
+      tags:
+      - Accounting Structures
+      parameters:
+      - name: accounting_structure_assignment_id
+        description: Accounting structure assignment ID. REQUIRED
+        in: query
+        type: integer
+        required: true
+      - name: process_id
+        description: Subprocess ID. REQUIRED
+        in: query
+        type: integer
+        required: true
+      responses:
+        '200':
+          description: Returns the accounting information corresponding to the payroll reprocessing, formatted according to the assigned accounting structure
+          schema:
+            properties:
+              data:
+                type: object
+                description: Hash where the key is the company RUT and the value is an array with the accounting difference data
+                example:
+                  12.345.678-9:
+                  - Column0: '92101'
+                    Column1: Base salary
+                    Column2: '500000'
+                    Column3: '101'
+        '400':
+          description: The sent request does not comply with the required format
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: There is no information for the entered parameters
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized - No read permissions
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

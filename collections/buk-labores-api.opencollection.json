@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Labores API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar labores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/tasks",
+            "params": [
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Fecha en que fue creada la labor en YYYY-MM-DD."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "'Retornar labores desde la fecha de creación dada'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear labores",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/tasks"
+          },
+          "docs": "Crea un nuevo labor en el sistema. Los parámetros son:\n\n  - description : Descripción del labor.\n  - code : Código del labor.\n  - seventh_workday : Afecto a semana corrida.\n  - custom_attrs : Atributos personalizados para labores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

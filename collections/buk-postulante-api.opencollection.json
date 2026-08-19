@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Postulante API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Postulante",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recruiting/applicants"
+          },
+          "docs": "Create a new applicant.\n\nFor parameters with values in square brackets, choose 1. e.g. document_type\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Display Applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recruiting/applicants/search_by_email"
+          },
+          "docs": "Return the applicant by their ID or RUT.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Display Applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recruiting/applicants/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character."
+              }
+            ]
+          },
+          "docs": "Return the applicant by their ID or RUT.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Create Applicants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recruiting/applicants/",
+            "params": [
+              {
+                "name": "selection_processes[]",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) IDs of the selection processes to be queried. (Returns applicants if they are at least in one selection process)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Return the list of applicants\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List applications by applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recruiting/applicants/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Return all applications associated with the applicant, using their ID or RUT number.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

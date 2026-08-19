@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk KP Is API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KPIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar tipos de KPI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kpis",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los tipos de KPI con este nombre"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los tipos de KPI con este código"
+              },
+              {
+                "name": "related_to",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los tipos de KPI con esta entidad asociada"
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los tipos de KPI con esta unidad de medida"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todos los tipos de KPI registrados en el sistema\n\nUn tipo de KPI posee los siguientes atributos\n- id: identificador único del tipo de KPI\n- name: nombre descriptivo\n- code: código interno\n- related_to: nombre de entidad a la que se asocia el tipo de KPI\n- units: unidad de medida del tipo de KPI\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tipos de KPI en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Listar datos de KPI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/kpi_data",
+            "params": [
+              {
+                "name": "kpi_id",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los datos de KPI asociados con el tipo de KPI indicado"
+              },
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "query",
+                "description": {}
+              },
+              {
+                "name": "area_id",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los datos de KPI asociados con la área indicada"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los datos de KPI asociados con el empleado indicado"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "#<Proc:0x00007f0ab3ad1b68 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:10 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Ingresar un dato de KPI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/kpi_data"
+          },
+          "docs": "#<Proc:0x00007f0ab3aced28 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:66 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Actualizar un dato de KPI",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/kpi_data/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del kpi_data a modificar."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Valor a sobrescribir en KPI."
+              }
+            ]
+          },
+          "docs": "Actualiza el dato de un KPI.\n\nSe debe enviar en el body de la request un objeto tipo JSON el siguiente parámetro:\n- **value:** Valor a sobreescribir en KPI.\n\nUn ejemplo puede ser:\n\n**PATH:** `/kpi_data/1`\n\n**BODY:**\n```json\n  {\n    \"value\": 100\n  }\n```\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

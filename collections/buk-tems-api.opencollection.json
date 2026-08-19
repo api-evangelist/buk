@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Ítems API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ítems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar ítems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/items",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los ítems que son vigentes para esta fecha"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los ítems con este nombre"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los ítems con este código"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filtra los ítems del tipo especificado ('haber', 'descuento', 'anticipo', 'aporte', 'informativo')"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todos los ítems registrados en el sistema\n\nSe cada ítem se compone de\n - id: identificador único del ítem\n - name: nombre descriptivo\n - amount: es la cantidad a asignar del ítem, este puede ser vacío\n - income_tax: si es o no tributable\n - created_at: fecha de creación\n - updated_at: última fecha de actualización\n - type: [descuento, haber, aporte, informativo]\n - start_date: fecha de inicio\n - end_date: fecha de fin\n - calculation_method: [fijo, proporcional, proporcional ausencia, por"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

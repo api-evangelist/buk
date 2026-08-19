@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "cbae1176-f09b-4a15-b347-1197fcfdd97a",
+      "name": "Capacitaciones",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63468ba8-fdac-4e56-b42a-99d6abf41398",
+          "name": "Mostrar tramo sence de todos los empleados",
+          "request": {
+            "name": "Mostrar tramo sence de todos los empleados",
+            "description": {
+              "content": "Retorna un listado con el id, rut y tramo sence de cada empleados del sistema que tenga una liquidación del mes abierto.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "training",
+                "sence_percents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2c79417-d028-4c6a-8f2e-b2d58de1f3e0",
+              "name": "Respuesta con el id, rut y porcentaje de tramo sence de cada empleados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "training",
+                    "sence_percents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3266525b-052b-45a1-9293-4f2b48751398",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "training",
+                    "sence_percents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "262a9957-0396-4370-a7d8-6efec3d49d5a",
+          "name": "Mostrar el tramo sence de un empleados",
+          "request": {
+            "name": "Mostrar el tramo sence de un empleados",
+            "description": {
+              "content": "Recibimos la información específica del empleados cuya ID o RUT enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de capacitaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "training",
+                "sence_percents",
+                ":employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required)  ID o RUT sin puntos del empleados a consultar"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ff4be76-7639-4ebb-a1bb-7a8defa782f7",
+              "name": "Retorna el porcentaje de tramo sence del empleados por medio del  ID o RUT.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "training",
+                    "sence_percents",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required)  ID o RUT sin puntos del empleados a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2aee5756-385c-4e6d-8420-cbbe27d02c5e",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "training",
+                    "sence_percents",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required)  ID o RUT sin puntos del empleados a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c548185-bca5-4c21-8f84-d4ea47e99d42",
+              "name": "empleados no encontrado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "training",
+                    "sence_percents",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required)  ID o RUT sin puntos del empleados a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3183d0e7-2ab7-4e4c-adac-298a74f3bac3",
+    "name": "Buk Capacitaciones API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Capacitaciones across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

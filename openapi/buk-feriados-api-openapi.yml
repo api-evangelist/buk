@@ -1,0 +1,70 @@
+openapi: 3.2.0
+info:
+  title: Buk Feriados API
+  version: '1.0'
+  description: 'Operations tagged Feriados across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Feriados
+paths:
+  /holidays:
+    get:
+      summary: Listar días feriados
+      description: 'Retorna todos los feriados registrados en el sistema.
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+        '
+      tags:
+      - Feriados
+      parameters:
+      - name: from
+        in: query
+        type: string
+        format: date
+        description: Obtiene solo los feriados posteriores a esta fecha. Si se omite, se usa por defecto el inicio de año
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+      responses:
+        '200':
+          description: Como respuesta recibimos un arreglo (data) con las fechas de feriado
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Holiday'
+definitions:
+  Holiday:
+    properties:
+      day:
+        type: string
+        format: date
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

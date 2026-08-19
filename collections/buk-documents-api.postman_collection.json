@@ -1,0 +1,738 @@
+{
+  "item": [
+    {
+      "id": "078620f5-4835-49c9-9b0c-3a1302882ada",
+      "name": "Documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dbf68de4-51c6-457e-bb5b-02302cd9df99",
+          "name": "Add a document to employee",
+          "request": {
+            "name": "Add a document to employee",
+            "description": {
+              "content": "We receive a document, which will be related to the employee.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Visible to the employee. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "visible",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires employee signature. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_employee",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires the signature of the legal representative. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_legal_agent",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Requires the signature of a second legal representative. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "signable_by_second_legal_agent",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Overwrite file. Applies only to documents that do not have all required signatures. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "overwrite",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Start automatic signature flow The document must be visible and must have signature or review requirements to select this option. Default: false (This can only be one of true,false)",
+                    "type": "text/plain"
+                  },
+                  "key": "start_signature_workflow",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Path where the file will be saved. If left blank it will be created in the employee's root folder. Example: personal/security",
+                    "type": "text/plain"
+                  },
+                  "key": "path",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "signatures",
+                  "value": "{\"value\":\"reference #/definitions/DocumentSignature not found in the OpenAPI spec\"}",
+                  "description": "Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account."
+                },
+                {
+                  "disabled": false,
+                  "key": "signatures",
+                  "value": "{\"value\":\"reference #/definitions/DocumentSignature not found in the OpenAPI spec\"}",
+                  "description": "Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account."
+                },
+                {
+                  "description": {
+                    "content": "Person's ID of the reviewer. This is an optional parameter, if you do not want to assign a reviewer, leave this field empty",
+                    "type": "text/plain"
+                  },
+                  "key": "reviewer_id",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the employee to be queried."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cef2ef0-a99d-4fe9-9a91-d57c732443e5",
+              "name": "API response after creating documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visible",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_employee",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_second_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_signature_workflow",
+                      "value": ""
+                    },
+                    {
+                      "key": "path",
+                      "value": ""
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "reviewer_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b907365-cf4a-49fe-8626-af4b375d686a",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "visible",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_employee",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "signable_by_second_legal_agent",
+                      "value": ""
+                    },
+                    {
+                      "key": "overwrite",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_signature_workflow",
+                      "value": ""
+                    },
+                    {
+                      "key": "path",
+                      "value": ""
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "signatures",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "reviewer_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "981247d8-05a7-488a-9fbe-ef7bab1e90d5",
+          "name": "Obtain employee documents",
+          "request": {
+            "name": "Obtain employee documents",
+            "description": {
+              "content": "Information is obtained from the employee's documents according to the date filters entered\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "From - Date range of document creation. Example: 2020/12/10",
+                    "type": "text/plain"
+                  },
+                  "key": "from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "To - Date range of document creation. Example 2020/12/11",
+                    "type": "text/plain"
+                  },
+                  "key": "to",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the employee to be queried."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "296ff04b-e5f3-4ac6-95fa-179debad2008",
+              "name": "As a response, we receive an array with the employee's documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": ""
+                    },
+                    {
+                      "key": "to",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bf1c60d-d124-4acc-8f7c-61bcc596232a",
+          "name": "Obtains an employee document",
+          "request": {
+            "name": "Obtains an employee document",
+            "description": {
+              "content": "The possible file IDs are in the GET `/employees/{id}/docs` endpoint.\n\nThe redirection for the entered document of file_id is returned, hence it must be followed.\n\n* To follow the redirection, add the ‘-L’ option.\n* To save the response in a file, add the ‘-o’ option and pass the file name.\n\n**Example**\n````curl -L -X GET --header 'Accept: */*' --header 'auth_token: [AUTH TOKEN]' 'http://www.[COMPANY SUBDOMAIN].buk.cl/api/v1/employees/1/docs/1156' -o [FILE NAME]````\n\nTest with ‘curl’, the Try It button does not work for documents.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "docs",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Employee ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "file_id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5aaab82e-9771-4f0c-b067-ab7117fdacc0",
+              "name": "As a response, we received an employee document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "docs",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Employee ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "file_id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15b9dcfe-f4bb-4688-832a-9906a652237b",
+          "name": "Obtain document detailed information",
+          "request": {
+            "name": "Obtain document detailed information",
+            "description": {
+              "content": "Receives the ID of a document and provides the specifications associated with that document.\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "docs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8d6fed3-3500-4c26-a2e7-164a3b6e472e",
+              "name": "As a response, we received an employee document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "docs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94341f66-c018-4192-bf8f-112fecd3ea94",
+          "name": "Start document signature workflow",
+          "request": {
+            "name": "Start document signature workflow",
+            "description": {
+              "content": "We receive a document ID, and the signature process begins. If the document had already started the signature process, an error with status 409 is displayed.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "docs",
+                ":id",
+                "signatures",
+                "process"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84217b2f-5a51-400a-92f9-af946063e2cf",
+          "name": "Add signers to a document",
+          "request": {
+            "name": "Add signers to a document",
+            "description": {
+              "content": "We receive the signatures or reviewer to be assigned. Changes will only be made to parameters that are submitted.\n- In the case of signatures:\n\n  We receive the type of signature to assign, this can be a string from the following list:\n  - employee_signature\n  - legal_agent_signature\n  - second_legal_agent_signature\n  - supervisor_signature\n  - other_signature\n  - second_other_signature    \n\n  Along with a valid person id with a user. In case of choosing the type of signature legal_agent_signature\n  or second_legal_agent_signature, the person ID must be of a legal representative configured. If choosing the type of signature employee_signature or supervisor_signature, it's not necessary to add the person ID.\n\n  If you want to add an order to the signatures, you should add the attribute \"position\" within each signature. Where you must indicate the order of the signatures to assign with numerical values from 1 up to the number of signatures, these values cannot be repeated. If you do not want an order for the signatures, do not send the \"position\" attribute.\n  \n  To remove the signatures from a document, you must send an empty list.\n\n- In the case of the reviewer:\n\n  We receive the person ID of the reviewer. To be valid, it must have an active user and at least one active job. To remove a reviewer, you must send null in the field.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n\nIf you are reassigning a signer to a document generated from a template, the template will not be modified. The reassignment will apply only to the selected document and it will be reloaded with the current content of the template.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "docs",
+                ":id",
+                "signatures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Document ID"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "302de550-2059-43a5-8387-98ec7614139e",
+              "name": "As a response we received the information of the signatures and the document reviewer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "docs",
+                    ":id",
+                    "signatures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28335e75-76ad-4166-a1dd-819bd0700e42",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "docs",
+                    ":id",
+                    "signatures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Document ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9f17b2e5-c5cf-45d0-a88c-46b797181f3f",
+    "name": "Buk Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Documents across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

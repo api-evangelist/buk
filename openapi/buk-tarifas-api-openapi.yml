@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  title: Buk Tarifas API
+  version: '1.0'
+  description: 'Operations tagged Tarifas across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Tarifas
+paths:
+  /piecework/executions:
+    get:
+      summary: Listar Tarifas
+      description: "'Retornar tarifas desde la fecha de creación dada'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Tarifas
+      parameters:
+      - name: created_at
+        description: (OPCIONAL) Fecha en que fue creada la tarifa en YYYY-MM-DD.
+        in: query
+        type: string
+        format: date
+      - name: page_size
+        type: integer
+        in: query
+        description: '(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+
+          '
+    post:
+      summary: Crear tarifa
+      description: "Crea una nueva tarifa en el sistema. Los parámetros son:\n\n- piecework_place_id : Id del lugar.\n- piecework_task_id : Id del labor.\n- piecework_unit_id : Id del unidad.\n- piecework_product_id: Id del producto.\n- formula : Valor de la tarifa, si la tarifa es simple no se requiere.\n- start_date : Fecha de inicio de la tarifa.\n- end_date: Fecha de finalización de la tarifa. OPCIONAL\n- type_rate : Tipo de tarifa, normal(0) o simple(1). Por defecto es 0.\n- monetary_floor : Se define piso de la tarifa de forma manual. Requerido si la tarifa es normal y no se tiene el calculo de piso por el sistema.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Tarifas
+      parameters:
+      - name: Tarifa
+        description: Objeto de tipo tarifa
+        in: body
+        required: true
+        schema:
+          properties:
+            execution:
+              $ref: '#/definitions/Piecework::Execution::Request'
+definitions:
+  Piecework::Execution::Request:
+    properties:
+      piecework_place_id:
+        type: integer
+      piecework_task_id:
+        type: integer
+      piecework_unit_id:
+        type: integer
+      piecework_product_id:
+        type: integer
+      formula:
+        type: number
+        format: float
+      start_date:
+        type: string
+        format: date
+      type_rate:
+        type: integer
+      monetary_floor:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

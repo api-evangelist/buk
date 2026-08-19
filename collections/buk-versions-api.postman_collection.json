@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "e7f7877a-9a7b-41a8-ad14-fe728cf185ec",
+      "name": "Versions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2635b069-81a5-4ca6-9563-ccbaa2b69a61",
+          "name": "Show versions",
+          "request": {
+            "name": "Show versions",
+            "description": {
+              "content": "We received the information related to the versions\n\n* Allow viewing sensitive information en: 'Sí'.\nPara acceder a historiales extensos (mayores a un año), se requiere solicitar a través de la plataforma. Esto permite procesar la información y luego disponibilizarla mediante la API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Event that originates the version",
+                    "type": "text/plain"
+                  },
+                  "key": "event",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Clase del objeto afectado que da origen a la versión",
+                    "type": "text/plain"
+                  },
+                  "key": "item_type",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page size",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ba2c5f6-e458-407b-a1c9-e873c40ef58d",
+              "name": "As a response, we received the information corresponding all the versions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event",
+                      "value": ""
+                    },
+                    {
+                      "key": "item_type",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ce552397-3751-4082-a876-7bd1d0da0d80",
+    "name": "Buk Versions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Versions across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Leaves API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leaves",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar tipos de leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/licence/types",
+            "params": [
+              {
+                "name": "with_pay",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) paid?"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "Retorna el listado de tipos de leaves en el sistema.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Ver un tipo de licencia",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/licence/types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id del tipo de licencia"
+              }
+            ]
+          },
+          "docs": "View a licencia type based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/licence",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the range in YYYY-MM-DD format."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page for query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Returns the leaves registered in the system in a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working"
+        },
+        {
+          "info": {
+            "name": "Create a leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/absences/licence"
+          },
+          "docs": "Crea una nueva inasistencia de tipo leave en el sistema.\nSe debe enviar como JSON un objeto tipo leave en el cuerpo de la petición. Description of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the"
+        },
+        {
+          "info": {
+            "name": "Delete leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/licence",
+            "params": [
+              {
+                "name": "employee_ids",
+                "value": "",
+                "type": "query",
+                "description": "Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD format."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Delete leaves using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "View leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/absences/licence/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "leave ID"
+              }
+            ]
+          },
+          "docs": "See a leave given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this leave. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and "
+        },
+        {
+          "info": {
+            "name": "Delete a leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/absences/licence/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "%{licence} ID"
+              }
+            ]
+          },
+          "docs": "Borrar una leave dado su identificador.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

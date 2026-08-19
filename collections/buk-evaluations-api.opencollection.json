@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Evaluations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Evaluations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show performance evaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/talent/evaluation_processes",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Provides the data of the available performance evaluations.\nEach performance evaluation has the following attributes:\n- id: Unique Id of the performance evaluation\n- name: name of performance evaluation\n- participants: number of participants added to performance evaluation\n- status: performance evaluation status\n- start_date: performance evaluation start date\n- end_date: performance evaluation end date\n- global_progress: percentage of completed forms \n- stages: stages set for performance evaluat"
+        },
+        {
+          "info": {
+            "name": "Show the results of the Competency from a performance evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/talent/evaluation_process/:id/results/capacities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the performance evaluation to be queried"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Displays the results related to the Competency from the queried performance evaluation.\nA result of Competency from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the eval"
+        },
+        {
+          "info": {
+            "name": "Display the results of the Objetivos from a performance evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/talent/evaluation_process/:id/results/goals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the performance evaluation to be queried"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Provides results related to the Objetivos from the queried performance evaluation.\nA result of Objetivos from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the evaluated\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

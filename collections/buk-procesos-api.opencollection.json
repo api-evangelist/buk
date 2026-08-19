@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Procesos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Procesos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List processes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/process",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the start date of the process to be consulted (YYYYY-MM-DD format)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Nombre del proceso para filtrar los resultados"
+              }
+            ]
+          },
+          "docs": "Retrieve all processes corresponding to a period.\n\nEste endpoint no requiere permisos especiales.\n"
+        },
+        {
+          "info": {
+            "name": "Crear un nuevo proceso de nómina",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/process"
+          },
+          "docs": "Retrieve all processes corresponding to a period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Process permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Obtener detalles de un proceso",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/process/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ÍD del proceso a consultar"
+              }
+            ]
+          },
+          "docs": "Retorna la información detallada de un proceso específico por su ÍD\n\n**Permisos requeridos para utilizar este endpoint:** \n* Process permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Eliminar proceso",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/process/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Identificador del proceso a eliminar"
+              }
+            ]
+          },
+          "docs": "Elimina un proceso de tipo liquidación utilizando su identificador. Solo se pueden eliminar procesos de este tipo.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Process permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

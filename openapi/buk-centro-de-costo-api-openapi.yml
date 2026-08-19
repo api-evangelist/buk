@@ -1,0 +1,217 @@
+openapi: 3.2.0
+info:
+  title: Buk Centro de costo API
+  version: '1.0'
+  description: 'Operations tagged Centro de costo across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Centro de costo
+paths:
+  /centro_costo_definitions/{id}:
+    get:
+      summary: Mostrar centro de costo
+      description: "Recibimos la información relacionada al centro de costo cuyo ID enviamos en la consulta\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: id
+        in: path
+        description: ID del centro de costo
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Como respuesta recibimos la información correspondiente al centro de costo buscado
+          schema:
+            $ref: '#/definitions/CentroCostoDefinition'
+    patch:
+      summary: Actualizar un centro de costo por ID
+      description: "Permite indicar el nuevo código, código previred y atributos personalizados de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: ID del centro de costo
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/centro_costo_definition_detail'
+      responses:
+        '200':
+          description: Respuesta al reemplazar centro de costo
+          schema:
+            $ref: '#/definitions/centro_costo_definition_response'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /centro_costo_definitions:
+    get:
+      summary: Mostrar centros de costo
+      description: "Recibimos la información relacionada a los centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: Tamaño de la página
+      - name: page
+        in: query
+        type: integer
+        description: Nro de página
+      responses:
+        '200':
+          description: Como respuesta recicibimos la información correspondiente a todos los centro de costo
+          schema:
+            $ref: '#/definitions/CentroCostoDefinition'
+    post:
+      summary: Crear centro de costo
+      description: "Crea un nuevo centro de costo en el sistema. Los parámetros son\n\n- code : Código del centro de costo\n- previred_code : Código para previred del centro de costo\n- custom_attributes: Código y valor de atributos personalizados del centro de costo\n:\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: centro_costo_definition
+        in: body
+        description: Parámetros de un centro de costo
+        required: true
+        schema:
+          $ref: '#/definitions/centro_costo_definition_detail'
+      responses:
+        '201':
+          description: Respuesta en caso de haber creado un centro de costo de forma exitosa
+          schema:
+            $ref: '#/definitions/centro_costo_definition_response'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /centro_costo_definitions/update:
+    put:
+      summary: Actualizar información centro de costo
+      description: "Permite indicar el nuevo código y código previred de un centro de costo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: centro_costo_definition
+        description: Objeto de tipo centro de costo definition
+        in: body
+        schema:
+          $ref: '#/definitions/centro_costo_definition_detail'
+      responses:
+        '200':
+          description: Respuesta al reemplazar centro de costo
+          schema:
+            properties:
+              message:
+                type: string
+              centro_costo_definition:
+                $ref: '#/definitions/centro_costo_definition_response'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /centro_costo_definitions/centro_costo:
+    post:
+      summary: Indicar centro de costo del trabajo
+      description: "Permite indicar el centro de costo relacionado a un trabajo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de contabilidad en: 'Lectura y Modificación'.\n"
+      tags:
+      - Centro de costo
+      parameters:
+      - name: centro_costo
+        description: Objeto de tipo centro de costo
+        in: body
+        schema:
+          $ref: '#/definitions/centro_costo_request'
+      responses:
+        '200':
+          description: Respuesta al crear centro de costo de trabajo
+          schema:
+            properties:
+              message:
+                type: string
+              centro_costo:
+                $ref: '#/definitions/centro_costo_response'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  CentroCostoDefinition:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      previred_code:
+        type: string
+      custom_attributes:
+        type: object
+  centro_costo_response:
+    properties:
+      centro_costo_definition_id:
+        type: integer
+      job_id:
+        type: integer
+      weight:
+        type: integer
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  centro_costo_definition_response:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      previred_code:
+        type: string
+      custom_attributes:
+        type: object
+    required:
+    - id
+    - code
+    - previred_code
+    - custom_attributes
+  centro_costo_request:
+    properties:
+      centro_costo_definition_id:
+        type: integer
+      job_id:
+        type: integer
+      weight:
+        type: integer
+    required:
+    - id
+    - code
+    - previred_code
+  centro_costo_definition_detail:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      previred_code:
+        type: string
+      custom_attributes:
+        type: object
+    required:
+    - code
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

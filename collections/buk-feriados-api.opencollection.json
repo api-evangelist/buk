@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Feriados API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feriados",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar días feriados",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/holidays",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Obtiene solo los feriados posteriores a esta fecha. Si se omite, se usa por defecto el inicio de año"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todos los feriados registrados en el sistema.\n\nEste endpoint no requiere permisos especiales.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

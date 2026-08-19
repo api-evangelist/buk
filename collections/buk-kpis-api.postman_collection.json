@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "f8b28bb9-99ee-4b21-aa35-0cbee9603332",
+      "name": "KPIs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f6a18fc-9866-41c4-9e3f-a1d06d7a8a89",
+          "name": "Listar tipos de KPI",
+          "request": {
+            "name": "Listar tipos de KPI",
+            "description": {
+              "content": "Retorna todos los tipos de KPI registrados en el sistema\n\nUn tipo de KPI posee los siguientes atributos\n- id: identificador único del tipo de KPI\n- name: nombre descriptivo\n- code: código interno\n- related_to: nombre de entidad a la que se asocia el tipo de KPI\n- units: unidad de medida del tipo de KPI\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tipos de KPI en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kpis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Filtra los tipos de KPI con este nombre",
+                    "type": "text/plain"
+                  },
+                  "key": "name",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los tipos de KPI con este código",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los tipos de KPI con esta entidad asociada",
+                    "type": "text/plain"
+                  },
+                  "key": "related_to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los tipos de KPI con esta unidad de medida",
+                    "type": "text/plain"
+                  },
+                  "key": "units",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "245f5c91-be39-4e93-be00-13be87c7f9ce",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de los tipos de KPI",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kpis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "code",
+                      "value": ""
+                    },
+                    {
+                      "key": "related_to",
+                      "value": ""
+                    },
+                    {
+                      "key": "units",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd3ad2ec-e3ab-4fb6-a847-87140585a648",
+          "name": "Listar datos de KPI",
+          "request": {
+            "name": "Listar datos de KPI",
+            "description": {
+              "content": "#<Proc:0x00007f0ab3ad1b68 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:10 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kpi_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Filtra los datos de KPI asociados con el tipo de KPI indicado",
+                    "type": "text/plain"
+                  },
+                  "key": "kpi_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "[object Object]",
+                    "type": "text/plain"
+                  },
+                  "key": "empresa_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los datos de KPI asociados con la área indicada",
+                    "type": "text/plain"
+                  },
+                  "key": "area_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filtra los datos de KPI asociados con el empleado indicado",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40648c6b-6d28-4545-bb3f-28b24a00fcf2",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de los datos de KPI",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kpi_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "kpi_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "area_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2870781-59a0-4445-8171-247a83b6dabb",
+          "name": "Ingresar un dato de KPI",
+          "request": {
+            "name": "Ingresar un dato de KPI",
+            "description": {
+              "content": "#<Proc:0x00007f0ab3aced28 /usr/src/app/packs/nomina/core/kpis/app/controllers/api/v1/kpi_data_controller.rb:66 (lambda)>\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kpi_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61a15d2c-7a31-4583-ae7c-86f593395582",
+              "name": "Respuesta en caso de haber registrado un dato de KPI de forma exitosa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kpi_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1aebfff6-5699-4493-a514-b455d029ccfb",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kpi_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29cdae93-2fcb-4527-8238-c9784234ae5e",
+          "name": "Actualizar un dato de KPI",
+          "request": {
+            "name": "Actualizar un dato de KPI",
+            "description": {
+              "content": "Actualiza el dato de un KPI.\n\nSe debe enviar en el body de la request un objeto tipo JSON el siguiente parámetro:\n- **value:** Valor a sobreescribir en KPI.\n\nUn ejemplo puede ser:\n\n**PATH:** `/kpi_data/1`\n\n**BODY:**\n```json\n  {\n    \"value\": 100\n  }\n```\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de datos de KPI en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kpi_data",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Valor a sobrescribir en KPI.",
+                    "type": "text/plain"
+                  },
+                  "key": "value",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del kpi_data a modificar."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bab0990-bc7e-49ba-9af0-1a1b861e450c",
+              "name": "Como respuesta obtenemos el KPI con los valores actualizados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kpi_data",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del kpi_data a modificar."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff543930-8d6d-4de4-9c70-76953a9c87e8",
+    "name": "Buk KP Is API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged KPIs across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "bcf6b9c5-182a-448a-81c2-c7b82e7a7373",
+      "name": "Grupo Familiar",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11e9467e-f0c4-4e07-914b-83dd050ea9d2",
+          "name": "Actualizar Grupo Familiar",
+          "request": {
+            "name": "Actualizar Grupo Familiar",
+            "description": {
+              "content": "Actualizar Grupo Familiar existente y sus detalles asociados\n\nEn el caso de relation: Recibimos el tipo de relación a asignar, este puede ser un string de la siguiente lista:\n\n- Chile/Colombia/México: child, husband, father, mother, other\n- Perú: spouse, concubine, minor_child, student_adult_child, disability_adult_child, pregnant, son_or_daughter, mother, father, other\n- Brasil: spouse, partner_with_children_or_lived_five_years_or_stable_union, child_stepchild, child_stepchild_university_student_or_attending_high_school, sibling_grandson_greatgrandchild_without_support, sibling_grandson_greatgrandson_university_student_without_support, parents_grandparents_greatgrandparents, poor_minor, incapable_person, exspouse, others\n\n\ncustom_attributes no pueden ser actualizados a través de este endpoint\n\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cargas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del Grupo Familiar a actualizar"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b010d95-b5a8-4e7a-8d21-05a524828b9a",
+              "name": "Actualización de Grupo Familiar exitosa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cargas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del Grupo Familiar a actualizar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "475a7489-f491-4854-a1e9-5a5c8b94ed7c",
+              "name": "Grupo Familiar no encontrado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cargas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del Grupo Familiar a actualizar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c6e7b41-8214-4be2-9a7d-134afdaba4da",
+              "name": "Error de validación",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cargas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del Grupo Familiar a actualizar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a562f427-2055-434b-99e7-dbfc7590c01a",
+    "name": "Buk Grupo Familiar API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Grupo Familiar across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

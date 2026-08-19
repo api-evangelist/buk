@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Inasistencia API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inasistencia",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "inasistencia",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/obtenerInasistencias",
+            "params": [
+              {
+                "name": "obra_id",
+                "value": "",
+                "type": "query",
+                "description": "Identificador único del recinto asociado a los trabajadores."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "dni_colaborador",
+                "value": "",
+                "type": "query",
+                "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retorna un listado de las inasistencia de los trabajadores de un recinto especifico para un rango de fechas. El periodo esta limitado a un máximo de 35 dias. Ademas, se puede filtrar la lista por el DNI del colaborador."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: Buk Usuarios y perfiles API
+  version: '1.0'
+  description: 'Operations tagged Usuarios y perfiles across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Usuarios y perfiles
+paths:
+  /permission_roles:
+    get:
+      summary: Mostrar Perfiles
+      description: "Entrega la información de todos los perfiles disponibles.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de usuarios y perfiles en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Usuarios y perfiles
+      parameters:
+      - name: id
+        in: query
+        type: integer
+        description: ID del perfil
+      - name: name
+        in: query
+        type: string
+        description: Nombre
+      responses:
+        '200':
+          description: Una lista de perfiles que cumplan con el criterio de búsqueda.
+          schema:
+            $ref: '#/definitions/PermissionRole'
+definitions:
+  PermissionRole:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      permissions:
+        type: object
+        properties:
+          permission:
+            type: string
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Synchronization of payment data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Synchronization of payment data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Crea o actualiza las asignaciones y sobretiempos de un determinado Colaborador.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/employees/:employee_id/payment_data/:period_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "period_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Se guardarán los datos enviados solo si ningún objeto presenta errores.\nDe lo contrario, se retornarán los objetos que posean uno o más errores.\nEn el caso de que el objeto ya exista previamente, este será actualizado con los datos enviados.\n\nEach assignment is composed of\n- id: ID of the Added Item to be deleted (optional)\n- _destroy: boolean (optional) (in order to delete a Added Item there must be id and _destroy in the object in question)\n- item_id: item assigned to Colaborador\n- amount: for"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

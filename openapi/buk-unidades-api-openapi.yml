@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Buk Unidades API
+  version: '1.0'
+  description: 'Operations tagged Unidades across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Unidades
+paths:
+  /piecework/units:
+    get:
+      summary: Listar Unidades
+      description: "'Retornar Unidades'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Unidades
+      parameters:
+      - name: page_size
+        type: integer
+        in: query
+        description: '(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+
+          '
+    post:
+      summary: Crear Unidades
+      description: "Crea una nueva Unidad en el sistema. Los parámetros son:\n\n  - name : Nombre de la Unidad.\n  - code : Código de la Unidad.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Unidades
+      parameters:
+      - name: Unidad
+        description: Objeto de tipo Unidad
+        in: body
+        required: true
+        schema:
+          properties:
+            unit:
+              $ref: '#/definitions/Piecework::Unit::Request'
+definitions:
+  Piecework::Unit::Request:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    required:
+    - code
+    - name
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

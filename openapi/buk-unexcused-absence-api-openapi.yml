@@ -1,0 +1,470 @@
+openapi: 3.2.0
+info:
+  title: Buk Unexcused absence API
+  version: '1.0'
+  description: 'Operations tagged Unexcused absence across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Unexcused absence
+paths:
+  /absences/absence/types:
+    get:
+      summary: List time off types
+      description: "Displays the list of types of time off leaves in the system.\n\nThe filter with salary payment (with_pay) is optional.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: with_pay
+        description: (OPTIONAL) paid?
+        in: query
+        type: boolean
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with time off types
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/LicenceType::Response'
+    post:
+      summary: Create a time off type
+      description: "Creates a type of time off in the system.\n\nA LicenceType object must be sent as a JSON object in the\nthe body of the request, composed of the following attributes:\n - code: Unique code that identifies the time off\n - name: Name of type of time off\n - description: Description of type of time off\n with_pay: whether it includes salary payment or not (optional, by default is false)\n requestable: whether the type of time off can be requested by the Colaborador (optional, by default is false)\n\n\n **Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: LicenceType
+        description: LicenceType object
+        in: body
+        schema:
+          $ref: '#/definitions/LicenceType::Request'
+      responses:
+        '201':
+          description: API response after creating an absence request.
+          schema:
+            properties:
+              message:
+                type: string
+              licence_type:
+                $ref: '#/definitions/LicenceType::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /absences/absence/types/{id}:
+    get:
+      summary: View a time off type
+      description: "View a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: id
+        description: Time off type ID
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we receive the information of the requested time off type
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/LicenceType::Response'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Delete a time off type
+      description: "Delete a type of time off based on its ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: id
+        description: Time off type ID
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we confirm that the resource has been successfully deleted.
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /absences/absence:
+    get:
+      summary: List time off leaves
+      description: "Displays the time off registered in the system within a date range (optional).\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Supplementary justification text (optional). - absence_type_id: Id of the type of time off to which it corresponds, these can be seen with the GET operation for \"List types of time off\". - absence_type_code: Code of the type of time off to which it corresponds.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: from
+        description: Start date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: to
+        description: End date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page for query
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the time off leaves.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Absences::Absence::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Delete Time Off Leaves
+      description: "Delete absences using the filters you prefer: you can enter a list of Colaboradores IDs and/or a start date range. Filters are optional, but you must send at least one of the three: employee_ids, start_date, or end_date.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: employee_ids
+        description: 'Enter the Colaboradores IDs separated by commas. Do not use other separators or parentheses. For example: 1,2,3'
+        in: query
+        type: array
+      - name: start_date
+        description: Start date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: end_date
+        description: End date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      responses:
+        '200':
+          description: As a response, we confirm that all the resources have been successfully deleted.
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: When there are no allowed resources to delete
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+        '400':
+          description: When an error occurs while deleting a record
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+              errors:
+                type: object
+                properties:
+                  record_id:
+                    type: integer
+                    description: ID of the resource that generated the error
+                  msj:
+                    type: string
+                    description: Error description
+    post:
+      summary: Create unjustified Time Off
+      description: "Create a new unexcused absence time off leave type in the system.\nSe debe enviar como JSON un objeto tipo Ausencia en el cuerpo de la petición.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Texto complementario de justificación (opcional). - absence_type_id: Id del tipo de permiso al que corresponde, estas se pueden ver con la operacion GET para \"Listar tipos inasistencias\".\n- justification: Supplementary text for justification of the absence request (optional). - medic_rut: Doctor's RUT (optional). - licence_number: Leave number (optional). - medic_name: Doctor's name (optional).\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: Time Off
+        description: Time off-type object
+        in: body
+        schema:
+          $ref: '#/definitions/Absences::Absence::Request'
+      responses:
+        '201':
+          description: API response after creating Time Off
+          schema:
+            properties:
+              message:
+                type: string
+              absence:
+                $ref: '#/definitions/Absences::Absence::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /absences/absence/{id}:
+    get:
+      summary: View a time off
+      description: "View a time off given its identifier.\nDescription of attributes:\n- employee_id: ID of the Colaborador associated with this Time Off. - start_date: Fecha de Inicio*: - days_count: Number of days of duration. - day_percent: Percentage of the day the Colaborador will take. Accepts 0.5 or 1, meaning half a day or a full day. If left blank it is considered as a full day (optional). - workday_stage: stage of the working hours. Among the accepted entries are \"full_working_day\" for day_percent equal to 1, and when day_percent equal to 0.5 the allowed values are \"start_working_day\" and \"end_working_day\" (optional). - type: Tipo de Time Off. - contribution_days: Number of days that are employer contribution. - application_date: Fecha en que se debe aplicar la Time Off (opcional). - custom_attributes: Custom attributes (optional). - justification: Complementary justification text (optional). - absence_type_id: Id of the type of time off to which it corresponds, these can be seen with the GET operation for \"List time off types\". - absence_type_code: Code of the corresponding time opff type.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: id
+        description: ID of the time off
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we received the information of the requested time off
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Absences::Absence::Response'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Delete time off leaves
+      description: "Delete time off based on its ID.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Unexcused absence
+      parameters:
+      - name: id
+        description: ID of the time off
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we confirm that the resource has been successfully deleted.
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '404':
+          description: When the resource being deleted does not exist
+          name: data
+          schema:
+            properties:
+              deleted:
+                type: boolean
+                default: false
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Absences::Absence::Request:
+    allOf:
+    - properties:
+        absence_type_id:
+          type: integer
+    - $ref: '#/definitions/Absence::Request'
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  LicenceType::Response:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      kind:
+        type: string
+        enum:
+        - licencia
+        - ausencia
+        - permiso
+      with_pay:
+        type: boolean
+      time_measure:
+        type: string
+        enum:
+        - per_day
+        - per_hour
+        - both
+      requestable:
+        type: boolean
+      editable:
+        type: boolean
+      created_at:
+        type: string
+        format: date
+      updated_at:
+        type: string
+        format: date
+  Absence::Request:
+    properties:
+      start_date:
+        type: string
+        format: date
+      days_count:
+        type: integer
+      day_percent:
+        type: string
+        default: '1'
+      workday_stage:
+        type: string
+      application_date:
+        type: string
+        format: date
+      justification:
+        type: string
+      employee_id:
+        type: integer
+      medic_rut:
+        type: string
+      licence_number:
+        type: string
+      medic_name:
+        type: string
+    required:
+    - start_date
+    - days_count
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  LicenceType::Request:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+      kind:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+      with_pay:
+        type: boolean
+      time_measure:
+        type: string
+        enum:
+        - per_day
+        - per_hour
+        - both
+      requestable:
+        type: boolean
+  Absence::Response:
+    properties:
+      id:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      days_count:
+        type: integer
+      day_percent:
+        type: number
+        format: float
+      contribution_days:
+        type: number
+        format: float
+      workday_stage:
+        type: string
+      application_date:
+        type: string
+        format: date
+      application_end_date:
+        type: string
+        format: date
+      justification:
+        type: string
+      employee_id:
+        type: integer
+      status:
+        type: string
+      created_at:
+        type: string
+        format: date
+      updated_at:
+        type: string
+        format: date
+    required:
+    - start_date
+    - days_count
+  Absences::Absence::Response:
+    allOf:
+    - properties:
+        absence_type_id:
+          type: integer
+        absence_type_code:
+          type: string
+    - $ref: '#/definitions/Absence::Response'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

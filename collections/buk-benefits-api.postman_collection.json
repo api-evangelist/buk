@@ -1,0 +1,436 @@
+{
+  "item": [
+    {
+      "id": "305e516c-e23c-4bdb-8f58-8d11fdd59108",
+      "name": "Benefits",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a92a08b9-3460-4b73-97dc-c4ba350ca150",
+          "name": "List all benefit requests",
+          "request": {
+            "name": "List all benefit requests",
+            "description": {
+              "content": "This endpoint returns all benefit requests.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "benefits",
+                "benefit_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Request status. Allowed values: in_process, approved, rejected, pre_approved, incomplete, cancel_request, canceled",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) ID of the person who requested the benefit. Used to filter requests from a specific person.",
+                    "type": "text/plain"
+                  },
+                  "key": "person_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) ID of the specific version of the requested benefit.",
+                    "type": "text/plain"
+                  },
+                  "key": "available_version_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Date from which to filter requests (format: YYYY-MM-DD). Allows searching for requests made from a specific date onwards",
+                    "type": "text/plain"
+                  },
+                  "key": "requested_at_from",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Date up to which to filter requests (format: YYYY-MM-DD). Allows searching for requests made up to a specific date",
+                    "type": "text/plain"
+                  },
+                  "key": "requested_at_to",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number for result pagination. Defaults to 1 if not specified",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of records per page (maximum 100). Default is 25 if not specified",
+                    "type": "text/plain"
+                  },
+                  "key": "per_page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Field by which to sort the results. Allowed values: id, person_id, approver_id, available_version_id, status, points_cost, requested_at, status_date, created_at",
+                    "type": "text/plain"
+                  },
+                  "key": "sort_by",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Sort direction. Allowed values: asc (ascending), desc (descending). Default is desc (This can only be one of asc,desc)",
+                    "type": "text/plain"
+                  },
+                  "key": "sort_order",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ecad8bd-11f6-4743-b605-6122c41a1a5a",
+              "name": "Benefit requests list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benefits",
+                    "benefit_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "person_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "available_version_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "requested_at_from",
+                      "value": ""
+                    },
+                    {
+                      "key": "requested_at_to",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "per_page",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ea75fbc-922e-49fb-84e0-a3e62d890ebf",
+          "name": "Obtains a specific benefit request",
+          "request": {
+            "name": "Obtains a specific benefit request",
+            "description": {
+              "content": "This endpoint returns a profit request according to its ID\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "benefits",
+                "benefit_requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Benefit request ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b14b6b6a-28cd-4187-b24e-a35216f0f4e9",
+              "name": "Benefit request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benefits",
+                    "benefit_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Benefit request ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee8d09e1-3de3-46a8-a272-8dfbed7ae8f6",
+              "name": "The benefit request was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benefits",
+                    "benefit_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Benefit request ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc15af5a-3485-461e-8e9b-56161449c3a0",
+          "name": "Obtains information from a benefit version",
+          "request": {
+            "name": "Obtains information from a benefit version",
+            "description": {
+              "content": "Returns the information of a specific benefit version\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "benefits",
+                "benefit_versions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Benefit version ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93620be8-1eba-4b3d-bea3-c3b5cd56dc7f",
+              "name": "Benefit version information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benefits",
+                    "benefit_versions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Benefit version ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1666de3-cbfe-4fc1-bf3e-633172847a01",
+              "name": "Benefit version not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benefits",
+                    "benefit_versions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Benefit version ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "313ce4eb-9859-40c0-b5bf-77f78dd8babb",
+    "name": "Buk Benefits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Benefits across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

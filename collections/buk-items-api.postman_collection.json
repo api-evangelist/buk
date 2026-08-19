@@ -1,0 +1,737 @@
+{
+  "item": [
+    {
+      "id": "def46dc1-1251-4a9b-8efe-9ce8ae9e5baf",
+      "name": "Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a76069d-f7ab-4bed-b9a6-b488d2544bc6",
+          "name": "Asignar un ítem",
+          "request": {
+            "name": "Asignar un ítem",
+            "description": {
+              "content": "No se recomienda el uso de este endpoint para cliente grandes. Para operaciones masivas se recomienda usar el endpoint de **Sincronización datos de pago**.\n\nAsigna un nuevo ítem a un empleado en el sistema.\n\n  - `employee_id`: Id del empleado al cual se asignará un ítem.\n  - `item_id`: Id del ítem el cual se asignará al usuario.\n  - `start_date`: Mes de inicio para esta asignación.\n  - `end_date`: (opcional) Mes de término para esta asignación.\n  - `description`: (opcional) Descripción a mostrar en la liquidación.\n  - `amount`: Monto de la asignación. Requerido sólo para ítems de tipo variable.\n  - `advance_payment_day`: (opcional) Día del mes en el que se paga el ítem si es de tipo anticipo.\n  - `overwrite_existing_assign`: (opcional) [boolean] Indica que se quiere emular el\n    comportamiento del importador masivo. Esto es, permitir sobreescribir la asignación en caso de que ya exista.\n  - `cost_center`: (opcional) [string] Código de la definición de centro de costos, debe estar habilitada la general Habilitar Centro Costo Bonos.\n  - `custom_attrs`: (opcional) [object] Atributos personalizados de la asignación, como pares clave-valor.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dca0ff5b-4535-4818-b583-03701e7a885a",
+              "name": "Se devuelve la asignación creada.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d8aa75a-34eb-4c13-a359-3166851f898b",
+              "name": "Faltan datos que son obligatorios.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "983f3611-f906-4fd3-b623-ed4713f3617c",
+              "name": "El empleado `employee_id` o el bono `item_id` no existen.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2037ed1c-9b4c-4c25-9eec-cea43133400d",
+          "name": "Editar una asignación",
+          "request": {
+            "name": "Editar una asignación",
+            "description": {
+              "content": "Prefiera el uso del endpoint de **Sincronización datos de pago**\n\nSe modifica una Asignación del sistema.\n\nSe debe enviar como JSON un objeto tipo Assign en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n  - `cost_center`: (opcional) [string] Código de la definición de centro de costos, debe estar habilitada la general Habilitar Centro Costo Bonos.\n  - `amount`: Monto de la asignación. Requerido solo para ítems de tipo variable\n  - `custom_attrs`: (opcional) [object] Atributos personalizados de la asignación, como pares clave-valor.\n\nLa asignación tiene que ser de un bono variable para poder cambiar el monto.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assigns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) id de la asignación"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62ab9f04-5993-4ac9-8331-401ae488b527",
+              "name": "Respuesta de la api ante el termino de la asignación.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "179f51d9-2ed5-44bc-a20a-42f93dfae326",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d35aa4f4-f395-425d-8d23-3be61838d08b",
+          "name": "Eliminar una asignación",
+          "request": {
+            "name": "Eliminar una asignación",
+            "description": {
+              "content": "Elimina una asignación.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assigns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) id de la asignación"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb9ffe84-a291-474a-993b-9857cb632dbf",
+              "name": "Respuesta de la api ante la eliminación de la asignación.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "279f69c0-719e-474e-8995-ba1b9c7774ee",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a47baa80-0dad-4efd-97c2-54cb8eb3453b",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6c20bf5-19d1-433c-b7cd-a35918ae090a",
+              "name": "No se pudo procesar la solicitud. Intente nuevamente.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bda5a59a-9d0f-48d3-ad7a-a2b3779955d1",
+          "name": "Terminar una asignación de ítem",
+          "request": {
+            "name": "Terminar una asignación de ítem",
+            "description": {
+              "content": "Termina la asignación de un ítem.\n\nSe debe enviar como JSON la fecha de término (opcional) en el cuerpo de la petición,\nen caso de no enviarla su valor será el período actual.\n\nLa fechas deben estar en formato YYYY-MM-DD.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assigns",
+                ":id",
+                "terminate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) id de la asignación"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "294c5a8e-14b5-44c5-bd64-f0a9f9523022",
+              "name": "Respuesta de la api ante el termino de la asignación.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edab1697-6d27-46a6-a00a-93af84e1f0c2",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assigns",
+                    ":id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) id de la asignación"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a45cc90-9d30-46b4-8b68-113d1c747d8d",
+          "name": "Show employee's item assignments",
+          "request": {
+            "name": "Show employee's item assignments",
+            "description": {
+              "content": "Returns the current assignments of an employee along with basic information of the assigned item.\n\nEach assignment consists of:\n- id: unique identifier of the assignment\n- item: item assigned to the employee\n- amount: for items configured with \"different amount per person\", this value corresponds to that entered in the assignment, and for items configured with \"same amount for all\" this value will be the amount of the item entered at its creation. For a formulated item, it represents the value of `item.amount`\n- start_date: start period for this assignment\n- end_date: end period for the assignment\n- custom_attrs: the object includes a custom attribute with its respective value. If there is no custom attribute configured, this will not appear in the response\n\nEach item consists of:\n- id: unique identifier of the item\n- code: item code\n\nThe start date of the period (optional) must be sent as JSON in the body of the request.\n\nThe date must be in YYYY-MM-DD format.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Item permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "assigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Filter the active added items for this date",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the employee to be queried"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f55f00e1-e258-4e86-8f31-dc0494f0970f",
+              "name": "As a response, we receive an array (data) with the information of the added items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "assigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc7479a6-ad3b-4243-a2f3-7ddec7840100",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "assigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the employee to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0d133823-044b-4a76-8d4b-3954c581c384",
+    "name": "Buk Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Items across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Pay stubs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay stubs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Pay stubs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payroll_detail/month",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Displays all Pay stubs for the specified month.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+        },
+        {
+          "info": {
+            "name": "List Pay stubs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payroll_detail/semi_month",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "It displays all the Pay stubs for the specified semi-monthly period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+        },
+        {
+          "info": {
+            "name": "List Pay stubs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payroll_detail/week",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "It displays all Pay stubs of the specified week.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Show details of the Colaborador",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/employees/:employee_id/payroll_detail",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character."
+              },
+              {
+                "name": "period_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of period you want to query can be weekly, semi_monthly o monthly. It is monthly by default."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pay stub start date (DD-MM-YYYYY format)"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Pay stub end date (DD-MM-YYYYY format)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]"
+              }
+            ]
+          },
+          "docs": "We receive the ID or RUT of the Colaborador and an optional date range\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Pay stub file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/employees/:id/statements/:year-:month.pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Colaborador"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "Queried Year"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "path",
+                "description": "Queried Month (1 - 12)"
+              }
+            ]
+          },
+          "docs": "Obtain the PDF file of the Pay stub of the Colaborador associated with a given month and year.\nObtains the PDF file of the Pay stub of the Colaborador associated with a given month and year.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

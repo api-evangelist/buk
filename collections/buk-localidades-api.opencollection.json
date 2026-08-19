@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Localidades API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Localidades",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mostrar localidad",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID de la localidad\n"
+              }
+            ]
+          },
+          "docs": "Recibimos la información relacionada a una localidad cuyo ID enviamos en la consulta\n\nEste endpoint no requiere permisos especiales.\n\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar localidades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations",
+            "params": [
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Profundidad"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Nro de página"
+              }
+            ]
+          },
+          "docs": "Recibimos la información relacionada a las localidades de un país dada una profundidad\n\nEste endpoint no requiere permisos especiales.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

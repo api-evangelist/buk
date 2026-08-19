@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Buk Empresas API
+  version: '1.0'
+  description: 'Operations tagged Empresas across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Empresas
+paths:
+  /companies:
+    get:
+      summary: List Empresas
+      description: '
+
+        Returns all the Empresas registered in the system.
+
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Empresas
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with information from the Empresas
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Company'
+definitions:
+  LegalAgent:
+    properties:
+      person_id:
+        type: integer
+      id:
+        type: integer
+      rut:
+        type: string
+  CompanyBank:
+    properties:
+      id:
+        type: integer
+      empresa_id:
+        type: integer
+      name:
+        type: string
+      account_number:
+        type: integer
+      clabe_mexico:
+        type: integer
+  Company:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      address:
+        type: string
+      commune:
+        type: string
+      city:
+        type: string
+      rut:
+        type: string
+      company_email:
+        type: string
+      company_business:
+        type: string
+      legal_agents:
+        type: array
+        items:
+          $ref: '#/definitions/LegalAgent'
+      custom_attributes:
+        type: object
+      company_banks:
+        type: array
+        items:
+          $ref: '#/definitions/CompanyBank'
+      external:
+        type: boolean
+      provider_registration_number:
+        type:
+        - string
+        - 'null'
+      cnpj:
+        type: string
+      fantasy_name:
+        type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

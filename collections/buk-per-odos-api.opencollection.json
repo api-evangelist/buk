@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Períodos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Períodos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar períodos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/process_periods",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todos los períodos de la aplicación con sus datos y estado correspondiente.\n\nEste endpoint no requiere permisos especiales.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

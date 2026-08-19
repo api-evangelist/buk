@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  title: Buk Localidades API
+  version: '1.0'
+  description: 'Operations tagged Localidades across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Localidades
+paths:
+  /locations/{id}:
+    get:
+      summary: Mostrar localidad
+      description: 'Recibimos la información relacionada a una localidad cuyo ID enviamos en la consulta
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+        '
+      tags:
+      - Localidades
+      parameters:
+      - name: id
+        in: path
+        description: 'ID de la localidad
+
+          '
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Como respuesta recibimos la información correspondiente a la localidad y el padre al cual pertenece (en caso de que tenga alguno) recursivamente. Un padre será tambien una localidad, por tanto tendrá el mismo formato.
+          schema:
+            $ref: '#/definitions/Location'
+  /locations:
+    get:
+      summary: Mostrar localidades
+      description: 'Recibimos la información relacionada a las localidades de un país dada una profundidad
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+        '
+      tags:
+      - Localidades
+      parameters:
+      - name: depth
+        in: query
+        description: Profundidad
+        required: false
+        default: 1
+        type: integer
+      - name: page_size
+        in: query
+        type: integer
+        description: Tamaño de la página
+      - name: page
+        in: query
+        type: integer
+        description: Nro de página
+      responses:
+        '200':
+          description: Como respuesta recibimos la información correspondiente a las localidades que cumplan con los criterios de profundidad proporcionados.
+          schema:
+            $ref: '#/definitions/Location::Minimal'
+definitions:
+  Location::Minimal:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      depth:
+        type: integer
+      ancestry:
+        type: string
+      full_name:
+        type: string
+  Location:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      depth:
+        type: integer
+      parent:
+        $ref: '#/definitions/Location'
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

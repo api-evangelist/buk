@@ -1,0 +1,373 @@
+{
+  "item": [
+    {
+      "id": "bdf51058-0c56-4be8-a267-bbd9e295e7f2",
+      "name": "Clockings",
+      "description": {
+        "content": "Attendance clocking ingestion from biometric devices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a861a4d-2ad1-42bc-bd5e-9bfc1453a95b",
+          "name": "Create attendance clocking",
+          "request": {
+            "name": "Create attendance clocking",
+            "description": {
+              "content": "Creates a new attendance clocking record from data sent by a biometric device middleware.\n\n### Authentication\n\nThis endpoint uses provider-based authentication via two custom headers:\n\n| Header             | Description                                      |\n|--------------------|--------------------------------------------------|\n| `x-provider-name`  | Registered provider name                         |\n| `x-provider-token` | Secret token assigned to the provider            |\n\nThe system validates that both headers are present, the provider exists, and the token matches.\n\n### Validation Rules\n\n| Field          | Required | Type              | Format / Constraint                              |\n|----------------|----------|-------------------|--------------------------------------------------|\n| serialNumber   | Yes      | String            | Alphanumeric with hyphens, 1-24 characters       |\n| idNumber       | Yes      | String            | Alphanumeric with hyphens, 1-24 characters       |\n| time           | Yes      | String            | `yyyy-MM-dd HH:mm:ss` (valid calendar date)     |\n| isEntry        | Yes      | Boolean / String  | `true` / `false` (case-insensitive)              |\n| verifyType     | No       | Integer           | Range 0-18                                       |\n| workCode       | No       | Integer           | >= 0                                             |\n| sensorNo       | No       | Integer           | >= 0                                             |\n| attFlag        | No       | Integer           | >= 0                                             |\n| mask           | No       | Integer           | 0 or 1                                           |\n| temperature    | No       | String            | Numeric (digits and dots), max 24 characters     |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "clockings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                "key": "x-provider-name",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                "key": "x-provider-token",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serialNumber\": \"<string>\",\n  \"idNumber\": \"<string>\",\n  \"time\": \"<string>\",\n  \"isEntry\": \"<boolean>\",\n  \"verifyType\": 0,\n  \"workCode\": 0,\n  \"sensorNo\": 0,\n  \"attFlag\": 0,\n  \"mask\": 0,\n  \"temperature\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "789b8549-a7e5-4359-a2d6-4d3f839d6c1d",
+              "name": "Clocking record created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clockings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                    "key": "x-provider-name",
+                    "value": "bukwebapp"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                    "key": "x-provider-token",
+                    "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serialNumber\": \"CKOU214860011\",\n  \"idNumber\": \"123123123K\",\n  \"time\": \"2026-04-14 09:15:00\",\n  \"isEntry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 201,\n  \"code\": \"CLOCKING_CREATED\",\n  \"message\": \"Clocking record created successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd0d160e-2f85-4e33-98ca-0adc73cac255",
+              "name": "Validation error in the request body. Returned when any field does not meet the expected format or constraints.\n\n**Possible codes:**\n- `INVALID_SERIAL_NUMBER` — serialNumber is missing or invalid. Expected: alphanumeric string with hyphens, 1 to 24 characters (e.g., `CKOU214860011`)\n- `INVALID_ID_NUMBER` — idNumber is missing or invalid. Expected: alphanumeric string with hyphens, 1 to 24 characters (e.g., `123123123K`)\n- `INVALID_TIME_FORMAT` — time is missing or invalid. Expected format: `yyyy-MM-dd HH:mm:ss` with a valid calendar date (e.g., `2026-04-14 08:30:00`)\n- `INVALID_IS_ENTRY` — isEntry is missing or invalid. Expected: `true` or `false` (boolean or case-insensitive string)\n- `INVALID_VERIFY_TYPE` — verifyType is invalid. Expected: integer between 0 and 18\n- `INVALID_WORK_CODE` — workCode is invalid. Expected: integer greater than or equal to 0\n- `INVALID_SENSOR_NO` — sensorNo is invalid. Expected: integer greater than or equal to 0\n- `INVALID_ATT_FLAG` — attFlag is invalid. Expected: integer greater than or equal to 0\n- `INVALID_MASK` — mask is invalid. Expected: `0` (no mask) or `1` (wearing mask)\n- `INVALID_TEMPERATURE` — temperature is invalid. Expected: numeric string with digits and dots, up to 24 characters (e.g., `36.5`)\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clockings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                    "key": "x-provider-name",
+                    "value": "bukwebapp"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                    "key": "x-provider-token",
+                    "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serialNumber\": \"CKOU214860011\",\n  \"idNumber\": \"123123123K\",\n  \"time\": \"2026-04-14 09:15:00\",\n  \"isEntry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"code\": \"INVALID_SERIAL_NUMBER\",\n  \"message\": \"The serial number is missing or invalid, expected alphanumeric string (1-24 characters)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feddcfe4-d1da-4bff-8840-790243d6d90d",
+              "name": "Authentication error. Returned when provider credentials are invalid or missing.\n\n**Possible codes:**\n- `UNAUTHORIZED` — Authentication headers are missing, empty, or token is incorrect\n- `INVALID_PROVIDER_NAME` — The provider does not exist in the system\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clockings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                    "key": "x-provider-name",
+                    "value": "bukwebapp"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                    "key": "x-provider-token",
+                    "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serialNumber\": \"CKOU214860011\",\n  \"idNumber\": \"123123123K\",\n  \"time\": \"2026-04-14 09:15:00\",\n  \"isEntry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Authentication credentials are missing or invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ec5e814-38a8-45d1-bc7c-37bb1e852991",
+              "name": "Duplicate conflict. Returned when a clocking record with the exact same data already exists (same device, user, timestamp, etc.).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clockings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                    "key": "x-provider-name",
+                    "value": "bukwebapp"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                    "key": "x-provider-token",
+                    "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serialNumber\": \"CKOU214860011\",\n  \"idNumber\": \"123123123K\",\n  \"time\": \"2026-04-14 09:15:00\",\n  \"isEntry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 409,\n  \"code\": \"CLOCKING_DUPLICATE\",\n  \"message\": \"A clocking record with the same data already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3339b0-f904-472e-b524-f2c7a5991ce0",
+              "name": "Internal server error. Returned when an unexpected error occurs during request processing.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clockings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Registered provider name. Must match an existing provider in the system.\n",
+                    "key": "x-provider-name",
+                    "value": "bukwebapp"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.\n",
+                    "key": "x-provider-token",
+                    "value": "f353ca91-4fc5-49f2-9b9e-304f83d11914"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serialNumber\": \"CKOU214860011\",\n  \"idNumber\": \"123123123K\",\n  \"time\": \"2026-04-14 09:15:00\",\n  \"isEntry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"code\": \"INTERNAL_ERROR\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://virtserver.swaggerhub.com/BUKASISTENCIA/AttendanceBiometrics/1.0.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c24b5a0-3e99-4c02-acea-c4a0ca8e4a3d",
+    "name": "Buk Attendance — Biometric Integration Clockings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public Attendance API for integrating biometric devices from any manufacturer.\nExposes standardized endpoints that any middleware can consume to submit\nattendance clockings, register devices, and synchronize biometric templates.\n\nDesigned as a single, vendor-agnostic entry point: the manufacturer's middleware\nnormalizes its data to this API's generic format, and Attendance processes it\nthrough its internal flows without needing to know the originating manufacturer.\n\n\nContact Support:\n Name: Integrations Team",
+      "type": "text/plain"
+    }
+  }
+}

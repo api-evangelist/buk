@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Empresas Variable Records API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Empresas Variable Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List variable records of Empresas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/company_variable_registries/:id",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Variable ID Empresa record of which you wish to list."
+              }
+            ]
+          },
+          "docs": "Displays all records of Empresas variables by company_variable_registries_id in the system.\n\nEste endpoint no requiere permisos especiales.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

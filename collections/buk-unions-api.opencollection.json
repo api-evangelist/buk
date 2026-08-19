@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Unions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Unions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show union",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/unions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Union ID"
+              }
+            ]
+          },
+          "docs": "We received the information related to the union whose ID we sent in the query.\nEste endpoint no requiere permisos especiales."
+        },
+        {
+          "info": {
+            "name": "Show unions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/unions",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "We received information related to unions\n\nEste endpoint no requiere permisos especiales."
+        },
+        {
+          "info": {
+            "name": "Create a union",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/unions"
+          },
+          "docs": "Create a new union in the system. The parameters are: \n\n - id : Union ID\n\n - name: Union name\n\n - rut: Union's RUT\n\nEste endpoint no requiere permisos especiales."
+        },
+        {
+          "info": {
+            "name": "Update union information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/unions/update"
+          },
+          "docs": "Allows you to specify the new name and RUT of a union.\n\nEste endpoint no requiere permisos especiales."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.
+  title: Buk Nómina Colaborador API
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Nómina Colaborador
+paths:
+  /obtenerNominaColaborador:
+    get:
+      tags:
+      - Nómina Colaborador
+      description: Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles como DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado del vínculo laboral y por un trabajador.
+      operationId: nomina
+      parameters:
+      - in: query
+        name: obra_id
+        description: Identificador único del recinto asociado a los trabajadores. Si se omite, la búsqueda incluirá todos los recintos.
+        schema:
+          type: integer
+      - in: query
+        name: dni_colaborador
+        description: DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores.
+        schema:
+          type: string
+      - in: query
+        name: status
+        description: Estado de vinculación de los trabajadores con la empresa.
+        schema:
+          type: string
+          enum:
+          - vinculado
+          - desvinculado
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25).
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa que contiene la lista de recintos de una empresa. La respuesta está paginada y cada página incluye un subconjunto de recintos junto con información detallada de cada uno.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: https://api.ejemplo.com/informacionRecinto?page=2
+                      previous:
+                        type:
+                        - string
+                        - 'null'
+                        example: null
+                      count:
+                        type: integer
+                        example: 342
+                      page:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 2
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        obra_id:
+                          type: integer
+                          example: 123
+                        DNI:
+                          type: integer
+                          example: 123456789
+                        empresa:
+                          type: string
+                          example: Empresa Ejemplo
+                        contrato:
+                          type: string
+                          example: CONTRATO
+                        especialidad:
+                          type: string
+                          example: ESPECIALIDAD
+                        estado:
+                          type: string
+                          example: vinculado
+        '400':
+          description: 'Solicitud incorrecta. Este error se devuelve si unos de los parámetrros de la consulta no son válidos.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El tamaño de página (page_size) no está en el rango permitido.'
+        '403':
+          description: Acceso no autorizado. Se retorna cuando el token proporcionado es inválido, ha expirado o falta en el encabezado de la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '405':
+          description: Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No message available
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token

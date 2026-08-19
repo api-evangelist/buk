@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Non-Worked Hours API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Non-Worked Hours",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List non-worked hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/attendances/non-worked-hours",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD format."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the  search query period  in YYYY-MM-DD format."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Parameter to sort records by their ID, the only possible value is 'id'."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              }
+            ]
+          },
+          "docs": "View records of non-worked hours\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Add non-worked hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/attendances/non-worked-hours"
+          },
+          "docs": "Allows to specify the number of hours of non-worked hours of a Colaborador in a given month.\n\nAn object of type NonWorkedHours must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the non-worked hours belongs (optional)\n- month: Month to which the non-worked hours correspond\n- year: Year to which the non-worked hours correspond\n- hours: Number of hours to add\n- employee_id: ID of the Colaborador to which the hours are added\n- type_id: Non-worked H"
+        },
+        {
+          "info": {
+            "name": "Enter non-worked hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/attendances/non-worked-hours"
+          },
+          "docs": "Allows to specify the number of hours of non-worked hours of a Colaborador in a given month. This method **replaces** the number of non-worked hours of the Colaborador\n\n\nAn object of type NonWorkedHours must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the non-worked hours belongs (optional)\n- month: Month to which the non-worked hours correspond\n- year: Year to which the non-worked hours correspond\n- hours: Number of hours to add\n- employee_id"
+        },
+        {
+          "info": {
+            "name": "View a non-working time record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/attendances/non-worked-hours/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the non-worked hour"
+              }
+            ]
+          },
+          "docs": "View a non-worked hour record based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

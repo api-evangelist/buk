@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: Buk Labores API
+  version: '1.0'
+  description: 'Operations tagged Labores across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Labores
+paths:
+  /piecework/tasks:
+    get:
+      summary: Listar labores
+      description: "'Retornar labores desde la fecha de creación dada'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Labores
+      parameters:
+      - name: created_at
+        description: (OPCIONAL) Fecha en que fue creada la labor en YYYY-MM-DD.
+        in: query
+        type: string
+        format: date
+      - name: page_size
+        type: integer
+        in: query
+        description: '(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+
+          '
+    post:
+      summary: Crear labores
+      description: "Crea un nuevo labor en el sistema. Los parámetros son:\n\n  - description : Descripción del labor.\n  - code : Código del labor.\n  - seventh_workday : Afecto a semana corrida.\n  - custom_attrs : Atributos personalizados para labores.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      tags:
+      - Labores
+      parameters:
+      - name: Labor
+        description: Objeto de tipo labor
+        in: body
+        required: true
+        schema:
+          properties:
+            task:
+              $ref: '#/definitions/Piecework::Task::Request'
+definitions:
+  Piecework::Task::Request:
+    properties:
+      code:
+        type: integer
+      description:
+        type: string
+      seventh_workday:
+        type: boolean
+      custom_attrs:
+        type: object
+    required:
+    - code
+    - description
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

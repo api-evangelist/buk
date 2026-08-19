@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Horas extras API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Horas extras",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "horasExtras",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/obtenerHorasExtras",
+            "params": [
+              {
+                "name": "obra_id",
+                "value": "",
+                "type": "query",
+                "description": "Identificador único del recinto asociado a los trabajadores."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "dni_colaborador",
+                "value": "",
+                "type": "query",
+                "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retorna un listado de las horas extras aprobadas de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador. El reporte presenta los tipos de horas extras y el total de horas extras en el intervalo indicado."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

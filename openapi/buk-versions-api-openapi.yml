@@ -1,0 +1,68 @@
+openapi: 3.2.0
+info:
+  title: Buk Versions API
+  version: '1.0'
+  description: 'Operations tagged Versions across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Versions
+paths:
+  /versions:
+    get:
+      summary: Show versions
+      description: 'We received the information related to the versions
+
+
+        * Allow viewing sensitive information en: ''Sí''.
+
+        Para acceder a historiales extensos (mayores a un año), se requiere solicitar a través de la plataforma. Esto permite procesar la información y luego disponibilizarla mediante la API.
+
+        '
+      tags:
+      - Versions
+      parameters:
+      - name: event
+        in: query
+        type: integer
+        description: Event that originates the version
+      - name: item_type
+        in: query
+        type: integer
+        description: Clase del objeto afectado que da origen a la versión
+      - name: page_size
+        in: query
+        type: integer
+        description: Page size
+      - name: page
+        in: query
+        type: integer
+        description: Page number
+      responses:
+        '200':
+          description: As a response, we received the information corresponding all the versions
+          schema:
+            $ref: '#/definitions/version'
+definitions:
+  version:
+    properties:
+      id:
+        type: integer
+      event:
+        type: string
+      item_type:
+        type: string
+      employee_id:
+        type: integer
+      object_changes:
+        type: object
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

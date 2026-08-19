@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Termination processes API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Termination processes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain termination process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/:id/termination",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ]
+          },
+          "docs": "Obtain termination process using the job ID.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Create Termination process",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/jobs/:id/termination",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ]
+          },
+          "docs": "Create a Termination process using an ID from Job and the data from Termination process.\n\nreason must be one of the following values: mutuo_acuerdo, renuncia, muerte, vencimiento_plazo, fin_servicio, :caso_fortuito, falta_probidad, acoso_sexual, vias_de_hecho, injurias, conducta_inmoral, acoso_laboral, negociaciones_prohibidas, no_concurrencia, abandonar_trabajo, faltas_seguridad, perjuicio_material, incumplimiento, necesidades_empresa, desahucio_gerente\n\n\n**Permisos requeridos para utilizar est"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

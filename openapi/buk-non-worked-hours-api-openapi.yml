@@ -1,0 +1,213 @@
+openapi: 3.2.0
+info:
+  title: Buk Non-Worked Hours API
+  version: '1.0'
+  description: 'Operations tagged Non-Worked Hours across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Non-Worked Hours
+paths:
+  /attendances/non-worked-hours:
+    get:
+      summary: List non-worked hours
+      description: "View records of non-worked hours\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Non-Worked Hours
+      parameters:
+      - name: from
+        description: Start date of the search query period in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: to
+        description: End date of the  search query period  in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: sort
+        in: query
+        type: string
+        description: (OPTIONAL) Parameter to sort records by their ID, the only possible value is 'id'.
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with non-worked hours
+          name: data
+          schema:
+            $ref: '#/definitions/Attendances::NonWorkedHours::Index'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    post:
+      summary: Add non-worked hours
+      description: "Allows to specify the number of hours of non-worked hours of a Colaborador in a given month.\n\nAn object of type NonWorkedHours must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the non-worked hours belongs (optional)\n- month: Month to which the non-worked hours correspond\n- year: Year to which the non-worked hours correspond\n- hours: Number of hours to add\n- employee_id: ID of the Colaborador to which the hours are added\n- type_id: Non-worked Hour Type ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Non-Worked Hours
+      parameters:
+      - name: Non-Worked Hours
+        description: Non-worked hours type object
+        in: body
+        schema:
+          $ref: '#/definitions/Attendances::NonWorkedHours::Request'
+      responses:
+        '200':
+          description: Response when adding time off hours
+          schema:
+            properties:
+              message:
+                type: string
+              ausencia:
+                $ref: '#/definitions/Attendances::NonWorkedHours::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+    put:
+      summary: Enter non-worked hours
+      description: "Allows to specify the number of hours of non-worked hours of a Colaborador in a given month. This method **replaces** the number of non-worked hours of the Colaborador\n\n\nAn object of type NonWorkedHours must be sent as JSON in the body of the request, composed of:\n- day: Day to determine to which period the non-worked hours belongs (optional)\n- month: Month to which the non-worked hours correspond\n- year: Year to which the non-worked hours correspond\n- hours: Number of hours to add\n- employee_id: ID of the Colaborador to which the hours are added\n- type_id: Non-worked Hour Type ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Non-Worked Hours
+      parameters:
+      - name: Non-Worked Hours
+        description: Non-worked hours type object
+        in: body
+        schema:
+          $ref: '#/definitions/Attendances::NonWorkedHours::Request'
+      responses:
+        '200':
+          description: Response when replacing time off hours
+          schema:
+            properties:
+              message:
+                type: string
+              ausencia:
+                $ref: '#/definitions/Attendances::NonWorkedHours::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /attendances/non-worked-hours/{id}:
+    get:
+      summary: View a non-working time record
+      description: "View a non-worked hour record based on its ID\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Non-Worked Hours
+      parameters:
+      - name: id
+        description: ID of the non-worked hour
+        in: path
+        type: integer
+      responses:
+        '200':
+          description: As a response, we received the information of the non-worked hours
+          name: data
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Attendances::NonWorkedHours::Response'
+        '404':
+          description: When the resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Attendances::NonWorkedHours::Index:
+    properties:
+      pagination:
+        $ref: '#/definitions/Pagination'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Attendances::NonWorkedHours::Response'
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  Attendances::NonWorkedHours::Request:
+    properties:
+      day:
+        type: integer
+      month:
+        type: integer
+      year:
+        type: integer
+      hours:
+        type: number
+        format: float
+        description: Cantidad de horas no trabajadas
+        example: 2.5
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 1234
+      type_id:
+        type: integer
+        description: ID del tipo de hora no trabajada
+        example: 1
+    required:
+    - hours
+    - employee_id
+    - type_id
+    - day
+    - month
+    - year
+  Attendances::NonWorkedHours::Response:
+    properties:
+      day:
+        type: integer
+      month:
+        type: integer
+      year:
+        type: integer
+      hours:
+        type: number
+        format: float
+        description: Cantidad de horas no trabajadas
+        example: 2.5
+      id:
+        type: integer
+        description: ID del registro de horas no trabajadas
+        example: 42
+      employee_id:
+        type: integer
+        description: ID del empleado
+        example: 14
+      type_id:
+        type: integer
+        description: ID del tipo de hora no trabajada
+        example: 1
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

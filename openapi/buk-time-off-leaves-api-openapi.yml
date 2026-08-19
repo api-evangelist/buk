@@ -1,0 +1,115 @@
+openapi: 3.2.0
+info:
+  title: Buk Time Off Leaves API
+  version: '1.0'
+  description: 'Operations tagged Time Off Leaves across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Time Off Leaves
+paths:
+  /absences:
+    get:
+      summary: List unexcused absences
+      description: "Displays the unexcused absence of each type registered in the system within a date range (optional).\nThe unexcused absences types are:\n\n- leave: Para una leave Médica\n- absence: For an unexcused absence\n- leave: For an unpaid absence request\n- paid_leave: For a paid absence request\n\nDates must be in YYYYY-MM-DD format.\nFilters by type and date are optional.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Time Off Leaves
+      deprecated: true
+      parameters:
+      - name: from
+        description: Start date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: to
+        description: End date of the range in YYYY-MM-DD format.
+        in: query
+        type: string
+        format: date
+      - name: type
+        description: Unexcused absence type
+        in: query
+        type: string
+        enum:
+        - licence
+        - absence
+        - leave
+        - paid_leave
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with unexcused absences.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Absence::Response'
+definitions:
+  Absence::Response:
+    properties:
+      id:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      days_count:
+        type: integer
+      day_percent:
+        type: number
+        format: float
+      contribution_days:
+        type: number
+        format: float
+      workday_stage:
+        type: string
+      application_date:
+        type: string
+        format: date
+      application_end_date:
+        type: string
+        format: date
+      justification:
+        type: string
+      employee_id:
+        type: integer
+      status:
+        type: string
+      created_at:
+        type: string
+        format: date
+      updated_at:
+        type: string
+        format: date
+    required:
+    - start_date
+    - days_count
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

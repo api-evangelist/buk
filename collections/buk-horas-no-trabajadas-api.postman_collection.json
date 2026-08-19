@@ -1,0 +1,712 @@
+{
+  "item": [
+    {
+      "id": "85551a59-2c1d-445c-827a-1f71f857fcaa",
+      "name": "Horas no trabajadas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "657c1ffc-d9e7-4671-a675-9743bcf02ad1",
+          "name": "horas No Trabajadas",
+          "request": {
+            "name": "horas No Trabajadas",
+            "description": {
+              "content": "Retorna un listado de las horas no trabajadas acumuladas de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "obtenerHorasNoTrabajadas"
+              ],
+              "host": [
+                "{{obtenerHorasNoTrabajadas-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "obra_id",
+                  "value": "<integer>",
+                  "description": "(Required) Identificador único del recinto asociado a los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+                },
+                {
+                  "disabled": false,
+                  "key": "dni_colaborador",
+                  "value": "<string>",
+                  "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "016115fd-0609-4d43-9cc4-c6bcee836441",
+              "name": "Respuesta exitosa con el listado de horas no trabajadas de los trabajadores dentro del rango de fechas especificado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerHorasNoTrabajadas"
+                  ],
+                  "host": [
+                    "{{obtenerHorasNoTrabajadas-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"next\": \"https://api.ejemplo.com/informacionRecinto?page=2\",\n    \"previous\": null,\n    \"count\": 342,\n    \"page\": 1,\n    \"totalPages\": 2\n  },\n  \"data\": [\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"horas_no_trabajadas\": 4396\n    },\n    {\n      \"obra_id\": 123,\n      \"DNI\": 123456789,\n      \"horas_no_trabajadas\": 3485\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02ea1eff-91fd-43c6-ad47-da8d23132775",
+              "name": "Solicitud incorrecta debido a parámetros inválidos o mal formateados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerHorasNoTrabajadas"
+                  ],
+                  "host": [
+                    "{{obtenerHorasNoTrabajadas-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El ID del recinto es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "419ff9a3-a63d-48e4-8b2f-59daaf62eea0",
+              "name": "Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerHorasNoTrabajadas"
+                  ],
+                  "host": [
+                    "{{obtenerHorasNoTrabajadas-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Error: El token es inválido.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b377a209-d0c3-4093-bd19-9511f9c26f15",
+              "name": "Método de solicitud HTTP no permitido. Este endpoint solo admite solicitudes GET.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "obtenerHorasNoTrabajadas"
+                  ],
+                  "host": [
+                    "{{obtenerHorasNoTrabajadas-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "obra_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dni_colaborador",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No message available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6b50047-88e4-45a6-8c9b-4161a1cdf450",
+          "name": "Listar tipos de horas no trabajadas",
+          "request": {
+            "name": "Listar tipos de horas no trabajadas",
+            "description": {
+              "content": "'Obtiene la lista de tipos de horas no trabajadas'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attendances",
+                "non-worked-hours",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "442ab266-3379-43c4-993b-dd5055f63353",
+              "name": "Como respuesta recibimos un arreglo (data) con los tipos de horas no trabajadas",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cddf49d9-0e66-4350-88cd-6e77698beae5",
+          "name": "Crear una tipo de Hora no Trabajada",
+          "request": {
+            "name": "Crear una tipo de Hora no Trabajada",
+            "description": {
+              "content": "Crea un nuevo tipo de hora no trabajada en el sistema.\n\nSe debe enviar como JSON un objeto tipo NonWorkedHourType en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n - name: Nombre del tipo de hora no trabajada\n - paid_leave: Boolean indicando si es con o sin goce de sueldo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attendances",
+                "non-worked-hours",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a251302c-eb07-49b0-aef3-fc646c6b83db",
+              "name": "Respuesta de la api ante la creación de NonWorkedHourType.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddefdbc0-14d5-4b04-aa23-124290e7e5e0",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "035e92ec-3ee1-4d6f-9f8f-3a6a79151c72",
+          "name": "Borrar un tipo de hora no trabajada",
+          "request": {
+            "name": "Borrar un tipo de hora no trabajada",
+            "description": {
+              "content": "Borrar un tipo de hora no trabajado dado su identificador\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attendances",
+                "non-worked-hours",
+                "types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "ID del tipo de hora no trabajada"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31fa8c20-8ece-4bec-9db6-975bffa3cf9a",
+              "name": "Se entrega un mensaje de que el recurso ha sido eliminado exitosamente",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID del tipo de hora no trabajada"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdeeb1a8-1d47-45e9-b3b3-61b48cc92cd0",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID del tipo de hora no trabajada"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a245d42d-79ef-4da4-afa8-8c30f0064a47",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attendances",
+                    "non-worked-hours",
+                    "types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "ID del tipo de hora no trabajada"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://app.ctrlit.cl/ctrl/api",
+      "key": "obtenerHorasNoTrabajadas-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "0257e920-af3a-4f3b-b80d-ab6c3a0595ff",
+    "name": "Buk Horas no trabajadas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Horas no trabajadas across 6 of this provider's published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

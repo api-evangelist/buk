@@ -1,0 +1,573 @@
+{
+  "item": [
+    {
+      "id": "1d8ac441-7437-417d-8157-8253457b9fc0",
+      "name": "Evaluations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6e7ad03-364a-4096-8833-88eaf887c75d",
+          "name": "Show performance evaluations",
+          "request": {
+            "name": "Show performance evaluations",
+            "description": {
+              "content": "Provides the data of the available performance evaluations.\nEach performance evaluation has the following attributes:\n- id: Unique Id of the performance evaluation\n- name: name of performance evaluation\n- participants: number of participants added to performance evaluation\n- status: performance evaluation status\n- start_date: performance evaluation start date\n- end_date: performance evaluation end date\n- global_progress: percentage of completed forms \n- stages: stages set for performance evaluation\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "talent",
+                "evaluation_processes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f64b04d2-4754-4c99-a4c3-299288c9e57b",
+              "name": "As a response, we receive the existing performance evaluations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_processes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5059034f-b65a-43af-8d0b-7c7fb94bf063",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_processes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89ee133a-77a0-4023-a94f-c5c7e43b4b6e",
+          "name": "Show the results of the Competency from a performance evaluation",
+          "request": {
+            "name": "Show the results of the Competency from a performance evaluation",
+            "description": {
+              "content": "Displays the results related to the Competency from the queried performance evaluation.\nA result of Competency from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the evaluated\n- role: Job title of the evaluated employee\n- role_family: Job family of the evaluated employee\n- division: Division of the evaluated employee\n- area: Area of the evaluated employee\n- sub_area: Sub area of the evaluated employee\n- evaluation_type: Type of evaluation\n- evaluator_name: Name of the evaluator\n- evaluator_rut: RUT of the evaluator\nevaluator_document_number: Document Number of the evaluator\nevaluator_document_type: Type of Document of the evaluator\n- score_by_capacity: Score per Competency.\n- capacities_score: Competency Final score\n- score: Final evaluation score\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "talent",
+                "evaluation_process",
+                ":id",
+                "results",
+                "capacities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the performance evaluation to be queried"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8743f643-ca9a-4090-a18c-df9b937b152f",
+              "name": "As a response, we received the results related to the Competency of the performance evaluation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "capacities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1ec3319-8cd0-4302-8983-ad5b285ddc36",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "capacities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09aff659-94f9-4a6a-a332-d1ebf2c12036",
+              "name": "Performance evaluation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "capacities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16688599-49b4-4799-8381-09bd962aefc7",
+          "name": "Display the results of the Objetivos from a performance evaluation",
+          "request": {
+            "name": "Display the results of the Objetivos from a performance evaluation",
+            "description": {
+              "content": "Provides results related to the Objetivos from the queried performance evaluation.\nA result of Objetivos from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the evaluated\n- role: Job title of the evaluated employee\n- role_family: Job family of the evaluated employee\n- division: Division of the evaluated employee\n- area: Area of the evaluated employee\n- sub_area: Sub area of the evaluated employee\n- evaluation_type: Type of evaluation\n- evaluator_name: Name of the evaluator\n- evaluator_rut: RUT of the evaluator\nevaluator_document_number: Document Number of the evaluator\nevaluator_document_type: Type of Document of the evaluator\n- score_by_goal: Score by Translation missing: en-br.{custom_translations.models.talent/employee_goal.one\n- goals_score: Final score of Objetivos\n- score: Final evaluation score\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "talent",
+                "evaluation_process",
+                ":id",
+                "results",
+                "goals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the performance evaluation to be queried"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef3c27b5-779f-47a6-ab0f-2c5bfc79c165",
+              "name": "As a response, we received the results related to the Objetivos of the performance evaluation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "goals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3831937e-7ee3-4148-b8e6-db4fd04cca16",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "goals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc96f94f-ae4c-4be4-b660-8cbd27331bbc",
+              "name": "Performance evaluation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "talent",
+                    "evaluation_process",
+                    ":id",
+                    "results",
+                    "goals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the performance evaluation to be queried"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aa171983-51d3-4d2c-b214-cbfa5e566b4d",
+    "name": "Buk Evaluations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Evaluations across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

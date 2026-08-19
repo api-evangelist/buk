@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Selection process API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Selection process",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List selection processes ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recruiting/selection_processes",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Search for selection processes starting from this date. If not specified, selection processes from the beginning are used. Format YYYY-MM-DD"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Search for selection processes up to this date. If not specified, selection processes up to the current date are used. Format YYYY-MM-DD"
+              }
+            ]
+          },
+          "docs": "It displays all selection processes in the system\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Selection Process",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recruiting/selection_processes"
+          },
+          "docs": "Creates a new selection process based on the parameters provided. If a template_id is not specified, the default template is used.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Documents API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain employee documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/employees/:id/docs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the employee to be queried."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "From - Date range of document creation. Example: 2020/12/10"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "To - Date range of document creation. Example 2020/12/11"
+              }
+            ]
+          },
+          "docs": "Information is obtained from the employee's documents according to the date filters entered\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Add a document to employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/employees/:id/docs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the employee to be queried."
+              },
+              {
+                "name": "visible",
+                "value": "",
+                "type": "query",
+                "description": "Visible to the employee. Default: false"
+              },
+              {
+                "name": "signable_by_employee",
+                "value": "",
+                "type": "query",
+                "description": "Requires employee signature. Default: false"
+              },
+              {
+                "name": "signable_by_legal_agent",
+                "value": "",
+                "type": "query",
+                "description": "Requires the signature of the legal representative. Default: false"
+              },
+              {
+                "name": "signable_by_second_legal_agent",
+                "value": "",
+                "type": "query",
+                "description": "Requires the signature of a second legal representative. Default: false"
+              },
+              {
+                "name": "overwrite",
+                "value": "",
+                "type": "query",
+                "description": "Overwrite file. Applies only to documents that do not have all required signatures. Default: false"
+              },
+              {
+                "name": "start_signature_workflow",
+                "value": "",
+                "type": "query",
+                "description": "Start automatic signature flow The document must be visible and must have signature or review requirements to select this option. Default: false"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Path where the file will be saved. If left blank it will be created in the employee's root folder. Example: personal/security"
+              },
+              {
+                "name": "signatures",
+                "value": "",
+                "type": "query",
+                "description": "Array of objects of signature type. It is an optional parameter. If this parameter is used, the other parameters related to the signature will not be taken into account."
+              },
+              {
+                "name": "reviewer_id",
+                "value": "",
+                "type": "query",
+                "description": "Person's ID of the reviewer. This is an optional parameter, if you do not want to assign a reviewer, leave this field empty"
+              }
+            ]
+          },
+          "docs": "We receive a document, which will be related to the employee.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Obtains an employee document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/employees/:id/docs/:file_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Employee ID"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "The possible file IDs are in the GET `/employees/{id}/docs` endpoint.\n\nThe redirection for the entered document of file_id is returned, hence it must be followed.\n\n* To follow the redirection, add the ‘-L’ option.\n* To save the response in a file, add the ‘-o’ option and pass the file name.\n\n**Example**\n````curl -L -X GET --header 'Accept: */*' --header 'auth_token: [AUTH TOKEN]' 'http://www.[COMPANY SUBDOMAIN].buk.cl/api/v1/employees/1/docs/1156' -o [FILE NAME]````\n\nTest with ‘curl’, the Try It"
+        },
+        {
+          "info": {
+            "name": "Obtain document detailed information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Receives the ID of a document and provides the specifications associated with that document.\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to View and download employee documents en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Start document signature workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/docs/:id/signatures/process",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "We receive a document ID, and the signature process begins. If the document had already started the signature process, an error with status 409 is displayed.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permissions to upload documents en: 'Sí'.\n"
+        },
+        {
+          "info": {
+            "name": "Add signers to a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/docs/:id/signatures",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "We receive the signatures or reviewer to be assigned. Changes will only be made to parameters that are submitted.\n- In the case of signatures:\n\n  We receive the type of signature to assign, this can be a string from the following list:\n  - employee_signature\n  - legal_agent_signature\n  - second_legal_agent_signature\n  - supervisor_signature\n  - other_signature\n  - second_other_signature    \n\n  Along with a valid person id with a user. In case of choosing the type of signature legal_agent_signatu"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  title: Buk Benefits API
+  version: '1.0'
+  description: 'Operations tagged Benefits across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Benefits
+paths:
+  /benefits/benefit_requests:
+    get:
+      summary: List all benefit requests
+      description: "This endpoint returns all benefit requests.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+      tags:
+      - Benefits
+      parameters:
+      - name: status
+        in: query
+        description: '(OPTIONAL) Request status. Allowed values: in_process, approved, rejected, pre_approved, incomplete, cancel_request, canceled'
+        required: false
+        type: string
+      - name: person_id
+        in: query
+        description: (OPTIONAL) ID of the person who requested the benefit. Used to filter requests from a specific person.
+        required: false
+        type: integer
+      - name: available_version_id
+        in: query
+        description: (OPTIONAL) ID of the specific version of the requested benefit.
+        required: false
+        type: integer
+      - name: requested_at_from
+        in: query
+        description: '(OPTIONAL) Date from which to filter requests (format: YYYY-MM-DD). Allows searching for requests made from a specific date onwards'
+        required: false
+        type: string
+        format: date
+      - name: requested_at_to
+        in: query
+        description: '(OPTIONAL) Date up to which to filter requests (format: YYYY-MM-DD). Allows searching for requests made up to a specific date'
+        required: false
+        type: string
+        format: date
+      - name: page
+        in: query
+        description: (OPTIONAL) Page number for result pagination. Defaults to 1 if not specified
+        required: false
+        type: integer
+        default: 1
+      - name: per_page
+        in: query
+        description: (OPTIONAL) Number of records per page (maximum 100). Default is 25 if not specified
+        required: false
+        type: integer
+        default: 25
+      - name: sort_by
+        in: query
+        description: '(OPTIONAL) Field by which to sort the results. Allowed values: id, person_id, approver_id, available_version_id, status, points_cost, requested_at, status_date, created_at'
+        required: false
+        type: string
+        default: id
+      - name: sort_order
+        in: query
+        description: '(OPTIONAL) Sort direction. Allowed values: asc (ascending), desc (descending). Default is desc'
+        required: false
+        type: string
+        enum:
+        - asc
+        - desc
+        default: desc
+      responses:
+        '200':
+          description: Benefit requests list
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/BenefitRequestResponse'
+  /benefits/benefit_requests/{id}:
+    get:
+      summary: Obtains a specific benefit request
+      description: "This endpoint returns a profit request according to its ID\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+      tags:
+      - Benefits
+      parameters:
+      - name: id
+        in: path
+        description: Benefit request ID
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Benefit request
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/BenefitRequestResponse'
+        '404':
+          description: The benefit request was not found
+  /benefits/benefit_versions/{id}:
+    get:
+      summary: Obtains information from a benefit version
+      description: "Returns the information of a specific benefit version\n\n**Permisos requeridos para utilizar este endpoint:** \n* Benefit permissions en: 'Lectura'.\n"
+      tags:
+      - Benefits
+      parameters:
+      - name: id
+        in: path
+        description: Benefit version ID
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Benefit version information
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/BenefitVersionResponse'
+        '404':
+          description: Benefit version not found
+definitions:
+  BenefitRequestResponse:
+    properties:
+      id:
+        type: integer
+        description: ID de la solicitud de beneficio
+        example: 1
+      person_id:
+        type: integer
+        description: ID de la persona que solicitó el beneficio
+        example: 1
+      approver_id:
+        type: integer
+        description: ID de la persona que aprobó la solicitud
+        example: 1
+      available_version_id:
+        type: integer
+        description: ID de la versión del beneficio
+        example: 1
+      status:
+        type: string
+        description: Estado actual de la solicitud
+        example: pending
+      requested_at:
+        type: string
+        format: date-time
+        description: Fecha y hora en que se realizó la solicitud
+        example: '2024-01-01T00:00:00Z'
+      status_date:
+        type: string
+        format: date-time
+        description: Fecha y hora del último cambio de estado
+        example: '2024-01-01T00:00:00Z'
+      points_cost:
+        type: integer
+        description: Costo en puntos del beneficio solicitado
+        example: 100
+      comments:
+        type: string
+        description: Comentarios generales de la solicitud
+        example: Comments
+      cancel_comments:
+        type: string
+        description: Comentarios de cancelación de la solicitud
+        example: Cancelado
+      created_at:
+        type: string
+        format: date-time
+        description: Fecha y hora de creación de la solicitud
+        example: '2024-01-01T00:00:00Z'
+      updated_at:
+        type: string
+        format: date-time
+        description: Fecha y hora de la última actualización de la solicitud
+        example: '2024-01-01T00:00:00Z'
+      benefit_request_field_values:
+        type: object
+        properties:
+          custom_attribute_name:
+            type: string
+        description: Valores de los campos personalizados definidos para la solicitud de beneficio
+        example:
+          custom_attribute_name: Valor
+  BenefitVersionResponse:
+    properties:
+      id:
+        type: integer
+        description: ID de la versión de beneficio
+        example: 1
+      name:
+        type: string
+        description: Nombre de la versión de beneficio
+        example: Complementario
+      global:
+        type: boolean
+        description: Indica si la versión del beneficio está disponible para todos
+        example: true
+      points:
+        type: integer
+        description: Costo de puntos asociados
+        example: 100
+      enrollment_type:
+        type: integer
+        description: Tipo de suscripción
+        example: 0
+      integration:
+        type: integer
+        description: 'Tipo de integración con otros módulos (ej: Vacaciones, Permisos, etc.)'
+        example: 0
+      created_at:
+        type: string
+        format: date-time
+        description: Fecha de creación
+        example: '2024-01-01T00:00:00Z'
+      updated_at:
+        type: string
+        format: date-time
+        description: Fecha de última actualización
+        example: '2024-01-01T00:00:00Z'
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

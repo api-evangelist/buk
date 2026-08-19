@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Versions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/versions",
+            "params": [
+              {
+                "name": "event",
+                "value": "",
+                "type": "query",
+                "description": "Event that originates the version"
+              },
+              {
+                "name": "item_type",
+                "value": "",
+                "type": "query",
+                "description": "Clase del objeto afectado que da origen a la versión"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "We received the information related to the versions\n\n* Allow viewing sensitive information en: 'Sí'.\nPara acceder a historiales extensos (mayores a un año), se requiere solicitar a través de la plataforma. Esto permite procesar la información y luego disponibilizarla mediante la API.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

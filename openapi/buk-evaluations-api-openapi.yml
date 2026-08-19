@@ -1,0 +1,277 @@
+openapi: 3.2.0
+info:
+  title: Buk Evaluations API
+  version: '1.0'
+  description: 'Operations tagged Evaluations across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Evaluations
+paths:
+  /talent/evaluation_processes:
+    get:
+      summary: Show performance evaluations
+      description: "Provides the data of the available performance evaluations.\nEach performance evaluation has the following attributes:\n- id: Unique Id of the performance evaluation\n- name: name of performance evaluation\n- participants: number of participants added to performance evaluation\n- status: performance evaluation status\n- start_date: performance evaluation start date\n- end_date: performance evaluation end date\n- global_progress: percentage of completed forms \n- stages: stages set for performance evaluation\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n"
+      tags:
+      - Evaluations
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      responses:
+        '200':
+          description: As a response, we receive the existing performance evaluations.
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              evaluation_processes:
+                $ref: '#/definitions/EvaluationProcess'
+            description: As a response, we receive all the data related to the available performance evaluations.
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /talent/evaluation_process/{id}/results/capacities:
+    get:
+      summary: Show the results of the Competency from a performance evaluation
+      description: "Displays the results related to the Competency from the queried performance evaluation.\nA result of Competency from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the evaluated\n- role: Job title of the evaluated employee\n- role_family: Job family of the evaluated employee\n- division: Division of the evaluated employee\n- area: Area of the evaluated employee\n- sub_area: Sub area of the evaluated employee\n- evaluation_type: Type of evaluation\n- evaluator_name: Name of the evaluator\n- evaluator_rut: RUT of the evaluator\nevaluator_document_number: Document Number of the evaluator\nevaluator_document_type: Type of Document of the evaluator\n- score_by_capacity: Score per Competency.\n- capacities_score: Competency Final score\n- score: Final evaluation score\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n"
+      tags:
+      - Evaluations
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        description: ID of the performance evaluation to be queried
+        required: true
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      responses:
+        '200':
+          description: As a response, we received the results related to the Competency of the performance evaluation.
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              evaluations:
+                $ref: '#/definitions/Capacities'
+            description: As a response, we received all the fields corresponding to the information of the queried performance evaluation.
+        '404':
+          description: Performance evaluation not found
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /talent/evaluation_process/{id}/results/goals:
+    get:
+      summary: Display the results of the Objetivos from a performance evaluation
+      description: "Provides results related to the Objetivos from the queried performance evaluation.\nA result of Objetivos from a performance evaluation has the following attributes:\n- evaluation_id: Unique ID of the performance evaluation\n- evaluation_status: Status of the evaluated employee\n- evaluated_name: Name of the evaluated employee\n- evaluated_rut: RUT of the evaluated employee\nevaluated_document_number: Document Number of the evaluated employee\nevaluated_document_type: Type of Document of the evaluated\n- role: Job title of the evaluated employee\n- role_family: Job family of the evaluated employee\n- division: Division of the evaluated employee\n- area: Area of the evaluated employee\n- sub_area: Sub area of the evaluated employee\n- evaluation_type: Type of evaluation\n- evaluator_name: Name of the evaluator\n- evaluator_rut: RUT of the evaluator\nevaluator_document_number: Document Number of the evaluator\nevaluator_document_type: Type of Document of the evaluator\n- score_by_goal: Score by Translation missing: en-br.{custom_translations.models.talent/employee_goal.one\n- goals_score: Final score of Objetivos\n- score: Final evaluation score\n\n**Permisos requeridos para utilizar este endpoint:** \n* Evaluation permissions en: 'Lectura'.\n"
+      tags:
+      - Evaluations
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        description: ID of the performance evaluation to be queried
+        required: true
+      - name: page_size
+        in: query
+        type: integer
+        description: (Optional) Number of responses per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page number
+      responses:
+        '200':
+          description: As a response, we received the results related to the Objetivos of the performance evaluation.
+          schema:
+            title: ResponseBody
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              evaluations:
+                $ref: '#/definitions/Goals'
+            description: As a response, we received all the fields corresponding to the information of the queried performance evaluation.
+        '404':
+          description: Performance evaluation not found
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  EvaluatedPersonIdentifier:
+    properties:
+      evaluated_document_number:
+        type: string
+        description: Document Number of  Evaluated.
+      evaluated_document_type:
+        type: string
+        description: 'Document Type Evaluated. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  Capacities:
+    properties:
+      evaluation_id:
+        type: integer
+      evaluation_status:
+        type: string
+      evaluated_name:
+        type: string
+      evaluated_rut:
+        type: string
+      role:
+        type: string
+      role_family:
+        type: string
+      division:
+        type: string
+      area:
+        type: string
+      sub_area:
+        type: string
+      evaluation_type:
+        type: string
+      evaluator_name:
+        type: string
+      evaluator_rut:
+        type: string
+      score_by_capacity:
+        type: array
+        items:
+          $ref: '#/definitions/ScoreByCapacity'
+      capacities_score:
+        type: number
+      score:
+        type: number
+    allOf:
+    - $ref: '#/definitions/EvaluatedPersonIdentifier'
+    - $ref: '#/definitions/EvaluatorPersonIdentifier'
+  Goals:
+    allOf:
+    - $ref: '#/definitions/EvaluatedPersonIdentifier'
+    - $ref: '#/definitions/EvaluatorPersonIdentifier'
+    properties:
+      evaluation_id:
+        type: integer
+      evaluation_status:
+        type: string
+      evaluated_name:
+        type: string
+      evaluated_rut:
+        type: string
+      role:
+        type: string
+      role_family:
+        type: string
+      division:
+        type: string
+      area:
+        type: string
+      sub_area:
+        type: string
+      evaluation_type:
+        type: string
+      evaluator_name:
+        type: string
+      evaluator_rut:
+        type: string
+      score_by_goal:
+        type: array
+        items:
+          $ref: '#/definitions/ScoreByGoal'
+      goals_score:
+        type: number
+      score:
+        type: number
+  EvaluationProcess:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      participants:
+        type: integer
+      status:
+        type: string
+      start_date:
+        type: string
+      end_date:
+        type: string
+      global_progress:
+        type: string
+      stages:
+        type: array
+        items:
+          type: string
+  EvaluatorPersonIdentifier:
+    properties:
+      evaluator_document_number:
+        type: string
+        description: Document Number of  Evaluator.
+      evaluator_document_type:
+        type: string
+        description: 'Document Type Evaluator. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+  ScoreByCapacity:
+    properties:
+      name:
+        type: string
+      score:
+        type: number
+  ScoreByGoal:
+    properties:
+      name:
+        type: string
+      score:
+        type: number
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

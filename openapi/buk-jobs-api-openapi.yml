@@ -1,0 +1,494 @@
+openapi: 3.2.0
+info:
+  title: Buk Jobs API
+  version: '1.0'
+  description: 'Operations tagged Jobs across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Jobs
+paths:
+  /jobs/{id}/terminate:
+    patch:
+      summary: Complete the job with the given ID.
+      description: "\nTerminates the job with the given id. Requires end date and termination reason (unless it is a contract for services). The parameters are:\n- end_date: End date of the job.\n- termination_reason: Reason for job termination. Accepted reasons are:\n\n\"Chile: [\"mutuo_acuerdo\", \"renuncia\", \"muerte\", \"vencimiento_plazo\", \"fin_servicio\", \"caso_fortuito\", \"falta_probidad\", \"acoso_sexual\", \"vias_de_hecho\", \"injurias\", \"conducta_inmoral\", \"acoso_laboral\", \"negociaciones_prohibidas\", \"no_concurrencia\", \"abandonar_trabajo\", \"faltas_seguridad\", \"perjuicio_material\", \"incumplimiento\", \"necesidades_empresa\", \"desahucio_gerente\"]\"\n\n\"Peru: [\"renuncia\", \"renuncia_con_incentivos\", \"despido\", \"cese_colectivo\", \"jubilacion\", \"invalidez_absoluta_permanente\", \"terminacion_de_la_obra\", \"mutuo_disenso\", \"fallecimiento\", \"sucesion_en_posicion_empleador\", \"extincion_o_liquidacion_empleador\", \"no_se_inicio_relacion_laboral\", \"limite_edad\", \"injustificado\"]\"\n\n\"Mexico: [\"renuncia_voluntaria\", \"muerte\", \"causa_imputable_patron\", \"despido_injustificado\", \"despido_justificado\", \"terminacion_natural\", \"incapacidad_permanente\", \"invalidez_trabajador\", \"reajuste_maquina\", \"clausura\", \"abandono_empleo\", \"ausentismo\", \"jubilacion\", \"otras\"]\"\n\n\"Colombia: [\"renuncia_voluntaria\", \"causa_justa_empleador\", \"termino_mutuo_acuerdo\", \"vencimiento_plazo\", \"termino_obra\", \"termino_sentencia\", \"muerte\", \"termino_abandono\", \"sustitucion_patronal\", \"abandono_cargo\", \"decision_unilateral\"]\"\n\n- comment: Internal comment on the job termination (OPTIONAL)\n- employee_final_state: Final status of Colaborador, by default remains inactive: [\"pending\", \"inactive\"] (OPTIONAL)\n- notice_date: Notice date of job termination in YYYY-MM-DD format; if this field is not added, end_date will be considered. (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        description: ID of the work to be completed.
+      - name: Job
+        in: body
+        description: Updated Job object.
+        required: true
+        schema:
+          $ref: '#/definitions/JobTerminateInput'
+      responses:
+        '200':
+          description: As a response, the Colaborador job is received and successfully completed.
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/JobResponseCountry'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /jobs/{id}/undo:
+    post:
+      summary: Undo the last move and return to the previous job.
+      description: "Undo the last move and return to the previous job.\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: id
+        in: path
+        description: ID of the job to be queried.
+        required: true
+        type: string
+      responses:
+        '201':
+          description: As a response, we received the information about the restored job
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/JobResponseCountry'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /jobs/{id}/undo_terminate:
+    patch:
+      summary: Termination cancelation
+      description: "Cancels the termination of a job.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: id
+        in: path
+        description: ID of the job to be canceled.
+        required: true
+        type: string
+      responses:
+        '200':
+          description: As a response, we received the information about the restored job
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/JobResponseCountry'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /jobs/events/hires:
+    get:
+      summary: List job records of the Colaboradores.
+      description: "Displays the admissions of Colaborador It has a start and end date to specify a query period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: start_date
+        in: query
+        type: string
+        format: date
+        description: Start date of the search query period in YYYY-MM-DD.
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        description: End date of the search query period in YYYYY-MM-DD.
+      - name: sort
+        in: query
+        type: string
+        description: Parameter to sort records, the only possible value is "id"; if not sent, it is sorted by name
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page of work to be obtained. The first one is displayed by default.
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the information of the retrieved movements.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/hire'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /jobs/events/movements:
+    get:
+      summary: List the activity records for the jobs of the Colaboradores.
+      description: "Displays the Colaborador movements list. It has a start and end date to specify a query period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: start_date
+        in: query
+        type: string
+        format: date
+        description: Start date of the search query period in YYYY-MM-DD.
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        description: End date of the search query period in YYYYY-MM-DD.
+      - name: sort
+        in: query
+        type: string
+        description: Parameter to sort records, the only possible value is "id"; if not sent, it is sorted by name
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page of work to be obtained. The first one is displayed by default.
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the information of the retrieved movements.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/job_movement'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+  /jobs/events/terminations:
+    get:
+      summary: List terminations
+      description: "Displays the finished jobs that have an end date between the start date (start_date) and the end date (end_date).\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      tags:
+      - Jobs
+      parameters:
+      - name: start_date
+        in: query
+        type: string
+        format: date
+        description: Start date of the search query period
+      - name: end_date
+        in: query
+        type: string
+        format: date
+        description: End date of the search query period
+      - name: sort
+        in: query
+        type: string
+        description: Parameter to sort records, the only possible value is "id"; if not sent, it is sorted by name
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      - name: page
+        in: query
+        type: integer
+        description: (OPTIONAL) Page of work to be obtained. The first one is displayed by default.
+      responses:
+        '200':
+          description: Results by page of terminations in the indicated period.
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/TerminatedJob'
+        '400':
+          description: The request sent does not respect the proper format.
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  BasePersonIdentifier:
+    properties:
+      document_number:
+        type: string
+        description: Document Number of  Colaborador.
+      document_type:
+        type: string
+        description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+  job_movement:
+    properties:
+      id:
+        type: integer
+      role_id:
+        type: integer
+      company_id:
+        type: integer
+      employee_id:
+        type: integer
+      area_id:
+        type: integer
+      weekly_hours:
+        type: integer
+      weekly_days:
+        type: array
+        items:
+          type: string
+      currency:
+        type: string
+      base_wage:
+        type: integer
+      supervisor_id:
+        type: integer
+      contract_term:
+        type: string
+        format: date
+      start_date:
+        type: string
+        format: date
+      custom_attributes:
+        type: object
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  BossModel:
+    properties:
+      id:
+        type: integer
+      cpf:
+        type: string
+    allOf:
+    - $ref: '#/definitions/BasePersonIdentifier'
+  hire:
+    properties:
+      id:
+        type: integer
+      role_id:
+        type: integer
+      company_id:
+        type: integer
+      employee_id:
+        type: integer
+      area_id:
+        type: integer
+      weekly_hours:
+        type: integer
+      weekly_days:
+        type: array
+        items:
+          type: string
+      currency:
+        type: string
+      base_wage:
+        type: integer
+      supervisor_id:
+        type: integer
+      contract_term:
+        type: string
+        format: date
+      start_date:
+        type: string
+        format: date
+      custom_attributes:
+        type: object
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  TerminatedJob:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      role_id:
+        type: integer
+      company_id:
+        type: integer
+      employee_id:
+        type: integer
+      area_id:
+        type: integer
+      weekly_hours:
+        type: integer
+      weekly_days:
+        type: array
+        items:
+          type: string
+      currency:
+        type: string
+      base_wage:
+        type: integer
+      supervisor_id:
+        type: integer
+      contract_term:
+        format: date
+      start_date:
+        format: date
+      end_date:
+        format: date
+      termination_reason:
+        type: string
+      custom_attributes:
+        type: object
+  JobTerminateInput:
+    required:
+    - end_date
+    - termination_reason
+    properties:
+      end_date:
+        type: string
+        format: date
+        description: Fecha de término del trabajo en YYYY-MM-DD.
+      termination_reason:
+        type: string
+        description: Causal de finiquito (ver opciones).
+        enum:
+        - mutuo_acuerdo
+        - renuncia
+        - muerte
+        - vencimiento_plazo
+        - fin_servicio
+        - caso_fortuito
+        - falta_probidad
+        - acoso_sexual
+        - vias_de_hecho
+        - injurias
+        - conducta_inmoral
+        - acoso_laboral
+        - negociaciones_prohibidas
+        - no_concurrencia
+        - abandonar_trabajo
+        - faltas_seguridad
+        - perjuicio_material
+        - incumplimiento
+        - necesidades_empresa
+        - desahucio_gerente
+      comment:
+        type: string
+        description: {}
+      employee_final_state:
+        type: string
+        description: {}
+      notice_date:
+        type: string
+        format: date
+        description: '- notice_date: Fecha de aviso de término de trabajo en YYYY-MM-DD, en caso de no agregar este campo se considerará el end_date. (OPCIONAL)'
+  JobResponseCountry:
+    properties:
+      id:
+        type: integer
+      company_id:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      type_of_contract:
+        type: string
+      end_of_contract:
+        type: string
+        format: date
+      notice_date:
+        type: string
+        format: date
+      regular_hours:
+        type: number
+      end_date:
+        type: string
+        format: date
+      cost_center:
+        type: string
+      vinculation:
+        type: string
+      tipo_jornada:
+        type: string
+      otros_tipo_jornada:
+        type: string
+      regimen_laboral:
+        type: string
+      admission_indicative:
+        type: string
+      admission_type:
+        type: string
+      regimen_previsional:
+        type: string
+      wage_type:
+        type: string
+      work_day_description:
+        type: string
+      position_of_trust:
+        type: boolean
+      function_of_trust:
+        type: string
+      experience_contract:
+        type: boolean
+      unhealthiness_additional:
+        type: string
+      dangerousness_additional:
+        type: string
+      night_shift:
+        type: boolean
+      esocial_code:
+        type: string
+      periodicity:
+        type: string
+      custom_attributes:
+        type: object
+      area_id:
+        type: integer
+      role_id:
+        type: integer
+      leader_id:
+        type: integer
+      currency_code:
+        type: string
+      wage:
+        type: float
+      boss:
+        $ref: '#/definitions/BossModel'
+      without_wage:
+        type: boolean
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

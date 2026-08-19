@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Variables of the Empresas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Variables of the Empresas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Variables of the Empresas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/company_variables/:empresa_id",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Empresa of which you want to list its variables from Empresa"
+              }
+            ]
+          },
+          "docs": "Displays all variables of the Empresas by Empresas registered in the system.\n\nEste endpoint no requiere permisos especiales.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

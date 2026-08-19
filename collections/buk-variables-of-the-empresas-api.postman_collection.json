@@ -1,0 +1,122 @@
+{
+  "item": [
+    {
+      "id": "1e15103b-7df7-4a42-b00d-38c61c0832ce",
+      "name": "Variables of the Empresas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b19e98a8-2438-43e3-93bf-f3b28c080050",
+          "name": "Variables of the Empresas",
+          "request": {
+            "name": "Variables of the Empresas",
+            "description": {
+              "content": "Displays all variables of the Empresas by Empresas registered in the system.\n\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company_variables",
+                ":empresa_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "empresa_id",
+                  "description": "(Required) ID of the Empresa of which you want to list its variables from Empresa"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16fe6c3c-cb17-4e40-9972-069a9b96034d",
+              "name": "As a response, we receive an array (data) with information from the Empresas",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_variables",
+                    ":empresa_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "empresa_id",
+                      "description": "(Required) ID of the Empresa of which you want to list its variables from Empresa"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8bc6fb15-7224-4036-ae50-3b2ee3565c56",
+    "name": "Buk Variables of the Empresas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Variables of the Empresas across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

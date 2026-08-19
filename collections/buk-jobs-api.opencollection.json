@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Jobs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Complete the job with the given ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/jobs/:id/terminate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the work to be completed."
+              }
+            ]
+          },
+          "docs": "\nTerminates the job with the given id. Requires end date and termination reason (unless it is a contract for services). The parameters are:\n- end_date: End date of the job.\n- termination_reason: Reason for job termination. Accepted reasons are:\n\n\"Chile: [\"mutuo_acuerdo\", \"renuncia\", \"muerte\", \"vencimiento_plazo\", \"fin_servicio\", \"caso_fortuito\", \"falta_probidad\", \"acoso_sexual\", \"vias_de_hecho\", \"injurias\", \"conducta_inmoral\", \"acoso_laboral\", \"negociaciones_prohibidas\", \"no_concurrencia\", \"aban"
+        },
+        {
+          "info": {
+            "name": "Undo the last move and return to the previous job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/jobs/:id/undo",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the job to be queried."
+              }
+            ]
+          },
+          "docs": "Undo the last move and return to the previous job.\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "Termination cancelation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/jobs/:id/undo_terminate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the job to be canceled."
+              }
+            ]
+          },
+          "docs": "Cancels the termination of a job.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List job records of the Colaboradores.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/events/hires",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period in YYYYY-MM-DD."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to sort records, the only possible value is \"id\"; if not sent, it is sorted by name"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page of work to be obtained. The first one is displayed by default."
+              }
+            ]
+          },
+          "docs": "Displays the admissions of Colaborador It has a start and end date to specify a query period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List the activity records for the jobs of the Colaboradores.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/events/movements",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period in YYYY-MM-DD."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period in YYYYY-MM-DD."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to sort records, the only possible value is \"id\"; if not sent, it is sorted by name"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page of work to be obtained. The first one is displayed by default."
+              }
+            ]
+          },
+          "docs": "Displays the Colaborador movements list. It has a start and end date to specify a query period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "List terminations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/jobs/events/terminations",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search query period"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search query period"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to sort records, the only possible value is \"id\"; if not sent, it is sorted by name"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page of work to be obtained. The first one is displayed by default."
+              }
+            ]
+          },
+          "docs": "Displays the finished jobs that have an end date between the start date (start_date) and the end date (end_date).\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,116 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Esta documentación detalla los endpoints disponibles para la integración con Buk Asistencia. Incluya su token en el header 'Authorize' para autenticar las solicitudes.
+  title: Buk Turnos API
+servers:
+- description: Production server
+  url: https://app.ctrlit.cl/ctrl/api
+- description: Production server app2
+  url: https://app2.ctrlit.cl/ctrl/api
+tags:
+- name: Turnos
+paths:
+  /getAsignacionTurnos:
+    get:
+      tags:
+      - Turnos
+      description: Retorna un listado de los datos de trabajador junto con toda la informacion sobre los turnos. El endpoint esta paginado, con un máximo de 1000 elementos por página.
+      operationId: asignacionTurnos
+      parameters:
+      - in: query
+        name: token
+        description: Identificador de la empresa
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: desde
+        description: Fecha de incio de la busqueda en formato dia-mes-año. En el caso de omitirlo se tomara el dia de ayer por defecto.
+        schema:
+          type: string
+      - in: query
+        name: hasta
+        description: Fecha de finalización de la busqueda en formato dia-mes-año. En el caso de omitirlo se tomara el dia de hoy por defecto.
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Número de la página. Si no se proporciona, se asume la primera página (1).
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        description: Cantidad de resultados por página.
+        schema:
+          type: integer
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Respuesta exitosa con el listado de los turnos de los trabajadores dentro del rango de fechas especificado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idRecinto:
+                    type: integer
+                    example: 123
+                  nombreRecinto:
+                    type: string
+                    example: Nombre Recinto
+                  codigoRecinto:
+                    type: string
+                    example: Código recinto
+                  dni:
+                    type: string
+                    example: 123456789
+                  nombreTrabajador:
+                    type: string
+                    example: Nombre trabajador
+                  areaTrabajador:
+                    type: string
+                    example: Area
+                  art22Trabajador:
+                    type: string
+                    example: false
+                  tipoTrabajador:
+                    type: string
+                    example: Trabajador
+                  idTurno:
+                    type: string
+                    example: TFTT
+                  nombreTurno:
+                    type: string
+                    example: Nombre turno
+                  diaTurno:
+                    type: string
+                    example: Día turno
+                  tipoTurno:
+                    type: string
+                    example: Diurno
+                  horarioTurno:
+                    type: string
+                    example: 08:00-18:00
+                  colacionTurno:
+                    type: string
+                    example: 13:00-14:00
+        '403':
+          description: Acceso prohibido. Se devuelve cuando el token de autenticación es inválido, ha expirado o no se ha proporcionado en la solicitud.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Error: El token es inválido.'
+        '404':
+          description: Servicio no encontrado
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: token

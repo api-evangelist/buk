@@ -1,0 +1,169 @@
+{
+  "item": [
+    {
+      "id": "97c98f7c-3608-4334-bd50-c20ceedae8d9",
+      "name": "Registros de Trabajo",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c171381-482a-4cfd-8cac-e93189332d7e",
+          "name": "Listar Registros de Trabajo",
+          "request": {
+            "name": "Listar Registros de Trabajo",
+            "description": {
+              "content": "'Retornar Registros de Trabajo'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "worklogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Opcional) ID del empleado asociado al Registro de Trabajo",
+                    "type": "text/plain"
+                  },
+                  "key": "employee_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Opcional) ID del periodo asociado al Registro de Trabajo",
+                    "type": "text/plain"
+                  },
+                  "key": "variable_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "[object Object]",
+                    "type": "text/plain"
+                  },
+                  "key": "empresa_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Opcional) ID del área a la que pertenece el empleado asociado al Registro de Trabajo",
+                    "type": "text/plain"
+                  },
+                  "key": "area_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Opcional) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23c357ec-b170-4a29-87e1-5b8bbee78cda",
+          "name": "Crear Registro de Trabajo",
+          "request": {
+            "name": "Crear Registro de Trabajo",
+            "description": {
+              "content": "Crea un nuevo Registro de Trabajo en el sistema. Los parámetros son:\n  - day: Fecha del trato en formato YYYY-MM-DD.\n  - employee_id: ID del empleado.\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - overwrite_existing: [boolean] (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_pay: [boolean] (Opcional)\n  - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).\n  - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)\n  - Worklogs: [array]\n    - production: (Opcional) Cantidad de unidades producidas.\n    - piecework_execution_id: ID de la tarifa.\n    - rate_value: (Opcional) Valor de la tarifa aplicada.\n    - total_pay: Valor que se pagará al empleado por este trato.\n    - work_type: Tipo de Trabajo. Posibles valores: 'ausencia', 'dia', 'trato', 'bono'.\n    - saved_in: Posibles valores: 'porcentaje', 'horas'.\n    - worked_units: Unidades trabajadas. Debe ser consistente con el atributo 'saved_in'.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "worklogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44a77e0d-697b-4f1c-9ca3-f16a7c38374d",
+          "name": "Editar un Registro de Trabajo",
+          "request": {
+            "name": "Editar un Registro de Trabajo",
+            "description": {
+              "content": "Edita un Registro de Trabajo existente en el sistema. Los parámetros son:\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_pay: [boolean] (Opcional)\n  - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).\n  - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)\n  - worklog [object]:\n    - day: Fecha del trato en formato YYYY-MM-DD.\n    - work_type: Tipo de Trabajo. Posibles valores: 'ausencia', 'dia', 'trato', 'bono'.\n    - worked_units: Unidades trabajadas. Debe ser consistente con el atributo 'saved_in'.\n    - production: Cantidad de unidades producidas.\n    - rate_value: Valor de la tarifa aplicada.\n    - total_pay: Valor que se pagará al empleado por este trato.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "worklogs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del registro de trabajo a modificar."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "66f6c718-014c-41fe-b825-a91e50a78541",
+    "name": "Buk Registros de Trabajo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Registros de Trabajo across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

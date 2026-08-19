@@ -1,0 +1,116 @@
+{
+  "item": [
+    {
+      "id": "faf5edc7-e392-4ae9-adf0-44b9e4782a91",
+      "name": "Usuarios y perfiles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fec68238-1683-4785-8d31-33dca21cac76",
+          "name": "Mostrar Perfiles",
+          "request": {
+            "name": "Mostrar Perfiles",
+            "description": {
+              "content": "Entrega la información de todos los perfiles disponibles.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de usuarios y perfiles en: 'Lectura' o 'Lectura y Modificación'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "permission_roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "ID del perfil",
+                    "type": "text/plain"
+                  },
+                  "key": "id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Nombre",
+                    "type": "text/plain"
+                  },
+                  "key": "name",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a027ea0-0b6e-438a-a549-77a7da332b19",
+              "name": "Una lista de perfiles que cumplan con el criterio de búsqueda.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "permission_roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3947de82-9ec9-4a8b-b67e-ce0e21ad8445",
+    "name": "Buk Usuarios y perfiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Usuarios y perfiles across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

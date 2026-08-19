@@ -1,0 +1,598 @@
+{
+  "item": [
+    {
+      "id": "0e3ef2fe-f4b9-458d-828a-6f20b4cd1ebe",
+      "name": "Payment documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c42c378-8524-4518-9f69-0b9a6f3e6782",
+          "name": "List Payment documents",
+          "request": {
+            "name": "List Payment documents",
+            "description": {
+              "content": "Displays all Payment documents for the specified month.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payroll_detail",
+                "month"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "The date on which to extract the Payment documents from the Colaboradores (Format DD-MM-YYYY)",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ce2bc47-48ea-46d8-9732-d47b6f11114e",
+              "name": "As a response, we receive all the details of the Payment documents for the queried month",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll_detail",
+                    "month"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "761da94c-6a05-4189-bf01-a42eb00bf636",
+          "name": "List Payment documents",
+          "request": {
+            "name": "List Payment documents",
+            "description": {
+              "content": "It displays all the Payment documents for the specified semi-monthly period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payroll_detail",
+                "semi_month"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "The date on which to extract the Payment documents from the Colaboradores (Format DD-MM-YYYY)",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "557de819-69ab-44a1-98eb-7750301c5c88",
+              "name": "As a response, we receive all the details of the Payment documents for the semi-monthly period queried",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll_detail",
+                    "semi_month"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85338d04-a011-4c81-a626-eddbec6e3784",
+          "name": "List Payment documents",
+          "request": {
+            "name": "List Payment documents",
+            "description": {
+              "content": "It displays all Payment documents of the specified week.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payroll_detail",
+                "week"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "The date on which to extract the Payment documents from the Colaboradores (Format DD-MM-YYYY)",
+                    "type": "text/plain"
+                  },
+                  "key": "date",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b7ef3fc-88c1-4661-aa30-64165b8ed515",
+              "name": "As a response, we receive all the details of the Payment documents for the week queried",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payroll_detail",
+                    "week"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9ba60cc-6615-4d0a-b311-55189ee64f5b",
+          "name": "Show details of the Colaborador",
+          "request": {
+            "name": "Show details of the Colaborador",
+            "description": {
+              "content": "We receive the ID or RUT of the Colaborador and an optional date range\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":employee_id",
+                "payroll_detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "The type of period you want to query can be weekly, semi_monthly o monthly. It is monthly by default.",
+                    "type": "text/plain"
+                  },
+                  "key": "period_type",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Pay stub start date (DD-MM-YYYYY format)",
+                    "type": "text/plain"
+                  },
+                  "key": "start",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Pay stub end date (DD-MM-YYYYY format)",
+                    "type": "text/plain"
+                  },
+                  "key": "end",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "employee_id",
+                  "description": "(Required) ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42fcf907-d141-4e4f-be99-60c88efea138",
+              "name": "As a response, we receive all the details of the queried Colaborador",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":employee_id",
+                    "payroll_detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period_type",
+                      "value": ""
+                    },
+                    {
+                      "key": "start",
+                      "value": ""
+                    },
+                    {
+                      "key": "end",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "employee_id",
+                      "description": "(Required) ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3453dff7-29cc-4f4c-8eff-8ba0aeb478b8",
+          "name": "Payment document file",
+          "request": {
+            "name": "Payment document file",
+            "description": {
+              "content": "Obtain the PDF file of the Payment document of the Colaborador associated with a given month and year.\nObtains the PDF file of the Payment document of the Colaborador associated with a given month and year.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":id",
+                "statements",
+                "{{year}}-{{month}}.pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID of the Colaborador"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e408eec-dab2-48d8-a8d1-710c56e5fe35",
+              "name": "Displays the PDF information of the corresponding Payment document for the month.\"",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "statements",
+                    "{{year}}-{{month}}.pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e17c563c-be19-47c4-b13c-467a3b7bb681",
+              "name": "The request sent does not respect the proper format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "statements",
+                    "{{year}}-{{month}}.pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab3c37c0-31f4-4232-b309-3d4b83371960",
+              "name": "There is no information for the month and year entered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":id",
+                    "statements",
+                    "{{year}}-{{month}}.pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID of the Colaborador"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Queried Year",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "",
+      "key": "year"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Queried Month (1 - 12)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "",
+      "key": "month"
+    }
+  ],
+  "info": {
+    "_postman_id": "66b7bb45-8c09-4450-98e6-f7755f977fab",
+    "name": "Buk Payment documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Payment documents across 2 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

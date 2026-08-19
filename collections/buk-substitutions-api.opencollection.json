@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Substitutions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Substitutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /substitutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/substitutions",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional query parameters to filter and label substitutions.\n"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Optional query parameters to filter and label substitutions.\n"
+              }
+            ]
+          },
+          "docs": "Obtain substitutions\n\nAttributes description:\n- `id`: Unique identifier of the substitution.\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Cause of the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "POST /substitutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/substitutions"
+          },
+          "docs": "Create a new substitution\n\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "PATCH /substitutions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/substitutions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Substitution ID to be updated\n"
+              }
+            ]
+          },
+          "docs": "Updates a specific substitution\nAttribute description:\n- `active`: Status of the substitution.\n- `employee_id`: Id of the Colaboradores.\n- `substitute_id`: Id of the substitute Colaboradores.\n- `start_date`: Start date of the substitution.\n- `end_date`: End date of the substitution.\n- `reason`: Reason for the substitution.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+        },
+        {
+          "info": {
+            "name": "DELETE /substitutions/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/substitutions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Substitution ID to be deleted\n"
+              }
+            ]
+          },
+          "docs": "Eliminate a specific substitution\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

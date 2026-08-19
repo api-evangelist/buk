@@ -1,0 +1,892 @@
+{
+  "item": [
+    {
+      "id": "326d9451-89cc-434d-86d7-9b1b629b2860",
+      "name": "Accounting Structures",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83cf7e20-3c20-4910-b5e7-a4878e30e33a",
+          "name": "Get accounting structures for a company",
+          "request": {
+            "name": "Get accounting structures for a company",
+            "description": {
+              "content": "Returns the accounting structures assigned to a company",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting_structure",
+                "structures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Company ID",
+                    "type": "text/plain"
+                  },
+                  "key": "empresa_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49e4dbcc-ca43-4ec1-8ec4-cd0c5de472e1",
+              "name": "Accounting structures successfully found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31f07534-aa96-4e9d-9d05-c63deb8b0e12",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fda78e6b-5d24-42da-bc87-cff696a57a99",
+              "name": "Unauthorized - No read permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76fca221-f1c2-4e2d-8370-8af73d5588ea",
+              "name": "Company not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0633f2f0-3611-4c38-8d27-c07acbfa2cb0",
+          "name": "Get accounting structure assignments",
+          "request": {
+            "name": "Get accounting structure assignments",
+            "description": {
+              "content": "Returns assignments filtered by company_id or accounting_structure_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting_structure",
+                "assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Company ID (required if accounting_structure_id is not provided)",
+                    "type": "text/plain"
+                  },
+                  "key": "empresa_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Accounting structure ID (required if company_id is not provided)",
+                    "type": "text/plain"
+                  },
+                  "key": "accounting_structure_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6fdd530-7859-4ec4-8fee-222d586c9dee",
+              "name": "Allocations approved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "accounting_structure_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7408c743-2ec6-4443-8d38-0577f6a63280",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "accounting_structure_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9abf7f7-b0b7-48e7-ab67-0884a04a2f0c",
+              "name": "Unauthorized - No read permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "accounting_structure_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00210785-5319-45ad-8f38-ba5b7c105a98",
+              "name": "Company or structure not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "empresa_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "accounting_structure_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28475d02-67ef-41ef-a1ad-7ca07e3121ed",
+          "name": "Export accounting data",
+          "request": {
+            "name": "Export accounting data",
+            "description": {
+              "content": "Exports the accounting data of an assignment. Supports optional pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting_structure",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Accounting structure assignment ID",
+                    "type": "text/plain"
+                  },
+                  "key": "accounting_structure_assignment_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Month (1-12)",
+                    "type": "text/plain"
+                  },
+                  "key": "month",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Year",
+                    "type": "text/plain"
+                  },
+                  "key": "year",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Page number",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Size of the page",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fab6e6b8-9b82-40a3-8b25-f6e931841252",
+              "name": "Accounting data successfully exported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec6861e6-d70d-494c-ad4c-450d9746cd8e",
+              "name": "Missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "096516e7-6a48-4af6-aefb-d319735063df",
+              "name": "Unauthorized - No read permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddc208ee-6720-4f7a-a4e3-e9cb983fff90",
+              "name": "Assignment not found or variable not found for the specified period",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "month",
+                      "value": ""
+                    },
+                    {
+                      "key": "year",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40af46d4-ad09-47e7-89a5-fc528767ece8",
+          "name": "Accounting of the reprocessing with accounting structure",
+          "request": {
+            "name": "Accounting of the reprocessing with accounting structure",
+            "description": {
+              "content": "Obtains in JSON format the accounting data for the differences generated in a subprocess as a result of a reprocess, using the assigned accounting structure",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting_structure",
+                "export_process_differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Accounting structure assignment ID. REQUIRED",
+                    "type": "text/plain"
+                  },
+                  "key": "accounting_structure_assignment_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(Required) Subprocess ID. REQUIRED",
+                    "type": "text/plain"
+                  },
+                  "key": "process_id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be99c224-def1-42a7-8f88-1f02f0213bc6",
+              "name": "Returns the accounting information corresponding to the payroll reprocessing, formatted according to the assigned accounting structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ff11704-b725-4c1f-96de-d134e3cdf068",
+              "name": "The sent request does not comply with the required format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c90f61a9-298a-41fc-acbe-004052e0d973",
+              "name": "Unauthorized - No read permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e8840bb-5c00-46e0-9648-c622f34944ca",
+              "name": "There is no information for the entered parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting_structure",
+                    "export_process_differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accounting_structure_assignment_id",
+                      "value": ""
+                    },
+                    {
+                      "key": "process_id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9f6b4171-53ad-4304-b47f-83156a53a464",
+    "name": "Buk Accounting Structures API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Accounting Structures across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

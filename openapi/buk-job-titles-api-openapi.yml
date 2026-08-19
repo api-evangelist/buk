@@ -1,0 +1,390 @@
+openapi: 3.2.0
+info:
+  title: Buk Job Titles API
+  version: '1.0'
+  description: 'Operations tagged Job Titles across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Job Titles
+paths:
+  /roles:
+    get:
+      summary: List job titles
+      description: 'Displays all job titles registered in the system''.
+
+
+        Este endpoint no requiere permisos especiales.
+
+
+
+        Descripción de atributos:
+
+        - `id`: [string] Id del Cargo.
+
+        - `code`: [string] Codigo.
+
+        - `name`: [string] Nombre.
+
+        - `description`: [string] Description.
+
+        - `requirements`: [string] Requisitos.
+
+        - `role_family`: [object] Familia de cargo.
+
+        - `area_ids`: [array] Área al que pertenece el cargo.
+
+        - `custom_attributes`: [object] Atributos personalizados del cargo.
+
+
+        '
+      tags:
+      - Job Titles
+      parameters:
+      - name: search
+        in: query
+        type: string
+        description: Filter job titles by name
+      - name: code
+        in: query
+        type: string
+        description: Filter job titles by code
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with job titles
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Role'
+    post:
+      summary: Create a job title
+      description: 'Creates a new role in the system. The parameters are:
+
+        - name: Name of the role
+
+        - code: Role code
+
+        - description: Role description (OPTIONAL)
+
+        - requirements: Role requirements (OPTIONAL)
+
+        - area_ids: Role area IDs (OPTIONAL)
+
+        - custom_attributes: Custom attributes of the role (OPTIONAL)
+
+        - role_family_id: Role family ID (OPTIONAL)
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Job Titles
+      parameters:
+      - name: Role
+        in: body
+        description: Role type object
+        required: true
+        schema:
+          $ref: '#/definitions/Role::Create'
+      responses:
+        '201':
+          schema:
+            title: ResponseBody
+            description: Job title created.
+            properties:
+              data:
+                $ref: '#/definitions/Role::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /roles/{id}:
+    get:
+      summary: Get a specific role by ID
+      description: 'Returns the specific information of the role associated with the provided ID
+
+
+        Descripción de atributos:
+
+        - `id`: [string] Id del Cargo.
+
+        - `code`: [string] Codigo.
+
+        - `name`: [string] Nombre.
+
+        - `description`: [string] Description.
+
+        - `requirements`: [string] Requisitos.
+
+        - `role_family`: [object] Familia de cargo.
+
+        - `area_ids`: [array] Área al que pertenece el cargo.
+
+        - `custom_attributes`: [object] Atributos personalizados del cargo.
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Job Titles
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        description: Job title ID
+        required: true
+      responses:
+        '200':
+          description: As a response you will receive a Role
+          schema:
+            title: ResponseBody
+            description: As a response you will receive the attributes corresponding to the requested role
+            properties:
+              data:
+                $ref: '#/definitions/Role::Response'
+        '404':
+          description: Job title not found
+  /roles/{identifier}:
+    patch:
+      summary: Update a position
+      description: 'Updates an existing role in the system. The parameters are:
+
+        - identifier: Existing role identifier. Can be either the numeric ID or the Role code
+
+        - name: New name of the role (OPTIONAL)
+
+        - description: New description of the role (OPTIONAL)
+
+        - requirements: New requirements of the role (OPTIONAL)
+
+        - active: Role status (OPTIONAL)
+
+        - area_ids: IDs of the new role areas (OPTIONAL)
+
+        - custom_attributes: Custom attributes of the role (OPTIONAL)
+
+        - role_family_id: Role family ID (OPTIONAL)
+
+
+        The entered values will overwrite the data of the role being edited
+
+
+        If area_ids does not contain the current ones, they will be removed, leaving only the ones entered.
+
+
+        You cannot remove the association of an area with a job title that has active jobs.
+
+
+        Este endpoint no requiere permisos especiales.
+
+        '
+      tags:
+      - Job Titles
+      parameters:
+      - name: identifier
+        in: path
+        description: '- identifier: Existing role identifier. Can be either the numeric ID or the Role code'
+        required: true
+        type: string
+      - name: Role
+        in: body
+        description: Role type object
+        required: true
+        schema:
+          $ref: '#/definitions/Role::Update'
+      responses:
+        '201':
+          schema:
+            title: ResponseBody
+            description: Job title updated.
+            properties:
+              data:
+                $ref: '#/definitions/Role::Response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Role::Response:
+    properties:
+      id:
+        type: integer
+        description: Identificador único del cargo
+        example: 1
+      name:
+        type: string
+        description: Nombre del cargo
+        example: Analista
+      description:
+        type: string
+        description: Descripción del cargo
+        example: Gestion
+      code:
+        type: string
+        description: Código del cargo
+        example: ROL-001
+      requirements:
+        type: string
+        description: Requisitos del cargo
+        example: Universitario
+      active:
+        type: boolean
+        description: Indica si el cargo está activo
+        example: true
+      area_ids:
+        type: array
+        description: Identificadores de las áreas asociadas al cargo
+        items:
+          type: integer
+          example: 1
+      role_family_id:
+        type: integer
+        description: Identificador de la familia de cargos
+        example: 1
+      custom_attributes:
+        type: object
+        description: Atributos personalizados del cargo
+        example: {}
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  RoleFamily:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      quantity_of_roles:
+        type: integer
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+  Role:
+    properties:
+      id:
+        type: integer
+        description: Identificador único del cargo
+        example: 1
+      code:
+        type: string
+        description: Código del cargo
+        example: ROL-001
+      name:
+        type: string
+        description: Nombre del cargo
+        example: Analista
+      description:
+        type: string
+        description: Descripción del cargo
+        example: Gestion
+      requirements:
+        type: string
+        description: Requisitos del cargo
+        example: Universitario
+      role_family:
+        type: object
+        $ref: '#/definitions/RoleFamily'
+        description: Familia de cargos a la que pertenece el cargo
+      area_ids:
+        type: array
+        description: Identificadores de las áreas asociadas al cargo
+        items:
+          type: integer
+          example: 1
+      custom_attributes:
+        type: object
+        description: Atributos personalizados del cargo
+        example: {}
+  Role::Create:
+    properties:
+      name:
+        type: string
+        description: Nombre del cargo
+        example: Analista
+      code:
+        type: string
+        description: Código del cargo
+        example: ROL-001
+      description:
+        type: string
+        description: Descripción del cargo
+        example: Gestion
+      requirements:
+        type: string
+        description: Requisitos del cargo
+        example: Universitario
+      role_family_id:
+        type: integer
+        description: Identificador de la familia de cargos
+        example: 1
+      area_ids:
+        type: array
+        description: Identificadores de las áreas asociadas al cargo
+        items:
+          type: integer
+          example: 1
+      custom_attributes:
+        type: object
+        description: Atributos personalizados del cargo
+        example: {}
+  Role::Update:
+    properties:
+      name:
+        type: string
+        description: Nombre del cargo
+        example: Analista
+      description:
+        type: string
+        description: Descripción del cargo
+        example: Gestion
+      requirements:
+        type: string
+        description: Requisitos del cargo
+        example: Universitario
+      active:
+        type: boolean
+        description: Indica si el cargo está activo
+        example: true
+      role_family_id:
+        type: integer
+        description: Identificador de la familia de cargos
+        example: 1
+      area_ids:
+        type: array
+        description: Identificadores de las áreas asociadas al cargo
+        items:
+          type: integer
+          example: 1
+      custom_attributes:
+        type: object
+        description: Atributos personalizados del cargo
+        example: {}
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

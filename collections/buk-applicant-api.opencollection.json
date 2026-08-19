@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Applicant API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applicant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update applicants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/recruiting/applicants/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the applicant being updated."
+              }
+            ]
+          },
+          "docs": "Update an applicant\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

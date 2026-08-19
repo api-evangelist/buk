@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Days worked API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Days worked",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Worked Days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/working_days",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Indicates the starting date of the worked days (Format YYYYY-MM-DD)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Indicates the end date of the worked days (Format YYYYY-MM-DD)"
+              },
+              {
+                "name": "document_number",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Document Number of the Colaborador"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Colaborador file code"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Page number"
+              }
+            ]
+          },
+          "docs": "Provides information about the days worked for each Colaborador.\n\nA type of Worked Day has the following attributes:\n- employee_id: unique identifier of the Colaborador\n- document_number: Document Number of the Colaborador\n- document_type: Type of Document of the Colaborador\n- code: file code of the Colaborador\n- working_days: total number of days worked\n- working_days_dates: dates of the days worked\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura'.\n"
+        },
+        {
+          "info": {
+            "name": "Create worked days",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/working_days"
+          },
+          "docs": "Save worked days for each Colaborador. The parameters are:\n\n- employee_id: ID of the Colaborador\n- month: Number of the month to which the worked days will be added\n- working_days: a list of worked days for the indicated month. This list should be a sequence of integers, where each number represents a day of the month, separated by commas.\n\nPlease note that the worked days will be saved for the specified month, overwriting the existing entry. In other words, each request will overwrite the worke"
+        },
+        {
+          "info": {
+            "name": "Delete worked days",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/working_days/:employee_id/:monthyear",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "- employee_id: ID of the Colaborador"
+              },
+              {
+                "name": "monthyear",
+                "value": "",
+                "type": "path",
+                "description": "- Date for deleting worked days (Format MM-YYYY)"
+              }
+            ]
+          },
+          "docs": "Deletes the days worked for an Colaborador. The parameters are:\n\n- employee_id: ID of the Colaborador\n- Date for deleting worked days (Format MM-YYYY)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

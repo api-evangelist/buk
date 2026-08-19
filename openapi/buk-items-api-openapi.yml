@@ -1,0 +1,285 @@
+openapi: 3.2.0
+info:
+  title: Buk Items API
+  version: '1.0'
+  description: 'Operations tagged Items across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Items
+paths:
+  /assigns:
+    post:
+      summary: Asignar un ítem
+      description: "No se recomienda el uso de este endpoint para cliente grandes. Para operaciones masivas se recomienda usar el endpoint de **Sincronización datos de pago**.\n\nAsigna un nuevo ítem a un empleado en el sistema.\n\n  - `employee_id`: Id del empleado al cual se asignará un ítem.\n  - `item_id`: Id del ítem el cual se asignará al usuario.\n  - `start_date`: Mes de inicio para esta asignación.\n  - `end_date`: (opcional) Mes de término para esta asignación.\n  - `description`: (opcional) Descripción a mostrar en la liquidación.\n  - `amount`: Monto de la asignación. Requerido sólo para ítems de tipo variable.\n  - `advance_payment_day`: (opcional) Día del mes en el que se paga el ítem si es de tipo anticipo.\n  - `overwrite_existing_assign`: (opcional) [boolean] Indica que se quiere emular el\n    comportamiento del importador masivo. Esto es, permitir sobreescribir la asignación en caso de que ya exista.\n  - `cost_center`: (opcional) [string] Código de la definición de centro de costos, debe estar habilitada la general Habilitar Centro Costo Bonos.\n  - `custom_attrs`: (opcional) [object] Atributos personalizados de la asignación, como pares clave-valor.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Items
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Assign::Create'
+      responses:
+        '200':
+          description: Se devuelve la asignación creada.
+          schema:
+            properties:
+              message:
+                type: string
+              item:
+                $ref: '#/definitions/Assign'
+        '400':
+          description: Faltan datos que son obligatorios.
+        '404':
+          description: El empleado `employee_id` o el bono `item_id` no existen.
+  /assigns/{id}:
+    patch:
+      summary: Editar una asignación
+      description: "Prefiera el uso del endpoint de **Sincronización datos de pago**\n\nSe modifica una Asignación del sistema.\n\nSe debe enviar como JSON un objeto tipo Assign en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n  - `cost_center`: (opcional) [string] Código de la definición de centro de costos, debe estar habilitada la general Habilitar Centro Costo Bonos.\n  - `amount`: Monto de la asignación. Requerido solo para ítems de tipo variable\n  - `custom_attrs`: (opcional) [object] Atributos personalizados de la asignación, como pares clave-valor.\n\nLa asignación tiene que ser de un bono variable para poder cambiar el monto.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Items
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        description: id de la asignación
+        required: true
+        type: string
+      - name: Assign
+        description: Objeto de tipo assign
+        in: body
+        schema:
+          properties:
+            amount:
+              type: integer
+              format: integer
+            cost_center:
+              type: string
+            custom_attrs:
+              type: object
+      responses:
+        '200':
+          description: Respuesta de la api ante el termino de la asignación.
+          schema:
+            properties:
+              message:
+                type: string
+              assign:
+                $ref: '#/definitions/Assign'
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+    delete:
+      summary: Eliminar una asignación
+      description: "Elimina una asignación.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Items
+      parameters:
+      - name: id
+        in: path
+        description: id de la asignación
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Respuesta de la api ante la eliminación de la asignación.
+          schema:
+            properties:
+              deleted:
+                type: boolean
+        '503':
+          description: No se pudo procesar la solicitud. Intente nuevamente.
+          schema:
+            properties:
+              error:
+                type: string
+        '404':
+          description: No Existe el recurso solicitado
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /assigns/{id}/terminate:
+    post:
+      summary: Terminar una asignación de ítem
+      description: "Termina la asignación de un ítem.\n\nSe debe enviar como JSON la fecha de término (opcional) en el cuerpo de la petición,\nen caso de no enviarla su valor será el período actual.\n\nLa fechas deben estar en formato YYYY-MM-DD.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de ítems en: 'Lectura y Modificación'.\n"
+      tags:
+      - Items
+      parameters:
+      - name: id
+        in: path
+        description: id de la asignación
+        required: true
+        type: string
+      - name: Assign
+        description: fecha de término
+        in: body
+        schema:
+          properties:
+            end_date:
+              type: string
+              format: date
+      responses:
+        '200':
+          description: Respuesta de la api ante el termino de la asignación.
+          schema:
+            properties:
+              message:
+                type: string
+        '400':
+          description: Existe un error con los datos enviados
+          schema:
+            $ref: '#/definitions/bad_request'
+  /employees/{id}/assigns:
+    get:
+      summary: Show employee's item assignments
+      description: "Returns the current assignments of an employee along with basic information of the assigned item.\n\nEach assignment consists of:\n- id: unique identifier of the assignment\n- item: item assigned to the employee\n- amount: for items configured with \"different amount per person\", this value corresponds to that entered in the assignment, and for items configured with \"same amount for all\" this value will be the amount of the item entered at its creation. For a formulated item, it represents the value of `item.amount`\n- start_date: start period for this assignment\n- end_date: end period for the assignment\n- custom_attrs: the object includes a custom attribute with its respective value. If there is no custom attribute configured, this will not appear in the response\n\nEach item consists of:\n- id: unique identifier of the item\n- code: item code\n\nThe start date of the period (optional) must be sent as JSON in the body of the request.\n\nThe date must be in YYYY-MM-DD format.\n\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura'.\n* Item permissions en: 'Lectura'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+      tags:
+      - Items
+      parameters:
+      - name: id
+        in: path
+        description: ID of the employee to be queried
+        required: true
+        type: string
+      - name: date
+        in: query
+        description: Filter the active added items for this date
+        format: date
+        type: string
+      - name: page_size
+        in: query
+        type: integer
+        description: '(OPTIONAL) Number of answers per page. By default, it has a value of 25 and must be within a range of [25 - 100].
+
+          '
+      - name: page
+        in: query
+        type: integer
+        description: Page number
+      responses:
+        '200':
+          description: As a response, we receive an array (data) with the information of the added items
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Employee::Assign'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  Assign::Create:
+    properties:
+      employee_id:
+        required: true
+        type: integer
+      item_id:
+        required: true
+        type: integer
+      start_date:
+        required: true
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      description:
+        type: string
+      amount:
+        required: true
+        type: integer
+      advance_payment_day:
+        type: integer
+      overwrite_existing_assign:
+        type: boolean
+        default: false
+      cost_center:
+        type: string
+      custom_attrs:
+        type: object
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  Employee::Assign:
+    properties:
+      id:
+        type: integer
+      item:
+        $ref: '#/definitions/Bono::Minimal'
+      amount:
+        type: number
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      description:
+        type: string
+      custom_attrs:
+        type: object
+  Bono::Minimal:
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+  Assign:
+    properties:
+      id:
+        type: integer
+      item_id:
+        type: integer
+      employee_id:
+        type: integer
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      amount:
+        type: integer
+      advance_payment_day:
+        type: integer
+      description:
+        type: string
+      cost_center:
+        type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

@@ -1,0 +1,149 @@
+openapi: 3.2.0
+info:
+  title: Buk Grupo Familiar API
+  version: '1.0'
+  description: 'Operations tagged Grupo Familiar across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Grupo Familiar
+paths:
+  /cargas/{id}:
+    patch:
+      summary: Actualizar Grupo Familiar
+      description: 'Actualizar Grupo Familiar existente y sus detalles asociados
+
+
+        En el caso de relation: Recibimos el tipo de relación a asignar, este puede ser un string de la siguiente lista:
+
+
+        - Chile/Colombia/México: child, husband, father, mother, other
+
+        - Perú: spouse, concubine, minor_child, student_adult_child, disability_adult_child, pregnant, son_or_daughter, mother, father, other
+
+        - Brasil: spouse, partner_with_children_or_lived_five_years_or_stable_union, child_stepchild, child_stepchild_university_student_or_attending_high_school, sibling_grandson_greatgrandchild_without_support, sibling_grandson_greatgrandson_university_student_without_support, parents_grandparents_greatgrandparents, poor_minor, incapable_person, exspouse, others
+
+
+
+        custom_attributes no pueden ser actualizados a través de este endpoint
+
+
+
+        '
+      tags:
+      - Grupo Familiar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID del Grupo Familiar a actualizar
+        type: integer
+      - name: carga
+        in: body
+        description: Datos de Grupo Familiar a actualizar
+        required: true
+        schema:
+          type: object
+          properties:
+            carga:
+              type: object
+              properties:
+                tramo_asignacion:
+                  type: string
+                carga_simple:
+                  type: integer
+                carga_maternal:
+                  type: integer
+                carga_invalida:
+                  type: integer
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                detalle_cargas_attributes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      first_name:
+                        type: string
+                      first_surname:
+                        type: string
+                      second_surname:
+                        type: string
+                      relation:
+                        type: string
+                      birthday:
+                        type: string
+                        format: date
+                      gender:
+                        type: string
+                      rut:
+                        type: string
+      responses:
+        '200':
+          description: Actualización de Grupo Familiar exitosa
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Mensaje de confirmación
+              carga:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  family_allowance_section:
+                    type: string
+                  simple_family_responsability:
+                    type: integer
+                  maternity_family_responsability:
+                    type: integer
+                  invalid_family_responsability:
+                    type: integer
+                  start_date:
+                    type: string
+                    format: date
+                  end_date:
+                    type: string
+                    format: date
+                  responsability_details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        first_name:
+                          type: string
+                        relation:
+                          type: string
+                        birthday:
+                          type: string
+                          format: date
+        '422':
+          description: Error de validación
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: Grupo Familiar no encontrado
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

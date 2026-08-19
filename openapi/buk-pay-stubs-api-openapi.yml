@@ -1,0 +1,301 @@
+openapi: 3.2.0
+info:
+  title: Buk Pay stubs API
+  version: '1.0'
+  description: 'Operations tagged Pay stubs across 3 of this provider''s published API definitions: buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Pay stubs
+paths:
+  /payroll_detail/month:
+    get:
+      summary: List Pay stubs
+      description: "Displays all Pay stubs for the specified month.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+      tags:
+      - Pay stubs
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive all the details of the Pay stubs for the queried month
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlement'
+  /payroll_detail/semi_month:
+    get:
+      summary: List Pay stubs
+      description: "It displays all the Pay stubs for the specified semi-monthly period.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+      tags:
+      - Pay stubs
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive all the details of the Pay stubs for the semi-monthly period queried
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlement'
+  /payroll_detail/week:
+    get:
+      summary: List Pay stubs
+      description: "It displays all Pay stubs of the specified week.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+      tags:
+      - Pay stubs
+      parameters:
+      - name: date
+        in: query
+        type: string
+        format: date
+        description: The date on which to extract the Pay stubs from the Colaboradores (Format DD-MM-YYYY)
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive all the details of the Pay stubs for the week queried
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlement'
+  /employees/{employee_id}/payroll_detail:
+    get:
+      summary: Show details of the Colaborador
+      description: "We receive the ID or RUT of the Colaborador and an optional date range\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n\n"
+      tags:
+      - Pay stubs
+      parameters:
+      - name: employee_id
+        in: path
+        type: string
+        description: ID or RUT of the applicant being queried. RUT number must be provided without dots and can include or exclude the dash character.
+        required: true
+      - name: period_type
+        in: query
+        type: string
+        format: date
+        description: The type of period you want to query can be weekly, semi_monthly o monthly. It is monthly by default.
+      - name: start
+        in: query
+        type: string
+        format: date
+        description: Pay stub start date (DD-MM-YYYYY format)
+      - name: end
+        in: query
+        type: string
+        format: date
+        description: Pay stub end date (DD-MM-YYYYY format)
+      - name: page_size
+        in: query
+        type: integer
+        description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100]
+      responses:
+        '200':
+          description: As a response, we receive all the details of the queried Colaborador
+          name: data
+          schema:
+            properties:
+              pagination:
+                $ref: '#/definitions/Pagination'
+              nationality:
+                type: string
+              civil_status:
+                type: string
+              private_role:
+                type: boolean
+              code_sheet:
+                type: string
+              pension_regime:
+                type: string
+              pension_fund:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlement'
+  /employees/{id}/statements/{year}-{month}.pdf:
+    get:
+      summary: Pay stub file
+      description: "Obtain the PDF file of the Pay stub of the Colaborador associated with a given month and year.\nObtains the PDF file of the Pay stub of the Colaborador associated with a given month and year.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Employee permissions en: 'Lectura' o 'Lectura y Modificación'.\n* Allow viewing sensitive information en: 'Sí'.\n"
+      tags:
+      - Pay stubs
+      parameters:
+      - name: id
+        in: path
+        type: integer
+        description: ID of the Colaborador
+        required: true
+      - name: year
+        in: path
+        type: integer
+        description: Queried Year
+        required: true
+      - name: month
+        in: path
+        type: integer
+        description: Queried Month (1 - 12)
+        required: true
+      responses:
+        '200':
+          description: Displays the PDF information of the corresponding Pay stub for the month."
+        '400':
+          description: The request sent does not respect the proper format
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: There is no information for the month and year entered
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  Settlement:
+    properties:
+      liquidacion_id:
+        type: integer
+        format: int64
+      person_id:
+        type: integer
+        format: int64
+      employee_id:
+        type: integer
+        format: int64
+      month:
+        type: string
+      year:
+        type: string
+      worked_days:
+        type: number
+        format: float
+      noworked_days:
+        type: number
+        format: float
+      income_gross:
+        type: number
+        format: float
+      income_net:
+        type: number
+        format: float
+      income_afp:
+        type: number
+        format: float
+      income_ips:
+        type: number
+        format: float
+      total_income_taxable:
+        type: number
+        format: float
+      total_income_notaxable:
+        type: number
+        format: float
+      total_legal_discounts:
+        type: number
+        format: float
+      total_other_discounts:
+        type: number
+        format: float
+      closed:
+        type: boolean
+      liquid_reach:
+        type: number
+        format: integer
+      taxable_base:
+        type: number
+        format: integer
+      rut:
+        type: string
+      lines_settlement:
+        type: array
+        items:
+          $ref: '#/definitions/SettlementLine'
+  SettlementLine:
+    properties:
+      type:
+        type: string
+      subtype:
+        type: string
+      income_type:
+        type: string
+      name:
+        type: string
+      amount:
+        type: number
+        format: float
+      resettlement:
+        type: boolean
+      taxable:
+        type: boolean
+      imponible:
+        type: boolean
+      anticipo:
+        type: boolean
+      credit_type:
+        type: string
+      institution:
+        type: string
+      description:
+        type: string
+      code:
+        type: string
+      item_code:
+        type: string
+  Pagination:
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+      count:
+        type: integer
+      total_pages:
+        type: integer
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml

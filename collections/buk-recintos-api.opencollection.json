@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Recintos API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recintos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "recinto",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/informacionRecinto",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Este endpoint proporciona una lista paginada de recintos pertenecientes a una empresa específica. Cada recinto incluye detalles como el nombre, dirección y ubicación."
+        },
+        {
+          "info": {
+            "name": "Show Recintos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/recintos",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "- code: Recinto code (OPTIONAL)"
+              }
+            ]
+          },
+          "docs": "Retrieve information for each Recinto\n\nA Recinto has the following attributes::\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Commune where the Recinto is located (you can check the endpoint GET /locations))\n- city: City\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto\n- address_optional: Description of the address\n- latitude: Latitude of the Recinto\n- longitude: Recinto longitude\n- postcode: Recinto Zip Code\n- integrated_with_ctrl: I"
+        },
+        {
+          "info": {
+            "name": "Create Recinto",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.ctrlit.cl/ctrl/api/recintos"
+          },
+          "docs": "Create a new Recinto in the system. The parameters are:\n\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations)\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto \n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (O"
+        },
+        {
+          "info": {
+            "name": "Upgrade Recinto",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.ctrlit.cl/ctrl/api/recintos/:code",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "- Existing Recinto code"
+              }
+            ]
+          },
+          "docs": "Updates an existing Recinto in the system. The parameters are:\n\nThe entered values will overwrite the data of the Recinto being edited.\n\n- identifier: ID of existing Recinto\n- name: Recinto name (OPTIONAL)\n- code: Recinto code (OPTIONAL)\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations) (OPTIONAL)\n- address_name: Street name of the Recinto (OPTIONAL)\n- address_number: Street number of the Recinto \\ (OPTIONAL)\n- address_optional: Address description (OPTIONAL)\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

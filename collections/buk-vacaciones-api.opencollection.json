@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Vacaciones API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vacaciones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar vacaciones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vacations",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD"
+              },
+              {
+                "name": "end_after",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que terminaron despues de una fecha en YYYY-MM-DD"
+              },
+              {
+                "name": "start_before",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              }
+            ]
+          },
+          "docs": "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear una vacacion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vacations"
+          },
+          "docs": "Crea una nueva vacación en el sistema. Los parámetros son:\n\n- employee_id : Id del empleado\n- start_date : Fecha de inicio del periodo de vacaciones en formato YYYY-MM-DD\n- end_date : Fecha de término del periodo de vacaciones en formato YYYY-MM-DD\n- type: Corresponde al tipo de vacaciones, puede ser: legales, progresivas o dias_administrativos (en caso de estar activadas).\n- percent_day : Corresponde a la fracción del último día del periodo de vacaciones que se considera como tal.\n  Mayor a 0 y"
+        },
+        {
+          "info": {
+            "name": "Borrar una vacación",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/vacations",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "ID del empleado"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio de la vacación"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de término de la vacación"
+              }
+            ]
+          },
+          "docs": "Borrar una vacación específica de acuerdo a el id del empleado, fecha inicio y fecha de término.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar una vacación",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vacations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID de la vacación a consultar"
+              }
+            ]
+          },
+          "docs": "Se muestran toda la información relacionada a vacación solicitada.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Mostrar cantidad de días hábiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vacations/business_days",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio (inclusive, formato YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de término (inclusive, formato YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Recibimos el rango fechas a calcular.\n\nEste endpoint no requiere permisos especiales.\n\n"
+        },
+        {
+          "info": {
+            "name": "Listar Vacaciones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vacations/requested",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) La fecha en la cual deben iniciar las vacaciones en YYYY-MM-DD"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) La fecha tope del periodo de consulta de las vacaciones en YYYY-MM-DD"
+              },
+              {
+                "name": "end_after",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que terminaron después de una fecha en YYYY-MM-DD"
+              },
+              {
+                "name": "start_before",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que empezaron antes de una fecha en YYYY-MM-DD"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Busca las vacaciones que tienen como status algunos de los valores permitidos (submitted, approved, rejected, pre_approved, signature_required)"
+              }
+            ]
+          },
+          "docs": "Retorna todas las vacaciones aprobadas en el sistema, como parámetro (opcional) recibe la fecha (en formato YYYY-MM-DD) de inicio de las vacaciones.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de vacaciones en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

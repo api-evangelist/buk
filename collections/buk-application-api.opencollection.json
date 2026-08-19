@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Application API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recruiting/applications",
+            "params": [
+              {
+                "name": "selection_processes[]",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) IDs of the selection processes to be queried. (Returns applications if they are in at least one selection process)"
+              },
+              {
+                "name": "application_date",
+                "value": "",
+                "type": "query",
+                "description": "(OPTIONAL) Indicate the date of application to be consulted (Format YYYYY-MM-DD)"
+              },
+              {
+                "name": "updated_from",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Indica la fecha inicial de actualización a consultar (Formato YYYY-MM-DD)"
+              },
+              {
+                "name": "updated_to",
+                "value": "",
+                "type": "query",
+                "description": "(OPCIONAL) Indica la fecha final de actualización a consultar (Formato YYYY-MM-DD)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Optional) Number of responses per page. By default, it has a value of 25 and must be within a range of [25 - 100]."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              }
+            ]
+          },
+          "docs": "Display application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Add applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recruiting/applications"
+          },
+          "docs": "Create an application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Update applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/recruiting/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to be updated"
+              }
+            ]
+          },
+          "docs": "Update application\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura y Modificación'.\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

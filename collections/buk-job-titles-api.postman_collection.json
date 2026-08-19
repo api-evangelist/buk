@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "1d81f442-fb69-44ee-a149-4c371f8ecffb",
+      "name": "Job Titles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2887dcf1-c3c3-4cc1-bcb6-4c7e43d12eea",
+          "name": "List job titles",
+          "request": {
+            "name": "List job titles",
+            "description": {
+              "content": "Displays all job titles registered in the system'.\n\nEste endpoint no requiere permisos especiales.\n\n\nDescripción de atributos:\n- `id`: [string] Id del Cargo.\n- `code`: [string] Codigo.\n- `name`: [string] Nombre.\n- `description`: [string] Description.\n- `requirements`: [string] Requisitos.\n- `role_family`: [object] Familia de cargo.\n- `area_ids`: [array] Área al que pertenece el cargo.\n- `custom_attributes`: [object] Atributos personalizados del cargo.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Filter job titles by name",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Filter job titles by code",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "978a91e4-8925-4769-a93e-e1fa76187f35",
+              "name": "As a response, we receive an array (data) with job titles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "code",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d60fbcf-58e4-4ce5-913e-c14247986157",
+          "name": "Create a job title",
+          "request": {
+            "name": "Create a job title",
+            "description": {
+              "content": "Creates a new role in the system. The parameters are:\n- name: Name of the role\n- code: Role code\n- description: Role description (OPTIONAL)\n- requirements: Role requirements (OPTIONAL)\n- area_ids: Role area IDs (OPTIONAL)\n- custom_attributes: Custom attributes of the role (OPTIONAL)\n- role_family_id: Role family ID (OPTIONAL)\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dacebebc-263f-4407-9f18-ebfec64b2af0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a756f3c8-736a-4c8a-969c-578bf596dc9b",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c5560fd-5a91-4333-8b1b-91209a826e3c",
+          "name": "Get a specific role by ID",
+          "request": {
+            "name": "Get a specific role by ID",
+            "description": {
+              "content": "Returns the specific information of the role associated with the provided ID\n\nDescripción de atributos:\n- `id`: [string] Id del Cargo.\n- `code`: [string] Codigo.\n- `name`: [string] Nombre.\n- `description`: [string] Description.\n- `requirements`: [string] Requisitos.\n- `role_family`: [object] Familia de cargo.\n- `area_ids`: [array] Área al que pertenece el cargo.\n- `custom_attributes`: [object] Atributos personalizados del cargo.\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "roles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Job title ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8a2b982-376e-4003-8cc4-ea6be3dcca74",
+              "name": "As a response you will receive a Role",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Job title ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04a1189d-121f-4308-89d7-ae93300ca62b",
+              "name": "Job title not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Job title ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f076b891-559d-4c11-967c-025fe139d19c",
+          "name": "Update a position",
+          "request": {
+            "name": "Update a position",
+            "description": {
+              "content": "Updates an existing role in the system. The parameters are:\n- identifier: Existing role identifier. Can be either the numeric ID or the Role code\n- name: New name of the role (OPTIONAL)\n- description: New description of the role (OPTIONAL)\n- requirements: New requirements of the role (OPTIONAL)\n- active: Role status (OPTIONAL)\n- area_ids: IDs of the new role areas (OPTIONAL)\n- custom_attributes: Custom attributes of the role (OPTIONAL)\n- role_family_id: Role family ID (OPTIONAL)\n\nThe entered values will overwrite the data of the role being edited\n\nIf area_ids does not contain the current ones, they will be removed, leaving only the ones entered.\n\nYou cannot remove the association of an area with a job title that has active jobs.\n\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "roles",
+                ":identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "identifier",
+                  "description": "(Required) - identifier: Existing role identifier. Can be either the numeric ID or the Role code"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "472077f2-a8d9-48fd-b68c-d432c2efc47a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "identifier",
+                      "description": "(Required) - identifier: Existing role identifier. Can be either the numeric ID or the Role code"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8e9b39d-1846-4024-ade7-88fd8682cecb",
+              "name": "There is an error with the data submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles",
+                    ":identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "identifier",
+                      "description": "(Required) - identifier: Existing role identifier. Can be either the numeric ID or the Role code"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "680ffe14-d28f-477d-8881-c3687606e8b4",
+    "name": "Buk Job Titles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Job Titles across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

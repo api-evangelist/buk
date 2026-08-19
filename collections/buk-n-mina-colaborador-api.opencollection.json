@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Nómina Colaborador API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nómina Colaborador",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "nomina",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/obtenerNominaColaborador",
+            "params": [
+              {
+                "name": "obra_id",
+                "value": "",
+                "type": "query",
+                "description": "Identificador único del recinto asociado a los trabajadores. Si se omite, la búsqueda incluirá todos los recintos."
+              },
+              {
+                "name": "dni_colaborador",
+                "value": "",
+                "type": "query",
+                "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Estado de vinculación de los trabajadores con la empresa."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retorna una lista de trabajadores asociados a una empresa específica, incluyendo detalles como DNI, contrato y estado laboral. Se pueden aplicar filtros por ID del recinto y estado del vínculo laboral y por un trabajador."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

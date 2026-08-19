@@ -1,0 +1,107 @@
+{
+  "item": [
+    {
+      "id": "f7551fc4-c57a-4947-92b5-eb5452196d7c",
+      "name": "Lugares de Trabajo",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52867b71-7d60-463c-9cd5-36d46ccc09d8",
+          "name": "Listar Lugares de Trabajo",
+          "request": {
+            "name": "Listar Lugares de Trabajo",
+            "description": {
+              "content": "#<Proc:0x00007f0ab3db4ba0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:10 (lambda)>\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "places"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "[object Object]",
+                    "type": "text/plain"
+                  },
+                  "key": "empresa_id",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff8e9112-07a1-4356-99b5-1c78da9bb536",
+          "name": "Crear Lugares de Trabajo",
+          "request": {
+            "name": "Crear Lugares de Trabajo",
+            "description": {
+              "content": "#<Proc:0x00007f0ab3db3cf0 /usr/src/app/packs/nomina/chile/piecework/app/controllers/api/v1/piecework/places_controller.rb:30 (lambda)>\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "piecework",
+                "places"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aac73baf-5f4b-49c0-9ade-d8cf79a064b4",
+    "name": "Buk Lugares de Trabajo API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Lugares de Trabajo across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

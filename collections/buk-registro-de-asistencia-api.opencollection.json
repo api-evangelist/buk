@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Registro de asistencia API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registro de asistencia",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "asistencia-empresa",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/v2/asistencia-empresa",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "desde",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del rango de consulta. Formato esperado \"DD-MM-AAAA\". Por defecto se usará el dia de ayer."
+              },
+              {
+                "name": "hasta",
+                "value": "",
+                "type": "query",
+                "description": "Fecha finalización del rango de consulta. Formato esperado \"DD-MM-AAAA\". Por defecto se usará el dia de hoy."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (100)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retorna asistencia (jornada) por trabajador, por rango de fechas correspondiente a una empresa y todos sus recintos. El rango de fechas no puede exceder los 35 días. Para empresas con gran cantidad de trabajadores y marcas es posible que se deba usar rangos de fecha mas acotados."
+        },
+        {
+          "info": {
+            "name": "registrar",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.ctrlit.cl/ctrl/api/v2/registrar",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "rut",
+                  "value": ""
+                },
+                {
+                  "name": "i",
+                  "value": ""
+                },
+                {
+                  "name": "fecha",
+                  "value": ""
+                },
+                {
+                  "name": "hora",
+                  "value": ""
+                },
+                {
+                  "name": "utc",
+                  "value": ""
+                },
+                {
+                  "name": "mov",
+                  "value": ""
+                },
+                {
+                  "name": "lat",
+                  "value": ""
+                },
+                {
+                  "name": "lng",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Registra una marca de asistencia (entrada o salida) de un trabajador en un recinto. Posee autenticación por token de empresa (header `token`). El recinto identificado por `id` debe pertenecer a la misma empresa que el token, en caso contrario se devuelve 403.\n\n### Comportamiento de fecha/hora/utc\n\nLos parámetros `fecha` y `hora` son obligatorios. El parámetro `utc` es opcional pero, cuando se envía, **prevalece** sobre `fecha`/`hora` para determinar el instante del marcaje:\n\n- Si se envía `utc` "
+        },
+        {
+          "info": {
+            "name": "registroAsistencia",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.ctrlit.cl/ctrl/api/obtenerRegistroAsistencia",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "obra_id",
+                "value": "",
+                "type": "query",
+                "description": "Identificador único del recinto asociado a los trabajadores."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del rango de consulta para las inasistencias. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Fecha finalización del rango de consulta para las inasistencia. Formato esperado \"DD-MM-AAAA\""
+              },
+              {
+                "name": "dni_colaborador",
+                "value": "",
+                "type": "query",
+                "description": "DNI del colaborador para filtrar la búsqueda. Si se omite, se incluirán todos los trabajadores."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Número de la página. Si no se proporciona, se asume la primera página (1)."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Tamaño de la página, con un valor máximo permitido de 100. Si no se proporciona, se utiliza un tamaño de página predeterminado (25)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retorna un listado de las de los registros de los trabajadores de un recinto especifico en un rango de fechas. El rango de fechas no puede exceder los 35 días. Ademas, se puede filtrar la lista por el DNI del coloborador."
+        },
+        {
+          "info": {
+            "name": "registroAsistenciaPost",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.ctrlit.cl/ctrl/api/inyectarRegistroAsistencia",
+            "params": [
+              {
+                "name": "obra_id",
+                "value": "",
+                "type": "query",
+                "description": "Identificador único del recinto asociado a los trabajadores."
+              },
+              {
+                "name": "dni_colaborador",
+                "value": "",
+                "type": "query",
+                "description": "DNI del trabajador a quien se le efectuara la marca."
+              },
+              {
+                "name": "jornada",
+                "value": "",
+                "type": "query",
+                "description": "Fecha de inicio del turno del trabajador. Este parámetro define el día en que comienza el turno laboral, independientemente de si el turno se extiende al día siguiente (como en turnos nocturnos). Se espera que la fecha se proporcione en el formato \"DD-MM-AAAA\". Este parámetro es crucial para identificar correctamente el ciclo de trabajo al que la marca pertenece."
+              },
+              {
+                "name": "fecha",
+                "value": "",
+                "type": "query",
+                "description": "Fecha real en la que se realiza la marca en el registro de asistencia. Para turnos que no se extienden más allá de la medianoche, este parámetro será el mismo que el de la jornada. Sin embargo, en el caso de turnos que cruzan la medianoche, este parámetro debe reflejar el día siguiente al de la jornada. También se espera en formato \"DD-MM-AAAA\"."
+              },
+              {
+                "name": "hora",
+                "value": "",
+                "type": "query",
+                "description": "Hora en la cual se ejecuta la marca Formato esperado \"HH:MM\""
+              },
+              {
+                "name": "sentido",
+                "value": "",
+                "type": "query",
+                "description": "Sentido en cual se efectuara la marca."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Este endpoint permite registrar una nueva marca manual de asistencia, ya sea de entrada o salida, para un trabajador específico en un recinto determinado. Requiere especificar el DNI del colaborador, la fecha y hora de la marca, y si se trata de una entrada o salida. Este endpoint solo se puede usar si se tiene el flujo de marca inactivo (confirmación de marca para el trabajador)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

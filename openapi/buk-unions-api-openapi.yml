@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  title: Buk Unions API
+  version: '1.0'
+  description: 'Operations tagged Unions across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Unions
+paths:
+  /unions/{id}:
+    get:
+      summary: Show union
+      description: 'We received the information related to the union whose ID we sent in the query.
+
+        Este endpoint no requiere permisos especiales.'
+      tags:
+      - Unions
+      parameters:
+      - name: id
+        in: path
+        description: Union ID
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: As a response, we received the information corresponding to the queried union
+          schema:
+            $ref: '#/definitions/union'
+  /unions:
+    get:
+      summary: Show unions
+      description: 'We received information related to unions
+
+
+        Este endpoint no requiere permisos especiales.'
+      tags:
+      - Unions
+      parameters:
+      - name: page_size
+        in: query
+        type: integer
+        description: Page size
+      - name: page
+        in: query
+        type: integer
+        description: Page number
+      responses:
+        '200':
+          description: As a response, we received the corresponding information for all unions.
+          schema:
+            $ref: '#/definitions/union'
+    post:
+      summary: Create a union
+      description: "Create a new union in the system. The parameters are: \n\n - id : Union ID\n\n - name: Union name\n\n - rut: Union's RUT\n\nEste endpoint no requiere permisos especiales."
+      tags:
+      - Unions
+      parameters:
+      - name: union
+        in: body
+        description: Parameters of a union
+        required: true
+        schema:
+          $ref: '#/definitions/approved_union'
+      responses:
+        '201':
+          description: Response in case a union has been successfully created
+          schema:
+            properties:
+              union:
+                $ref: '#/definitions/union_detail'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+  /unions/update:
+    put:
+      summary: Update union information
+      description: 'Allows you to specify the new name and RUT of a union.
+
+
+        Este endpoint no requiere permisos especiales.'
+      tags:
+      - Unions
+      parameters:
+      - name: union
+        description: Union-type object
+        in: body
+        schema:
+          $ref: '#/definitions/union_request'
+      responses:
+        '200':
+          description: Response to union replacement
+          schema:
+            properties:
+              message:
+                type: string
+              union:
+                $ref: '#/definitions/union_response'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+definitions:
+  union:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      rut:
+        type: string
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  union_detail:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      rut:
+        type: string
+  approved_union:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      rut:
+        type: string
+    required:
+    - id
+    - name
+    - rut
+  union_request:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      rut:
+        type: string
+    required:
+    - id
+    - name
+    - rut
+  union_response:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      rut:
+        type: string
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

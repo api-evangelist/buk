@@ -1,0 +1,724 @@
+{
+  "item": [
+    {
+      "id": "37afa2fb-351f-4233-9591-66afc8b6e18b",
+      "name": "Áreas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5330f296-87eb-4f12-8754-7ffb7f24235d",
+          "name": "Listar áreas",
+          "request": {
+            "name": "Listar áreas",
+            "description": {
+              "content": "Crea una nueva Área en el sistema.\n\nEste endpoint no requiere permisos especiales.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "areas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Filtra los resultados por el estado del área. (This can only be one of active,inactive,both)",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Número de página",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "139c0c03-aaaf-45d1-be1e-212a1252c292",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de las áreas",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83abf0d5-d4f6-417f-a8c8-9d1e85740ec0",
+          "name": "Obtener un área en especifico por ID",
+          "request": {
+            "name": "Obtener un área en especifico por ID",
+            "description": {
+              "content": "Retorna el área correspodiente al ID\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "areas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del área a consultar"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfe86662-ed64-4add-a34a-846b11a9977f",
+              "name": "Como respuesta recibirás un área",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "areas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del área a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0d8a82b-ec79-412f-92f4-bb77a8fe3ae1",
+          "name": "Listar áreas",
+          "request": {
+            "name": "Listar áreas",
+            "description": {
+              "content": "Retorna todas las áreas, incluyendo las de nivel 0 y nivel 1.\n\n\nDescripción de Atributos:\n- `id`: [string] Id del Área.\n- `name`: [string] Nombre del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `children_area`: [object] Objeto con Área hijas.\n- `parent_area`: [object] Objeto con Área padre.\n- `first_level_id`: [string] Id del área de primer nivel del Área.\n- `first_level_name`: [string] Nombre del área de primer nivel del Área.\n- `second_level_id`: [string] Id del área de segundo nivel del Área.\n- `second_level_name`: [string] Nombre del área de segundo nivel del Área.\n- `depth`: [string] Nivel de Área.\n- `cost_center`: [object] Centro de costo.\n- `status`: [string] Estado del Área (activo o inactivo).\n- `custom_attributes`: [string] Atributos personalizados.\n- `city`: [string] Ciudad del Área.\n\nEste endpoint no requiere permisos especiales.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "areas",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Filtra los resultados por el estado del área. (This can only be one of active,inactive,both)",
+                    "type": "text/plain"
+                  },
+                  "key": "status",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Número de página",
+                    "type": "text/plain"
+                  },
+                  "key": "page",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fdeca22-efcf-45c4-a005-9f4e10a1418c",
+              "name": "Como respuesta recibimos un arreglo (data) con la información de las áreas",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    },
+                    {
+                      "key": "page",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28ade58d-cccc-4ce9-a69a-713417df7d0e",
+          "name": "Obtener un área en especifico por ID",
+          "request": {
+            "name": "Obtener un área en especifico por ID",
+            "description": {
+              "content": "Retorna el área correspodiente al ID, incluyendo aquellas de nivel 0 y nivel 1.\n\n\nDescripción de Atributos:\n- `id`: [string] Id del Área.\n- `name`: [string] Nombre del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `children_area`: [object] Objeto con Área hijas.\n- `parent_area`: [object] Objeto con Área padre.\n- `first_level_id`: [string] Id del área de primer nivel del Área.\n- `first_level_name`: [string] Nombre del área de primer nivel del Área.\n- `second_level_id`: [string] Id del área de segundo nivel del Área.\n- `second_level_name`: [string] Nombre del área de segundo nivel del Área.\n- `depth`: [string] Nivel de Área.\n- `cost_center`: [object] Centro de costo.\n- `status`: [string] Estado del Área (activo o inactivo).\n- `custom_attributes`: [string] Atributos personalizados.\n- `city`: [string] Ciudad del Área.\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "areas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del área a consultar"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e40761a0-14b0-41e6-ac36-2b7371c0373a",
+              "name": "Como respuesta recibirás un área",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del área a consultar"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef97665-a427-482a-9bdb-c62877ef987c",
+          "name": "Actualizar un área por ID",
+          "request": {
+            "name": "Actualizar un área por ID",
+            "description": {
+              "content": "Edita un Área en el sistema.\n- `name`: [string] Nombre del Área.\n- `accounting_prefix`: [string] Prefijo costos.\n- `city`: [string] Ciudad del Área.\n- `address`: (opcional) [string] Dirección del Área.\n- `cost_center_id`: [string] Id del centro de costo [string] Dirección del Área.\n- `location_id`: [integer] Id de la Location del Área.\n- `role_ids`: [array] Ids de los roles del Área.\n- `custom_attrs`: [object] Objeto con atributo custom y valor.\n- `active`: [boolean] Estado del Área.\n\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "areas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) ID del área a consultar"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "122ec7d8-d8f9-46ac-936e-8c1b6f417c35",
+              "name": "Como respuesta recibirás un área",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) ID del área a consultar"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b87deeb-fbd9-4446-b36e-a993620f1f82",
+          "name": "Crear Área",
+          "request": {
+            "name": "Crear Área",
+            "description": {
+              "content": "Crea una nueva Área en el sistema.\n- `parent_id`: [string] Id del Área padre.\n- `name`: [string] Nombre del Área a crear.\n- `accounting_prefix`: [string] Prefijo costos.\n- `city`: [string] Ciudad del Área a crear.\n- `address`: (opcional) [string] Dirección del Área a crear.\n- `cost_center_id`: [string] Id del centro de costo.\n- `location_id`: [integer] Id de la Location del Área a crear.\n- `role_ids`: [array] Ids de los roles del Área a crear.\n- `custom_attrs`: [object] Objeto con atributo custom y valor.\n\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "areas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d1d9624-40df-4197-bacf-69a0a9ac21b2",
+              "name": "Como respuesta recibirás un área",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "653fdec3-3e0f-42a6-ab11-8a7e74748ceb",
+              "name": "Existe un error con los datos enviados",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb22b0e5-f8a2-47de-8437-aa646fc19dc3",
+              "name": "No Existe el recurso solicitado",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9220fca8-870b-4ec8-bd7f-af13dd32f4e0",
+          "name": "Eliminar áreas por ID",
+          "request": {
+            "name": "Eliminar áreas por ID",
+            "description": {
+              "content": "Elimina Áreas en el sistema. - `id`: Id del Área.\nEste endpoint no requiere permisos especiales.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organization",
+                "areas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(Required) Elimina Áreas en el sistema. - `id`: Id del Área.",
+                    "type": "text/plain"
+                  },
+                  "key": "id",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3850790-4705-4f22-bb5b-e6376f66063c",
+              "name": "Recibirás una respuesta de éxito o de error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e2a034e-46ae-49b9-b786-ea1ec5418565",
+              "name": "Cuando hay un error al borrar un registro",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1712e025-a522-4b2a-8324-c416897ad203",
+              "name": "Cuando no hay recursos permitidos que borrar",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organization",
+                    "areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "09c6d013-c688-4d41-9d30-51b429c96dbb",
+    "name": "Buk Áreas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Áreas across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

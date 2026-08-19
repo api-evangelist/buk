@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Usuarios y perfiles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usuarios y perfiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mostrar Perfiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/permission_roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "ID del perfil"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Nombre"
+              }
+            ]
+          },
+          "docs": "Entrega la información de todos los perfiles disponibles.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de usuarios y perfiles en: 'Lectura' o 'Lectura y Modificación'.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

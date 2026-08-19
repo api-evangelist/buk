@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "fac6b15c-acaf-4344-91cb-d05f9256085d",
+      "name": "Períodos",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48c07164-727a-4d9e-b4a5-7fcc9a97b030",
+          "name": "Listar períodos",
+          "request": {
+            "name": "Listar períodos",
+            "description": {
+              "content": "Retorna todos los períodos de la aplicación con sus datos y estado correspondiente.\n\nEste endpoint no requiere permisos especiales.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "process_periods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "(OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]",
+                    "type": "text/plain"
+                  },
+                  "key": "page_size",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3ef40e2-08b4-4df5-b79b-20f676bf61ce",
+              "name": "Como respuesta recibimos un arreglo (data) con todos los períodos de la aplicación",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "process_periods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d03d8cc7-0d13-4ea4-aada-6529a3866d0c",
+    "name": "Buk Períodos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Períodos across 5 of this provider's published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

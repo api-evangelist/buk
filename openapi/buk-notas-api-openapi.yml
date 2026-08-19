@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  title: Buk Notas API
+  version: '1.0'
+  description: 'Operations tagged Notas across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+host: demo.buk.cl
+tags:
+- name: Notas
+paths:
+  /recruiting/notes:
+    post:
+      summary: Add comment
+      description: "Create a new comment associated with an applicant using their email\n\n**Permisos requeridos para utilizar este endpoint:** \n* Selection permissions en: 'Lectura'.\n"
+      tags:
+      - Notas
+      parameters:
+      - name: note
+        in: body
+        description: Comment parameters
+        required: true
+        schema:
+          title: RequestBody
+          properties:
+            note:
+              $ref: '#/definitions/NoteInput'
+      responses:
+        '201':
+          description: Comment successfully created
+          schema:
+            title: ResponseBody
+            properties:
+              note:
+                $ref: '#/definitions/NoteCreated'
+        '400':
+          description: There is an error with the data submitted
+          schema:
+            $ref: '#/definitions/bad_request'
+        '404':
+          description: The requested resource does not exist
+          name: errors
+          schema:
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+definitions:
+  bad_request:
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  NoteInput:
+    required:
+    - message
+    - email
+    - referrer
+    type: object
+    description: Datos para crear un comentario
+    properties:
+      message:
+        example: {}
+        type: string
+        description: Mensaje del comentario
+      email:
+        example: {}
+        type: string
+        format: email
+        description: E-mail del postulante
+      process_stage_name:
+        example: {}
+        type: string
+        description: Nombre de la etapa del proceso
+      process_stage_id:
+        example: 123
+        type: integer
+        description: Id de la etapa del proceso
+      score:
+        example: 10
+        type: integer
+        description: Puntaje dado al postulante
+      referrer:
+        example: portal
+        type: string
+        description: Origen del comentario, Tipos soportados (internal, external, diio)
+      selection_process_id:
+        example: 123
+        type: integer
+        description: Id del proceso de selección
+  NoteCreated:
+    type: object
+    description: Comentario creado exitosamente
+    properties:
+      id:
+        example: 123
+        type: integer
+        description: Id del comentario
+      message:
+        example: {}
+        type: string
+        description: Mensaje del comentario
+      postulante_id:
+        example: 123
+        type: integer
+        description: Id del postulante
+      created_at:
+        example: '2024-01-01T12:00:00Z'
+        type: string
+        format: date-time
+        description: Fecha de creación del comentario
+securityDefinitions:
+  auth_token:
+    type: apiKey
+    name: auth_token
+    in: header
+x-refined-from:
+- buk-data-access-api-brasil-openapi.yml
+- buk-data-access-api-chile-openapi.yml
+- buk-data-access-api-colombia-openapi.yml
+- buk-data-access-api-mexico-openapi.yml
+- buk-data-access-api-peru-openapi.yml

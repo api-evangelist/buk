@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buk Registros de Trabajo API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registros de Trabajo",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Listar Registros de Trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/piecework/worklogs",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "(Opcional) ID del empleado asociado al Registro de Trabajo"
+              },
+              {
+                "name": "variable_id",
+                "value": "",
+                "type": "query",
+                "description": "(Opcional) ID del periodo asociado al Registro de Trabajo"
+              },
+              {
+                "name": "empresa_id",
+                "value": "",
+                "type": "query",
+                "description": {}
+              },
+              {
+                "name": "area_id",
+                "value": "",
+                "type": "query",
+                "description": "(Opcional) ID del área a la que pertenece el empleado asociado al Registro de Trabajo"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "(Opcional) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]\n"
+              }
+            ]
+          },
+          "docs": "'Retornar Registros de Trabajo'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+        },
+        {
+          "info": {
+            "name": "Crear Registro de Trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/piecework/worklogs"
+          },
+          "docs": "Crea un nuevo Registro de Trabajo en el sistema. Los parámetros son:\n  - day: Fecha del trato en formato YYYY-MM-DD.\n  - employee_id: ID del empleado.\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - overwrite_existing: [boolean] (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_"
+        },
+        {
+          "info": {
+            "name": "Editar un Registro de Trabajo",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/piecework/worklogs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID del registro de trabajo a modificar."
+              }
+            ]
+          },
+          "docs": "Edita un Registro de Trabajo existente en el sistema. Los parámetros son:\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_pay: [boolean] (Opcional)\n  - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (aus"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
