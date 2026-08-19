@@ -38,7 +38,7 @@ tags:
 - Webhooks
 created: '2026-08-08'
 modified: '2026-08-08'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
 - aid: buk:buk-absences-requests-api
   name: Buk Absences requests API
