@@ -34,6 +34,19 @@ tags:
 - Employee Records
 - Latin America
 - Chile
+- Software-as-a-Service
+- Webhook
+tags_raw:
+- Human Resources
+- Payroll
+- HR Tech
+- Time and Attendance
+- Benefits
+- Recruiting
+- Performance Management
+- Employee Records
+- Latin America
+- Chile
 - SaaS
 - Webhooks
 created: '2026-08-08'
@@ -839,6 +852,8 @@ apis:
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
+  - Item
+  tags_raw:
   - Items
   properties:
   - type: OpenAPI
@@ -905,6 +920,8 @@ apis:
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -1235,6 +1252,8 @@ apis:
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
+  - Paystubs
+  tags_raw:
   - Pay stubs
   properties:
   - type: OpenAPI
