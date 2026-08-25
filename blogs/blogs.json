@@ -9,13 +9,20 @@
       "method": "none"
     },
     {
+      "source": "https://www.buk.cl/blog/rss.xml",
+      "feed_url": "https://www.buk.cl/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.buk.cl/blog",
       "feed_url": "https://www.buk.cl/blog/rss.xml",
       "title": "",
-      "saved": 5,
+      "saved": 0,
       "method": "discovered"
     }
   ],
-  "post_count": 5,
-  "fetched": "2026-08-15T12:22:01Z"
+  "post_count": 15,
+  "fetched": "2026-08-22T20:20:02Z"
 }
