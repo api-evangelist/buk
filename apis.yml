@@ -22,6 +22,18 @@ description: >-
   workspace, no status page, no sandbox, no /.well-known/ surface, no MCP server, no
   operationId on any of 206 operations, and no documented rate limit or 429 response. The
   contract is public; the program around it is not built yet.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.buk.cl/hubfs/logo-buk.svg
 tags:
 - Human Resources
