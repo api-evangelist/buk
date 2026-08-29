@@ -2258,6 +2258,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/buk-capability-edges.yml
+  name: Buk Business Capability Map
 - type: DomainSecurity
   url: security/buk-domain-security.yml
 - type: Website

@@ -1,0 +1,353 @@
+slug: buk
+provider: Buk
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 35
+edges:
+- tag: Postulante
+  spec_file: buk-postulante-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.95
+  evidence: POST /recruiting/applicants    Add applicant; GET /recruiting/applicants/{id}/applications    List
+    applications by applicant
+  reason: Applicant creation, lookup and application listing under /recruiting — plainly recruiting/hiring,
+    i.e. Talent Acquisition Management.
+- tag: Selection process
+  spec_file: buk-selection-process-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.93
+  evidence: GET /recruiting/selection_processes "List selection processes"
+  reason: Recruiting selection processes are plainly talent acquisition (sourcing, recruiting, hiring)
+    within the employee lifecycle.
+- tag: Evaluations
+  spec_file: buk-evaluations-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.9
+  evidence: GET /talent/evaluation_processes  Show performance evaluations; GET /talent/evaluation_process/{id}/results/goals
+  reason: Performance evaluation processes with competency and objective results is squarely talent/performance
+    management.
+- tag: Application
+  spec_file: buk-application-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: POST /recruiting/applications    Add applications; GET /recruiting/applications    List the
+    applications.
+  reason: Job applications under /recruiting are the recruiting/hiring pipeline — Talent Acquisition Management,
+    not software applications.
+- tag: Benefits
+  spec_file: buk-benefits-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.88
+  evidence: GET /benefits/benefit_requests    List all benefit requests
+  reason: Employee benefit requests and benefit versions on an HR/payroll platform realise Compensation
+    & Benefits Management.
+- tag: Pay stubs
+  spec_file: buk-pay-stubs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.88
+  evidence: GET /payroll_detail/month    List Pay stubs; GET /employees/{id}/statements/{year}-{month}.pdf    Pay
+    stub file
+  reason: Operations list payroll details and produce per-employee pay stub PDFs — payroll administration
+    within Human Capital Management.
+- tag: Applicant
+  spec_file: buk-applicant-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: PATCH /recruiting/applicants/{id}    Update applicants.
+  reason: Recruiting applicant records are Talent Acquisition Management within HCM.
+- tag: Colaboradores
+  spec_file: buk-colaboradores-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /employees, POST /employees Create an Colaborador, GET /employees/{id}/vacations_available,
+    GET /employees/{employee_id}/family_responsibilities/{id} Display Dependents of a Colaborador
+  reason: CRUD over employee master records including dependents, vacation balances and pension savings
+    — core HR operations / employee record administration.
+- tag: Payment documents
+  spec_file: buk-payment-documents-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /payroll_detail/week    List Payment documents; GET /employees/{id}/statements/{year}-{month}.pdf    Payment
+    document file
+  reason: Despite the generic 'Payment documents' name, the paths are payroll_detail and per-employee
+    monthly statements — the Brazil/Peru naming of pay stubs, i.e. payroll administration, not accounts
+    payable.
+- tag: Unions
+  spec_file: buk-unions-api-openapi.yml
+  capability_id: BC-300.80
+  capability_id_l1: BC-300
+  capability_name: Employee & Labour Relations
+  confidence: 0.85
+  evidence: POST /unions "Create a union"; PUT /unions/update "Update union information"
+  reason: Records and maintains trade-union entities and their information for employees, which is the
+    employee & labour relations sub-capability.
+- tag: Capacitaciones
+  spec_file: buk-capacitaciones-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.8
+  evidence: GET /training/sence_percents    Mostrar tramo sence de todos los empleados
+  reason: '''Capacitaciones'' endpoints under /training expose employee training (SENCE training-franchise
+    brackets) — Learning & Development Management.'
+- tag: Dismissal
+  spec_file: buk-dismissal-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.8
+  evidence: POST /jobs/{id}/termination  Create dismissal; schemas Finiquito, FiniquitoDescuentos, FiniquitoHaberes
+  reason: Employment termination and settlement (finiquito) calculation is clearly human capital management;
+    ambiguous between HR operations (settlement payroll) and labour relations, so no L2 asserted.
+- tag: Jobs
+  spec_file: buk-jobs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /jobs/events/hires 'List job records of the Colaboradores'; GET /jobs/events/terminations
+    'List terminations'; PATCH /jobs/{id}/undo_terminate 'Termination cancelation'
+  reason: Employment record events — hires, movements, terminations — for employees ('Colaboradores').
+    This is core employee-record lifecycle administration, i.e. HR Operations Management.
+- tag: Procesos
+  spec_file: buk-procesos-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: POST /process    Crear un nuevo proceso de nómina
+  reason: Creates, reads and deletes payroll processes ('proceso de nómina') — payroll run administration
+    within HR Operations Management.
+- tag: Unexcused absence
+  spec_file: buk-unexcused-absence-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: '"List time off types", "Create a time off type", "Create unjustified Time Off", "Delete Time
+    Off Leaves"'
+  reason: Full CRUD over time-off types and leave records — absence administration, an HR operations service
+    of the employee lifecycle.
+- tag: Vacaciones
+  spec_file: buk-vacaciones-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: POST /vacations Crear una vacacion; GET /vacations/requested Listar Vacaciones; GET /vacations/business_days
+    Mostrar cantidad de días hábiles
+  reason: Full CRUD over employee vacation records plus working-day calculation and requested-leave listing;
+    the vendor is explicitly an HR/payroll platform covering 'absence and vacation management'. Absence/leave
+    administration sits in HR Operations; L2 slightly less certain than the L1.
+- tag: Absences requests
+  spec_file: buk-absences-requests-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /absences/permission    List absence requests; POST /absences/permission    Create Absence
+    Request
+  reason: Absence/leave request administration on an HR & payroll platform is core HR operations (employee
+    records, leave administration) within Human Capital Management.
+- tag: Horas no trabajadas
+  spec_file: buk-horas-no-trabajadas-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /attendances/non-worked-hours/types 'Listar tipos de horas no trabajadas'; POST 'Crear
+    una tipo de Hora no Trabajada'
+  reason: Configuration and retrieval of non-worked-hour types under /attendances — attendance/absence
+    administration on an HR and payroll platform, which is HR Operations Management.
+- tag: Leaves
+  spec_file: buk-leaves-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /absences/licence 'List leaves'; POST /absences/licence 'Create a leave'; GET /absences/licence/types
+    'Listar tipos de leaves'
+  reason: Leave/licence records and types under /absences on an HR and payroll platform whose scope includes
+    'absence and vacation management' — absence administration, i.e. HR Operations Management.
+- tag: Non-Worked Hours
+  spec_file: buk-non-worked-hours-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /attendances/non-worked-hours 'List non-worked hours'; POST 'Add non-worked hours'; GET
+    /attendances/non-worked-hours/{id} 'View a non-working time record'
+  reason: Recording and retrieval of non-worked time records under /attendances on an HR/payroll platform
+    — time-and-attendance administration feeding payroll, which is HR Operations Management.
+- tag: Registro de asistencia
+  spec_file: buk-registro-de-asistencia-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: '"integración con Buk Asistencia"; POST /v2/registrar, GET /obtenerRegistroAsistencia (registroAsistencia)'
+  reason: Endpoints record and retrieve employee attendance records for a company — time & attendance
+    data capture, an HR operations/administration function of this HR-payroll platform.
+- tag: Clockings
+  spec_file: buk-clockings-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: POST /v1/clockings  createClocking  Create attendance clocking — "Public Attendance API for
+    integrating biometric devices ... submit attendance clockings"
+  reason: Time-and-attendance capture for employees on an HR/payroll platform; sits within HR operations
+    (employee time records feeding payroll), not a generic IoT/device capability.
+- tag: Days worked
+  spec_file: buk-days-worked-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /working_days  Show Worked Days; POST /working_days  Create worked days
+  reason: Recording of days worked per employee per month on a payroll platform — HR operations input
+    to payroll administration.
+- tag: Job Titles
+  spec_file: buk-job-titles-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.75
+  evidence: GET /roles 'List job titles'; POST /roles 'Create a job title'; PATCH /roles/{identifier}
+    'Update a position'
+  reason: CRUD over job titles/positions in an HR platform — job and position structure master data, part
+    of Human Capital Management. Ambiguous between HR operations and workforce/organisation design, so
+    L2 left null.
+- tag: Nómina Colaborador
+  spec_file: buk-n-mina-colaborador-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /obtenerNominaColaborador  nomina
+  reason: Retrieves the employee payroll roster ('nómina colaborador') from an HR/payroll platform; payroll
+    administration sits in HR Operations Management.
+- tag: Overtime
+  spec_file: buk-overtime-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /attendances/overtime    List overtime; GET /attendances/overtime/types    List types
+    of overtime hours
+  reason: Time-and-attendance overtime records and overtime hour types on an HR/payroll platform — employee
+    time administration feeding payroll, i.e. HR operations.
+- tag: Synchronization of payment data
+  spec_file: buk-synchronization-of-payment-data-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: POST /employees/{employee_id}/payment_data/{period_id} "Crea o actualiza las asignaciones
+    y sobretiempos de un determinado Colaborador"
+  reason: Loads per-employee allowances and overtime for a payroll period — payroll administration input,
+    an HR operations capability.
+- tag: Horas extras
+  spec_file: buk-horas-extras-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.72
+  evidence: GET /obtenerHorasExtras  horasExtras — 'integración con Buk Asistencia' (time & attendance)
+  reason: Retrieval of employee overtime hours from the HR/payroll vendor's attendance API; this is time-and-attendance
+    record keeping feeding payroll, i.e. HR operations within Human Capital Management. No other capability
+    fits an overtime-hours feed.
+- tag: Inasistencia
+  spec_file: buk-inasistencia-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.72
+  evidence: GET /obtenerInasistencias  inasistencia (Buk Asistencia integration)
+  reason: Absence records retrieval from the attendance module of an HR/payroll platform; absence administration
+    is HR operations within Human Capital Management.
+- tag: Notas
+  spec_file: buk-notas-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.72
+  evidence: POST /recruiting/notes    Add comment
+  reason: Single operation adds notes/comments under the recruiting path of an HR platform, i.e. recruiter
+    annotations on candidates — talent acquisition rather than a generic commenting utility, though the
+    surface is thin.
+- tag: Time Off Leaves
+  spec_file: buk-time-off-leaves-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.72
+  evidence: GET /absences "List unexcused absences"
+  reason: Absence/leave records administration within the vendor's stated "absence and vacation management"
+    scope — HR operations record-keeping.
+- tag: Centralized accounting
+  spec_file: buk-centralized-accounting-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.7
+  evidence: GET /accounting    Centralized accounting; GET /ledger_account    List accounts; GET /accounting/export_detail    Accounting
+    by Pay Stub
+  reason: Ledger account listing and accounting exports of payroll postings map to General Ledger Management;
+    some ambiguity as it is payroll-derived accounting output.
+- tag: Documents
+  spec_file: buk-documents-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: POST /employees/{id}/docs  Add a document to employee; POST /docs/{id}/signatures/process  Start
+    document signature workflow
+  reason: Employee document files and signature workflow attached to employee records — HR employee record
+    administration; the signature workflow is a means, not a separate business capability.
+- tag: Payrolls
+  spec_file: buk-payrolls-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: 'POST /jobs/{id}/termination    Create Payroll; schemas: FiniquitoBase, Finiquito, FiniquitoDescuentos,
+    FiniquitoHaberes'
+  reason: Operations create and retrieve the termination settlement ('finiquito') with earnings and deductions
+    for a job — final-pay payroll calculation, an HR operations/payroll administration function.
+- tag: Termination processes
+  spec_file: buk-termination-processes-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: GET /jobs/{id}/termination "Obtain termination process"; POST "Create Termination process"
+  reason: Manages employee termination/settlement processes against a job record — employee lifecycle
+    administration by this HR platform; could alternatively be labour relations, hence moderate confidence.
