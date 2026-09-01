@@ -1264,7 +1264,7 @@ apis:
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
-  - Pay stubs
+  - Paystubs
   tags_raw:
   - Pay stubs
   properties:
