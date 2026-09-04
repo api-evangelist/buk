@@ -34,6 +34,19 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://www.buk.cl/hubfs/logo-buk.svg
 tags:
 - Human Resources
@@ -2333,8 +2346,9 @@ common:
 - type: WellKnown
   url: well-known/buk-well-known.yml
   name: /.well-known/ probe results across six Buk hosts
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/buk-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
   name: Candidate MCP tool surface derived from the contracts (Buk publishes no MCP server)
 - type: ToolCrosswalk
   url: mcp/buk-tool-crosswalk.yml
