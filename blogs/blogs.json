@@ -2,6 +2,13 @@
   "repo": "buk",
   "feeds": [
     {
+      "source": "https://www.buk.cl/blog",
+      "feed_url": "https://www.buk.cl/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
       "source": "https://supportcenter.buk.cl/hc/es-419",
       "feed_url": "https://supportcenter.buk.cl/hc/es-419",
       "title": "",
@@ -13,22 +20,11 @@
       "feed_url": "https://www.buk.cl/blog/rss.xml",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
-    },
-    {
-      "source": "https://www.buk.cl/blog",
-      "feed_url": "https://www.buk.cl/blog/rss.xml",
-      "title": "",
-      "saved": 0,
-      "method": "discovered",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
+      "method": "feed"
     }
   ],
-  "post_count": 22,
-  "fetched": "2026-08-30T22:33:40Z",
+  "post_count": 28,
+  "fetched": "2026-09-06T19:17:18Z",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
