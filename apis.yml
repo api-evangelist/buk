@@ -507,39 +507,6 @@ apis:
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
   - type: APIReference
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-- aid: buk:buk-dismissal-api
-  name: Buk Dismissal API
-  description: The Dismissal API from Buk — 1 operation(s) for dismissal.
-  humanURL: https://demo.buk.cl/apidocs
-  baseURL: https://demo.buk.cl/api/v1/chile
-  tags:
-  - Dismissal
-  properties:
-  - type: OpenAPI
-    url: openapi/buk-dismissal-api-openapi.yml
-  - type: Documentation
-    url: https://demo.buk.cl/apidocs
-  - type: APIReference
-    url: https://demo.buk.cl/apidocs
-  - type: GettingStarted
-    url: >-
-      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
-  - type: Authentication
-    url: authentication/buk-authentication.yml
-  - type: Webhooks
-    url: asyncapi/buk-webhooks.yml
-  - type: DataModel
-    url: data-model/buk-data-model.yml
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: GettingStarted
-    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
 - aid: buk:buk-documents-api
   name: Buk Documents API
   description: The Documents API from Buk — 5 operation(s) for documents.
@@ -1271,41 +1238,6 @@ apis:
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
   - type: APIReference
     url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-- aid: buk:buk-pay-stubs-api
-  name: Buk Pay stubs API
-  description: The Pay stubs API from Buk — 5 operation(s) for pay stubs.
-  humanURL: https://demo.buk.cl/apidocs
-  baseURL: https://demo.buk.cl/api/v1/chile
-  tags:
-  - Paystubs
-  tags_raw:
-  - Pay stubs
-  properties:
-  - type: OpenAPI
-    url: openapi/buk-pay-stubs-api-openapi.yml
-  - type: Documentation
-    url: https://demo.buk.cl/apidocs
-  - type: APIReference
-    url: https://demo.buk.cl/apidocs
-  - type: GettingStarted
-    url: >-
-      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
-  - type: Authentication
-    url: authentication/buk-authentication.yml
-  - type: Webhooks
-    url: asyncapi/buk-webhooks.yml
-  - type: DataModel
-    url: data-model/buk-data-model.yml
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: GettingStarted
-    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
 - aid: buk:buk-payment-documents-api
   name: Buk Payment documents API
   description: The Payment documents API from Buk — 5 operation(s) for payment documents.
@@ -1316,39 +1248,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/buk-payment-documents-api-openapi.yml
-  - type: Documentation
-    url: https://demo.buk.cl/apidocs
-  - type: APIReference
-    url: https://demo.buk.cl/apidocs
-  - type: GettingStarted
-    url: >-
-      https://supportcenter.buk.cl/hc/es-419/articles/36657679009307-C%C3%B3mo-integrarse-a-Buk-a-trav%C3%A9s-de-API
-  - type: Authentication
-    url: authentication/buk-authentication.yml
-  - type: Webhooks
-    url: asyncapi/buk-webhooks.yml
-  - type: DataModel
-    url: data-model/buk-data-model.yml
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/ApiAsistencia/1.0.0
-  - type: GettingStarted
-    url: https://supportcenter.buk.cl/hc/es-419/articles/50240904785051-APIs-de-Buk-Asistencia
-  - type: Documentation
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-  - type: APIReference
-    url: https://app.swaggerhub.com/apis-docs/BUKASISTENCIA/AttendanceBiometrics/1.0.0
-- aid: buk:buk-payrolls-api
-  name: Buk Payrolls API
-  description: The Payrolls API from Buk — 1 operation(s) for payrolls.
-  humanURL: https://demo.buk.cl/apidocs
-  baseURL: https://demo.buk.cl/api/v1/chile
-  tags:
-  - Payrolls
-  properties:
-  - type: OpenAPI
-    url: openapi/buk-payrolls-api-openapi.yml
   - type: Documentation
     url: https://demo.buk.cl/apidocs
   - type: APIReference
