@@ -51,7 +51,6 @@ image: https://www.buk.cl/hubfs/logo-buk.svg
 tags:
 - Human Resources
 - Payroll
-- HR Tech
 - Time and Attendance
 - Benefits
 - Recruiting
@@ -613,6 +612,8 @@ apis:
   humanURL: https://demo.buk.cl/apidocs
   baseURL: https://demo.buk.cl/api/v1/chile
   tags:
+  - Evaluation
+  tags_raw:
   - Evaluations
   properties:
   - type: OpenAPI
