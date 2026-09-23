@@ -1,16 +1,35 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk People API
-  version: '1.0'
-  description: 'Operations tagged People across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: People
 paths:
   /people/{id}:
     get:
       summary: Obtain basic data on a person
-      description: "Returns basic information about a specific person, including their id, first name, last name and ID number.\n\n**Permisos requeridos para utilizar este endpoint:** \n* People permissions en: 'Lectura'.\n"
+      description: 'Returns basic information about a specific person, including their id, first name, last name and ID number.
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * People permissions en: ''Lectura''.'
       tags:
       - People
       parameters:
@@ -18,39 +37,44 @@ paths:
         in: path
         description: ID of the individual
         required: true
-        type: integer
+        schema:
+          type: integer
       responses:
         '200':
           description: Offer details
-          schema:
-            properties:
-              data:
-                $ref: '#/definitions/PersonResponse'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PersonResponse'
+            application/pdf:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PersonResponse'
         '404':
           description: Page not found
-definitions:
-  PersonResponse:
-    properties:
-      id:
-        type: integer
-        description: Identificador único de la persona
-      first_name:
-        type: string
-        description: Nombre de la persona
-      last_name:
-        type: string
-        description: Apellido de la persona
-      dni:
-        type: string
-        description: Número de identificación (RUT, DNI, CORP, etc.)
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+      operationId: getPeopleById
+      x-operation-id-source: derived
+components:
+  schemas:
+    PersonResponse:
+      properties:
+        id:
+          type: integer
+          description: Identificador único de la persona
+        first_name:
+          type: string
+          description: Nombre de la persona
+        last_name:
+          type: string
+          description: Apellido de la persona
+        dni:
+          type: string
+          description: Número de identificación (RUT, DNI, CORP, etc.)
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

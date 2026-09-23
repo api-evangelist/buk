@@ -1,9 +1,23 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Grupo Familiar API
-  version: '1.0'
-  description: 'Operations tagged Grupo Familiar across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Grupo Familiar
 paths:
@@ -23,12 +37,7 @@ paths:
         - Brasil: spouse, partner_with_children_or_lived_five_years_or_stable_union, child_stepchild, child_stepchild_university_student_or_attending_high_school, sibling_grandson_greatgrandchild_without_support, sibling_grandson_greatgrandson_university_student_without_support, parents_grandparents_greatgrandparents, poor_minor, incapable_person, exspouse, others
 
 
-
-        custom_attributes no pueden ser actualizados a través de este endpoint
-
-
-
-        '
+        custom_attributes no pueden ser actualizados a través de este endpoint'
       tags:
       - Grupo Familiar
       parameters:
@@ -36,114 +45,165 @@ paths:
         in: path
         required: true
         description: ID del Grupo Familiar a actualizar
-        type: integer
-      - name: carga
-        in: body
-        description: Datos de Grupo Familiar a actualizar
-        required: true
         schema:
-          type: object
-          properties:
-            carga:
-              type: object
-              properties:
-                tramo_asignacion:
-                  type: string
-                carga_simple:
-                  type: integer
-                carga_maternal:
-                  type: integer
-                carga_invalida:
-                  type: integer
-                start_date:
-                  type: string
-                  format: date
-                end_date:
-                  type: string
-                  format: date
-                detalle_cargas_attributes:
-                  type: array
-                  items:
+          type: integer
+      responses:
+        '200':
+          description: Actualización de Grupo Familiar exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Mensaje de confirmación
+                  carga:
                     type: object
                     properties:
                       id:
                         type: integer
-                      first_name:
+                      family_allowance_section:
                         type: string
-                      first_surname:
-                        type: string
-                      second_surname:
-                        type: string
-                      relation:
-                        type: string
-                      birthday:
+                      simple_family_responsability:
+                        type: integer
+                      maternity_family_responsability:
+                        type: integer
+                      invalid_family_responsability:
+                        type: integer
+                      start_date:
                         type: string
                         format: date
-                      gender:
+                      end_date:
                         type: string
-                      rut:
-                        type: string
-      responses:
-        '200':
-          description: Actualización de Grupo Familiar exitosa
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                description: Mensaje de confirmación
-              carga:
+                        format: date
+                      responsability_details:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            first_name:
+                              type: string
+                            relation:
+                              type: string
+                            birthday:
+                              type: string
+                              format: date
+            application/pdf:
+              schema:
                 type: object
                 properties:
-                  id:
-                    type: integer
-                  family_allowance_section:
+                  message:
                     type: string
-                  simple_family_responsability:
-                    type: integer
-                  maternity_family_responsability:
-                    type: integer
-                  invalid_family_responsability:
-                    type: integer
-                  start_date:
-                    type: string
-                    format: date
-                  end_date:
-                    type: string
-                    format: date
-                  responsability_details:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        first_name:
-                          type: string
-                        relation:
-                          type: string
-                        birthday:
-                          type: string
-                          format: date
+                    description: Mensaje de confirmación
+                  carga:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      family_allowance_section:
+                        type: string
+                      simple_family_responsability:
+                        type: integer
+                      maternity_family_responsability:
+                        type: integer
+                      invalid_family_responsability:
+                        type: integer
+                      start_date:
+                        type: string
+                        format: date
+                      end_date:
+                        type: string
+                        format: date
+                      responsability_details:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            first_name:
+                              type: string
+                            relation:
+                              type: string
+                            birthday:
+                              type: string
+                              format: date
         '422':
           description: Error de validación
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+            application/pdf:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
         '404':
           description: Grupo Familiar no encontrado
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                carga:
+                  type: object
+                  properties:
+                    tramo_asignacion:
+                      type: string
+                    carga_simple:
+                      type: integer
+                    carga_maternal:
+                      type: integer
+                    carga_invalida:
+                      type: integer
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    detalle_cargas_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          first_name:
+                            type: string
+                          first_surname:
+                            type: string
+                          second_surname:
+                            type: string
+                          relation:
+                            type: string
+                          birthday:
+                            type: string
+                            format: date
+                          gender:
+                            type: string
+                          rut:
+                            type: string
+        description: Datos de Grupo Familiar a actualizar
+        required: true
+      operationId: patchCargasById
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

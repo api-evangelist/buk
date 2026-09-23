@@ -2,21 +2,17 @@ openapi: 3.2.0
 info:
   title: Buk Recintos API
   version: '1.0'
-  description: 'Operations tagged Recintos across 6 of this provider''s published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Recintos across 2 of this provider''s published API definitions: buk-asistencia-api-openapi.json, buk-data-access-api-brasil-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - description: Production server
   url: https://app.ctrlit.cl/ctrl/api
 - description: Production server app2
   url: https://app2.ctrlit.cl/ctrl/api
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Recintos
 paths:
   /informacionRecinto:
-    servers:
-    - description: Production server
-      url: https://app.ctrlit.cl/ctrl/api
-    - description: Production server app2
-      url: https://app2.ctrlit.cl/ctrl/api
     get:
       tags:
       - Recintos
@@ -118,6 +114,13 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Recinto
+      x-summary-source: derived
+    servers:
+    - description: Production server
+      url: https://app.ctrlit.cl/ctrl/api
+    - description: Production server app2
+      url: https://app2.ctrlit.cl/ctrl/api
   /recintos:
     get:
       summary: Show Recintos
@@ -151,61 +154,151 @@ paths:
         - establishment_code: Recinto Code
 
 
-
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Recintos
       parameters:
       - name: code
         in: query
-        type: string
         description: '- code: Recinto code (OPTIONAL)'
+        schema:
+          type: string
       responses:
         '200':
           description: An array (data) with the information of the Recintos.
           name: data
-          schema:
-            properties:
-              pagination:
-                $ref: '#/definitions/Pagination'
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/RecintoIndex'
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecintoIndex'
+            application/pdf:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecintoIndex'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      operationId: getRecintos
+      x-operation-id-source: derived
     post:
       summary: Create Recinto
-      description: "Create a new Recinto in the system. The parameters are:\n\n- name: Recinto name\n- code: Recinto code\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations)\n- address_name: Street name of the Recinto\n- address_number: Street number of the Recinto \n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      description: 'Create a new Recinto in the system. The parameters are:
+
+
+        - name: Recinto name
+
+        - code: Recinto code
+
+        - location_id: ID of the Recinto location (you can check the endpoint GET /locations)
+
+        - address_name: Street name of the Recinto
+
+        - address_number: Street number of the Recinto
+
+        - address_optional: Address description (OPTIONAL)
+
+        - latitude: Latitude of the Recinto (OPTIONAL)
+
+        - longitude: Longitude of the Recinto (OPTIONAL)
+
+        - postcode: Recinto Zip Code (OPTIONAL)
+
+        - establishment_code: Recinto Code (OPTIONAL)
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Attendance permissions en: ''Lectura y Modificación''.'
       tags:
       - Recintos
-      parameters:
-      - name: Recinto
-        in: body
-        description: Recinto object type.
-        required: true
-        schema:
-          $ref: '#/definitions/Recinto::Create'
       responses:
         '201':
           description: Recinto created.
-          schema:
-            title: ResponseBody
-            properties:
-              data:
-                $ref: '#/definitions/Recinto::Response'
+          content:
+            application/json:
+              schema:
+                title: ResponseBody
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Recinto__Response'
+            application/pdf:
+              schema:
+                title: ResponseBody
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Recinto__Response'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recinto__Create'
+        description: Recinto object type.
+        required: true
+      operationId: postRecintos
+      x-operation-id-source: derived
+    servers:
+    - url: https://demo.buk.cl/api/v1/brasil
   /recintos/{code}:
     patch:
       summary: Upgrade Recinto
-      description: "Updates an existing Recinto in the system. The parameters are:\n\nThe entered values will overwrite the data of the Recinto being edited.\n\n- identifier: ID of existing Recinto\n- name: Recinto name (OPTIONAL)\n- code: Recinto code (OPTIONAL)\n- location_id: ID of the Recinto location (you can check the endpoint GET /locations) (OPTIONAL)\n- address_name: Street name of the Recinto (OPTIONAL)\n- address_number: Street number of the Recinto \\ (OPTIONAL)\n- address_optional: Address description (OPTIONAL)\n- latitude: Latitude of the Recinto (OPTIONAL)\n- longitude: Longitude of the Recinto (OPTIONAL)\n- postcode: Recinto Zip Code (OPTIONAL)\n- establishment_code: Recinto Code (OPTIONAL)\n\n**Permisos requeridos para utilizar este endpoint:** \n* Attendance permissions en: 'Lectura y Modificación'.\n"
+      description: 'Updates an existing Recinto in the system. The parameters are:
+
+
+        The entered values will overwrite the data of the Recinto being edited.
+
+
+        - identifier: ID of existing Recinto
+
+        - name: Recinto name (OPTIONAL)
+
+        - code: Recinto code (OPTIONAL)
+
+        - location_id: ID of the Recinto location (you can check the endpoint GET /locations) (OPTIONAL)
+
+        - address_name: Street name of the Recinto (OPTIONAL)
+
+        - address_number: Street number of the Recinto \ (OPTIONAL)
+
+        - address_optional: Address description (OPTIONAL)
+
+        - latitude: Latitude of the Recinto (OPTIONAL)
+
+        - longitude: Longitude of the Recinto (OPTIONAL)
+
+        - postcode: Recinto Zip Code (OPTIONAL)
+
+        - establishment_code: Recinto Code (OPTIONAL)
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Attendance permissions en: ''Lectura y Modificación''.'
       tags:
       - Recintos
       parameters:
@@ -213,140 +306,156 @@ paths:
         in: path
         description: '- Existing Recinto code'
         required: true
-        type: string
-      - name: recinto
-        in: body
-        description: Recinto object type.
-        required: true
         schema:
-          $ref: '#/definitions/Recinto::Update'
+          type: string
       responses:
         '202':
-          schema:
-            title: ResponseBody
-            description: Updated Recinto.
-            properties:
-              data:
-                $ref: '#/definitions/Recinto::Response'
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: ResponseBody
+                description: Updated Recinto.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Recinto__Response'
+            application/pdf:
+              schema:
+                title: ResponseBody
+                description: Updated Recinto.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Recinto__Response'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recinto__Update'
+        description: Recinto object type.
+        required: true
+      operationId: patchRecintosByCode
+      x-operation-id-source: derived
+    servers:
+    - url: https://demo.buk.cl/api/v1/brasil
 components:
+  schemas:
+    Recinto__Update:
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Recinto__Create:
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
+    Recinto__Response:
+      properties:
+        id:
+          type: integer
+          description: Identificador interno
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
+    Recinto:
+      properties:
+        name:
+          type: string
+          description: Nombre
+        code:
+          type: string
+          description: Código
+        location_id:
+          type: integer
+          description: Localidad
+        address_name:
+          type: string
+          description: Calle
+        address_number:
+          type: string
+          description: Número
+        address_optional:
+          type: string
+          description: Descripción
+        latitude:
+          type: number
+          description: Latitud
+        longitude:
+          type: number
+          description: Longitud
+        postcode:
+          type: string
+          description: Código Postal
+        codigo_establecimiento:
+          type: string
+          description: Código Establecimiento
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    RecintoIndex:
+      properties:
+        name:
+          type: string
+          description: Nombre
+        code:
+          type: string
+          description: Código
+        location_id:
+          type: integer
+          description: Localidad
+        city:
+          type: string
+          description: Ciudad
+        address_name:
+          type: string
+          description: Calle
+        address_number:
+          type: string
+          description: Número
+        address_optional:
+          type: string
+          description: Descripción
+        latitude:
+          type: float
+          description: Latitud
+        longitude:
+          type: float
+          description: Longitud
+        postcode:
+          type: string
+          description: Código Postal
+        integrated_with_ctrl:
+          type: boolean
+          description: Integrado con CTRL
+        codigo_establecimiento:
+          type: string
+          description: Código Establecimiento
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: token
-definitions:
-  Recinto::Response:
-    properties:
-      id:
-        type: integer
-        description: Identificador interno
-    allOf:
-    - $ref: '#/definitions/Recinto'
-  bad_request:
-    properties:
-      errors:
-        type: array
-        items:
-          type: string
-  Recinto::Create:
-    allOf:
-    - $ref: '#/definitions/Recinto'
-  RecintoIndex:
-    properties:
-      name:
-        type: string
-        description: Nombre
-      code:
-        type: string
-        description: Código
-      location_id:
-        type: integer
-        description: Localidad
-      city:
-        type: string
-        description: Ciudad
-      address_name:
-        type: string
-        description: Calle
-      address_number:
-        type: string
-        description: Número
-      address_optional:
-        type: string
-        description: Descripción
-      latitude:
-        type: float
-        description: Latitud
-      longitude:
-        type: float
-        description: Longitud
-      postcode:
-        type: string
-        description: Código Postal
-      integrated_with_ctrl:
-        type: boolean
-        description: Integrado con CTRL
-      codigo_establecimiento:
-        type: string
-        description: Código Establecimiento
-  Pagination:
-    properties:
-      next:
-        type: string
-      previous:
-        type: string
-      count:
-        type: integer
-      total_pages:
-        type: integer
-  Recinto:
-    properties:
-      name:
-        type: string
-        description: Nombre
-      code:
-        type: string
-        description: Código
-      location_id:
-        type: integer
-        description: Localidad
-      address_name:
-        type: string
-        description: Calle
-      address_number:
-        type: string
-        description: Número
-      address_optional:
-        type: string
-        description: Descripción
-      latitude:
-        type: number
-        description: Latitud
-      longitude:
-        type: number
-        description: Longitud
-      postcode:
-        type: string
-        description: Código Postal
-      codigo_establecimiento:
-        type: string
-        description: Código Establecimiento
-  Recinto::Update:
-    allOf:
-    - $ref: '#/definitions/Recinto'
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header
 x-refined-from:
-- buk-asistencia-api-openapi.yml
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+- buk-asistencia-api-openapi.json
+- buk-data-access-api-brasil-openapi.json

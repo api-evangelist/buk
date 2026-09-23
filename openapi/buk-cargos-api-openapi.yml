@@ -1,9 +1,23 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Cargos API
-  version: '1.0'
-  description: 'Operations tagged Cargos across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Cargos
 paths:
@@ -13,60 +27,67 @@ paths:
       description: '''Retorna todas las familias de cargos registradas en el sistema''
 
 
-        Este endpoint no requiere permisos especiales.
-
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Cargos
       parameters:
       - name: search
         in: query
-        type: string
         description: Filtra las familias de cargos por nombre
+        schema:
+          type: string
       - name: page_size
         in: query
-        type: integer
         description: (OPCIONAL) Número de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+        schema:
+          type: integer
       responses:
         '200':
           description: Como respuesta recibimos un arreglo (data) con las familias de cargos
           name: data
-          schema:
-            properties:
-              pagination:
-                $ref: '#/definitions/Pagination'
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/RoleFamily'
-definitions:
-  RoleFamily:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      quantity_of_roles:
-        type: integer
-  Pagination:
-    properties:
-      next:
-        type: string
-      previous:
-        type: string
-      count:
-        type: integer
-      total_pages:
-        type: integer
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoleFamily'
+            application/pdf:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoleFamily'
+      operationId: getRoleFamilies
+      x-operation-id-source: derived
+components:
+  schemas:
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    RoleFamily:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity_of_roles:
+          type: integer
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

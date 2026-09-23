@@ -1,90 +1,118 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Vacation Policies API
-  version: '1.0'
-  description: 'Operations tagged Vacation Policies across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Vacation Policies
 paths:
   /vacation_definitions:
     get:
       summary: List Vacation Policies
-      description: "Displays all vacation policies and their associated vacation type.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Vacation permissions en: 'Lectura'.\n"
+      description: 'Displays all vacation policies and their associated vacation type.
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Vacation permissions en: ''Lectura''.'
       tags:
       - Vacation Policies
       parameters:
       - name: page_size
         in: query
-        type: integer
         description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+        schema:
+          type: integer
       - name: page
         in: query
-        type: integer
         description: (OPTIONAL) Page number
+        schema:
+          type: integer
       responses:
         '200':
           description: As a response, we receive a list of available vacation policies.
-          schema:
-            $ref: '#/definitions/VacationDefinitionOutput'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VacationDefinitionOutput'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/VacationDefinitionOutput'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
-definitions:
-  bad_request:
-    properties:
-      errors:
-        type: array
-        items:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      operationId: getVacationDefinitions
+      x-operation-id-source: derived
+components:
+  schemas:
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    VacationDefinitionOutput:
+      properties:
+        vacation_definitions:
+          type: array
+          description: Lista de políticas de vacaciones
+          example: []
+          items:
+            $ref: '#/components/schemas/VacationDefinition'
+    VacationType:
+      properties:
+        name:
           type: string
-  VacationDefinition:
-    properties:
-      id:
-        type: integer
-        description: ID de la política de vacaciones
-        example: 1
-      code:
-        type: string
-        description: Código de la política
-        example: legales
-      name:
-        type: string
-        description: Nombre de la política de vacaciones
-        example: Vacaciones legales
-      vacation_type:
-        type: object
-        $ref: '#/definitions/VacationType'
-        description: Tipo de vacación asociado
-        example:
-          name: Legales
-          code: legales
-  VacationDefinitionOutput:
-    properties:
-      vacation_definitions:
-        type: array
-        description: Lista de políticas de vacaciones
-        example: []
-        items:
-          $ref: '#/definitions/VacationDefinition'
-  VacationType:
-    properties:
-      name:
-        type: string
-        description: Nombre del tipo de vacación
-        example: Legales
-      code:
-        type: string
-        description: Código del tipo de vacación
-        example: legales
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+          description: Nombre del tipo de vacación
+          example: Legales
+        code:
+          type: string
+          description: Código del tipo de vacación
+          example: legales
+    VacationDefinition:
+      properties:
+        id:
+          type: integer
+          description: ID de la política de vacaciones
+          example: 1
+        code:
+          type: string
+          description: Código de la política
+          example: legales
+        name:
+          type: string
+          description: Nombre de la política de vacaciones
+          example: Vacaciones legales
+        vacation_type:
+          type: object
+          $ref: '#/components/schemas/VacationType'
+          description: Tipo de vacación asociado
+          example:
+            name: Legales
+            code: legales
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

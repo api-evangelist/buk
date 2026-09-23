@@ -131,6 +131,8 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Nomina
+      x-summary-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

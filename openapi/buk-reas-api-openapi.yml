@@ -1,9 +1,23 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Áreas API
-  version: '1.0'
-  description: 'Operations tagged Áreas across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Áreas
 paths:
@@ -13,75 +27,96 @@ paths:
       description: 'Crea una nueva Área en el sistema.
 
 
-        Este endpoint no requiere permisos especiales.
-
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       deprecated: true
       parameters:
       - name: status
         in: query
-        type: string
         description: (OPCIONAL) Filtra los resultados por el estado del área.
-        default: both
-        enum:
-        - active
-        - inactive
-        - both
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          - both
+          default: both
       - name: page_size
         in: query
-        type: integer
         description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+        schema:
+          type: integer
       - name: page
         in: query
-        type: integer
         description: Número de página
+        schema:
+          type: integer
       responses:
         '200':
           description: Como respuesta recibimos un arreglo (data) con la información de las áreas
           name: data
-          schema:
-            properties:
-              pagination:
-                $ref: '#/definitions/Pagination'
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/Area'
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Area'
+            application/pdf:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Area'
+      operationId: getAreas
+      x-operation-id-source: derived
   /areas/{id}:
     get:
       summary: Obtener un área en especifico por ID
       description: 'Retorna el área correspodiente al ID
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       deprecated: true
       parameters:
       - name: id
         in: path
-        type: integer
         description: ID del área a consultar
         required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Como respuesta recibirás un área
-          schema:
-            description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
-            properties:
-              data:
-                $ref: '#/definitions/Area'
+          content:
+            application/json:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area'
+            application/pdf:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area'
+      operationId: getAreasById
+      x-operation-id-source: derived
   /organization/areas/:
     get:
       summary: Listar áreas
       description: 'Retorna todas las áreas, incluyendo las de nivel 0 y nivel 1.
 
 
-
         Descripción de Atributos:
 
         - `id`: [string] Id del Área.
@@ -113,49 +148,61 @@ paths:
         - `city`: [string] Ciudad del Área.
 
 
-        Este endpoint no requiere permisos especiales.
-
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       parameters:
       - name: status
         in: query
-        type: string
         description: (OPCIONAL) Filtra los resultados por el estado del área.
-        default: both
-        enum:
-        - active
-        - inactive
-        - both
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          - both
+          default: both
       - name: page_size
         in: query
-        type: integer
         description: (OPCIONAL) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
+        schema:
+          type: integer
       - name: page
         in: query
-        type: integer
         description: Número de página
+        schema:
+          type: integer
       responses:
         '200':
           description: Como respuesta recibimos un arreglo (data) con la información de las áreas
           name: data
-          schema:
-            properties:
-              pagination:
-                $ref: '#/definitions/Pagination'
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/Area_new'
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Area_new'
+            application/pdf:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Area_new'
+      operationId: getOrganizationAreas
+      x-operation-id-source: derived
   /organization/areas/{id}:
     get:
       summary: Obtener un área en especifico por ID
       description: 'Retorna el área correspodiente al ID, incluyendo aquellas de nivel 0 y nivel 1.
 
 
-
         Descripción de Atributos:
 
         - `id`: [string] Id del Área.
@@ -186,25 +233,34 @@ paths:
 
         - `city`: [string] Ciudad del Área.
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       parameters:
       - name: id
         in: path
-        type: integer
         description: ID del área a consultar
         required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Como respuesta recibirás un área
-          schema:
-            description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
-            properties:
-              data:
-                $ref: '#/definitions/Area_new'
+          content:
+            application/json:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
+            application/pdf:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
+      operationId: getOrganizationAreasById
+      x-operation-id-source: derived
     patch:
       summary: Actualizar un área por ID
       description: 'Edita un Área en el sistema.
@@ -228,30 +284,40 @@ paths:
         - `active`: [boolean] Estado del Área.
 
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       parameters:
       - name: id
         in: path
-        type: integer
         required: true
         description: ID del área a consultar
-      - name: body
-        in: body
-        required: true
         schema:
-          $ref: '#/definitions/Area::Update'
+          type: integer
       responses:
         '200':
           description: Como respuesta recibirás un área
-          schema:
-            description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
-            properties:
-              data:
-                $ref: '#/definitions/Area_new'
+          content:
+            application/json:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
+            application/pdf:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Area__Update'
+        required: true
+      operationId: patchOrganizationAreasById
+      x-operation-id-source: derived
   /organization/areas:
     post:
       summary: Crear Área
@@ -276,242 +342,292 @@ paths:
         - `custom_attrs`: [object] Objeto con atributo custom y valor.
 
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/Area::Create'
       responses:
         '201':
           description: Como respuesta recibirás un área
-          schema:
-            description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
-            properties:
-              data:
-                $ref: '#/definitions/Area_new'
+          content:
+            application/json:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
+            application/pdf:
+              schema:
+                description: Como respuesta recibimos todos los campos correspondiente a la información del área consultada dentro
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Area_new'
         '404':
           description: No Existe el recurso solicitado
           name: errors
-          schema:
-            properties:
-              errors:
-                type: array
-                items:
-                  type: string
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+            application/pdf:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
         '400':
           description: Existe un error con los datos enviados
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Area__Create'
+        required: true
+      operationId: postOrganizationAreas
+      x-operation-id-source: derived
     delete:
       summary: Eliminar áreas por ID
       description: 'Elimina Áreas en el sistema. - `id`: Id del Área.
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Áreas
       parameters:
       - name: id
         description: 'Elimina Áreas en el sistema. - `id`: Id del Área.'
         in: query
-        type: integer
         required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Recibirás una respuesta de éxito o de error
           name: data
-          schema:
-            properties:
-              deleted:
-                type: boolean
+          content:
+            application/json:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
+            application/pdf:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
         '404':
           description: Cuando no hay recursos permitidos que borrar
           name: data
-          schema:
-            properties:
-              deleted:
-                type: boolean
-                default: false
+          content:
+            application/json:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
+                    default: false
+            application/pdf:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
+                    default: false
         '400':
           description: Cuando hay un error al borrar un registro
           name: data
-          schema:
-            properties:
-              deleted:
-                type: boolean
-                default: false
-              errors:
-                type: object
+          content:
+            application/json:
+              schema:
                 properties:
-                  record_id:
-                    type: integer
-                    description: Id del recurso que generó el error
-                  msj:
-                    type: string
-                    description: Descripción del error
-definitions:
-  AreaFirstLevel:
-    properties:
-      id:
-        type: integer
-        description: Identificador del área de primer nivel
-        example: 1
-      name:
-        type: string
-        description: Nombre del área de primer nivel
-        example: Gerencia
-  Area::Create:
-    properties:
-      parent_id:
-        required: true
-        type: integer
-      location_id:
-        required: true
-        type: integer
-      name:
-        required: true
-        type: string
-      accounting_prefix:
-        type: string
-      city:
-        type: string
-      address:
-        type: string
-      cost_center_id:
-        type: string
-      role_ids:
-        type: array
-        items:
+                  deleted:
+                    type: boolean
+                    default: false
+                  errors:
+                    type: object
+                    properties:
+                      record_id:
+                        type: integer
+                        description: Id del recurso que generó el error
+                      msj:
+                        type: string
+                        description: Descripción del error
+            application/pdf:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
+                    default: false
+                  errors:
+                    type: object
+                    properties:
+                      record_id:
+                        type: integer
+                        description: Id del recurso que generó el error
+                      msj:
+                        type: string
+                        description: Descripción del error
+      operationId: deleteOrganizationAreas
+      x-operation-id-source: derived
+components:
+  schemas:
+    Area:
+      properties:
+        id:
           type: integer
-      custom_attrs:
-        type: object
-  parent_child_area:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      commune:
-        type: string
-      city:
-        type: string
-      address:
-        type: string
-  bad_request:
-    properties:
-      errors:
-        type: array
-        items:
+        name:
           type: string
-  Area::Update:
-    properties:
-      name:
-        required: true
-        type: string
-      accounting_prefix:
-        type: string
-      city:
-        type: string
-      address:
-        type: string
-      cost_center_id:
-        type: string
-      location_id:
-        required: true
-        type: integer
-      active:
-        type: boolean
-      role_ids:
-        type: array
-        items:
+        address:
+          type: string
+        children_area:
+          $ref: '#/components/schemas/parent_child_area'
+        parent_area:
+          $ref: '#/components/schemas/parent_child_area'
+        cost_center:
+          type: string
+        department:
+          $ref: '#/components/schemas/AreaSecondLevel'
+        status:
+          type: string
+        custom_attributes:
+          type: object
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
           type: integer
-      custom_attrs:
-        type: object
-        items:
+        total_pages:
+          type: integer
+    AreaSecondLevel:
+      properties:
+        id:
+          type: integer
+        name:
           type: string
-  AreaSecondLevel:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      division:
-        $ref: '#/definitions/AreaFirstLevel'
-  Pagination:
-    properties:
-      next:
-        type: string
-      previous:
-        type: string
-      count:
-        type: integer
-      total_pages:
-        type: integer
-  Area:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      address:
-        type: string
-      children_area:
-        $ref: '#/definitions/parent_child_area'
-      parent_area:
-        $ref: '#/definitions/parent_child_area'
-      cost_center:
-        type: string
-      department:
-        $ref: '#/definitions/AreaSecondLevel'
-      status:
-        type: string
-      custom_attributes:
-        type: object
-  Area_new:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      address:
-        type: string
-      children_area:
-        type: array
-        items:
-          $ref: '#/definitions/parent_child_area'
-      parent_area:
-        $ref: '#/definitions/parent_child_area'
-      first_level_id:
-        type: integer
-      first_level_name:
-        type: string
-      second_level_id:
-        type: integer
-      second_level_name:
-        type: string
-      depth:
-        type: integer
-      cost_center:
-        type: string
-      status:
-        type: string
-      custom_attributes:
-        type: object
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+        division:
+          $ref: '#/components/schemas/AreaFirstLevel'
+    Area__Update:
+      properties:
+        name:
+          required: true
+          type: string
+        accounting_prefix:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        cost_center_id:
+          type: string
+        location_id:
+          required: true
+          type: integer
+        active:
+          type: boolean
+        role_ids:
+          type: array
+          items:
+            type: integer
+        custom_attrs:
+          type: object
+          items:
+            type: string
+    Area_new:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        children_area:
+          type: array
+          items:
+            $ref: '#/components/schemas/parent_child_area'
+        parent_area:
+          $ref: '#/components/schemas/parent_child_area'
+        first_level_id:
+          type: integer
+        first_level_name:
+          type: string
+        second_level_id:
+          type: integer
+        second_level_name:
+          type: string
+        depth:
+          type: integer
+        cost_center:
+          type: string
+        status:
+          type: string
+        custom_attributes:
+          type: object
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Area__Create:
+      properties:
+        parent_id:
+          required: true
+          type: integer
+        location_id:
+          required: true
+          type: integer
+        name:
+          required: true
+          type: string
+        accounting_prefix:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        cost_center_id:
+          type: string
+        role_ids:
+          type: array
+          items:
+            type: integer
+        custom_attrs:
+          type: object
+    parent_child_area:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        commune:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+    AreaFirstLevel:
+      properties:
+        id:
+          type: integer
+          description: Identificador del área de primer nivel
+          example: 1
+        name:
+          type: string
+          description: Nombre del área de primer nivel
+          example: Gerencia
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

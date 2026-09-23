@@ -1,88 +1,188 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Registros de Trabajo API
-  version: '1.0'
-  description: 'Operations tagged Registros de Trabajo across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Registros de Trabajo
 paths:
   /piecework/worklogs:
     get:
       summary: Listar Registros de Trabajo
-      description: "'Retornar Registros de Trabajo'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      description: '''Retornar Registros de Trabajo''
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de tratos en: ''Lectura'' o ''Lectura y Modificación''.'
       tags:
       - Registros de Trabajo
       parameters:
       - name: employee_id
         description: (Opcional) ID del empleado asociado al Registro de Trabajo
         in: query
-        type: integer
+        schema:
+          type: integer
       - name: variable_id
         description: (Opcional) ID del periodo asociado al Registro de Trabajo
         in: query
-        type: integer
+        schema:
+          type: integer
       - name: empresa_id
         description: {}
         in: query
-        type: integer
+        schema:
+          type: integer
       - name: area_id
         description: (Opcional) ID del área a la que pertenece el empleado asociado al Registro de Trabajo
         in: query
-        type: integer
+        schema:
+          type: integer
       - name: page_size
-        type: integer
         in: query
         description: '(Opcional) Numero de respuestas por página. Por defecto tiene un valor de 25 y debe estar entre un rango de [25 - 100]
 
           '
+        schema:
+          type: integer
+      responses: {}
+      operationId: getPieceworkWorklogs
+      x-operation-id-source: derived
     post:
       summary: Crear Registro de Trabajo
-      description: "Crea un nuevo Registro de Trabajo en el sistema. Los parámetros son:\n  - day: Fecha del trato en formato YYYY-MM-DD.\n  - employee_id: ID del empleado.\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - overwrite_existing: [boolean] (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_pay: [boolean] (Opcional)\n  - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).\n  - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)\n  - Worklogs: [array]\n    - production: (Opcional) Cantidad de unidades producidas.\n    - piecework_execution_id: ID de la tarifa.\n    - rate_value: (Opcional) Valor de la tarifa aplicada.\n    - total_pay: Valor que se pagará al empleado por este trato.\n    - work_type: Tipo de Trabajo. Posibles valores: 'ausencia', 'dia', 'trato', 'bono'.\n    - saved_in: Posibles valores: 'porcentaje', 'horas'.\n    - worked_units: Unidades trabajadas. Debe ser consistente con el atributo 'saved_in'.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      description: 'Crea un nuevo Registro de Trabajo en el sistema. Los parámetros son:
+
+        - day: Fecha del trato en formato YYYY-MM-DD.
+
+        - employee_id: ID del empleado.
+
+        - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.
+
+        - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)
+
+        - overwrite_existing: [boolean] (Opcional)
+
+        - discount_day_amount: [boolean] (Opcional)
+
+        - calculate_total_pay: [boolean] (Opcional)
+
+        - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).
+
+        - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)
+
+        - Worklogs: [array]
+
+        - production: (Opcional) Cantidad de unidades producidas.
+
+        - piecework_execution_id: ID de la tarifa.
+
+        - rate_value: (Opcional) Valor de la tarifa aplicada.
+
+        - total_pay: Valor que se pagará al empleado por este trato.
+
+        - work_type: Tipo de Trabajo. Posibles valores: ''ausencia'', ''dia'', ''trato'', ''bono''.
+
+        - saved_in: Posibles valores: ''porcentaje'', ''horas''.
+
+        - worked_units: Unidades trabajadas. Debe ser consistente con el atributo ''saved_in''.
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de tratos en: ''Lectura y Modificación''.'
       tags:
       - Registros de Trabajo
-      parameters:
-      - name: Registro de Trabajo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                daily_base_floor:
+                  type: boolean
+                  default: false
+                discount_day_amount:
+                  type: boolean
+                  default: false
+                calculate_total_pay:
+                  type: boolean
+                  default: false
+                overwrite_existing:
+                  type: boolean
+                  default: false
+                sync_attendance:
+                  type: integer
+                  default: 0
+                day:
+                  type: string
+                  default: '2022-01-01'
+                employee_id:
+                  type: integer
+                  default: 1
+                monetary_floor:
+                  type: integer
+                  default: 0
+                informative:
+                  type: boolean
+                  default: false
+                worklogs:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Piecework__Worklog__Request'
         description: Objeto de tipo Registro de Trabajo
-        in: body
         required: true
-        schema:
-          properties:
-            daily_base_floor:
-              type: boolean
-              default: false
-            discount_day_amount:
-              type: boolean
-              default: false
-            calculate_total_pay:
-              type: boolean
-              default: false
-            overwrite_existing:
-              type: boolean
-              default: false
-            sync_attendance:
-              type: integer
-              default: 0
-            day:
-              type: string
-              default: '2022-01-01'
-            employee_id:
-              type: integer
-              default: 1
-            monetary_floor:
-              type: integer
-              default: 0
-            informative:
-              type: boolean
-              default: false
-            worklogs:
-              type: array
-              items:
-                $ref: '#/definitions/Piecework::Worklog::Request'
+      responses: {}
+      operationId: postPieceworkWorklogs
+      x-operation-id-source: derived
   /piecework/worklogs/{id}:
     patch:
       summary: Editar un Registro de Trabajo
-      description: "Edita un Registro de Trabajo existente en el sistema. Los parámetros son:\n  - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.\n  - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)\n  - discount_day_amount: [boolean] (Opcional)\n  - calculate_total_pay: [boolean] (Opcional)\n  - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).\n  - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)\n  - worklog [object]:\n    - day: Fecha del trato en formato YYYY-MM-DD.\n    - work_type: Tipo de Trabajo. Posibles valores: 'ausencia', 'dia', 'trato', 'bono'.\n    - worked_units: Unidades trabajadas. Debe ser consistente con el atributo 'saved_in'.\n    - production: Cantidad de unidades producidas.\n    - rate_value: Valor de la tarifa aplicada.\n    - total_pay: Valor que se pagará al empleado por este trato.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de tratos en: 'Lectura y Modificación'.\n\n"
+      description: 'Edita un Registro de Trabajo existente en el sistema. Los parámetros son:
+
+        - monetary_floor: [integer] Se define piso de la tarifa de forma manual. Requerido si tratos simplificado y no se tiene el calculo de piso por el sistema.
+
+        - daily_base_floor: [boolean] Calcular piso del trato sin redondear (Opcional)
+
+        - discount_day_amount: [boolean] (Opcional)
+
+        - calculate_total_pay: [boolean] (Opcional)
+
+        - sync_attendance: [integer] Posibles valores: 0 (no sincronizar), 1 (días trabajados), 2 (ausencias), 3 (días trabajados y ausencias).
+
+        - informative: [boolean] (Opcional) Si es que el trato es del tipo informativo y no se debe considerar en la liquidación, informative debe ser true. (Default: false)
+
+        - worklog [object]:
+
+        - day: Fecha del trato en formato YYYY-MM-DD.
+
+        - work_type: Tipo de Trabajo. Posibles valores: ''ausencia'', ''dia'', ''trato'', ''bono''.
+
+        - worked_units: Unidades trabajadas. Debe ser consistente con el atributo ''saved_in''.
+
+        - production: Cantidad de unidades producidas.
+
+        - rate_value: Valor de la tarifa aplicada.
+
+        - total_pay: Valor que se pagará al empleado por este trato.
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de tratos en: ''Lectura y Modificación''.'
       tags:
       - Registros de Trabajo
       parameters:
@@ -90,91 +190,91 @@ paths:
         in: path
         description: ID del registro de trabajo a modificar.
         required: true
-        type: integer
-      - name: Registro de Trabajo
-        description: Objeto de tipo Registro de Trabajo
-        in: body
-        required: true
         schema:
-          properties:
-            daily_base_floor:
-              type: boolean
-              default: false
-            discount_day_amount:
-              type: boolean
-              default: false
-            calculate_total_pay:
-              type: boolean
-              default: false
-            sync_attendance:
-              type: integer
-              default: 0
-            monetary_floor:
-              type: integer
-              default: 0
-            informative:
-              type: boolean
-              default: false
-            worklog:
-              $ref: '#/definitions/Piecework::Worklog::RequestPatch'
-definitions:
-  Piecework::Worklog::RequestPatch:
-    properties:
-      day:
-        type: string
-        default: '2022-02-02'
-      work_type:
-        type: string
-        default: dia
-      worked_units:
-        type: decimal
-        default: 5
-      production:
-        type: integer
-        default: 2
-      total_pay:
-        type: decimal
-        default: 100
-      rate_value:
-        type: decimal
-        default: 3
-  Piecework::Worklog::Request:
-    properties:
-      piecework_execution_id:
-        type: integer
-        default: 1
-      production:
-        type: integer
-      rate_value:
-        type: decimal
-        default: 3
-      saved_in:
-        type: string
-        default: horas
-      total_pay:
-        type: decimal
-        default: 100
-      work_type:
-        type: string
-        default: trato
-      worked_units:
-        type: decimal
-        default: 8
-    required:
-    - day
-    - employee_id
-    - piecework_execution_id
-    - saved_in
-    - work_type
-    - worked_units
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                daily_base_floor:
+                  type: boolean
+                  default: false
+                discount_day_amount:
+                  type: boolean
+                  default: false
+                calculate_total_pay:
+                  type: boolean
+                  default: false
+                sync_attendance:
+                  type: integer
+                  default: 0
+                monetary_floor:
+                  type: integer
+                  default: 0
+                informative:
+                  type: boolean
+                  default: false
+                worklog:
+                  $ref: '#/components/schemas/Piecework__Worklog__RequestPatch'
+        description: Objeto de tipo Registro de Trabajo
+        required: true
+      responses: {}
+      operationId: patchPieceworkWorklogsById
+      x-operation-id-source: derived
+components:
+  schemas:
+    Piecework__Worklog__Request:
+      properties:
+        piecework_execution_id:
+          type: integer
+          default: 1
+        production:
+          type: integer
+        rate_value:
+          type: decimal
+          default: 3
+        saved_in:
+          type: string
+          default: horas
+        total_pay:
+          type: decimal
+          default: 100
+        work_type:
+          type: string
+          default: trato
+        worked_units:
+          type: decimal
+          default: 8
+      required:
+      - day
+      - employee_id
+      - piecework_execution_id
+      - saved_in
+      - work_type
+      - worked_units
+    Piecework__Worklog__RequestPatch:
+      properties:
+        day:
+          type: string
+          default: '2022-02-02'
+        work_type:
+          type: string
+          default: dia
+        worked_units:
+          type: decimal
+          default: 5
+        production:
+          type: integer
+          default: 2
+        total_pay:
+          type: decimal
+          default: 100
+        rate_value:
+          type: decimal
+          default: 3
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

@@ -2,21 +2,17 @@ openapi: 3.2.0
 info:
   title: Buk Horas no trabajadas API
   version: '1.0'
-  description: 'Operations tagged Horas no trabajadas across 6 of this provider''s published API definitions: buk-asistencia-api-openapi.yml, buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Horas no trabajadas across 2 of this provider''s published API definitions: buk-asistencia-api-openapi.json, buk-data-access-api-brasil-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - description: Production server
   url: https://app.ctrlit.cl/ctrl/api
 - description: Production server app2
   url: https://app2.ctrlit.cl/ctrl/api
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Horas no trabajadas
 paths:
   /obtenerHorasNoTrabajadas:
-    servers:
-    - description: Production server
-      url: https://app.ctrlit.cl/ctrl/api
-    - description: Production server app2
-      url: https://app2.ctrlit.cl/ctrl/api
     get:
       tags:
       - Horas no trabajadas
@@ -130,124 +126,207 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Horas no trabajadas
+      x-summary-source: derived
+    servers:
+    - description: Production server
+      url: https://app.ctrlit.cl/ctrl/api
+    - description: Production server app2
+      url: https://app2.ctrlit.cl/ctrl/api
   /attendances/non-worked-hours/types:
     get:
       summary: Listar tipos de horas no trabajadas
-      description: "'Obtiene la lista de tipos de horas no trabajadas'\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura' o 'Lectura y Modificación'.\n\n"
+      description: '''Obtiene la lista de tipos de horas no trabajadas''
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de asistencia en: ''Lectura'' o ''Lectura y Modificación''.'
       tags:
       - Horas no trabajadas
       responses:
         '200':
           description: Como respuesta recibimos un arreglo (data) con los tipos de horas no trabajadas
           name: data
-          schema:
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/Attendances::NonWorkedHours::Type'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendances__NonWorkedHours__Type'
+            application/pdf:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendances__NonWorkedHours__Type'
+      operationId: getAttendancesNonWorkedHoursTypes
+      x-operation-id-source: derived
     post:
       summary: Crear una tipo de Hora no Trabajada
-      description: "Crea un nuevo tipo de hora no trabajada en el sistema.\n\nSe debe enviar como JSON un objeto tipo NonWorkedHourType en el cuerpo de la petición,\ncompuesto por los siguientes atributos\n\n - name: Nombre del tipo de hora no trabajada\n - paid_leave: Boolean indicando si es con o sin goce de sueldo\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n"
+      description: 'Crea un nuevo tipo de hora no trabajada en el sistema.
+
+
+        Se debe enviar como JSON un objeto tipo NonWorkedHourType en el cuerpo de la petición,
+
+        compuesto por los siguientes atributos
+
+
+        - name: Nombre del tipo de hora no trabajada
+
+        - paid_leave: Boolean indicando si es con o sin goce de sueldo
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de asistencia en: ''Lectura y Modificación''.'
       tags:
       - Horas no trabajadas
-      parameters:
-      - name: NonWorkedHourType
-        description: 'Objeto de tipo NonWorkedHourType '
-        in: body
-        schema:
-          $ref: '#/definitions/Attendances::NonWorkedHours::TypeModel::Request'
       responses:
         '201':
           description: Respuesta de la api ante la creación de NonWorkedHourType.
-          schema:
-            properties:
-              message:
-                type: string
-              non_worked_hour_type:
-                $ref: '#/definitions/Attendances::NonWorkedHours::TypeModel::Response'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  non_worked_hour_type:
+                    $ref: '#/components/schemas/Attendances__NonWorkedHours__TypeModel__Response'
+            application/pdf:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  non_worked_hour_type:
+                    $ref: '#/components/schemas/Attendances__NonWorkedHours__TypeModel__Response'
         '400':
           description: Existe un error con los datos enviados
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attendances__NonWorkedHours__TypeModel__Request'
+        description: 'Objeto de tipo NonWorkedHourType '
+      operationId: postAttendancesNonWorkedHoursTypes
+      x-operation-id-source: derived
+    servers:
+    - url: https://demo.buk.cl/api/v1/brasil
   /attendances/non-worked-hours/types/{id}:
     delete:
       summary: Borrar un tipo de hora no trabajada
-      description: "Borrar un tipo de hora no trabajado dado su identificador\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de asistencia en: 'Lectura y Modificación'.\n\n"
+      description: 'Borrar un tipo de hora no trabajado dado su identificador
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de asistencia en: ''Lectura y Modificación''.'
       tags:
       - Horas no trabajadas
       parameters:
       - name: id
         description: ID del tipo de hora no trabajada
         in: path
-        type: integer
+        schema:
+          type: integer
+        required: true
       responses:
         '200':
           description: Se entrega un mensaje de que el recurso ha sido eliminado exitosamente
-          schema:
-            properties:
-              deleted:
-                type: boolean
+          content:
+            application/json:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
+            application/pdf:
+              schema:
+                properties:
+                  deleted:
+                    type: boolean
         '404':
           description: No Existe el recurso solicitado
           name: errors
-          schema:
-            properties:
-              errors:
-                type: array
-                items:
-                  type: string
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+            application/pdf:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
         '400':
           description: Existe un error con los datos enviados
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      operationId: deleteAttendancesNonWorkedHoursTypesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://demo.buk.cl/api/v1/brasil
 components:
+  schemas:
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Attendances__NonWorkedHours__TypeModel__Request:
+      properties:
+        name:
+          type: string
+        paid_leave:
+          type: boolean
+      required:
+      - name
+      - paid_leave
+    Attendances__NonWorkedHours__TypeModel__Response:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        paid_leave:
+          type: boolean
+    Attendances__NonWorkedHours__Type:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        paid_leave:
+          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: token
-definitions:
-  bad_request:
-    properties:
-      errors:
-        type: array
-        items:
-          type: string
-  Attendances::NonWorkedHours::Type:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      paid_leave:
-        type: boolean
-  Attendances::NonWorkedHours::TypeModel::Response:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      paid_leave:
-        type: boolean
-  Attendances::NonWorkedHours::TypeModel::Request:
-    properties:
-      name:
-        type: string
-      paid_leave:
-        type: boolean
-    required:
-    - name
-    - paid_leave
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header
 x-refined-from:
-- buk-asistencia-api-openapi.yml
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+- buk-asistencia-api-openapi.json
+- buk-data-access-api-brasil-openapi.json

@@ -1,9 +1,23 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Job Titles API
-  version: '1.0'
-  description: 'Operations tagged Job Titles across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Job Titles
 paths:
@@ -14,7 +28,6 @@ paths:
 
 
         Este endpoint no requiere permisos especiales.
-
 
 
         Descripción de atributos:
@@ -33,37 +46,50 @@ paths:
 
         - `area_ids`: [array] Área al que pertenece el cargo.
 
-        - `custom_attributes`: [object] Atributos personalizados del cargo.
-
-
-        '
+        - `custom_attributes`: [object] Atributos personalizados del cargo.'
       tags:
       - Job Titles
       parameters:
       - name: search
         in: query
-        type: string
         description: Filter job titles by name
+        schema:
+          type: string
       - name: code
         in: query
-        type: string
         description: Filter job titles by code
+        schema:
+          type: string
       - name: page_size
         in: query
-        type: integer
         description: (OPTIONAL) Number of answers per page. By default it has a value of 25 and must be within a range of [25 - 100].
+        schema:
+          type: integer
       responses:
         '200':
           description: As a response, we receive an array (data) with job titles
           name: data
-          schema:
-            properties:
-              pagination:
-                $ref: '#/definitions/Pagination'
-              data:
-                type: array
-                items:
-                  $ref: '#/definitions/Role'
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+            application/pdf:
+              schema:
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+      operationId: getRoles
+      x-operation-id-source: derived
     post:
       summary: Create a job title
       description: 'Creates a new role in the system. The parameters are:
@@ -82,30 +108,45 @@ paths:
 
         - role_family_id: Role family ID (OPTIONAL)
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Job Titles
-      parameters:
-      - name: Role
-        in: body
-        description: Role type object
-        required: true
-        schema:
-          $ref: '#/definitions/Role::Create'
       responses:
         '201':
-          schema:
-            title: ResponseBody
-            description: Job title created.
-            properties:
-              data:
-                $ref: '#/definitions/Role::Response'
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: ResponseBody
+                description: Job title created.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
+            application/pdf:
+              schema:
+                title: ResponseBody
+                description: Job title created.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role__Create'
+        description: Role type object
+        required: true
+      operationId: postRoles
+      x-operation-id-source: derived
   /roles/{id}:
     get:
       summary: Get a specific role by ID
@@ -130,28 +171,38 @@ paths:
 
         - `custom_attributes`: [object] Atributos personalizados del cargo.
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Job Titles
       parameters:
       - name: id
         in: path
-        type: integer
         description: Job title ID
         required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: As a response you will receive a Role
-          schema:
-            title: ResponseBody
-            description: As a response you will receive the attributes corresponding to the requested role
-            properties:
-              data:
-                $ref: '#/definitions/Role::Response'
+          content:
+            application/json:
+              schema:
+                title: ResponseBody
+                description: As a response you will receive the attributes corresponding to the requested role
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
+            application/pdf:
+              schema:
+                title: ResponseBody
+                description: As a response you will receive the attributes corresponding to the requested role
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
         '404':
           description: Job title not found
+      operationId: getRolesById
+      x-operation-id-source: derived
   /roles/{identifier}:
     patch:
       summary: Update a position
@@ -183,9 +234,7 @@ paths:
         You cannot remove the association of an area with a job title that has active jobs.
 
 
-        Este endpoint no requiere permisos especiales.
-
-        '
+        Este endpoint no requiere permisos especiales.'
       tags:
       - Job Titles
       parameters:
@@ -193,198 +242,212 @@ paths:
         in: path
         description: '- identifier: Existing role identifier. Can be either the numeric ID or the Role code'
         required: true
-        type: string
-      - name: Role
-        in: body
-        description: Role type object
-        required: true
         schema:
-          $ref: '#/definitions/Role::Update'
+          type: string
       responses:
         '201':
-          schema:
-            title: ResponseBody
-            description: Job title updated.
-            properties:
-              data:
-                $ref: '#/definitions/Role::Response'
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: ResponseBody
+                description: Job title updated.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
+            application/pdf:
+              schema:
+                title: ResponseBody
+                description: Job title updated.
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Role__Response'
         '400':
           description: There is an error with the data submitted
-          schema:
-            $ref: '#/definitions/bad_request'
-definitions:
-  Role::Response:
-    properties:
-      id:
-        type: integer
-        description: Identificador único del cargo
-        example: 1
-      name:
-        type: string
-        description: Nombre del cargo
-        example: Analista
-      description:
-        type: string
-        description: Descripción del cargo
-        example: Gestion
-      code:
-        type: string
-        description: Código del cargo
-        example: ROL-001
-      requirements:
-        type: string
-        description: Requisitos del cargo
-        example: Universitario
-      active:
-        type: boolean
-        description: Indica si el cargo está activo
-        example: true
-      area_ids:
-        type: array
-        description: Identificadores de las áreas asociadas al cargo
-        items:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role__Update'
+        description: Role type object
+        required: true
+      operationId: patchRolesByIdentifier
+      x-operation-id-source: derived
+components:
+  schemas:
+    RoleFamily:
+      properties:
+        id:
           type: integer
-          example: 1
-      role_family_id:
-        type: integer
-        description: Identificador de la familia de cargos
-        example: 1
-      custom_attributes:
-        type: object
-        description: Atributos personalizados del cargo
-        example: {}
-  bad_request:
-    properties:
-      errors:
-        type: array
-        items:
+        name:
           type: string
-  RoleFamily:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      quantity_of_roles:
-        type: integer
-  Pagination:
-    properties:
-      next:
-        type: string
-      previous:
-        type: string
-      count:
-        type: integer
-      total_pages:
-        type: integer
-  Role:
-    properties:
-      id:
-        type: integer
-        description: Identificador único del cargo
-        example: 1
-      code:
-        type: string
-        description: Código del cargo
-        example: ROL-001
-      name:
-        type: string
-        description: Nombre del cargo
-        example: Analista
-      description:
-        type: string
-        description: Descripción del cargo
-        example: Gestion
-      requirements:
-        type: string
-        description: Requisitos del cargo
-        example: Universitario
-      role_family:
-        type: object
-        $ref: '#/definitions/RoleFamily'
-        description: Familia de cargos a la que pertenece el cargo
-      area_ids:
-        type: array
-        description: Identificadores de las áreas asociadas al cargo
-        items:
+        quantity_of_roles:
           type: integer
-          example: 1
-      custom_attributes:
-        type: object
-        description: Atributos personalizados del cargo
-        example: {}
-  Role::Create:
-    properties:
-      name:
-        type: string
-        description: Nombre del cargo
-        example: Analista
-      code:
-        type: string
-        description: Código del cargo
-        example: ROL-001
-      description:
-        type: string
-        description: Descripción del cargo
-        example: Gestion
-      requirements:
-        type: string
-        description: Requisitos del cargo
-        example: Universitario
-      role_family_id:
-        type: integer
-        description: Identificador de la familia de cargos
-        example: 1
-      area_ids:
-        type: array
-        description: Identificadores de las áreas asociadas al cargo
-        items:
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
           type: integer
-          example: 1
-      custom_attributes:
-        type: object
-        description: Atributos personalizados del cargo
-        example: {}
-  Role::Update:
-    properties:
-      name:
-        type: string
-        description: Nombre del cargo
-        example: Analista
-      description:
-        type: string
-        description: Descripción del cargo
-        example: Gestion
-      requirements:
-        type: string
-        description: Requisitos del cargo
-        example: Universitario
-      active:
-        type: boolean
-        description: Indica si el cargo está activo
-        example: true
-      role_family_id:
-        type: integer
-        description: Identificador de la familia de cargos
-        example: 1
-      area_ids:
-        type: array
-        description: Identificadores de las áreas asociadas al cargo
-        items:
+        total_pages:
           type: integer
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Role__Create:
+      properties:
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        code:
+          type: string
+          description: Código del cargo
+          example: ROL-001
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        role_family_id:
+          type: integer
+          description: Identificador de la familia de cargos
           example: 1
-      custom_attributes:
-        type: object
-        description: Atributos personalizados del cargo
-        example: {}
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+    Role__Response:
+      properties:
+        id:
+          type: integer
+          description: Identificador único del cargo
+          example: 1
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        code:
+          type: string
+          description: Código del cargo
+          example: ROL-001
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        active:
+          type: boolean
+          description: Indica si el cargo está activo
+          example: true
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        role_family_id:
+          type: integer
+          description: Identificador de la familia de cargos
+          example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+    Role:
+      properties:
+        id:
+          type: integer
+          description: Identificador único del cargo
+          example: 1
+        code:
+          type: string
+          description: Código del cargo
+          example: ROL-001
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        role_family:
+          type: object
+          $ref: '#/components/schemas/RoleFamily'
+          description: Familia de cargos a la que pertenece el cargo
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+    Role__Update:
+      properties:
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        active:
+          type: boolean
+          description: Indica si el cargo está activo
+          example: true
+        role_family_id:
+          type: integer
+          description: Identificador de la familia de cargos
+          example: 1
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header

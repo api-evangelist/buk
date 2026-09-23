@@ -175,6 +175,8 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Asistencia empresa
+      x-summary-source: derived
   /v2/registrar:
     post:
       tags:
@@ -198,9 +200,7 @@ paths:
         ### Identificador del dispositivo
 
 
-        El campo `mov` se persiste con el prefijo `API-`. Si no se envía, queda como `API-sin-dispositivo`.
-
-        '
+        El campo `mov` se persiste con el prefijo `API-`. Si no se envía, queda como `API-sin-dispositivo`.'
       operationId: registrar
       parameters:
       - in: header
@@ -343,6 +343,8 @@ paths:
                   mensaje:
                     type: string
                     example: Hubo un error al procesar el registro
+      summary: Registrar
+      x-summary-source: derived
   /obtenerRegistroAsistencia:
     get:
       tags:
@@ -493,6 +495,8 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Registro asistencia
+      x-summary-source: derived
   /inyectarRegistroAsistencia:
     post:
       tags:
@@ -581,6 +585,8 @@ paths:
                   message:
                     type: string
                     example: No message available
+      summary: Registro asistencia post
+      x-summary-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

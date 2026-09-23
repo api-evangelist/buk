@@ -1,52 +1,75 @@
 openapi: 3.2.0
 info:
+  description: '# Buk Data Access API.
+
+
+    To use the API, you need to obtain an **API Key**.
+
+    You can manage access within the platform, in **Settings => API Access.**
+
+
+    Once an API Key is created, you must send the value as a header in the HTTP request, in the `auth_token` field.
+
+
+    ## For more details, you can review the article "How to integrate with Buk through an API"
+
+
+    # Endpoints'
   title: Buk Usuarios y perfiles API
-  version: '1.0'
-  description: 'Operations tagged Usuarios y perfiles across 5 of this provider''s published API definitions: buk-data-access-api-brasil-openapi.yml, buk-data-access-api-chile-openapi.yml, buk-data-access-api-colombia-openapi.yml, buk-data-access-api-mexico-openapi.yml, buk-data-access-api-peru-openapi.yml. Each path carries the servers of the definition it was published in.'
-host: demo.buk.cl
+servers:
+- url: https://demo.buk.cl/api/v1/brasil
 tags:
 - name: Usuarios y perfiles
 paths:
   /permission_roles:
     get:
       summary: Mostrar Perfiles
-      description: "Entrega la información de todos los perfiles disponibles.\n\n**Permisos requeridos para utilizar este endpoint:** \n* Permisos de usuarios y perfiles en: 'Lectura' o 'Lectura y Modificación'.\n"
+      description: 'Entrega la información de todos los perfiles disponibles.
+
+
+        **Permisos requeridos para utilizar este endpoint:**
+
+        * Permisos de usuarios y perfiles en: ''Lectura'' o ''Lectura y Modificación''.'
       tags:
       - Usuarios y perfiles
       parameters:
       - name: id
         in: query
-        type: integer
         description: ID del perfil
+        schema:
+          type: integer
       - name: name
         in: query
-        type: string
         description: Nombre
+        schema:
+          type: string
       responses:
         '200':
           description: Una lista de perfiles que cumplan con el criterio de búsqueda.
-          schema:
-            $ref: '#/definitions/PermissionRole'
-definitions:
-  PermissionRole:
-    properties:
-      id:
-        type: integer
-      name:
-        type: string
-      permissions:
-        type: object
-        properties:
-          permission:
-            type: string
-securityDefinitions:
-  auth_token:
-    type: apiKey
-    name: auth_token
-    in: header
-x-refined-from:
-- buk-data-access-api-brasil-openapi.yml
-- buk-data-access-api-chile-openapi.yml
-- buk-data-access-api-colombia-openapi.yml
-- buk-data-access-api-mexico-openapi.yml
-- buk-data-access-api-peru-openapi.yml
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionRole'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/PermissionRole'
+      operationId: getPermissionRoles
+      x-operation-id-source: derived
+components:
+  schemas:
+    PermissionRole:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        permissions:
+          type: object
+          properties:
+            permission:
+              type: string
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: auth_token
+      in: header
