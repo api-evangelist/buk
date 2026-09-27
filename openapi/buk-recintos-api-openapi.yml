@@ -351,26 +351,6 @@ components:
     Recinto__Update:
       allOf:
       - $ref: '#/components/schemas/Recinto'
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    Recinto__Create:
-      allOf:
-      - $ref: '#/components/schemas/Recinto'
-    Recinto__Response:
-      properties:
-        id:
-          type: integer
-          description: Identificador interno
-      allOf:
-      - $ref: '#/components/schemas/Recinto'
     Recinto:
       properties:
         name:
@@ -403,12 +383,26 @@ components:
         codigo_establecimiento:
           type: string
           description: Código Establecimiento
-    bad_request:
+    Pagination:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Recinto__Response:
+      properties:
+        id:
+          type: integer
+          description: Identificador interno
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
+    Recinto__Create:
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
     RecintoIndex:
       properties:
         name:
@@ -447,6 +441,12 @@ components:
         codigo_establecimiento:
           type: string
           description: Código Establecimiento
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

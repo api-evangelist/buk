@@ -601,12 +601,38 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
+    LicenceType__Request:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        code:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        with_pay:
+          type: boolean
+        time_measure:
+          type: string
+          enum:
+          - per_day
+          - per_hour
+          - both
+        requestable:
+          type: boolean
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     LicenceType__Response:
       properties:
         id:
@@ -641,38 +667,12 @@ components:
         updated_at:
           type: string
           format: date
-    Pagination:
+    bad_request:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    LicenceType__Request:
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-        with_pay:
-          type: boolean
-        time_measure:
-          type: string
-          enum:
-          - per_day
-          - per_hour
-          - both
-        requestable:
-          type: boolean
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

@@ -175,7 +175,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    approved_union:
+    union_response:
       properties:
         id:
           type: integer
@@ -183,10 +183,6 @@ components:
           type: string
         rut:
           type: string
-      required:
-      - id
-      - name
-      - rut
     union:
       properties:
         id:
@@ -213,7 +209,7 @@ components:
           type: array
           items:
             type: string
-    union_detail:
+    approved_union:
       properties:
         id:
           type: integer
@@ -221,7 +217,11 @@ components:
           type: string
         rut:
           type: string
-    union_response:
+      required:
+      - id
+      - name
+      - rut
+    union_detail:
       properties:
         id:
           type: integer

@@ -402,6 +402,52 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    vacation_detail:
+      properties:
+        employee_id:
+          type: integer
+          description: ID del empleado
+          example: 123
+        type:
+          type: string
+          enum:
+          - legales
+          - progresivas
+          - dias_administrativos
+          description: Tipo de vacación
+          example: legales
+        start_date:
+          type: string
+          format: date
+          description: Fecha de inicio de la vacación
+          example: '2024-01-15'
+        end_date:
+          type: string
+          format: date
+          description: Fecha de término de la vacación
+          example: '2024-01-26'
+        working_days:
+          type: integer
+          description: Días hábiles de vacación
+          example: 10
+        calendar_days:
+          type: integer
+          description: Días corridos de vacación
+          example: 12
+        workday_stage:
+          type: string
+          description: Etapa de la jornada laboral
+          example: full_working_day
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     Vacation:
       properties:
         id:
@@ -460,16 +506,6 @@ components:
           type: integer
           description: ID del tipo de vacación
           example: 2
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
     approved_vacation:
       properties:
         employee_id:
@@ -514,42 +550,6 @@ components:
           type: array
           items:
             type: string
-    vacation_detail:
-      properties:
-        employee_id:
-          type: integer
-          description: ID del empleado
-          example: 123
-        type:
-          type: string
-          enum:
-          - legales
-          - progresivas
-          - dias_administrativos
-          description: Tipo de vacación
-          example: legales
-        start_date:
-          type: string
-          format: date
-          description: Fecha de inicio de la vacación
-          example: '2024-01-15'
-        end_date:
-          type: string
-          format: date
-          description: Fecha de término de la vacación
-          example: '2024-01-26'
-        working_days:
-          type: integer
-          description: Días hábiles de vacación
-          example: 10
-        calendar_days:
-          type: integer
-          description: Días corridos de vacación
-          example: 12
-        workday_stage:
-          type: string
-          description: Etapa de la jornada laboral
-          example: full_working_day
   securitySchemes:
     auth_token:
       type: apiKey

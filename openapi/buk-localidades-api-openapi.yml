@@ -92,6 +92,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Location:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        depth:
+          type: integer
+        parent:
+          $ref: '#/components/schemas/Location'
     Location__Minimal:
       properties:
         id:
@@ -104,16 +114,6 @@ components:
           type: string
         full_name:
           type: string
-    Location:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        depth:
-          type: integer
-        parent:
-          $ref: '#/components/schemas/Location'
   securitySchemes:
     auth_token:
       type: apiKey

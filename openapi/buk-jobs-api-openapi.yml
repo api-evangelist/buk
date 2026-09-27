@@ -427,14 +427,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BossModel:
+    Pagination:
       properties:
-        id:
-          type: integer
-        cpf:
+        next:
           type: string
-      allOf:
-      - $ref: '#/components/schemas/BasePersonIdentifier'
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     JobTerminateInput:
       required:
       - end_date
@@ -478,16 +480,28 @@ components:
           type: string
           format: date
           description: '- notice_date: Fecha de aviso de término de trabajo en YYYY-MM-DD, en caso de no agregar este campo se considerará el end_date. (OPCIONAL)'
-    Pagination:
+    BasePersonIdentifier:
       properties:
-        next:
+        document_number:
           type: string
-        previous:
+          description: Document Number of  Colaborador.
+        document_type:
           type: string
-        count:
+          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    BossModel:
+      properties:
+        id:
           type: integer
-        total_pages:
-          type: integer
+        cpf:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/BasePersonIdentifier'
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     JobResponseCountry:
       properties:
         id:
@@ -562,20 +576,6 @@ components:
           $ref: '#/components/schemas/BossModel'
         without_wage:
           type: boolean
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    BasePersonIdentifier:
-      properties:
-        document_number:
-          type: string
-          description: Document Number of  Colaborador.
-        document_type:
-          type: string
-          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
   securitySchemes:
     auth_token:
       type: apiKey

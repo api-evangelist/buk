@@ -483,12 +483,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
+    Pagination:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     LicenceType__Response:
       properties:
         id:
@@ -523,16 +527,12 @@ components:
         updated_at:
           type: string
           format: date
-    Pagination:
+    bad_request:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

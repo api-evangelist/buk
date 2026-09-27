@@ -63,6 +63,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    LegalAgent:
+      properties:
+        person_id:
+          type: integer
+        id:
+          type: integer
+        rut:
+          type: string
     CompanyBank:
       properties:
         id:
@@ -122,14 +130,6 @@ components:
         cnpj:
           type: string
         fantasy_name:
-          type: string
-    LegalAgent:
-      properties:
-        person_id:
-          type: integer
-        id:
-          type: integer
-        rut:
           type: string
   securitySchemes:
     auth_token:

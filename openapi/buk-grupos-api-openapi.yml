@@ -141,6 +141,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    FilterQueryModel:
+      properties:
+        id:
+          type: integer
+          description: ID del grupo
+        group_name:
+          type: string
+          description: Nombre del grupo
+        updated_at:
+          type: string
+          format: date-time
+          description: Última actualización
     FilterQueryParticipant:
       properties:
         id:
@@ -162,18 +174,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    FilterQueryModel:
-      properties:
-        id:
-          type: integer
-          description: ID del grupo
-        group_name:
-          type: string
-          description: Nombre del grupo
-        updated_at:
-          type: string
-          format: date-time
-          description: Última actualización
   securitySchemes:
     auth_token:
       type: apiKey

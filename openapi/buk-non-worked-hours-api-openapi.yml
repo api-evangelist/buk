@@ -261,31 +261,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Attendances__NonWorkedHours__Response:
+    Attendances__NonWorkedHours__Index:
       properties:
-        day:
-          type: integer
-        month:
-          type: integer
-        year:
-          type: integer
-        hours:
-          type: number
-          format: float
-          description: Cantidad de horas no trabajadas
-          example: 2.5
-        id:
-          type: integer
-          description: ID del registro de horas no trabajadas
-          example: 42
-        employee_id:
-          type: integer
-          description: ID del empleado
-          example: 14
-        type_id:
-          type: integer
-          description: ID del tipo de hora no trabajada
-          example: 1
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__NonWorkedHours__Response'
     Pagination:
       properties:
         next:
@@ -296,14 +279,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    Attendances__NonWorkedHours__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__NonWorkedHours__Response'
     Attendances__NonWorkedHours__Request:
       properties:
         day:
@@ -338,6 +313,31 @@ components:
           type: array
           items:
             type: string
+    Attendances__NonWorkedHours__Response:
+      properties:
+        day:
+          type: integer
+        month:
+          type: integer
+        year:
+          type: integer
+        hours:
+          type: number
+          format: float
+          description: Cantidad de horas no trabajadas
+          example: 2.5
+        id:
+          type: integer
+          description: ID del registro de horas no trabajadas
+          example: 42
+        employee_id:
+          type: integer
+          description: ID del empleado
+          example: 14
+        type_id:
+          type: integer
+          description: ID del tipo de hora no trabajada
+          example: 1
   securitySchemes:
     auth_token:
       type: apiKey

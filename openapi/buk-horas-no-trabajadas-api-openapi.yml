@@ -287,12 +287,6 @@ paths:
     - url: https://demo.buk.cl/api/v1/brasil
 components:
   schemas:
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Attendances__NonWorkedHours__TypeModel__Request:
       properties:
         name:
@@ -318,6 +312,12 @@ components:
           type: string
         paid_leave:
           type: boolean
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

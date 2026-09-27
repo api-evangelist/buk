@@ -66,30 +66,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    VacationDefinitionOutput:
-      properties:
-        vacation_definitions:
-          type: array
-          description: Lista de políticas de vacaciones
-          example: []
-          items:
-            $ref: '#/components/schemas/VacationDefinition'
-    VacationType:
-      properties:
-        name:
-          type: string
-          description: Nombre del tipo de vacación
-          example: Legales
-        code:
-          type: string
-          description: Código del tipo de vacación
-          example: legales
     VacationDefinition:
       properties:
         id:
@@ -111,6 +87,30 @@ components:
           example:
             name: Legales
             code: legales
+    VacationType:
+      properties:
+        name:
+          type: string
+          description: Nombre del tipo de vacación
+          example: Legales
+        code:
+          type: string
+          description: Código del tipo de vacación
+          example: legales
+    VacationDefinitionOutput:
+      properties:
+        vacation_definitions:
+          type: array
+          description: Lista de políticas de vacaciones
+          example: []
+          items:
+            $ref: '#/components/schemas/VacationDefinition'
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

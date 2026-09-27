@@ -141,64 +141,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SelectionProcessRole:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessSupervisor:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessLocation:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessStage:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    Article22: {}
     SelectionProcessRecruiter:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessArea:
       type: object
       properties:
         id:
@@ -268,6 +222,17 @@ components:
             items:
               $ref: '#/components/schemas/SelectionProcessRecruiter'
             description: {}
+    SelectionProcessStage:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
     SelectionProcessCompany:
       properties:
         cpf:
@@ -279,6 +244,30 @@ components:
           type: integer
           description: {}
       type: object
+    SelectionProcessSupervisor:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessLocation:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
     CamposBrasil:
       properties:
         regimen_laboral:
@@ -343,38 +332,17 @@ components:
           - fiscal_action
           - judicial_action
           description: Indicativo de admisión
-    SelectionProcessInput:
-      required:
-      - area_id
-      - role_id
-      - company_id
-      allOf:
-      - $ref: '#/components/schemas/SelectionProcessBase'
-      - $ref: '#/components/schemas/Article22'
-      - $ref: '#/components/schemas/CamposBrasil'
-      - properties:
-          area_id:
-            example: 123
-            type: integer
-            description: {}
-          role_id:
-            example: 123
-            type: integer
-            description: {}
-          company_id:
-            example: 123
-            type: integer
-            description: {}
-          location_id:
-            example: 123
-            type: integer
-            description: {}
-    bad_request:
+    SelectionProcessRole:
+      type: object
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
     SelectionProcessBase:
       properties:
         name:
@@ -472,17 +440,49 @@ components:
           items:
             type: string
           description: {}
-    SelectionProcessArea:
-      type: object
+    Pagination:
       properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
+        next:
           type: string
-          description: {}
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Article22: {}
+    SelectionProcessInput:
+      required:
+      - area_id
+      - role_id
+      - company_id
+      allOf:
+      - $ref: '#/components/schemas/SelectionProcessBase'
+      - $ref: '#/components/schemas/Article22'
+      - $ref: '#/components/schemas/CamposBrasil'
+      - properties:
+          area_id:
+            example: 123
+            type: integer
+            description: {}
+          role_id:
+            example: 123
+            type: integer
+            description: {}
+          company_id:
+            example: 123
+            type: integer
+            description: {}
+          location_id:
+            example: 123
+            type: integer
+            description: {}
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

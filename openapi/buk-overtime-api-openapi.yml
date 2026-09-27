@@ -303,6 +303,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Attendances__Overtime__Index:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__Overtime__Response'
+    Attendances__Overtime__Type:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        factor:
+          type: number
+          format: float
+        category:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: 0 = hora_extra, 1 = recargo
     Attendances__Overtime__Response:
       properties:
         day:
@@ -358,35 +381,12 @@ components:
       - day
       - month
       - year
-    Attendances__Overtime__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__Overtime__Response'
     bad_request:
       properties:
         errors:
           type: array
           items:
             type: string
-    Attendances__Overtime__Type:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        factor:
-          type: number
-          format: float
-        category:
-          type: integer
-          enum:
-          - 0
-          - 1
-          description: 0 = hora_extra, 1 = recargo
   securitySchemes:
     auth_token:
       type: apiKey

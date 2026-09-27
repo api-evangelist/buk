@@ -15,7 +15,7 @@ info:
 
 
     # Endpoints'
-  title: Buk KP Is API
+  title: Buk KPIs API
 servers:
 - url: https://demo.buk.cl/api/v1/brasil
 tags:
@@ -267,12 +267,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Pagination:
       properties:
         next:
@@ -283,18 +277,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    KPI:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        code:
-          type: string
-        related_to:
-          type: string
-        units:
-          type: string
     KPIDatum:
       properties:
         id:
@@ -319,6 +301,24 @@ components:
       required:
       - kpi_id
       - value
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    KPI:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+        related_to:
+          type: string
+        units:
+          type: string
   securitySchemes:
     auth_token:
       type: apiKey

@@ -224,6 +224,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Piecework__Worklog__RequestPatch:
+      properties:
+        day:
+          type: string
+          default: '2022-02-02'
+        work_type:
+          type: string
+          default: dia
+        worked_units:
+          type: decimal
+          default: 5
+        production:
+          type: integer
+          default: 2
+        total_pay:
+          type: decimal
+          default: 100
+        rate_value:
+          type: decimal
+          default: 3
     Piecework__Worklog__Request:
       properties:
         piecework_execution_id:
@@ -253,26 +273,6 @@ components:
       - saved_in
       - work_type
       - worked_units
-    Piecework__Worklog__RequestPatch:
-      properties:
-        day:
-          type: string
-          default: '2022-02-02'
-        work_type:
-          type: string
-          default: dia
-        worked_units:
-          type: decimal
-          default: 5
-        production:
-          type: integer
-          default: 2
-        total_pay:
-          type: decimal
-          default: 100
-        rate_value:
-          type: decimal
-          default: 3
   securitySchemes:
     auth_token:
       type: apiKey

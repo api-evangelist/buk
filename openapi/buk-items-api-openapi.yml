@@ -421,6 +421,34 @@ components:
           type: string
         custom_attrs:
           type: object
+    Assign:
+      properties:
+        id:
+          type: integer
+        item_id:
+          type: integer
+        employee_id:
+          type: integer
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        amount:
+          type: integer
+        advance_payment_day:
+          type: integer
+        description:
+          type: string
+        cost_center:
+          type: string
+    Bono__Minimal:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
     Pagination:
       properties:
         next:
@@ -460,40 +488,12 @@ components:
           type: string
         custom_attrs:
           type: object
-    Assign:
-      properties:
-        id:
-          type: integer
-        item_id:
-          type: integer
-        employee_id:
-          type: integer
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        amount:
-          type: integer
-        advance_payment_day:
-          type: integer
-        description:
-          type: string
-        cost_center:
-          type: string
     bad_request:
       properties:
         errors:
           type: array
           items:
             type: string
-    Bono__Minimal:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
   securitySchemes:
     auth_token:
       type: apiKey
