@@ -194,6 +194,52 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    BenefitVersionResponse:
+      properties:
+        id:
+          type: integer
+          description: ID de la versión de beneficio
+          example: 1
+        name:
+          type: string
+          description: Nombre de la versión de beneficio
+          example: Complementario
+        global:
+          type: boolean
+          description: Indica si la versión del beneficio está disponible para todos
+          example: true
+        points:
+          type: integer
+          description: Costo de puntos asociados
+          example: 100
+        enrollment_type:
+          type: integer
+          description: Tipo de suscripción
+          example: 0
+        integration:
+          type: integer
+          description: 'Tipo de integración con otros módulos (ej: Vacaciones, Permisos, etc.)'
+          example: 0
+        created_at:
+          type: string
+          format: date-time
+          description: Fecha de creación
+          example: '2024-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Fecha de última actualización
+          example: '2024-01-01T00:00:00Z'
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     BenefitRequestResponse:
       properties:
         id:
@@ -256,52 +302,6 @@ components:
           description: Valores de los campos personalizados definidos para la solicitud de beneficio
           example:
             custom_attribute_name: Valor
-    BenefitVersionResponse:
-      properties:
-        id:
-          type: integer
-          description: ID de la versión de beneficio
-          example: 1
-        name:
-          type: string
-          description: Nombre de la versión de beneficio
-          example: Complementario
-        global:
-          type: boolean
-          description: Indica si la versión del beneficio está disponible para todos
-          example: true
-        points:
-          type: integer
-          description: Costo de puntos asociados
-          example: 100
-        enrollment_type:
-          type: integer
-          description: Tipo de suscripción
-          example: 0
-        integration:
-          type: integer
-          description: 'Tipo de integración con otros módulos (ej: Vacaciones, Permisos, etc.)'
-          example: 0
-        created_at:
-          type: string
-          format: date-time
-          description: Fecha de creación
-          example: '2024-01-01T00:00:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          description: Fecha de última actualización
-          example: '2024-01-01T00:00:00Z'
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

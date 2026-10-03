@@ -120,59 +120,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FiniquitoDescuentos:
-      properties:
-        nombre:
-          type: number
-        monto:
-          type: number
-    FiniquitoBase:
-      properties:
-        fecha:
-          type: string
-          format: date
-        fecha_aviso:
-          type: string
-          format: date
-        fecha_pago:
-          type: string
-          format: date
-        razon:
-          type: string
-        anos_de_servicio:
-          type: number
-        indemnizacion_legal_por_anos_servicios:
-          type: number
-        indemnizacion_legal_por_meses_obra:
-          type: number
-        indemnizacion_sustitutiva_previo_aviso:
-          type: number
-        indemnizacion_pactada_contractualmente:
-          type: number
-        indemnizacion_voluntaria:
-          type: number
-        indemnizacion_vacaciones:
-          type: number
-        descuento_seguro_cesantia:
-          type: number
-        otros_descuentos:
-          type: number
-        monto_indemnizacion_no_renta:
-          type: number
-        reajuste_indemnizacion:
-          type: number
-        interes_indemnizacion:
-          type: number
-        en_liquidacion:
-          type: boolean
-        custom_attributes:
-          type: object
-    FiniquitoHaberes:
-      properties:
-        nombre:
-          type: number
-        monto:
-          type: number
     Finiquito:
       allOf:
       - $ref: '#/components/schemas/FiniquitoBase'
@@ -224,6 +171,59 @@ components:
           type: number
         numero_proceso_judicial:
           type: string
+    FiniquitoHaberes:
+      properties:
+        nombre:
+          type: number
+        monto:
+          type: number
+    FiniquitoBase:
+      properties:
+        fecha:
+          type: string
+          format: date
+        fecha_aviso:
+          type: string
+          format: date
+        fecha_pago:
+          type: string
+          format: date
+        razon:
+          type: string
+        anos_de_servicio:
+          type: number
+        indemnizacion_legal_por_anos_servicios:
+          type: number
+        indemnizacion_legal_por_meses_obra:
+          type: number
+        indemnizacion_sustitutiva_previo_aviso:
+          type: number
+        indemnizacion_pactada_contractualmente:
+          type: number
+        indemnizacion_voluntaria:
+          type: number
+        indemnizacion_vacaciones:
+          type: number
+        descuento_seguro_cesantia:
+          type: number
+        otros_descuentos:
+          type: number
+        monto_indemnizacion_no_renta:
+          type: number
+        reajuste_indemnizacion:
+          type: number
+        interes_indemnizacion:
+          type: number
+        en_liquidacion:
+          type: boolean
+        custom_attributes:
+          type: object
+    FiniquitoDescuentos:
+      properties:
+        nombre:
+          type: number
+        monto:
+          type: number
   securitySchemes:
     auth_token:
       type: apiKey

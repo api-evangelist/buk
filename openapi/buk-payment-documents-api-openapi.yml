@@ -350,37 +350,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    SettlementLine:
-      properties:
-        type:
-          type: string
-        subtype:
-          type: string
-        income_type:
-          type: string
-        name:
-          type: string
-        amount:
-          type: number
-          format: float
-        resettlement:
-          type: boolean
-        taxable:
-          type: boolean
-        imponible:
-          type: boolean
-        anticipo:
-          type: boolean
-        credit_type:
-          type: string
-        institution:
-          type: string
-        description:
-          type: string
-        code:
-          type: string
-        item_code:
-          type: string
     Settlement:
       properties:
         liquidacion_id:
@@ -440,6 +409,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SettlementLine'
+    SettlementLine:
+      properties:
+        type:
+          type: string
+        subtype:
+          type: string
+        income_type:
+          type: string
+        name:
+          type: string
+        amount:
+          type: number
+          format: float
+        resettlement:
+          type: boolean
+        taxable:
+          type: boolean
+        imponible:
+          type: boolean
+        anticipo:
+          type: boolean
+        credit_type:
+          type: string
+        institution:
+          type: string
+        description:
+          type: string
+        code:
+          type: string
+        item_code:
+          type: string
   securitySchemes:
     auth_token:
       type: apiKey

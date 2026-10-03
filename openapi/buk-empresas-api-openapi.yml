@@ -63,14 +63,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LegalAgent:
-      properties:
-        person_id:
-          type: integer
-        id:
-          type: integer
-        rut:
-          type: string
     CompanyBank:
       properties:
         id:
@@ -93,6 +85,14 @@ components:
           type: integer
         total_pages:
           type: integer
+    LegalAgent:
+      properties:
+        person_id:
+          type: integer
+        id:
+          type: integer
+        rut:
+          type: string
     Company:
       properties:
         id:

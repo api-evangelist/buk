@@ -345,24 +345,156 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApplicantSelectionProcess:
+      type: array
+      items:
+        type: object
+        description: Selection process
+        properties:
+          id:
+            example: 123
+            type: integer
+            description: Selection Process ID
+          name:
+            example: {}
+            type: string
+            description: Title of the selection process
+    ApplicantCv:
+      properties:
+        cv_url:
+          example: https://ejemplo.com
+          type: string
+          description: Applicant's CV
+          format: binary
+    SearchApplicantByEmail:
+      properties:
+        email:
+          example: {}
+          type: string
+          description: Email
+    ApplicationApplicant:
+      type: object
+      description: Postulante
+      allOf:
+      - properties:
+          id:
+            example: 123
+            type: integer
+            description: ID del postulante
+      - $ref: '#/components/schemas/ApplicationApplicantIdentifier'
+    ApplicantInput:
+      required:
+      - first_name
+      - surname
+      allOf:
+      - $ref: '#/components/schemas/ApplicantBase'
+      - $ref: '#/components/schemas/StudiesLevel'
+      - $ref: '#/components/schemas/ApplicantIdentifier'
+      - $ref: '#/components/schemas/ApplicantLocationInput'
+    ApplicantLocationInput:
+      properties:
+        location_id:
+          example: '123'
+          type: string
+          description: ID or name of the Municipality
     ApplicationApplicantIdentifier:
       properties:
         document_number:
           example: '123456789'
           type: string
           description: Número de documento del postulante
-    ApplicationProcessStage:
-      type: object
-      description: Etapa del proceso de selección
+    ApplicationBase:
       properties:
-        id:
+        selection_process_id:
           example: 123
           type: integer
-          description: ID de la etapa del proceso de selección
-        name:
-          example: {}
+          description: ID del proceso de selección
+        referrer:
+          example: internal
           type: string
-          description: Nombre de la etapa del proceso de selección
+          description: Origen de la postulación
+          enum:
+          - internal
+          - external
+          - genoma
+          - trabajando
+          - aira
+          - portal
+          - talent
+        integration_url:
+          example: https://ejemplo.com
+          type: string
+          description: URL asociada al origen de la postulación
+        salary_expectation:
+          example: 10
+          type: integer
+          description: Expectativa salarial específica para la postulación
+        custom_attributes:
+          example:
+            clave: valor
+          type: object
+          description: Atributos personalizados de la postulación. (Consultar con administrador cuales son los atributos personalizados disponibles)
+        application_date:
+          type: string
+          format: date
+          description: Fecha de postulación
+          example: '2024-01-01'
+        updated_at:
+          example: '2024-01-01T12:00:00Z'
+          type: string
+          format: date-time
+          description: Fecha de actualización
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Applicant:
+      allOf:
+      - $ref: '#/components/schemas/ApplicantBase'
+      - properties:
+          location:
+            $ref: '#/components/schemas/ApplicantLocation'
+          id:
+            example: 123
+            type: integer
+            description: ID del postulante
+      - $ref: '#/components/schemas/StudiesLevel'
+      - $ref: '#/components/schemas/ApplicantIdentifier'
+    BasePersonIdentifier:
+      properties:
+        document_number:
+          type: string
+          description: Document Number of  Colaborador.
+        document_type:
+          type: string
+          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    ApplicantIdentifier:
+      allOf:
+      - $ref: '#/components/schemas/BasePersonIdentifier'
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    ApplicationForApplicant:
+      allOf:
+      - properties:
+          id:
+            example: 123
+            type: integer
+            description: ID de la postulación
+          applicant:
+            $ref: '#/components/schemas/ApplicationApplicant'
+          process_stage:
+            $ref: '#/components/schemas/ApplicationProcessStage'
+      - $ref: '#/components/schemas/ApplicationBase'
     StudiesLevel:
       properties:
         studies_level:
@@ -382,88 +514,29 @@ components:
           - Postgraduación completa
           - Maestría completa
           - Doctorado completo
-    ApplicationForApplicant:
-      allOf:
-      - properties:
-          id:
-            example: 123
-            type: integer
-            description: ID de la postulación
-          applicant:
-            $ref: '#/components/schemas/ApplicationApplicant'
-          process_stage:
-            $ref: '#/components/schemas/ApplicationProcessStage'
-      - $ref: '#/components/schemas/ApplicationBase'
-    ApplicantSelectionProcess:
-      type: array
-      items:
-        type: object
-        description: Selection process
-        properties:
-          id:
-            example: 123
-            type: integer
-            description: Selection Process ID
-          name:
-            example: {}
-            type: string
-            description: Title of the selection process
-    ApplicantIdentifier:
-      allOf:
-      - $ref: '#/components/schemas/BasePersonIdentifier'
-    ApplicantInput:
-      required:
-      - first_name
-      - surname
-      allOf:
-      - $ref: '#/components/schemas/ApplicantBase'
-      - $ref: '#/components/schemas/StudiesLevel'
-      - $ref: '#/components/schemas/ApplicantIdentifier'
-      - $ref: '#/components/schemas/ApplicantLocationInput'
-    Applicant:
-      allOf:
-      - $ref: '#/components/schemas/ApplicantBase'
-      - properties:
-          location:
-            $ref: '#/components/schemas/ApplicantLocation'
-          id:
-            example: 123
-            type: integer
-            description: ID del postulante
-      - $ref: '#/components/schemas/StudiesLevel'
-      - $ref: '#/components/schemas/ApplicantIdentifier'
-    ApplicationApplicant:
+    ApplicantLocation:
       type: object
-      description: Postulante
-      allOf:
-      - properties:
-          id:
-            example: 123
-            type: integer
-            description: ID del postulante
-      - $ref: '#/components/schemas/ApplicationApplicantIdentifier'
-    SearchApplicantByEmail:
       properties:
-        email:
+        id:
+          example: 123
+          type: integer
+          description: ID of the Municipality
+        name:
           example: {}
           type: string
-          description: Email
-    Pagination:
+          description: Name of the Municipality
+    ApplicationProcessStage:
+      type: object
+      description: Etapa del proceso de selección
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
+        id:
+          example: 123
           type: integer
-        total_pages:
-          type: integer
-    ApplicantLocationInput:
-      properties:
-        location_id:
-          example: '123'
+          description: ID de la etapa del proceso de selección
+        name:
+          example: {}
           type: string
-          description: ID or name of the Municipality
+          description: Nombre de la etapa del proceso de selección
     ApplicantBase:
       properties:
         first_name:
@@ -527,79 +600,6 @@ components:
             clave: valor
           type: object
           description: Customized applicant attributes. (Check with the administrator for available custom attributes)
-    ApplicationBase:
-      properties:
-        selection_process_id:
-          example: 123
-          type: integer
-          description: ID del proceso de selección
-        referrer:
-          example: internal
-          type: string
-          description: Origen de la postulación
-          enum:
-          - internal
-          - external
-          - genoma
-          - trabajando
-          - aira
-          - portal
-          - talent
-        integration_url:
-          example: https://ejemplo.com
-          type: string
-          description: URL asociada al origen de la postulación
-        salary_expectation:
-          example: 10
-          type: integer
-          description: Expectativa salarial específica para la postulación
-        custom_attributes:
-          example:
-            clave: valor
-          type: object
-          description: Atributos personalizados de la postulación. (Consultar con administrador cuales son los atributos personalizados disponibles)
-        application_date:
-          type: string
-          format: date
-          description: Fecha de postulación
-          example: '2024-01-01'
-        updated_at:
-          example: '2024-01-01T12:00:00Z'
-          type: string
-          format: date-time
-          description: Fecha de actualización
-    BasePersonIdentifier:
-      properties:
-        document_number:
-          type: string
-          description: Document Number of  Colaborador.
-        document_type:
-          type: string
-          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    ApplicantLocation:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: ID of the Municipality
-        name:
-          example: {}
-          type: string
-          description: Name of the Municipality
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    ApplicantCv:
-      properties:
-        cv_url:
-          example: https://ejemplo.com
-          type: string
-          description: Applicant's CV
-          format: binary
   securitySchemes:
     auth_token:
       type: apiKey

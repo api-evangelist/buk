@@ -348,7 +348,7 @@ paths:
     - url: https://demo.buk.cl/api/v1/brasil
 components:
   schemas:
-    Recinto__Update:
+    Recinto__Create:
       allOf:
       - $ref: '#/components/schemas/Recinto'
     Recinto:
@@ -383,6 +383,15 @@ components:
         codigo_establecimiento:
           type: string
           description: Código Establecimiento
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Recinto__Update:
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
     Pagination:
       properties:
         next:
@@ -393,16 +402,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    Recinto__Response:
-      properties:
-        id:
-          type: integer
-          description: Identificador interno
-      allOf:
-      - $ref: '#/components/schemas/Recinto'
-    Recinto__Create:
-      allOf:
-      - $ref: '#/components/schemas/Recinto'
     RecintoIndex:
       properties:
         name:
@@ -441,12 +440,13 @@ components:
         codigo_establecimiento:
           type: string
           description: Código Establecimiento
-    bad_request:
+    Recinto__Response:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        id:
+          type: integer
+          description: Identificador interno
+      allOf:
+      - $ref: '#/components/schemas/Recinto'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -270,6 +270,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    centro_costo_definition_detail:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        previred_code:
+          type: string
+        custom_attributes:
+          type: object
+      required:
+      - code
+    CentroCostoDefinition:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        previred_code:
+          type: string
+        custom_attributes:
+          type: object
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     centro_costo_definition_response:
       properties:
         id:
@@ -285,42 +313,6 @@ components:
       - code
       - previred_code
       - custom_attributes
-    CentroCostoDefinition:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        previred_code:
-          type: string
-        custom_attributes:
-          type: object
-    centro_costo_response:
-      properties:
-        centro_costo_definition_id:
-          type: integer
-        job_id:
-          type: integer
-        weight:
-          type: integer
-    centro_costo_definition_detail:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        previred_code:
-          type: string
-        custom_attributes:
-          type: object
-      required:
-      - code
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     centro_costo_request:
       properties:
         centro_costo_definition_id:
@@ -333,6 +325,14 @@ components:
       - id
       - code
       - previred_code
+    centro_costo_response:
+      properties:
+        centro_costo_definition_id:
+          type: integer
+        job_id:
+          type: integer
+        weight:
+          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

@@ -545,6 +545,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     VacationBalance:
       properties:
         employee_id:
@@ -563,16 +573,6 @@ components:
           type: number
           description: Diferencia entre saldo final e inicial
           example: -2.5
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

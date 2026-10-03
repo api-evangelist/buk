@@ -141,7 +141,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SelectionProcessRecruiter:
+    SelectionProcessRole:
       type: object
       properties:
         id:
@@ -153,6 +153,41 @@ components:
           type: string
           description: {}
     SelectionProcessArea:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessSupervisor:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessLocation:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessStage:
       type: object
       properties:
         id:
@@ -222,117 +257,7 @@ components:
             items:
               $ref: '#/components/schemas/SelectionProcessRecruiter'
             description: {}
-    SelectionProcessStage:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessCompany:
-      properties:
-        cpf:
-          example: '123456789'
-          type: string
-          description: {}
-        id:
-          example: 123
-          type: integer
-          description: {}
-      type: object
-    SelectionProcessSupervisor:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessLocation:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    CamposBrasil:
-      properties:
-        regimen_laboral:
-          example: general_employee
-          type: string
-          enum:
-          - general_employee
-          - intermitent_employee
-          - domestic_employee
-          - rural_employee
-          - apprentice
-          - fixed_term_employee
-          - temporary_employee
-          - estagiario
-          - prolabore_722
-          - prolabore_723
-          - no_reportable_esocial_work_category
-          description: Categoría Laboral
-        tipo_jornada:
-          example: workday_12x36
-          type: string
-          enum:
-          - workday_12x36
-          - workday_variable_free_time
-          - workday_fixed_free_time
-          - workday_fixed_free_time_except_sunday
-          - workday_fixed_time_additional_sunday
-          - workday_uninterrupted
-          - other_workday
-          description: Tipo de jornada
-        work_day_description:
-          example: Ejemplo
-          type: string
-          description: Descripción de jornada
-        otros_tipo_jornada:
-          example: subject_to_workday
-          type: string
-          enum:
-          - subject_to_workday
-          - external_forseen_activity
-          - forseen_function
-          - remote_work
-          - no_reportable_esocial_workday
-          description: Régimen de jornada
-        admission_type:
-          example: admission
-          type: string
-          enum:
-          - admission
-          - transference_company_same_group
-          - transferencia_company_consortium
-          - transferencia_succesion_incorporation_fusion
-          - transferencia_domestinc_employee
-          - cpf_movement
-          - transference_company_unexistence
-          description: Tipo de admisión
-        admission_indicative:
-          example: normal
-          type: string
-          enum:
-          - normal
-          - fiscal_action
-          - judicial_action
-          description: Indicativo de admisión
-    SelectionProcessRole:
+    SelectionProcessRecruiter:
       type: object
       properties:
         id:
@@ -450,7 +375,12 @@ components:
           type: integer
         total_pages:
           type: integer
-    Article22: {}
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     SelectionProcessInput:
       required:
       - area_id
@@ -477,12 +407,82 @@ components:
             example: 123
             type: integer
             description: {}
-    bad_request:
+    CamposBrasil:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        regimen_laboral:
+          example: general_employee
+          type: string
+          enum:
+          - general_employee
+          - intermitent_employee
+          - domestic_employee
+          - rural_employee
+          - apprentice
+          - fixed_term_employee
+          - temporary_employee
+          - estagiario
+          - prolabore_722
+          - prolabore_723
+          - no_reportable_esocial_work_category
+          description: Categoría Laboral
+        tipo_jornada:
+          example: workday_12x36
+          type: string
+          enum:
+          - workday_12x36
+          - workday_variable_free_time
+          - workday_fixed_free_time
+          - workday_fixed_free_time_except_sunday
+          - workday_fixed_time_additional_sunday
+          - workday_uninterrupted
+          - other_workday
+          description: Tipo de jornada
+        work_day_description:
+          example: Ejemplo
+          type: string
+          description: Descripción de jornada
+        otros_tipo_jornada:
+          example: subject_to_workday
+          type: string
+          enum:
+          - subject_to_workday
+          - external_forseen_activity
+          - forseen_function
+          - remote_work
+          - no_reportable_esocial_workday
+          description: Régimen de jornada
+        admission_type:
+          example: admission
+          type: string
+          enum:
+          - admission
+          - transference_company_same_group
+          - transferencia_company_consortium
+          - transferencia_succesion_incorporation_fusion
+          - transferencia_domestinc_employee
+          - cpf_movement
+          - transference_company_unexistence
+          description: Tipo de admisión
+        admission_indicative:
+          example: normal
+          type: string
+          enum:
+          - normal
+          - fiscal_action
+          - judicial_action
+          description: Indicativo de admisión
+    Article22: {}
+    SelectionProcessCompany:
+      properties:
+        cpf:
+          example: '123456789'
+          type: string
+          description: {}
+        id:
+          example: 123
+          type: integer
+          description: {}
+      type: object
   securitySchemes:
     auth_token:
       type: apiKey

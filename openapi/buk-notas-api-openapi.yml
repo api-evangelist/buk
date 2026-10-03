@@ -89,27 +89,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NoteCreated:
-      type: object
-      description: Comentario creado exitosamente
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: Id del comentario
-        message:
-          example: {}
-          type: string
-          description: Mensaje del comentario
-        postulante_id:
-          example: 123
-          type: integer
-          description: Id del postulante
-        created_at:
-          example: '2024-01-01T12:00:00Z'
-          type: string
-          format: date-time
-          description: Fecha de creación del comentario
     bad_request:
       properties:
         errors:
@@ -153,6 +132,27 @@ components:
           example: 123
           type: integer
           description: Id del proceso de selección
+    NoteCreated:
+      type: object
+      description: Comentario creado exitosamente
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: Id del comentario
+        message:
+          example: {}
+          type: string
+          description: Mensaje del comentario
+        postulante_id:
+          example: 123
+          type: integer
+          description: Id del postulante
+        created_at:
+          example: '2024-01-01T12:00:00Z'
+          type: string
+          format: date-time
+          description: Fecha de creación del comentario
   securitySchemes:
     auth_token:
       type: apiKey

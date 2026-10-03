@@ -244,40 +244,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApplicationApplicantIdentifier:
-      properties:
-        document_number:
-          example: '123456789'
-          type: string
-          description: Número de documento del postulante
-    ApplicationProcessStage:
-      type: object
-      description: Etapa del proceso de selección
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: ID de la etapa del proceso de selección
-        name:
-          example: {}
-          type: string
-          description: Nombre de la etapa del proceso de selección
-    ApplicationApplicantIdentifierInput:
-      properties:
-        applicant_id:
-          example: '123'
-          type: string
-          description: ID o Número de documento del postulante
-    ApplicationApplicant:
-      type: object
-      description: Postulante
-      allOf:
-      - properties:
-          id:
-            example: 123
-            type: integer
-            description: ID del postulante
-      - $ref: '#/components/schemas/ApplicationApplicantIdentifier'
     ApplicationInput:
       required:
       - applicant_id
@@ -290,30 +256,22 @@ components:
             example: '123'
             type: string
             description: ID o nombre de la etapa del proceso de selección.
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    Application:
+    ApplicationApplicant:
+      type: object
+      description: Postulante
       allOf:
-      - $ref: '#/components/schemas/ApplicationBase'
       - properties:
-          applicant:
-            $ref: '#/components/schemas/ApplicationApplicant'
-          process_stage:
-            $ref: '#/components/schemas/ApplicationProcessStage'
+          id:
+            example: 123
+            type: integer
+            description: ID del postulante
+      - $ref: '#/components/schemas/ApplicationApplicantIdentifier'
+    ApplicationApplicantIdentifier:
+      properties:
+        document_number:
+          example: '123456789'
+          type: string
+          description: Número de documento del postulante
     ApplicationBase:
       properties:
         selection_process_id:
@@ -355,6 +313,48 @@ components:
           type: string
           format: date-time
           description: Fecha de actualización
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Application:
+      allOf:
+      - $ref: '#/components/schemas/ApplicationBase'
+      - properties:
+          applicant:
+            $ref: '#/components/schemas/ApplicationApplicant'
+          process_stage:
+            $ref: '#/components/schemas/ApplicationProcessStage'
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    ApplicationApplicantIdentifierInput:
+      properties:
+        applicant_id:
+          example: '123'
+          type: string
+          description: ID o Número de documento del postulante
+    ApplicationProcessStage:
+      type: object
+      description: Etapa del proceso de selección
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: ID de la etapa del proceso de selección
+        name:
+          example: {}
+          type: string
+          description: Nombre de la etapa del proceso de selección
   securitySchemes:
     auth_token:
       type: apiKey

@@ -334,23 +334,74 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EvaluationProcess:
+    ScoreByGoal:
       properties:
-        id:
-          type: integer
         name:
           type: string
-        participants:
+        score:
+          type: number
+    EvaluatorPersonIdentifier:
+      properties:
+        evaluator_document_number:
+          type: string
+          description: Document Number of  Evaluator.
+        evaluator_document_type:
+          type: string
+          description: 'Document Type Evaluator. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    Capacities:
+      properties:
+        evaluation_id:
           type: integer
-        status:
+        evaluation_status:
           type: string
-        start_date:
+        evaluated_name:
           type: string
-        end_date:
+        evaluated_rut:
           type: string
-        global_progress:
+        role:
           type: string
-        stages:
+        role_family:
+          type: string
+        division:
+          type: string
+        area:
+          type: string
+        sub_area:
+          type: string
+        evaluation_type:
+          type: string
+        evaluator_name:
+          type: string
+        evaluator_rut:
+          type: string
+        score_by_capacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScoreByCapacity'
+        capacities_score:
+          type: number
+        score:
+          type: number
+      allOf:
+      - $ref: '#/components/schemas/EvaluatedPersonIdentifier'
+      - $ref: '#/components/schemas/EvaluatorPersonIdentifier'
+    EvaluatedPersonIdentifier:
+      properties:
+        evaluated_document_number:
+          type: string
+          description: Document Number of  Evaluated.
+        evaluated_document_type:
+          type: string
+          description: 'Document Type Evaluated. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    ScoreByCapacity:
+      properties:
+        name:
+          type: string
+        score:
+          type: number
+    bad_request:
+      properties:
+        errors:
           type: array
           items:
             type: string
@@ -391,25 +442,23 @@ components:
           type: number
         score:
           type: number
-    EvaluatedPersonIdentifier:
+    EvaluationProcess:
       properties:
-        evaluated_document_number:
+        id:
+          type: integer
+        name:
           type: string
-          description: Document Number of  Evaluated.
-        evaluated_document_type:
+        participants:
+          type: integer
+        status:
           type: string
-          description: 'Document Type Evaluated. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    EvaluatorPersonIdentifier:
-      properties:
-        evaluator_document_number:
+        start_date:
           type: string
-          description: Document Number of  Evaluator.
-        evaluator_document_type:
+        end_date:
           type: string
-          description: 'Document Type Evaluator. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    bad_request:
-      properties:
-        errors:
+        global_progress:
+          type: string
+        stages:
           type: array
           items:
             type: string
@@ -423,55 +472,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    Capacities:
-      properties:
-        evaluation_id:
-          type: integer
-        evaluation_status:
-          type: string
-        evaluated_name:
-          type: string
-        evaluated_rut:
-          type: string
-        role:
-          type: string
-        role_family:
-          type: string
-        division:
-          type: string
-        area:
-          type: string
-        sub_area:
-          type: string
-        evaluation_type:
-          type: string
-        evaluator_name:
-          type: string
-        evaluator_rut:
-          type: string
-        score_by_capacity:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScoreByCapacity'
-        capacities_score:
-          type: number
-        score:
-          type: number
-      allOf:
-      - $ref: '#/components/schemas/EvaluatedPersonIdentifier'
-      - $ref: '#/components/schemas/EvaluatorPersonIdentifier'
-    ScoreByGoal:
-      properties:
-        name:
-          type: string
-        score:
-          type: number
-    ScoreByCapacity:
-      properties:
-        name:
-          type: string
-        score:
-          type: number
   securitySchemes:
     auth_token:
       type: apiKey

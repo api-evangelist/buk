@@ -479,26 +479,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Area:
+    AreaSecondLevel:
       properties:
         id:
           type: integer
         name:
           type: string
-        address:
+        division:
+          $ref: '#/components/schemas/AreaFirstLevel'
+    AreaFirstLevel:
+      properties:
+        id:
+          type: integer
+          description: Identificador del área de primer nivel
+          example: 1
+        name:
           type: string
-        children_area:
-          $ref: '#/components/schemas/parent_child_area'
-        parent_area:
-          $ref: '#/components/schemas/parent_child_area'
-        cost_center:
-          type: string
-        department:
-          $ref: '#/components/schemas/AreaSecondLevel'
-        status:
-          type: string
-        custom_attributes:
-          type: object
+          description: Nombre del área de primer nivel
+          example: Gerencia
     Area_new:
       properties:
         id:
@@ -529,6 +527,12 @@ components:
           type: string
         custom_attributes:
           type: object
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     Area__Update:
       properties:
         name:
@@ -555,18 +559,6 @@ components:
           type: object
           items:
             type: string
-    parent_child_area:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        commune:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
     Area__Create:
       properties:
         parent_id:
@@ -592,24 +584,38 @@ components:
             type: integer
         custom_attrs:
           type: object
-    AreaFirstLevel:
-      properties:
-        id:
-          type: integer
-          description: Identificador del área de primer nivel
-          example: 1
-        name:
-          type: string
-          description: Nombre del área de primer nivel
-          example: Gerencia
-    AreaSecondLevel:
+    Area:
       properties:
         id:
           type: integer
         name:
           type: string
-        division:
-          $ref: '#/components/schemas/AreaFirstLevel'
+        address:
+          type: string
+        children_area:
+          $ref: '#/components/schemas/parent_child_area'
+        parent_area:
+          $ref: '#/components/schemas/parent_child_area'
+        cost_center:
+          type: string
+        department:
+          $ref: '#/components/schemas/AreaSecondLevel'
+        status:
+          type: string
+        custom_attributes:
+          type: object
+    parent_child_area:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        commune:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
     Pagination:
       properties:
         next:
@@ -620,12 +626,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
   securitySchemes:
     auth_token:
       type: apiKey

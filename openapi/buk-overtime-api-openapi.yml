@@ -303,60 +303,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Attendances__Overtime__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__Overtime__Response'
-    Attendances__Overtime__Type:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        factor:
-          type: number
-          format: float
-        category:
-          type: integer
-          enum:
-          - 0
-          - 1
-          description: 0 = hora_extra, 1 = recargo
-    Attendances__Overtime__Response:
-      properties:
-        day:
-          type: integer
-        month:
-          type: integer
-        year:
-          type: integer
-        hours:
-          type: number
-          format: float
-        id:
-          type: integer
-        employee_id:
-          type: integer
-        type_id:
-          type: integer
-        centro_costo:
-          type: string
-        centro_costo_code:
-          type: string
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
     Attendances__Overtime__Request:
       properties:
         day:
@@ -381,12 +327,66 @@ components:
       - day
       - month
       - year
+    Attendances__Overtime__Response:
+      properties:
+        day:
+          type: integer
+        month:
+          type: integer
+        year:
+          type: integer
+        hours:
+          type: number
+          format: float
+        id:
+          type: integer
+        employee_id:
+          type: integer
+        type_id:
+          type: integer
+        centro_costo:
+          type: string
+        centro_costo_code:
+          type: string
+    Attendances__Overtime__Index:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__Overtime__Response'
     bad_request:
       properties:
         errors:
           type: array
           items:
             type: string
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Attendances__Overtime__Type:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        factor:
+          type: number
+          format: float
+        category:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: 0 = hora_extra, 1 = recargo
   securitySchemes:
     auth_token:
       type: apiKey

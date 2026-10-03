@@ -68,14 +68,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RoleFamily:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        quantity_of_roles:
-          type: integer
     Pagination:
       properties:
         next:
@@ -85,6 +77,14 @@ components:
         count:
           type: integer
         total_pages:
+          type: integer
+    RoleFamily:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity_of_roles:
           type: integer
   securitySchemes:
     auth_token:

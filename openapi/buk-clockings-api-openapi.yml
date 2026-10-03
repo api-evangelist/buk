@@ -288,6 +288,29 @@ paths:
                 code: INTERNAL_ERROR
                 message: An unexpected error occurred
 components:
+  parameters:
+    XProviderToken:
+      name: x-provider-token
+      in: header
+      required: true
+      description: 'Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.
+
+        '
+      schema:
+        type: string
+        minLength: 1
+      example: f353ca91-4fc5-49f2-9b9e-304f83d11914
+    XProviderName:
+      name: x-provider-name
+      in: header
+      required: true
+      description: 'Registered provider name. Must match an existing provider in the system.
+
+        '
+      schema:
+        type: string
+        minLength: 1
+      example: bukwebapp
   schemas:
     ClockingRequest:
       type: object
@@ -525,29 +548,6 @@ components:
           type: string
           description: Descriptive message of the operation result.
           example: Clocking record created successfully
-  parameters:
-    XProviderName:
-      name: x-provider-name
-      in: header
-      required: true
-      description: 'Registered provider name. Must match an existing provider in the system.
-
-        '
-      schema:
-        type: string
-        minLength: 1
-      example: bukwebapp
-    XProviderToken:
-      name: x-provider-token
-      in: header
-      required: true
-      description: 'Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.
-
-        '
-      schema:
-        type: string
-        minLength: 1
-      example: f353ca91-4fc5-49f2-9b9e-304f83d11914
   securitySchemes:
     ProviderAuth:
       type: apiKey

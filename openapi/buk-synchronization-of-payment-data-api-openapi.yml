@@ -137,29 +137,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Assign__PaymentDetailResponse:
+    Attendances__Overtime__PaymentDetail:
       properties:
-        id:
-          required: false
+        day:
           type: integer
+        hours:
+          type: number
+          format: float
         employee_id:
-          required: true
           type: integer
-        item_id:
-          required: true
+        type_id:
           type: integer
-        end_date:
+        centro_costo:
           type: string
-          format: date
-        description:
-          type: string
-        amount:
-          required: true
-          type: integer
-        cost_center:
-          type: string
-        custom_attrs:
-          type: object
+      required:
+      - hours
+      - employee_id
+      - type_id
     Assign__PaymentDetail:
       properties:
         id:
@@ -186,23 +180,29 @@ components:
           default: false
         custom_attrs:
           type: object
-    Attendances__Overtime__PaymentDetail:
+    Assign__PaymentDetailResponse:
       properties:
-        day:
+        id:
+          required: false
           type: integer
-        hours:
-          type: number
-          format: float
         employee_id:
+          required: true
           type: integer
-        type_id:
+        item_id:
+          required: true
           type: integer
-        centro_costo:
+        end_date:
           type: string
-      required:
-      - hours
-      - employee_id
-      - type_id
+          format: date
+        description:
+          type: string
+        amount:
+          required: true
+          type: integer
+        cost_center:
+          type: string
+        custom_attrs:
+          type: object
   securitySchemes:
     auth_token:
       type: apiKey

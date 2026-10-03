@@ -164,45 +164,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    processInput:
-      required:
-      - process
-      - owner_email
-      - employees
-      properties:
-        process:
-          type: object
-          required:
-          - name
-          - variable_id
-          properties:
-            name:
-              type: string
-              description: Nombre del proceso a crear
-              example: Proceso de nómina Enero 2024
-            variable_id:
-              type: string
-              description: Identificador del periodo (variable) asociado al proceso
-              example: '456'
-        owner_email:
-          type: string
-          description: Correo del responsable del proceso
-          example: responsable@empresa.cl
-        employees:
-          type: array
-          items:
-            type: integer
-            format: int64
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
     Process:
       required:
       - id
@@ -271,6 +232,45 @@ components:
           format: date
           description: Última fecha que se modifico
           example: '2024-01-06'
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    processInput:
+      required:
+      - process
+      - owner_email
+      - employees
+      properties:
+        process:
+          type: object
+          required:
+          - name
+          - variable_id
+          properties:
+            name:
+              type: string
+              description: Nombre del proceso a crear
+              example: Proceso de nómina Enero 2024
+            variable_id:
+              type: string
+              description: Identificador del periodo (variable) asociado al proceso
+              example: '456'
+        owner_email:
+          type: string
+          description: Correo del responsable del proceso
+          example: responsable@empresa.cl
+        employees:
+          type: array
+          items:
+            type: integer
+            format: int64
   securitySchemes:
     auth_token:
       type: apiKey
