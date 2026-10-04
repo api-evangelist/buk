@@ -282,44 +282,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Role__Create:
-      properties:
-        name:
-          type: string
-          description: Nombre del cargo
-          example: Analista
-        code:
-          type: string
-          description: Código del cargo
-          example: ROL-001
-        description:
-          type: string
-          description: Descripción del cargo
-          example: Gestion
-        requirements:
-          type: string
-          description: Requisitos del cargo
-          example: Universitario
-        role_family_id:
-          type: integer
-          description: Identificador de la familia de cargos
-          example: 1
-        area_ids:
-          type: array
-          description: Identificadores de las áreas asociadas al cargo
-          items:
-            type: integer
-            example: 1
-        custom_attributes:
-          type: object
-          description: Atributos personalizados del cargo
-          example: {}
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Role__Update:
       properties:
         name:
@@ -352,60 +314,6 @@ components:
           type: object
           description: Atributos personalizados del cargo
           example: {}
-    RoleFamily:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        quantity_of_roles:
-          type: integer
-    Role:
-      properties:
-        id:
-          type: integer
-          description: Identificador único del cargo
-          example: 1
-        code:
-          type: string
-          description: Código del cargo
-          example: ROL-001
-        name:
-          type: string
-          description: Nombre del cargo
-          example: Analista
-        description:
-          type: string
-          description: Descripción del cargo
-          example: Gestion
-        requirements:
-          type: string
-          description: Requisitos del cargo
-          example: Universitario
-        role_family:
-          type: object
-          $ref: '#/components/schemas/RoleFamily'
-          description: Familia de cargos a la que pertenece el cargo
-        area_ids:
-          type: array
-          description: Identificadores de las áreas asociadas al cargo
-          items:
-            type: integer
-            example: 1
-        custom_attributes:
-          type: object
-          description: Atributos personalizados del cargo
-          example: {}
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
     Role__Response:
       properties:
         id:
@@ -446,6 +354,98 @@ components:
           type: object
           description: Atributos personalizados del cargo
           example: {}
+    RoleFamily:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity_of_roles:
+          type: integer
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Role__Create:
+      properties:
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        code:
+          type: string
+          description: Código del cargo
+          example: ROL-001
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        role_family_id:
+          type: integer
+          description: Identificador de la familia de cargos
+          example: 1
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+    Role:
+      properties:
+        id:
+          type: integer
+          description: Identificador único del cargo
+          example: 1
+        code:
+          type: string
+          description: Código del cargo
+          example: ROL-001
+        name:
+          type: string
+          description: Nombre del cargo
+          example: Analista
+        description:
+          type: string
+          description: Descripción del cargo
+          example: Gestion
+        requirements:
+          type: string
+          description: Requisitos del cargo
+          example: Universitario
+        role_family:
+          type: object
+          $ref: '#/components/schemas/RoleFamily'
+          description: Familia de cargos a la que pertenece el cargo
+        area_ids:
+          type: array
+          description: Identificadores de las áreas asociadas al cargo
+          items:
+            type: integer
+            example: 1
+        custom_attributes:
+          type: object
+          description: Atributos personalizados del cargo
+          example: {}
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

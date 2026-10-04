@@ -288,30 +288,77 @@ paths:
                 code: INTERNAL_ERROR
                 message: An unexpected error occurred
 components:
-  parameters:
-    XProviderToken:
-      name: x-provider-token
-      in: header
-      required: true
-      description: 'Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.
-
-        '
-      schema:
-        type: string
-        minLength: 1
-      example: f353ca91-4fc5-49f2-9b9e-304f83d11914
-    XProviderName:
-      name: x-provider-name
-      in: header
-      required: true
-      description: 'Registered provider name. Must match an existing provider in the system.
-
-        '
-      schema:
-        type: string
-        minLength: 1
-      example: bukwebapp
   schemas:
+    ClockingResponse:
+      type: object
+      required:
+      - status
+      - code
+      - message
+      properties:
+        status:
+          type: integer
+          description: HTTP status code of the response.
+          example: 201
+        code:
+          type: string
+          description: 'Operation result identifier code.
+
+
+            **Possible values:**
+
+            - `CLOCKING_CREATED` — Clocking created successfully (201)
+
+            - `INVALID_SERIAL_NUMBER` — Invalid serialNumber (400)
+
+            - `INVALID_ID_NUMBER` — Invalid idNumber (400)
+
+            - `INVALID_TIME_FORMAT` — Invalid time format (400)
+
+            - `INVALID_IS_ENTRY` — Invalid isEntry (400)
+
+            - `INVALID_VERIFY_TYPE` — Invalid verifyType (400)
+
+            - `INVALID_WORK_CODE` — Invalid workCode (400)
+
+            - `INVALID_SENSOR_NO` — Invalid sensorNo (400)
+
+            - `INVALID_ATT_FLAG` — Invalid attFlag (400)
+
+            - `INVALID_MASK` — Invalid mask (400)
+
+            - `INVALID_TEMPERATURE` — Invalid temperature (400)
+
+            - `INVALID_PROVIDER_NAME` — Unregistered provider (401)
+
+            - `UNAUTHORIZED` — Invalid credentials (401)
+
+            - `CLOCKING_DUPLICATE` — Duplicate record (409)
+
+            - `INTERNAL_ERROR` — Internal error (500)
+
+            '
+          enum:
+          - CLOCKING_CREATED
+          - INVALID_SERIAL_NUMBER
+          - INVALID_ID_NUMBER
+          - INVALID_TIME_FORMAT
+          - INVALID_IS_ENTRY
+          - INVALID_VERIFY_TYPE
+          - INVALID_WORK_CODE
+          - INVALID_SENSOR_NO
+          - INVALID_ATT_FLAG
+          - INVALID_MASK
+          - INVALID_TEMPERATURE
+          - INVALID_PROVIDER_NAME
+          - UNAUTHORIZED
+          - CLOCKING_DUPLICATE
+          - INTERNAL_ERROR
+          example: CLOCKING_CREATED
+        message:
+          type: string
+          description: Descriptive message of the operation result.
+          example: Clocking record created successfully
     ClockingRequest:
       type: object
       required:
@@ -478,76 +525,29 @@ components:
 
             '
           example: '36.5'
-    ClockingResponse:
-      type: object
-      required:
-      - status
-      - code
-      - message
-      properties:
-        status:
-          type: integer
-          description: HTTP status code of the response.
-          example: 201
-        code:
-          type: string
-          description: 'Operation result identifier code.
+  parameters:
+    XProviderName:
+      name: x-provider-name
+      in: header
+      required: true
+      description: 'Registered provider name. Must match an existing provider in the system.
 
+        '
+      schema:
+        type: string
+        minLength: 1
+      example: bukwebapp
+    XProviderToken:
+      name: x-provider-token
+      in: header
+      required: true
+      description: 'Provider authentication token. Must match the stored token for the provider specified in `x-provider-name`.
 
-            **Possible values:**
-
-            - `CLOCKING_CREATED` — Clocking created successfully (201)
-
-            - `INVALID_SERIAL_NUMBER` — Invalid serialNumber (400)
-
-            - `INVALID_ID_NUMBER` — Invalid idNumber (400)
-
-            - `INVALID_TIME_FORMAT` — Invalid time format (400)
-
-            - `INVALID_IS_ENTRY` — Invalid isEntry (400)
-
-            - `INVALID_VERIFY_TYPE` — Invalid verifyType (400)
-
-            - `INVALID_WORK_CODE` — Invalid workCode (400)
-
-            - `INVALID_SENSOR_NO` — Invalid sensorNo (400)
-
-            - `INVALID_ATT_FLAG` — Invalid attFlag (400)
-
-            - `INVALID_MASK` — Invalid mask (400)
-
-            - `INVALID_TEMPERATURE` — Invalid temperature (400)
-
-            - `INVALID_PROVIDER_NAME` — Unregistered provider (401)
-
-            - `UNAUTHORIZED` — Invalid credentials (401)
-
-            - `CLOCKING_DUPLICATE` — Duplicate record (409)
-
-            - `INTERNAL_ERROR` — Internal error (500)
-
-            '
-          enum:
-          - CLOCKING_CREATED
-          - INVALID_SERIAL_NUMBER
-          - INVALID_ID_NUMBER
-          - INVALID_TIME_FORMAT
-          - INVALID_IS_ENTRY
-          - INVALID_VERIFY_TYPE
-          - INVALID_WORK_CODE
-          - INVALID_SENSOR_NO
-          - INVALID_ATT_FLAG
-          - INVALID_MASK
-          - INVALID_TEMPERATURE
-          - INVALID_PROVIDER_NAME
-          - UNAUTHORIZED
-          - CLOCKING_DUPLICATE
-          - INTERNAL_ERROR
-          example: CLOCKING_CREATED
-        message:
-          type: string
-          description: Descriptive message of the operation result.
-          example: Clocking record created successfully
+        '
+      schema:
+        type: string
+        minLength: 1
+      example: f353ca91-4fc5-49f2-9b9e-304f83d11914
   securitySchemes:
     ProviderAuth:
       type: apiKey

@@ -303,6 +303,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Attendances__Overtime__Type:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        factor:
+          type: number
+          format: float
+        category:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: 0 = hora_extra, 1 = recargo
     Attendances__Overtime__Request:
       properties:
         day:
@@ -348,20 +369,6 @@ components:
           type: string
         centro_costo_code:
           type: string
-    Attendances__Overtime__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__Overtime__Response'
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Pagination:
       properties:
         next:
@@ -372,21 +379,14 @@ components:
           type: integer
         total_pages:
           type: integer
-    Attendances__Overtime__Type:
+    Attendances__Overtime__Index:
       properties:
-        id:
-          type: integer
-        name:
-          type: string
-        factor:
-          type: number
-          format: float
-        category:
-          type: integer
-          enum:
-          - 0
-          - 1
-          description: 0 = hora_extra, 1 = recargo
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__Overtime__Response'
   securitySchemes:
     auth_token:
       type: apiKey

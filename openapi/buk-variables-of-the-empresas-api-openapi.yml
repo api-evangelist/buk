@@ -69,6 +69,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    CompanyVariable:
+      properties:
+        id:
+          type: integer
     Pagination:
       properties:
         next:
@@ -78,10 +82,6 @@ components:
         count:
           type: integer
         total_pages:
-          type: integer
-    CompanyVariable:
-      properties:
-        id:
           type: integer
   securitySchemes:
     auth_token:

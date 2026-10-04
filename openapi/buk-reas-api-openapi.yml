@@ -479,24 +479,32 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AreaSecondLevel:
+    Area__Update:
       properties:
-        id:
-          type: integer
         name:
+          required: true
           type: string
-        division:
-          $ref: '#/components/schemas/AreaFirstLevel'
-    AreaFirstLevel:
-      properties:
-        id:
+        accounting_prefix:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        cost_center_id:
+          type: string
+        location_id:
+          required: true
           type: integer
-          description: Identificador del área de primer nivel
-          example: 1
-        name:
-          type: string
-          description: Nombre del área de primer nivel
-          example: Gerencia
+        active:
+          type: boolean
+        role_ids:
+          type: array
+          items:
+            type: integer
+        custom_attrs:
+          type: object
+          items:
+            type: string
     Area_new:
       properties:
         id:
@@ -527,63 +535,16 @@ components:
           type: string
         custom_attributes:
           type: object
-    bad_request:
+    Pagination:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
-    Area__Update:
-      properties:
-        name:
-          required: true
+        next:
           type: string
-        accounting_prefix:
+        previous:
           type: string
-        city:
-          type: string
-        address:
-          type: string
-        cost_center_id:
-          type: string
-        location_id:
-          required: true
+        count:
           type: integer
-        active:
-          type: boolean
-        role_ids:
-          type: array
-          items:
-            type: integer
-        custom_attrs:
-          type: object
-          items:
-            type: string
-    Area__Create:
-      properties:
-        parent_id:
-          required: true
+        total_pages:
           type: integer
-        location_id:
-          required: true
-          type: integer
-        name:
-          required: true
-          type: string
-        accounting_prefix:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
-        cost_center_id:
-          type: string
-        role_ids:
-          type: array
-          items:
-            type: integer
-        custom_attrs:
-          type: object
     Area:
       properties:
         id:
@@ -616,16 +577,55 @@ components:
           type: string
         address:
           type: string
-    Pagination:
+    Area__Create:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
+        parent_id:
+          required: true
           type: integer
-        total_pages:
+        location_id:
+          required: true
           type: integer
+        name:
+          required: true
+          type: string
+        accounting_prefix:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        cost_center_id:
+          type: string
+        role_ids:
+          type: array
+          items:
+            type: integer
+        custom_attrs:
+          type: object
+    AreaSecondLevel:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        division:
+          $ref: '#/components/schemas/AreaFirstLevel'
+    AreaFirstLevel:
+      properties:
+        id:
+          type: integer
+          description: Identificador del área de primer nivel
+          example: 1
+        name:
+          type: string
+          description: Nombre del área de primer nivel
+          example: Gerencia
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

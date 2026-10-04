@@ -258,8 +258,11 @@ components:
           type: integer
         total_pages:
           type: integer
-    EmployeeSubstitutionInput:
+    EmployeeSubstitutionDetail:
       properties:
+        id:
+          type: integer
+          readOnly: true
         active:
           type: boolean
         employee_id:
@@ -275,11 +278,8 @@ components:
         reason:
           type: string
           description: Causal
-    EmployeeSubstitutionDetail:
+    EmployeeSubstitutionInput:
       properties:
-        id:
-          type: integer
-          readOnly: true
         active:
           type: boolean
         employee_id:

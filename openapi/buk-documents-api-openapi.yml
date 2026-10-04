@@ -401,6 +401,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    EmployeeFileListDetail:
+      properties:
+        file_id:
+          type: integer
+        filename:
+          type: string
+        path:
+          type: string
+        created_at:
+          type: string
     DocumentSignature:
       properties:
         signature_type:
@@ -417,22 +427,6 @@ components:
           type: string
         created_at:
           type: string
-    EmployeeFileListDetail:
-      properties:
-        file_id:
-          type: integer
-        filename:
-          type: string
-        path:
-          type: string
-        created_at:
-          type: string
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Signature:
       properties:
         signatures:
@@ -478,6 +472,12 @@ components:
             $ref: '#/components/schemas/DocumentSignature'
         reviewer_id:
           type: integer
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

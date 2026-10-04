@@ -195,6 +195,22 @@ components:
       - id
       - name
       - rut
+    union_response:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        rut:
+          type: string
+    union:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        rut:
+          type: string
     bad_request:
       properties:
         errors:
@@ -213,22 +229,6 @@ components:
       - id
       - name
       - rut
-    union_response:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        rut:
-          type: string
-    union:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        rut:
-          type: string
   securitySchemes:
     auth_token:
       type: apiKey

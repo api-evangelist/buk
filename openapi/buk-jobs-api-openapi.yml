@@ -427,49 +427,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    JobTerminateInput:
-      required:
-      - end_date
-      - termination_reason
-      properties:
-        end_date:
-          type: string
-          format: date
-          description: Fecha de término del trabajo en YYYY-MM-DD.
-        termination_reason:
-          type: string
-          description: Causal de finiquito (ver opciones).
-          enum:
-          - mutuo_acuerdo
-          - renuncia
-          - muerte
-          - vencimiento_plazo
-          - fin_servicio
-          - caso_fortuito
-          - falta_probidad
-          - acoso_sexual
-          - vias_de_hecho
-          - injurias
-          - conducta_inmoral
-          - acoso_laboral
-          - negociaciones_prohibidas
-          - no_concurrencia
-          - abandonar_trabajo
-          - faltas_seguridad
-          - perjuicio_material
-          - incumplimiento
-          - necesidades_empresa
-          - desahucio_gerente
-        comment:
-          type: string
-          description: {}
-        employee_final_state:
-          type: string
-          description: {}
-        notice_date:
-          type: string
-          format: date
-          description: '- notice_date: Fecha de aviso de término de trabajo en YYYY-MM-DD, en caso de no agregar este campo se considerará el end_date. (OPCIONAL)'
     JobResponseCountry:
       properties:
         id:
@@ -544,28 +501,6 @@ components:
           $ref: '#/components/schemas/BossModel'
         without_wage:
           type: boolean
-    BossModel:
-      properties:
-        id:
-          type: integer
-        cpf:
-          type: string
-      allOf:
-      - $ref: '#/components/schemas/BasePersonIdentifier'
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    BasePersonIdentifier:
-      properties:
-        document_number:
-          type: string
-          description: Document Number of  Colaborador.
-        document_type:
-          type: string
-          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
     Pagination:
       properties:
         next:
@@ -576,6 +511,71 @@ components:
           type: integer
         total_pages:
           type: integer
+    BasePersonIdentifier:
+      properties:
+        document_number:
+          type: string
+          description: Document Number of  Colaborador.
+        document_type:
+          type: string
+          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    BossModel:
+      properties:
+        id:
+          type: integer
+        cpf:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/BasePersonIdentifier'
+    JobTerminateInput:
+      required:
+      - end_date
+      - termination_reason
+      properties:
+        end_date:
+          type: string
+          format: date
+          description: Fecha de término del trabajo en YYYY-MM-DD.
+        termination_reason:
+          type: string
+          description: Causal de finiquito (ver opciones).
+          enum:
+          - mutuo_acuerdo
+          - renuncia
+          - muerte
+          - vencimiento_plazo
+          - fin_servicio
+          - caso_fortuito
+          - falta_probidad
+          - acoso_sexual
+          - vias_de_hecho
+          - injurias
+          - conducta_inmoral
+          - acoso_laboral
+          - negociaciones_prohibidas
+          - no_concurrencia
+          - abandonar_trabajo
+          - faltas_seguridad
+          - perjuicio_material
+          - incumplimiento
+          - necesidades_empresa
+          - desahucio_gerente
+        comment:
+          type: string
+          description: {}
+        employee_final_state:
+          type: string
+          description: {}
+        notice_date:
+          type: string
+          format: date
+          description: '- notice_date: Fecha de aviso de término de trabajo en YYYY-MM-DD, en caso de no agregar este campo se considerará el end_date. (OPCIONAL)'
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

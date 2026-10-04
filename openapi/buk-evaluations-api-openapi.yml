@@ -340,14 +340,12 @@ components:
           type: string
         score:
           type: number
-    EvaluatorPersonIdentifier:
+    ScoreByCapacity:
       properties:
-        evaluator_document_number:
+        name:
           type: string
-          description: Document Number of  Evaluator.
-        evaluator_document_type:
-          type: string
-          description: 'Document Type Evaluator. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+        score:
+          type: number
     Capacities:
       properties:
         evaluation_id:
@@ -385,6 +383,36 @@ components:
       allOf:
       - $ref: '#/components/schemas/EvaluatedPersonIdentifier'
       - $ref: '#/components/schemas/EvaluatorPersonIdentifier'
+    EvaluationProcess:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        participants:
+          type: integer
+        status:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        global_progress:
+          type: string
+        stages:
+          type: array
+          items:
+            type: string
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     EvaluatedPersonIdentifier:
       properties:
         evaluated_document_number:
@@ -393,18 +421,6 @@ components:
         evaluated_document_type:
           type: string
           description: 'Document Type Evaluated. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    ScoreByCapacity:
-      properties:
-        name:
-          type: string
-        score:
-          type: number
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Goals:
       allOf:
       - $ref: '#/components/schemas/EvaluatedPersonIdentifier'
@@ -442,36 +458,20 @@ components:
           type: number
         score:
           type: number
-    EvaluationProcess:
+    EvaluatorPersonIdentifier:
       properties:
-        id:
-          type: integer
-        name:
+        evaluator_document_number:
           type: string
-        participants:
-          type: integer
-        status:
+          description: Document Number of  Evaluator.
+        evaluator_document_type:
           type: string
-        start_date:
-          type: string
-        end_date:
-          type: string
-        global_progress:
-          type: string
-        stages:
+          description: 'Document Type Evaluator. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    bad_request:
+      properties:
+        errors:
           type: array
           items:
             type: string
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

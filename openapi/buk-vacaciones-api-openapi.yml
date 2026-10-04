@@ -498,12 +498,16 @@ components:
           type: integer
           description: ID del tipo de vacación
           example: 2
-    bad_request:
+    Pagination:
       properties:
-        errors:
-          type: array
-          items:
-            type: string
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     vacation_detail:
       properties:
         employee_id:
@@ -540,16 +544,12 @@ components:
           type: string
           description: Etapa de la jornada laboral
           example: full_working_day
-    Pagination:
+    bad_request:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

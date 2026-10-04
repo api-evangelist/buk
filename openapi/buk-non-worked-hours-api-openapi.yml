@@ -261,14 +261,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Attendances__NonWorkedHours__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__NonWorkedHours__Response'
     Attendances__NonWorkedHours__Request:
       properties:
         day:
@@ -297,6 +289,24 @@ components:
       - day
       - month
       - year
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Attendances__NonWorkedHours__Index:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__NonWorkedHours__Response'
     Attendances__NonWorkedHours__Response:
       properties:
         day:
@@ -328,16 +338,6 @@ components:
           type: array
           items:
             type: string
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

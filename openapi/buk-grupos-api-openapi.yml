@@ -151,6 +151,17 @@ components:
           type: integer
         total_pages:
           type: integer
+    FilterQueryParticipant:
+      properties:
+        id:
+          type: integer
+          description: ID del participante
+        full_name:
+          type: string
+          description: Nombre completo del participante
+        document_number:
+          type: string
+          description: Número de documento del participante
     FilterQueryModel:
       properties:
         id:
@@ -163,17 +174,6 @@ components:
           type: string
           format: date-time
           description: Última actualización
-    FilterQueryParticipant:
-      properties:
-        id:
-          type: integer
-          description: ID del participante
-        full_name:
-          type: string
-          description: Nombre completo del participante
-        document_number:
-          type: string
-          description: Número de documento del participante
   securitySchemes:
     auth_token:
       type: apiKey

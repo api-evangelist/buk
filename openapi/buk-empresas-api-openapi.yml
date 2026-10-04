@@ -63,18 +63,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CompanyBank:
-      properties:
-        id:
-          type: integer
-        empresa_id:
-          type: integer
-        name:
-          type: string
-        account_number:
-          type: integer
-        clabe_mexico:
-          type: integer
     Pagination:
       properties:
         next:
@@ -131,6 +119,18 @@ components:
           type: string
         fantasy_name:
           type: string
+    CompanyBank:
+      properties:
+        id:
+          type: integer
+        empresa_id:
+          type: integer
+        name:
+          type: string
+        account_number:
+          type: integer
+        clabe_mexico:
+          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

@@ -123,12 +123,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Pagination:
       properties:
         next:
@@ -139,6 +133,12 @@ components:
           type: integer
         total_pages:
           type: integer
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
   securitySchemes:
     auth_token:
       type: apiKey

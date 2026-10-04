@@ -1738,15 +1738,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Employee__Response__Minimal:
-      allOf:
-      - $ref: '#/components/schemas/EmployeeInputBase'
-      - $ref: '#/components/schemas/EmployeeInputCountry'
-      properties:
-        period_type:
-          if: {}
-          type: string
-          description: 'Frecuencia de pago: monthly, semi_monthly o weekly.'
     Employee__Response:
       properties:
         person_id:
@@ -1848,550 +1839,14 @@ components:
           $ref: '#/components/schemas/EmployeeFamilyResponsability'
       allOf:
       - $ref: '#/components/schemas/BasePersonIdentifier'
-    EmployeeFileListDetail:
+    RoleFamily:
       properties:
-        file_id:
+        id:
           type: integer
-        filename:
-          type: string
-        path:
-          type: string
-        created_at:
-          type: string
-    Vacations:
-      properties:
         name:
           type: string
-          description: Nombre del tipo de vacación
-          example: Vacaciones legales
-        stock:
-          type: number
-          description: Saldo de días disponibles
-          example: 15.5
-    ResponsibilityDetail:
-      properties:
-        id:
+        quantity_of_roles:
           type: integer
-        rut:
-          type: string
-        gender:
-          type: string
-        first_name:
-          type: string
-        first_surname:
-          type: string
-        second_surname:
-          type: string
-        birthday:
-          type: string
-          format: date
-        legal_responsibility:
-          type: boolean
-        health_plan:
-          type: boolean
-        relation:
-          type: string
-        expiration_date:
-          type: string
-          format: date
-        retirement_fund:
-          type: string
-        voluntary_enrollment:
-          type: boolean
-        voluntary_retirement_percentage:
-          type: number
-        voluntary_account_2:
-          type: integer
-        custom_attributes:
-          type: object
-    JobResponseCountry:
-      properties:
-        id:
-          type: integer
-        company_id:
-          type: integer
-        start_date:
-          type: string
-          format: date
-        type_of_contract:
-          type: string
-        end_of_contract:
-          type: string
-          format: date
-        notice_date:
-          type: string
-          format: date
-        regular_hours:
-          type: number
-        end_date:
-          type: string
-          format: date
-        cost_center:
-          type: string
-        vinculation:
-          type: string
-        tipo_jornada:
-          type: string
-        otros_tipo_jornada:
-          type: string
-        regimen_laboral:
-          type: string
-        admission_indicative:
-          type: string
-        admission_type:
-          type: string
-        regimen_previsional:
-          type: string
-        wage_type:
-          type: string
-        work_day_description:
-          type: string
-        position_of_trust:
-          type: boolean
-        function_of_trust:
-          type: string
-        experience_contract:
-          type: boolean
-        unhealthiness_additional:
-          type: string
-        dangerousness_additional:
-          type: string
-        night_shift:
-          type: boolean
-        esocial_code:
-          type: string
-        periodicity:
-          type: string
-        custom_attributes:
-          type: object
-        area_id:
-          type: integer
-        role_id:
-          type: integer
-        leader_id:
-          type: integer
-        currency_code:
-          type: string
-        wage:
-          type: float
-        boss:
-          $ref: '#/components/schemas/BossModel'
-        without_wage:
-          type: boolean
-    JobInputCountryPost:
-      required:
-      - company_id
-      - start_date
-      - type_of_contract
-      - vinculation
-      - tipo_jornada
-      - otros_tipo_jornada
-      - regimen_laboral
-      - admission_indicative
-      - admission_type
-      - regimen_previsional
-      - regular_hours
-      - work_day_description
-      - area_id
-      - role_id
-      - leader_id
-      - wage
-      properties:
-        company_id:
-          type: integer
-          description: {}
-        start_date:
-          type: string
-          format: date
-          description: Fecha Inicio
-        type_of_contract:
-          type: string
-          description: Tipo Contrato
-          enum:
-          - indeterminate
-          - determined_by_days
-          - determined_by_event
-        end_of_contract:
-          type: string
-          format: date
-          description: Término Contrato
-        regular_hours:
-          type: number
-          format: float
-          description: Horario Semanal
-        days:
-          type: object
-          description: Dias de la Jornada Laboral
-          example:
-          - l
-          - m
-          - w
-          - j
-          - v
-        vinculation:
-          type: string
-          description: Vinculación Laboral
-          enum:
-          - total_discount_rate
-          - difference_discount_rate
-          - discount_rate_does_not_apply
-          - does_not_have
-        tipo_jornada:
-          type: string
-          description: Tipo de Jornada
-          enum:
-          - workday_12x36
-          - workday_variable_free_time
-          - workday_fixed_free_time
-          - workday_fixed_free_time_except_sunday
-          - workday_fixed_time_additional_sunday
-          - workday_uninterrupted
-          - other_workday
-        otros_tipo_jornada:
-          type: string
-          description: Otros Tipos de Jornada
-          enum:
-          - subject_to_workday
-          - external_forseen_activity
-          - forseen_function
-          - remote_work
-          - no_reportable_esocial_workday
-        regimen_laboral:
-          type: string
-          description: Régimen Laboral
-          enum:
-          - general_employee
-          - intermitent_employee
-          - domestic_employee
-          - rural_employee
-          - apprentice
-          - fixed_term_employee
-          - temporary_employee
-          - estagiario
-          - prolabore_722
-          - prolabore_723
-          - no_reportable_esocial_work_category
-        admission_indicative:
-          type: string
-          description: Indicativo de Admisión
-          enum:
-          - normal
-          - fiscal_action
-          - judicial_action
-        admission_type:
-          type: string
-          description: Tipo de Admisión
-          enum:
-          - admission
-          - transference_company_same_group
-          - transferencia_company_consortium
-          - transferencia_succesion_incorporation_fusion
-          - transferencia_domestinc_employee
-          - cpf_movement
-          - transference_company_unexistence
-        regimen_previsional:
-          type: string
-          description: Régimen Previsional
-          enum:
-          - general_social_regime
-          - social_security_regime
-          - no_reportable_esocial_social_security_regime
-        wage_type:
-          type: string
-          description: Tipo Salario, default 'variable'
-          enum:
-          - fixed
-          - mixed
-          - variable
-        wage:
-          type: number
-          format: float
-          description: Sueldo Base
-        work_day_description:
-          type: string
-          description: Descripción de Jornada de Trabajo
-        position_of_trust:
-          type: boolean
-          description: Cargo de Confianza
-        function_of_trust:
-          type: string
-          description: Función de Confianza
-        experience_contract:
-          type: boolean
-          description: Contrato de Experiencia
-        unhealthiness_additional:
-          type: string
-          description: Adicional de Insalubridad
-          enum:
-          - 'no'
-          - low
-          - medium
-          - high
-        dangerousness_additional:
-          type: string
-          description: Adicional de Peligrosidad
-          enum:
-          - 'no'
-          - 'yes'
-        night_shift:
-          type: boolean
-          description: Trabajo Nocturno
-        esocial_code:
-          type: string
-          description: Código eSocial
-        area_id:
-          type: integer
-          description: Área
-        role_id:
-          type: integer
-          description: Cargo
-        leader_id:
-          type: integer
-          description: Supervisor
-        without_wage:
-          type: boolean
-          description: Tiene Liquidación
-          default: false
-        custom_attributes:
-          type: object
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    BasePersonIdentifier:
-      properties:
-        document_number:
-          type: string
-          description: Document Number of  Colaborador.
-        document_type:
-          type: string
-          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    CurrentJobDetails:
-      properties:
-        periodicity:
-          type: string
-          description: Periodicidad de pago del empleado
-          example: mensual
-        zone_assignment:
-          type: string
-          description: Zona de trabajo asignada al empleado
-          example: Santiago
-    MinimalEmployee:
-      allOf:
-      - properties:
-          id:
-            type: integer
-            format: int64
-          first_name:
-            type: string
-          surname:
-            type: string
-          second_surname:
-            type: string
-          full_name:
-            type: string
-          picture_url:
-            type: string
-          email:
-            type: string
-      - $ref: '#/components/schemas/BasePersonIdentifier'
-      - $ref: '#/components/schemas/MinimalEmployeeCountry'
-    EmployeeFamilyResponsibility:
-      properties:
-        id:
-          type: integer
-        family_allowance_section:
-          type: string
-        maternity_family_responsibility:
-          type: string
-        invalid_family_responsibility:
-          type: string
-        simple_family_responsibility:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        responsibility_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResponsibilityDetail'
-    VacationDefinition:
-      properties:
-        id:
-          type: integer
-          description: ID de la política de vacaciones
-          example: 1
-        code:
-          type: string
-          description: Código de la política
-          example: legales
-        name:
-          type: string
-          description: Nombre de la política de vacaciones
-          example: Vacaciones legales
-        vacation_type:
-          type: object
-          $ref: '#/components/schemas/VacationType'
-          description: Tipo de vacación asociado
-          example:
-            name: Legales
-            code: legales
-    Attendances__Overtime__Response:
-      properties:
-        day:
-          type: integer
-        month:
-          type: integer
-        year:
-          type: integer
-        hours:
-          type: number
-          format: float
-        id:
-          type: integer
-        employee_id:
-          type: integer
-        type_id:
-          type: integer
-        centro_costo:
-          type: string
-        centro_costo_code:
-          type: string
-    DocumentSignature:
-      properties:
-        signature_type:
-          type: string
-        person_id:
-          type: number
-        position:
-          type: number
-        status:
-          type: string
-        signed_at:
-          type: string
-        confirmation_code_channel:
-          type: string
-        created_at:
-          type: string
-    PensionSaving:
-      properties:
-        type:
-          type: string
-        institution:
-          type: string
-        amount:
-          type: number
-        currency:
-          type: string
-        deposit_type:
-          type: string
-        document:
-          type: string
-        reduction:
-          type: boolean
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-    EarnedVacations:
-      properties:
-        vacation_definition_id:
-          type: integer
-          description: ID de la política de vacaciones
-          example: 1
-        vacation_type_id:
-          type: integer
-          description: ID del tipo de vacación
-          example: 2
-        earned_days:
-          type: number
-          description: Días de vacaciones acumulados
-          example: 15.5
-        period_start_date:
-          type: string
-          format: date
-          description: Fecha de inicio del período de acumulación
-          example: '2024-01-01'
-        earned_at:
-          type: string
-          format: date
-          description: Fecha en que se devengaron las vacaciones
-          example: '2024-06-30'
-        proportional:
-          type: boolean
-          description: Indica si las vacaciones son proporcionales
-          example: true
-        compensated:
-          type: boolean
-          description: Indica si las vacaciones fueron compensadas en dinero
-          example: false
-        expiration_date:
-          type: date
-          description: Fecha de vencimiento de las vacaciones
-          example: '2025-12-31'
-    BossModel:
-      properties:
-        id:
-          type: integer
-        cpf:
-          type: string
-      allOf:
-      - $ref: '#/components/schemas/BasePersonIdentifier'
-    EmployeeInputBase:
-      properties:
-        picture_url:
-          type: string
-    VacationsAvailable:
-      properties:
-        employee_id:
-          type: integer
-          description: ID del empleado
-          example: 123
-        full_name:
-          type: string
-          description: Nombre completo del empleado
-          example: Juan Perez Gonzalez
-        nationality:
-          type: string
-          description: Nacionalidad del empleado
-          example: Chilena
-        civil_status:
-          type: string
-          description: Estado civil del empleado
-          example: Soltero
-        private_role:
-          type: boolean
-          description: Indica si el empleado tiene cargo de confianza
-          example: false
-        code_sheet:
-          type: string
-          description: Código de planilla del empleado
-          example: EMP-001
-        pension_regime:
-          type: string
-          description: Régimen previsional del empleado
-          example: AFP
-        pension_fund:
-          type: string
-          description: AFP o institución previsional del empleado
-          example: Cuprum
-        current_job:
-          $ref: '#/components/schemas/CurrentJobDetails'
-          description: Detalle del cargo actual del empleado
-          example: {}
-        vacations:
-          type: array
-          description: Lista de tipos de vacaciones con saldo disponible
-          example: []
-          items:
-            $ref: '#/components/schemas/Vacations'
     JobInputCountry:
       required:
       - company_id
@@ -2579,10 +2034,400 @@ components:
                 description: Peso
         custom_attributes:
           type: object
-    EmployeeResponsePatch:
+    DocumentSignature:
+      properties:
+        signature_type:
+          type: string
+        person_id:
+          type: number
+        position:
+          type: number
+        status:
+          type: string
+        signed_at:
+          type: string
+        confirmation_code_channel:
+          type: string
+        created_at:
+          type: string
+    VacationsAvailable:
+      properties:
+        employee_id:
+          type: integer
+          description: ID del empleado
+          example: 123
+        full_name:
+          type: string
+          description: Nombre completo del empleado
+          example: Juan Perez Gonzalez
+        nationality:
+          type: string
+          description: Nacionalidad del empleado
+          example: Chilena
+        civil_status:
+          type: string
+          description: Estado civil del empleado
+          example: Soltero
+        private_role:
+          type: boolean
+          description: Indica si el empleado tiene cargo de confianza
+          example: false
+        code_sheet:
+          type: string
+          description: Código de planilla del empleado
+          example: EMP-001
+        pension_regime:
+          type: string
+          description: Régimen previsional del empleado
+          example: AFP
+        pension_fund:
+          type: string
+          description: AFP o institución previsional del empleado
+          example: Cuprum
+        current_job:
+          $ref: '#/components/schemas/CurrentJobDetails'
+          description: Detalle del cargo actual del empleado
+          example: {}
+        vacations:
+          type: array
+          description: Lista de tipos de vacaciones con saldo disponible
+          example: []
+          items:
+            $ref: '#/components/schemas/Vacations'
+    PlanResponseCountry:
+      properties:
+        start_date:
+          type: string
+          format: date
+        health_company:
+          type: string
+        health_plan_identifier:
+          type: string
+        complementary_insurance_company:
+          type: string
+    VacationType:
+      properties:
+        name:
+          type: string
+          description: Nombre del tipo de vacación
+          example: Legales
+        code:
+          type: string
+          description: Código del tipo de vacación
+          example: legales
+    EmployeeInputCloneCountry:
+      properties:
+        payment_method:
+          type: string
+          description: Payment Method
+          enum:
+          - Cheque
+          - Efectivo
+          - No Generar Pago
+          - Transferencia Bancaria
+        bank:
+          type: string
+          description: Bank Mandatory if payment_method is "Bank Transfer".
+          enum:
+          - BANCO DIGIMAIS
+          - ABC-BRASIL SA
+          - ARBI SA
+          - AZTECA DO BRASIL SA
+          - BANCO ALFA
+          - Banco Classico SA
+          - BANCO DA CHINA BRASIL SA
+          - BANCO DE LA NACION ARGENTINA
+          - BANCO DE LA PROVINCIA DE BUENOS AIRES
+          - BANCO DE LA REPUBLICA ORIENTAL DEL URUGUAY
+          - BANCO DO BRASIL
+          - BANCO DO ESTADO DO PARÁ SA
+          - BANCO TOKYO MITSUBISH UFJ BRASIL SA
+          - BANCO WESTLB DO BRASIL
+          - BANCO XP
+          - BANCOOB
+          - BANESE
+          - BANESTES
+          - BANIF-BANCO INTERNACIONAL DO FUNCHAL (BRASIL) SA
+          - BANK OF AMERICA MERRILL LYNCH BANCO MULTIPLO SA
+          - BANRISUL
+          - BARCLAYS SA
+          - BASA
+          - BBM SA
+          - BANCO SEGURO SA
+          - BCV - BANCO DE CREDITO E VAREJO SA
+          - BEM
+          - BERJ SA
+          - BES INVESTIMENTO DO BRASIL SA - BANCO DE INVESTIM
+          - BGN SA
+          - BIC BANCO
+          - BM&F DE SERV DE LIQUIDACAO E CUSTODIA SA
+          - BMC SA
+          - BMG SA
+          - BNB
+          - BNP PARIBAS BRASIL SA
+          - BNY MELLON SA
+          - BOA VISTA INTERATLANTICO SA
+          - BONSUCESSO SA
+          - BANCO CREFISA SA
+          - BRACCE SA
+          - BRADESCO
+          - BRASCAN SA
+          - BRASIL PLURAL SA BANCO MULTIPLO
+          - BRB
+          - BRICKELL S A CREDITO, FINANCIAMENTO E INVESTIMENTO
+          - BTG PACTUAL SA
+          - CACIQUE SA
+          - CAIXA ECON FEDERAL
+          - CAIXA GERAL - BRASIL SA
+          - CAPITAL SA
+          - CARGILL SA
+          - CC UNICRED BRASIL CENTRAL
+          - CC UNIPRIME NORTE DO PARANA
+          - CECOOPES-CENTRAL DAS COOP DE ECON E CRED MUTUO DO
+          - AILOS - COOPERATIVA CENTRAL DE CREDITO
+          - CEDULA SA
+          - CIFRA SA
+          - CITIBANK
+          - Citibank NA
+          - COOPERATIVA CENTRAL DE CREDITO DO ESTADO DE SP
+          - COOPERATIVA CENTRAL DE CREDITO NOROESTE BRASILEIRO
+          - COOPERATIVA DE CREDITO RURAL DA REGIAO DA MOGIANA
+          - CR2 SA
+          - CREDIALIANCA COOPERATIVA DE CREDITO RURAL
+          - CREDIT AGRICOLE BRASIL SA
+          - CREDIT SUISSE (BRASIL) SA
+          - DAYCOVAL
+          - DEUTSCHE BANK S A - BANCO ALEMAO
+          - DIBENS SA
+          - FATOR SA
+          - FIBRA
+          - BANCO C6 CONSIGNADO S A
+          - BANCO AGIBANK SA
+          - GUANABARA SA
+          - HIPERCARD BANCO MULTIPLO SA
+          - HSBC
+          - IBI
+          - INDUSTRIAL DO BRASIL S A
+          - INDUSVAL SA
+          - ING BANK NV
+          - INTERCAP SA
+          - BANCO INTER
+          - Investcred Unibanco
+          - ITAÚ
+          - ITAU HOLDING FINANCEIRA SA
+          - Itaú-BBA
+          - J SAFRA SA
+          - JP MORGAN SA
+          - JOHN DEERE SA
+          - JPMORGAN CHASE BANK
+          - KDB DO BRASIL SA
+          - KEB DO BRASIL SA
+          - Luso Brasileiro
+          - BANCO MASTER S A
+          - MERCANTIL DO BRASIL
+          - MODAL SA
+          - MORGAN STANLEY DEAN WITTER SA
+          - NATIXIS BRASIL SA - BANCO MòLTIPLO
+          - NUBANK (NU PAGAMENTOS S.A.)
+          - NBC BANK BRASIL SA- BANCO MULTIPLO
+          - OPPORTUNITY SA
+          - PICPAY BANK
+          - ORIGINAL SA
+          - PANAMERICANO
+          - PARANA BANCO SA
+          - PAULISTA
+          - PECUNIA SA
+          - PETRA SA
+          - PINE SA
+          - POTTENCIAL SA
+          - RABOBANK INTERNATIONAL BRASIL SA
+          - RANDON SA
+          - RENDIMENTO SA
+          - RIBEIRÃO PRETO
+          - RODOBENS SA
+          - RURAL
+          - RURAL MAIS SA
+          - SAFRA
+          - SANTANDER BRASIL
+          - SCOTIABANK BRASIL SA BANCO MULTIPLO
+          - SEMEAR SA
+          - SICREDI
+          - SIMPLES SA
+          - SOCIETE GENERALE BRASIL SA
+          - SOFISA SA
+          - SUMITOMO MITSUI BRASILEIRO SA
+          - TOPAZIO SA
+          - Triangulo
+          - UNICARD BANCO MULTIPLO SA
+          - UNICRED CENTRAL RS - CENTRAL DE COOP ECON CRED MUT
+          - UNICRED CENTRAL SANTA CATARINA
+          - UNIPRIME
+          - VOTORANTIM
+          - VR SA
+          - WESTERN UNION DO BRASIL SA
+          - WOORI BANK DO BRASIL SA
+          - BANCO CRESOL
+          - SERVICOOP
+          - FACTA FINANCEIRA S.A
+          - PARATI CFI S.A
+          - C6 BANK
+          - QI SOCIEDADE DE CREDITO DIRETO S.A
+          - BANCO INBURSA SA
+          - LECCA
+          - UNICRED
+          - VALOR S/A
+          - SENFF SA
+          - WILL FINANCEIRA SA
+          - MERCADO PAGO
+          - BARI SA
+          - BANCO DIGIO
+          - CREDITAS
+          - AL5
+          - MIDWAY
+          - COOPERFORTE
+          - PICPAY
+          - NUBANK
+          - BANCO VOLKSWAGEN
+          - BANCO BV SA
+          - NEON
+          - CREDIFIT
+          - CAPITAL CONSIG
+          - PAN FINANCEIRA
+          - KONECT
+          - CELCOIN
+          - BANCO INTER SA
+          - COOPER JOHNSON
+        account_type:
+          type: string
+          description: Account type. Mandatory if payment_method is "Bank Transfer".
+          enum:
+          - Conta Corrente
+          - Conta Poupança
+          - Conta Salário
+        account_number:
+          type: string
+          description: Account Number Mandatory if payment_method is "Bank Transfer".
+        code_sheet:
+          type: string
+          description: File Code
+        start_date:
+          type: string
+          description: Company Entry Date
+          format: date
+        private_role:
+          type: boolean
+        custom_attributes:
+          type: object
+        period_type:
+          if: {}
+          type: string
+          description: 'Payment Frequency: monthly, semi_monthly or weekly.'
+    VacationDefinitionInput:
+      properties:
+        code:
+          type: string
+          description: Código de la política de vacaciones
+          example: legales
+    EmployeeFamilyResponsability:
+      properties:
+        id:
+          type: integer
+        family_allowance_section:
+          type: string
+        maternity_family_responsability:
+          type: string
+        invalid_family_responsability:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        responsability_details:
+          $ref: '#/components/schemas/ResponsabilityDetail'
+    EarnedVacations:
+      properties:
+        vacation_definition_id:
+          type: integer
+          description: ID de la política de vacaciones
+          example: 1
+        vacation_type_id:
+          type: integer
+          description: ID del tipo de vacación
+          example: 2
+        earned_days:
+          type: number
+          description: Días de vacaciones acumulados
+          example: 15.5
+        period_start_date:
+          type: string
+          format: date
+          description: Fecha de inicio del período de acumulación
+          example: '2024-01-01'
+        earned_at:
+          type: string
+          format: date
+          description: Fecha en que se devengaron las vacaciones
+          example: '2024-06-30'
+        proportional:
+          type: boolean
+          description: Indica si las vacaciones son proporcionales
+          example: true
+        compensated:
+          type: boolean
+          description: Indica si las vacaciones fueron compensadas en dinero
+          example: false
+        expiration_date:
+          type: date
+          description: Fecha de vencimiento de las vacaciones
+          example: '2025-12-31'
+    MinimalEmployee:
       allOf:
-      - $ref: '#/components/schemas/EmployeeInputBase'
-      - $ref: '#/components/schemas/EmployeeInputCountry'
+      - properties:
+          id:
+            type: integer
+            format: int64
+          first_name:
+            type: string
+          surname:
+            type: string
+          second_surname:
+            type: string
+          full_name:
+            type: string
+          picture_url:
+            type: string
+          email:
+            type: string
+      - $ref: '#/components/schemas/BasePersonIdentifier'
+      - $ref: '#/components/schemas/MinimalEmployeeCountry'
+    Vacations:
+      properties:
+        name:
+          type: string
+          description: Nombre del tipo de vacación
+          example: Vacaciones legales
+        stock:
+          type: number
+          description: Saldo de días disponibles
+          example: 15.5
+    BasePersonIdentifier:
+      properties:
+        document_number:
+          type: string
+          description: Document Number of  Colaborador.
+        document_type:
+          type: string
+          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    BossModel:
+      properties:
+        id:
+          type: integer
+        cpf:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/BasePersonIdentifier'
     EmployeeFileDetail:
       properties:
         id:
@@ -2614,12 +2459,6 @@ components:
             $ref: '#/components/schemas/DocumentSignature'
         reviewer_id:
           type: integer
-    VacationDefinitionInput:
-      properties:
-        code:
-          type: string
-          description: Código de la política de vacaciones
-          example: legales
     Role:
       properties:
         id:
@@ -2656,16 +2495,27 @@ components:
           type: object
           description: Atributos personalizados del cargo
           example: {}
-    Pagination:
+    VacationDefinition:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
+        id:
           type: integer
-        total_pages:
-          type: integer
+          description: ID de la política de vacaciones
+          example: 1
+        code:
+          type: string
+          description: Código de la política
+          example: legales
+        name:
+          type: string
+          description: Nombre de la política de vacaciones
+          example: Vacaciones legales
+        vacation_type:
+          type: object
+          $ref: '#/components/schemas/VacationType'
+          description: Tipo de vacación asociado
+          example:
+            name: Legales
+            code: legales
     PlanInputCountry:
       required:
       - health_company
@@ -2681,6 +2531,163 @@ components:
         complementary_insurance_company:
           type: string
           description: {}
+    Attendances__Overtime__Index:
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendances__Overtime__Response'
+    PensionSaving:
+      properties:
+        type:
+          type: string
+        institution:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        deposit_type:
+          type: string
+        document:
+          type: string
+        reduction:
+          type: boolean
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    VacationDefinitionOutput:
+      properties:
+        vacation_definitions:
+          type: array
+          description: Lista de políticas de vacaciones
+          example: []
+          items:
+            $ref: '#/components/schemas/VacationDefinition'
+    EmployeeResponsePatch:
+      allOf:
+      - $ref: '#/components/schemas/EmployeeInputBase'
+      - $ref: '#/components/schemas/EmployeeInputCountry'
+    EmployeeFileListDetail:
+      properties:
+        file_id:
+          type: integer
+        filename:
+          type: string
+        path:
+          type: string
+        created_at:
+          type: string
+    JobResponseCountry:
+      properties:
+        id:
+          type: integer
+        company_id:
+          type: integer
+        start_date:
+          type: string
+          format: date
+        type_of_contract:
+          type: string
+        end_of_contract:
+          type: string
+          format: date
+        notice_date:
+          type: string
+          format: date
+        regular_hours:
+          type: number
+        end_date:
+          type: string
+          format: date
+        cost_center:
+          type: string
+        vinculation:
+          type: string
+        tipo_jornada:
+          type: string
+        otros_tipo_jornada:
+          type: string
+        regimen_laboral:
+          type: string
+        admission_indicative:
+          type: string
+        admission_type:
+          type: string
+        regimen_previsional:
+          type: string
+        wage_type:
+          type: string
+        work_day_description:
+          type: string
+        position_of_trust:
+          type: boolean
+        function_of_trust:
+          type: string
+        experience_contract:
+          type: boolean
+        unhealthiness_additional:
+          type: string
+        dangerousness_additional:
+          type: string
+        night_shift:
+          type: boolean
+        esocial_code:
+          type: string
+        periodicity:
+          type: string
+        custom_attributes:
+          type: object
+        area_id:
+          type: integer
+        role_id:
+          type: integer
+        leader_id:
+          type: integer
+        currency_code:
+          type: string
+        wage:
+          type: float
+        boss:
+          $ref: '#/components/schemas/BossModel'
+        without_wage:
+          type: boolean
+    Attendances__Overtime__Response:
+      properties:
+        day:
+          type: integer
+        month:
+          type: integer
+        year:
+          type: integer
+        hours:
+          type: number
+          format: float
+        id:
+          type: integer
+        employee_id:
+          type: integer
+        type_id:
+          type: integer
+        centro_costo:
+          type: string
+        centro_costo_code:
+          type: string
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     EmployeeResponseCountry:
       allOf:
       - $ref: '#/components/schemas/BasePersonIdentifier'
@@ -2798,6 +2805,342 @@ components:
         rg_issuing_date:
           type: string
           format: date
+    EmployeeCurrentJob:
+      properties:
+        periodicity:
+          type: string
+        frequency:
+          type: string
+        working_schedule_type:
+          type: string
+        zone_assignment:
+          type: boolean
+        previous_job_id:
+          type: integer
+        company_id:
+          type: integer
+        area_id:
+          type: integer
+        contract_term:
+          type: string
+          format: date
+        contract_type:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        active_until:
+          type: string
+          format: date
+        contract_finishing_date_1:
+          type: string
+          format: date
+        contract_finishing_date_2:
+          type: string
+          format: date
+        weekly_hours:
+          type: integer
+        base_wage:
+          type: integer
+        cost_center:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+        custom_attributes:
+          type: object
+        union:
+          type: citext
+        project:
+          type: string
+        days:
+          type: array
+          items:
+            type: string
+          example:
+          - l
+          - m
+          - w
+          - j
+          - v
+        boss:
+          $ref: '#/components/schemas/BossModel'
+        recinto_primario:
+          $ref: '#/components/schemas/RecintoModel'
+        recinto_secundario:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecintoModel'
+    ResponsabilityDetail:
+      properties:
+        id:
+          type: integer
+        gender:
+          type: string
+        first_name:
+          type: string
+        first_surname:
+          type: string
+        second_surname:
+          type: string
+        birthday:
+          type: string
+          format: date
+        legal_responsability:
+          type: string
+        health_plan:
+          type: string
+        relation:
+          type: string
+        expiration_date:
+          format: date
+        retirement_fund:
+          type: string
+        voluntary_enrollment:
+          type: string
+        voluntary_retirement_percentage:
+          type: string
+        voluntary_account_2:
+          type: string
+        custom_attributes:
+          type: object
+        rut:
+          type: string
+    EmployeeInputBase:
+      properties:
+        picture_url:
+          type: string
+    ResponsibilityDetail:
+      properties:
+        id:
+          type: integer
+        rut:
+          type: string
+        gender:
+          type: string
+        first_name:
+          type: string
+        first_surname:
+          type: string
+        second_surname:
+          type: string
+        birthday:
+          type: string
+          format: date
+        legal_responsibility:
+          type: boolean
+        health_plan:
+          type: boolean
+        relation:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        retirement_fund:
+          type: string
+        voluntary_enrollment:
+          type: boolean
+        voluntary_retirement_percentage:
+          type: number
+        voluntary_account_2:
+          type: integer
+        custom_attributes:
+          type: object
+    MinimalEmployeeCountry: {}
+    JobInputCountryPost:
+      required:
+      - company_id
+      - start_date
+      - type_of_contract
+      - vinculation
+      - tipo_jornada
+      - otros_tipo_jornada
+      - regimen_laboral
+      - admission_indicative
+      - admission_type
+      - regimen_previsional
+      - regular_hours
+      - work_day_description
+      - area_id
+      - role_id
+      - leader_id
+      - wage
+      properties:
+        company_id:
+          type: integer
+          description: {}
+        start_date:
+          type: string
+          format: date
+          description: Fecha Inicio
+        type_of_contract:
+          type: string
+          description: Tipo Contrato
+          enum:
+          - indeterminate
+          - determined_by_days
+          - determined_by_event
+        end_of_contract:
+          type: string
+          format: date
+          description: Término Contrato
+        regular_hours:
+          type: number
+          format: float
+          description: Horario Semanal
+        days:
+          type: object
+          description: Dias de la Jornada Laboral
+          example:
+          - l
+          - m
+          - w
+          - j
+          - v
+        vinculation:
+          type: string
+          description: Vinculación Laboral
+          enum:
+          - total_discount_rate
+          - difference_discount_rate
+          - discount_rate_does_not_apply
+          - does_not_have
+        tipo_jornada:
+          type: string
+          description: Tipo de Jornada
+          enum:
+          - workday_12x36
+          - workday_variable_free_time
+          - workday_fixed_free_time
+          - workday_fixed_free_time_except_sunday
+          - workday_fixed_time_additional_sunday
+          - workday_uninterrupted
+          - other_workday
+        otros_tipo_jornada:
+          type: string
+          description: Otros Tipos de Jornada
+          enum:
+          - subject_to_workday
+          - external_forseen_activity
+          - forseen_function
+          - remote_work
+          - no_reportable_esocial_workday
+        regimen_laboral:
+          type: string
+          description: Régimen Laboral
+          enum:
+          - general_employee
+          - intermitent_employee
+          - domestic_employee
+          - rural_employee
+          - apprentice
+          - fixed_term_employee
+          - temporary_employee
+          - estagiario
+          - prolabore_722
+          - prolabore_723
+          - no_reportable_esocial_work_category
+        admission_indicative:
+          type: string
+          description: Indicativo de Admisión
+          enum:
+          - normal
+          - fiscal_action
+          - judicial_action
+        admission_type:
+          type: string
+          description: Tipo de Admisión
+          enum:
+          - admission
+          - transference_company_same_group
+          - transferencia_company_consortium
+          - transferencia_succesion_incorporation_fusion
+          - transferencia_domestinc_employee
+          - cpf_movement
+          - transference_company_unexistence
+        regimen_previsional:
+          type: string
+          description: Régimen Previsional
+          enum:
+          - general_social_regime
+          - social_security_regime
+          - no_reportable_esocial_social_security_regime
+        wage_type:
+          type: string
+          description: Tipo Salario, default 'variable'
+          enum:
+          - fixed
+          - mixed
+          - variable
+        wage:
+          type: number
+          format: float
+          description: Sueldo Base
+        work_day_description:
+          type: string
+          description: Descripción de Jornada de Trabajo
+        position_of_trust:
+          type: boolean
+          description: Cargo de Confianza
+        function_of_trust:
+          type: string
+          description: Función de Confianza
+        experience_contract:
+          type: boolean
+          description: Contrato de Experiencia
+        unhealthiness_additional:
+          type: string
+          description: Adicional de Insalubridad
+          enum:
+          - 'no'
+          - low
+          - medium
+          - high
+        dangerousness_additional:
+          type: string
+          description: Adicional de Peligrosidad
+          enum:
+          - 'no'
+          - 'yes'
+        night_shift:
+          type: boolean
+          description: Trabajo Nocturno
+        esocial_code:
+          type: string
+          description: Código eSocial
+        area_id:
+          type: integer
+          description: Área
+        role_id:
+          type: integer
+          description: Cargo
+        leader_id:
+          type: integer
+          description: Supervisor
+        without_wage:
+          type: boolean
+          description: Tiene Liquidación
+          default: false
+        custom_attributes:
+          type: object
+    CurrentJobDetails:
+      properties:
+        periodicity:
+          type: string
+          description: Periodicidad de pago del empleado
+          example: mensual
+        zone_assignment:
+          type: string
+          description: Zona de trabajo asignada al empleado
+          example: Santiago
+    RecintoModel:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
     EmployeeInputCountry:
       allOf:
       - $ref: '#/components/schemas/BasePersonIdentifier'
@@ -3316,117 +3659,32 @@ components:
           type: boolean
           description: Active. the use of ~~true and false~~ is obsolete.
           default: true
-    EmployeeCurrentJob:
+    Employee__Response__Minimal:
+      allOf:
+      - $ref: '#/components/schemas/EmployeeInputBase'
+      - $ref: '#/components/schemas/EmployeeInputCountry'
       properties:
-        periodicity:
+        period_type:
+          if: {}
           type: string
-        frequency:
-          type: string
-        working_schedule_type:
-          type: string
-        zone_assignment:
-          type: boolean
-        previous_job_id:
-          type: integer
-        company_id:
-          type: integer
-        area_id:
-          type: integer
-        contract_term:
-          type: string
-          format: date
-        contract_type:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        active_until:
-          type: string
-          format: date
-        contract_finishing_date_1:
-          type: string
-          format: date
-        contract_finishing_date_2:
-          type: string
-          format: date
-        weekly_hours:
-          type: integer
-        base_wage:
-          type: integer
-        cost_center:
-          type: string
-        role:
-          $ref: '#/components/schemas/Role'
-        custom_attributes:
-          type: object
-        union:
-          type: citext
-        project:
-          type: string
-        days:
+          description: 'Frecuencia de pago: monthly, semi_monthly o weekly.'
+    bad_request:
+      properties:
+        errors:
           type: array
           items:
             type: string
-          example:
-          - l
-          - m
-          - w
-          - j
-          - v
-        boss:
-          $ref: '#/components/schemas/BossModel'
-        recinto_primario:
-          $ref: '#/components/schemas/RecintoModel'
-        recinto_secundario:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecintoModel'
-    MinimalEmployeeCountry: {}
-    RecintoModel:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-    Attendances__Overtime__Index:
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attendances__Overtime__Response'
-    VacationDefinitionOutput:
-      properties:
-        vacation_definitions:
-          type: array
-          description: Lista de políticas de vacaciones
-          example: []
-          items:
-            $ref: '#/components/schemas/VacationDefinition'
-    PlanResponseCountry:
-      properties:
-        start_date:
-          type: string
-          format: date
-        health_company:
-          type: string
-        health_plan_identifier:
-          type: string
-        complementary_insurance_company:
-          type: string
-    EmployeeFamilyResponsability:
+    EmployeeFamilyResponsibility:
       properties:
         id:
           type: integer
         family_allowance_section:
           type: string
-        maternity_family_responsability:
+        maternity_family_responsibility:
           type: string
-        invalid_family_responsability:
+        invalid_family_responsibility:
+          type: string
+        simple_family_responsibility:
           type: string
         start_date:
           type: string
@@ -3434,268 +3692,10 @@ components:
         end_date:
           type: string
           format: date
-        responsability_details:
-          $ref: '#/components/schemas/ResponsabilityDetail'
-    EmployeeInputCloneCountry:
-      properties:
-        payment_method:
-          type: string
-          description: Payment Method
-          enum:
-          - Cheque
-          - Efectivo
-          - No Generar Pago
-          - Transferencia Bancaria
-        bank:
-          type: string
-          description: Bank Mandatory if payment_method is "Bank Transfer".
-          enum:
-          - BANCO DIGIMAIS
-          - ABC-BRASIL SA
-          - ARBI SA
-          - AZTECA DO BRASIL SA
-          - BANCO ALFA
-          - Banco Classico SA
-          - BANCO DA CHINA BRASIL SA
-          - BANCO DE LA NACION ARGENTINA
-          - BANCO DE LA PROVINCIA DE BUENOS AIRES
-          - BANCO DE LA REPUBLICA ORIENTAL DEL URUGUAY
-          - BANCO DO BRASIL
-          - BANCO DO ESTADO DO PARÁ SA
-          - BANCO TOKYO MITSUBISH UFJ BRASIL SA
-          - BANCO WESTLB DO BRASIL
-          - BANCO XP
-          - BANCOOB
-          - BANESE
-          - BANESTES
-          - BANIF-BANCO INTERNACIONAL DO FUNCHAL (BRASIL) SA
-          - BANK OF AMERICA MERRILL LYNCH BANCO MULTIPLO SA
-          - BANRISUL
-          - BARCLAYS SA
-          - BASA
-          - BBM SA
-          - BANCO SEGURO SA
-          - BCV - BANCO DE CREDITO E VAREJO SA
-          - BEM
-          - BERJ SA
-          - BES INVESTIMENTO DO BRASIL SA - BANCO DE INVESTIM
-          - BGN SA
-          - BIC BANCO
-          - BM&F DE SERV DE LIQUIDACAO E CUSTODIA SA
-          - BMC SA
-          - BMG SA
-          - BNB
-          - BNP PARIBAS BRASIL SA
-          - BNY MELLON SA
-          - BOA VISTA INTERATLANTICO SA
-          - BONSUCESSO SA
-          - BANCO CREFISA SA
-          - BRACCE SA
-          - BRADESCO
-          - BRASCAN SA
-          - BRASIL PLURAL SA BANCO MULTIPLO
-          - BRB
-          - BRICKELL S A CREDITO, FINANCIAMENTO E INVESTIMENTO
-          - BTG PACTUAL SA
-          - CACIQUE SA
-          - CAIXA ECON FEDERAL
-          - CAIXA GERAL - BRASIL SA
-          - CAPITAL SA
-          - CARGILL SA
-          - CC UNICRED BRASIL CENTRAL
-          - CC UNIPRIME NORTE DO PARANA
-          - CECOOPES-CENTRAL DAS COOP DE ECON E CRED MUTUO DO
-          - AILOS - COOPERATIVA CENTRAL DE CREDITO
-          - CEDULA SA
-          - CIFRA SA
-          - CITIBANK
-          - Citibank NA
-          - COOPERATIVA CENTRAL DE CREDITO DO ESTADO DE SP
-          - COOPERATIVA CENTRAL DE CREDITO NOROESTE BRASILEIRO
-          - COOPERATIVA DE CREDITO RURAL DA REGIAO DA MOGIANA
-          - CR2 SA
-          - CREDIALIANCA COOPERATIVA DE CREDITO RURAL
-          - CREDIT AGRICOLE BRASIL SA
-          - CREDIT SUISSE (BRASIL) SA
-          - DAYCOVAL
-          - DEUTSCHE BANK S A - BANCO ALEMAO
-          - DIBENS SA
-          - FATOR SA
-          - FIBRA
-          - BANCO C6 CONSIGNADO S A
-          - BANCO AGIBANK SA
-          - GUANABARA SA
-          - HIPERCARD BANCO MULTIPLO SA
-          - HSBC
-          - IBI
-          - INDUSTRIAL DO BRASIL S A
-          - INDUSVAL SA
-          - ING BANK NV
-          - INTERCAP SA
-          - BANCO INTER
-          - Investcred Unibanco
-          - ITAÚ
-          - ITAU HOLDING FINANCEIRA SA
-          - Itaú-BBA
-          - J SAFRA SA
-          - JP MORGAN SA
-          - JOHN DEERE SA
-          - JPMORGAN CHASE BANK
-          - KDB DO BRASIL SA
-          - KEB DO BRASIL SA
-          - Luso Brasileiro
-          - BANCO MASTER S A
-          - MERCANTIL DO BRASIL
-          - MODAL SA
-          - MORGAN STANLEY DEAN WITTER SA
-          - NATIXIS BRASIL SA - BANCO MòLTIPLO
-          - NUBANK (NU PAGAMENTOS S.A.)
-          - NBC BANK BRASIL SA- BANCO MULTIPLO
-          - OPPORTUNITY SA
-          - PICPAY BANK
-          - ORIGINAL SA
-          - PANAMERICANO
-          - PARANA BANCO SA
-          - PAULISTA
-          - PECUNIA SA
-          - PETRA SA
-          - PINE SA
-          - POTTENCIAL SA
-          - RABOBANK INTERNATIONAL BRASIL SA
-          - RANDON SA
-          - RENDIMENTO SA
-          - RIBEIRÃO PRETO
-          - RODOBENS SA
-          - RURAL
-          - RURAL MAIS SA
-          - SAFRA
-          - SANTANDER BRASIL
-          - SCOTIABANK BRASIL SA BANCO MULTIPLO
-          - SEMEAR SA
-          - SICREDI
-          - SIMPLES SA
-          - SOCIETE GENERALE BRASIL SA
-          - SOFISA SA
-          - SUMITOMO MITSUI BRASILEIRO SA
-          - TOPAZIO SA
-          - Triangulo
-          - UNICARD BANCO MULTIPLO SA
-          - UNICRED CENTRAL RS - CENTRAL DE COOP ECON CRED MUT
-          - UNICRED CENTRAL SANTA CATARINA
-          - UNIPRIME
-          - VOTORANTIM
-          - VR SA
-          - WESTERN UNION DO BRASIL SA
-          - WOORI BANK DO BRASIL SA
-          - BANCO CRESOL
-          - SERVICOOP
-          - FACTA FINANCEIRA S.A
-          - PARATI CFI S.A
-          - C6 BANK
-          - QI SOCIEDADE DE CREDITO DIRETO S.A
-          - BANCO INBURSA SA
-          - LECCA
-          - UNICRED
-          - VALOR S/A
-          - SENFF SA
-          - WILL FINANCEIRA SA
-          - MERCADO PAGO
-          - BARI SA
-          - BANCO DIGIO
-          - CREDITAS
-          - AL5
-          - MIDWAY
-          - COOPERFORTE
-          - PICPAY
-          - NUBANK
-          - BANCO VOLKSWAGEN
-          - BANCO BV SA
-          - NEON
-          - CREDIFIT
-          - CAPITAL CONSIG
-          - PAN FINANCEIRA
-          - KONECT
-          - CELCOIN
-          - BANCO INTER SA
-          - COOPER JOHNSON
-        account_type:
-          type: string
-          description: Account type. Mandatory if payment_method is "Bank Transfer".
-          enum:
-          - Conta Corrente
-          - Conta Poupança
-          - Conta Salário
-        account_number:
-          type: string
-          description: Account Number Mandatory if payment_method is "Bank Transfer".
-        code_sheet:
-          type: string
-          description: File Code
-        start_date:
-          type: string
-          description: Company Entry Date
-          format: date
-        private_role:
-          type: boolean
-        custom_attributes:
-          type: object
-        period_type:
-          if: {}
-          type: string
-          description: 'Payment Frequency: monthly, semi_monthly or weekly.'
-    ResponsabilityDetail:
-      properties:
-        id:
-          type: integer
-        gender:
-          type: string
-        first_name:
-          type: string
-        first_surname:
-          type: string
-        second_surname:
-          type: string
-        birthday:
-          type: string
-          format: date
-        legal_responsability:
-          type: string
-        health_plan:
-          type: string
-        relation:
-          type: string
-        expiration_date:
-          format: date
-        retirement_fund:
-          type: string
-        voluntary_enrollment:
-          type: string
-        voluntary_retirement_percentage:
-          type: string
-        voluntary_account_2:
-          type: string
-        custom_attributes:
-          type: object
-        rut:
-          type: string
-    RoleFamily:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        quantity_of_roles:
-          type: integer
-    VacationType:
-      properties:
-        name:
-          type: string
-          description: Nombre del tipo de vacación
-          example: Legales
-        code:
-          type: string
-          description: Código del tipo de vacación
-          example: legales
+        responsibility_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponsibilityDetail'
   securitySchemes:
     auth_token:
       type: apiKey

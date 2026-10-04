@@ -293,14 +293,6 @@ components:
           type: array
           items:
             type: string
-    Attendances__NonWorkedHours__Type:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        paid_leave:
-          type: boolean
     Attendances__NonWorkedHours__TypeModel__Response:
       properties:
         id:
@@ -318,6 +310,14 @@ components:
       required:
       - name
       - paid_leave
+    Attendances__NonWorkedHours__Type:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        paid_leave:
+          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
