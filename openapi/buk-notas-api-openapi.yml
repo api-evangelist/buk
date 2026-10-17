@@ -89,6 +89,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     NoteCreated:
       type: object
       description: Comentario creado exitosamente
@@ -110,12 +116,6 @@ components:
           type: string
           format: date-time
           description: Fecha de creación del comentario
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     NoteInput:
       required:
       - message

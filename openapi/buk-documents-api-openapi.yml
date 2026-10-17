@@ -401,16 +401,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EmployeeFileListDetail:
-      properties:
-        file_id:
-          type: integer
-        filename:
-          type: string
-        path:
-          type: string
-        created_at:
-          type: string
     DocumentSignature:
       properties:
         signature_type:
@@ -424,6 +414,16 @@ components:
         signed_at:
           type: string
         confirmation_code_channel:
+          type: string
+        created_at:
+          type: string
+    EmployeeFileListDetail:
+      properties:
+        file_id:
+          type: integer
+        filename:
+          type: string
+        path:
           type: string
         created_at:
           type: string

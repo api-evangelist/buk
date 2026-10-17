@@ -479,32 +479,38 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Area__Update:
+    parent_child_area:
       properties:
+        id:
+          type: integer
         name:
-          required: true
           type: string
-        accounting_prefix:
+        commune:
           type: string
         city:
           type: string
         address:
           type: string
-        cost_center_id:
-          type: string
-        location_id:
-          required: true
+    Area:
+      properties:
+        id:
           type: integer
-        active:
-          type: boolean
-        role_ids:
-          type: array
-          items:
-            type: integer
-        custom_attrs:
+        name:
+          type: string
+        address:
+          type: string
+        children_area:
+          $ref: '#/components/schemas/parent_child_area'
+        parent_area:
+          $ref: '#/components/schemas/parent_child_area'
+        cost_center:
+          type: string
+        department:
+          $ref: '#/components/schemas/AreaSecondLevel'
+        status:
+          type: string
+        custom_attributes:
           type: object
-          items:
-            type: string
     Area_new:
       properties:
         id:
@@ -535,48 +541,16 @@ components:
           type: string
         custom_attributes:
           type: object
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    Area:
+    AreaFirstLevel:
       properties:
         id:
           type: integer
+          description: Identificador del área de primer nivel
+          example: 1
         name:
           type: string
-        address:
-          type: string
-        children_area:
-          $ref: '#/components/schemas/parent_child_area'
-        parent_area:
-          $ref: '#/components/schemas/parent_child_area'
-        cost_center:
-          type: string
-        department:
-          $ref: '#/components/schemas/AreaSecondLevel'
-        status:
-          type: string
-        custom_attributes:
-          type: object
-    parent_child_area:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        commune:
-          type: string
-        city:
-          type: string
-        address:
-          type: string
+          description: Nombre del área de primer nivel
+          example: Gerencia
     Area__Create:
       properties:
         parent_id:
@@ -602,6 +576,12 @@ components:
             type: integer
         custom_attrs:
           type: object
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     AreaSecondLevel:
       properties:
         id:
@@ -610,20 +590,40 @@ components:
           type: string
         division:
           $ref: '#/components/schemas/AreaFirstLevel'
-    AreaFirstLevel:
+    Pagination:
       properties:
-        id:
-          type: integer
-          description: Identificador del área de primer nivel
-          example: 1
-        name:
+        next:
           type: string
-          description: Nombre del área de primer nivel
-          example: Gerencia
-    bad_request:
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    Area__Update:
       properties:
-        errors:
+        name:
+          required: true
+          type: string
+        accounting_prefix:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        cost_center_id:
+          type: string
+        location_id:
+          required: true
+          type: integer
+        active:
+          type: boolean
+        role_ids:
           type: array
+          items:
+            type: integer
+        custom_attrs:
+          type: object
           items:
             type: string
   securitySchemes:

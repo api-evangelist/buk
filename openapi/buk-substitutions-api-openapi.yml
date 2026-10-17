@@ -248,21 +248,8 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Pagination:
+    EmployeeSubstitutionInput:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    EmployeeSubstitutionDetail:
-      properties:
-        id:
-          type: integer
-          readOnly: true
         active:
           type: boolean
         employee_id:
@@ -278,8 +265,21 @@ components:
         reason:
           type: string
           description: Causal
-    EmployeeSubstitutionInput:
+    Pagination:
       properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
+    EmployeeSubstitutionDetail:
+      properties:
+        id:
+          type: integer
+          readOnly: true
         active:
           type: boolean
         employee_id:

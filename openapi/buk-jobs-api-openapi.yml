@@ -427,6 +427,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    BasePersonIdentifier:
+      properties:
+        document_number:
+          type: string
+          description: Document Number of  Colaborador.
+        document_type:
+          type: string
+          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
+    BossModel:
+      properties:
+        id:
+          type: integer
+        cpf:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/BasePersonIdentifier'
     JobResponseCountry:
       properties:
         id:
@@ -501,32 +517,6 @@ components:
           $ref: '#/components/schemas/BossModel'
         without_wage:
           type: boolean
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    BasePersonIdentifier:
-      properties:
-        document_number:
-          type: string
-          description: Document Number of  Colaborador.
-        document_type:
-          type: string
-          description: 'Document Type Colaborador. Valid Document Types in the {code: translation} format are: {"ci_brasil":"CPF","otro":"Other"}'
-    BossModel:
-      properties:
-        id:
-          type: integer
-        cpf:
-          type: string
-      allOf:
-      - $ref: '#/components/schemas/BasePersonIdentifier'
     JobTerminateInput:
       required:
       - end_date
@@ -576,6 +566,16 @@ components:
           type: array
           items:
             type: string
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
   securitySchemes:
     auth_token:
       type: apiKey

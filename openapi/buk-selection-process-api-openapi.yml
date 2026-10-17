@@ -141,6 +141,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SelectionProcessRecruiter:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessLocation:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
     CamposBrasil:
       properties:
         regimen_laboral:
@@ -205,6 +227,152 @@ components:
           - fiscal_action
           - judicial_action
           description: Indicativo de admisión
+    SelectionProcessStage:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcessCompany:
+      properties:
+        cpf:
+          example: '123456789'
+          type: string
+          description: {}
+        id:
+          example: 123
+          type: integer
+          description: {}
+      type: object
+    Article22: {}
+    SelectionProcessArea:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    SelectionProcessRole:
+      type: object
+      properties:
+        id:
+          example: 123
+          type: integer
+          description: {}
+        name:
+          example: {}
+          type: string
+          description: {}
+    SelectionProcess:
+      allOf:
+      - $ref: '#/components/schemas/SelectionProcessBase'
+      - $ref: '#/components/schemas/Article22'
+      - $ref: '#/components/schemas/CamposBrasil'
+      - properties:
+          id:
+            example: 123
+            type: integer
+            description: {}
+          area:
+            $ref: '#/components/schemas/SelectionProcessArea'
+          role:
+            $ref: '#/components/schemas/SelectionProcessRole'
+          company:
+            $ref: '#/components/schemas/SelectionProcessCompany'
+          location:
+            $ref: '#/components/schemas/SelectionProcessLocation'
+          process_stages:
+            example: {}
+            type: array
+            description: {}
+            items:
+              $ref: '#/components/schemas/SelectionProcessStage'
+          public_token:
+            example: token123
+            type: string
+            description: {}
+          start_date:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: {}
+            example: '2024-01-01'
+          end_date:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: {}
+            example: '2024-01-01'
+          created_at:
+            type: string
+            format: date-time
+            description: {}
+            example: '2024-01-01T12:00:00Z'
+          hired_count:
+            example: 10
+            type: integer
+            description: {}
+          supervisor:
+            $ref: '#/components/schemas/SelectionProcessSupervisor'
+          recruiters:
+            example: {}
+            type: array
+            items:
+              $ref: '#/components/schemas/SelectionProcessRecruiter'
+            description: {}
+    SelectionProcessInput:
+      required:
+      - area_id
+      - role_id
+      - company_id
+      allOf:
+      - $ref: '#/components/schemas/SelectionProcessBase'
+      - $ref: '#/components/schemas/Article22'
+      - $ref: '#/components/schemas/CamposBrasil'
+      - properties:
+          area_id:
+            example: 123
+            type: integer
+            description: {}
+          role_id:
+            example: 123
+            type: integer
+            description: {}
+          company_id:
+            example: 123
+            type: integer
+            description: {}
+          location_id:
+            example: 123
+            type: integer
+            description: {}
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     SelectionProcessBase:
       properties:
         name:
@@ -302,178 +470,10 @@ components:
           items:
             type: string
           description: {}
-    SelectionProcessStage:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    Article22: {}
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    SelectionProcessRole:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
     SelectionProcessSupervisor:
       type:
       - object
       - 'null'
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessLocation:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    SelectionProcessInput:
-      required:
-      - area_id
-      - role_id
-      - company_id
-      allOf:
-      - $ref: '#/components/schemas/SelectionProcessBase'
-      - $ref: '#/components/schemas/Article22'
-      - $ref: '#/components/schemas/CamposBrasil'
-      - properties:
-          area_id:
-            example: 123
-            type: integer
-            description: {}
-          role_id:
-            example: 123
-            type: integer
-            description: {}
-          company_id:
-            example: 123
-            type: integer
-            description: {}
-          location_id:
-            example: 123
-            type: integer
-            description: {}
-    SelectionProcess:
-      allOf:
-      - $ref: '#/components/schemas/SelectionProcessBase'
-      - $ref: '#/components/schemas/Article22'
-      - $ref: '#/components/schemas/CamposBrasil'
-      - properties:
-          id:
-            example: 123
-            type: integer
-            description: {}
-          area:
-            $ref: '#/components/schemas/SelectionProcessArea'
-          role:
-            $ref: '#/components/schemas/SelectionProcessRole'
-          company:
-            $ref: '#/components/schemas/SelectionProcessCompany'
-          location:
-            $ref: '#/components/schemas/SelectionProcessLocation'
-          process_stages:
-            example: {}
-            type: array
-            description: {}
-            items:
-              $ref: '#/components/schemas/SelectionProcessStage'
-          public_token:
-            example: token123
-            type: string
-            description: {}
-          start_date:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: {}
-            example: '2024-01-01'
-          end_date:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: {}
-            example: '2024-01-01'
-          created_at:
-            type: string
-            format: date-time
-            description: {}
-            example: '2024-01-01T12:00:00Z'
-          hired_count:
-            example: 10
-            type: integer
-            description: {}
-          supervisor:
-            $ref: '#/components/schemas/SelectionProcessSupervisor'
-          recruiters:
-            example: {}
-            type: array
-            items:
-              $ref: '#/components/schemas/SelectionProcessRecruiter'
-            description: {}
-    SelectionProcessRecruiter:
-      type: object
-      properties:
-        id:
-          example: 123
-          type: integer
-          description: {}
-        name:
-          example: {}
-          type: string
-          description: {}
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    SelectionProcessCompany:
-      properties:
-        cpf:
-          example: '123456789'
-          type: string
-          description: {}
-        id:
-          example: 123
-          type: integer
-          description: {}
-      type: object
-    SelectionProcessArea:
-      type: object
       properties:
         id:
           example: 123

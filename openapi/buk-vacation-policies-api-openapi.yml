@@ -66,6 +66,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    VacationDefinitionOutput:
+      properties:
+        vacation_definitions:
+          type: array
+          description: Lista de políticas de vacaciones
+          example: []
+          items:
+            $ref: '#/components/schemas/VacationDefinition'
     VacationDefinition:
       properties:
         id:
@@ -103,14 +111,6 @@ components:
           type: string
           description: Código del tipo de vacación
           example: legales
-    VacationDefinitionOutput:
-      properties:
-        vacation_definitions:
-          type: array
-          description: Lista de políticas de vacaciones
-          example: []
-          items:
-            $ref: '#/components/schemas/VacationDefinition'
   securitySchemes:
     auth_token:
       type: apiKey

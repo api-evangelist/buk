@@ -63,15 +63,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Pagination:
+    CompanyBank:
       properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
+        id:
           type: integer
-        total_pages:
+        empresa_id:
+          type: integer
+        name:
+          type: string
+        account_number:
+          type: integer
+        clabe_mexico:
           type: integer
     LegalAgent:
       properties:
@@ -119,17 +121,15 @@ components:
           type: string
         fantasy_name:
           type: string
-    CompanyBank:
+    Pagination:
       properties:
-        id:
-          type: integer
-        empresa_id:
-          type: integer
-        name:
+        next:
           type: string
-        account_number:
+        previous:
+          type: string
+        count:
           type: integer
-        clabe_mexico:
+        total_pages:
           type: integer
   securitySchemes:
     auth_token:

@@ -526,17 +526,6 @@ components:
             '
           example: '36.5'
   parameters:
-    XProviderName:
-      name: x-provider-name
-      in: header
-      required: true
-      description: 'Registered provider name. Must match an existing provider in the system.
-
-        '
-      schema:
-        type: string
-        minLength: 1
-      example: bukwebapp
     XProviderToken:
       name: x-provider-token
       in: header
@@ -548,6 +537,17 @@ components:
         type: string
         minLength: 1
       example: f353ca91-4fc5-49f2-9b9e-304f83d11914
+    XProviderName:
+      name: x-provider-name
+      in: header
+      required: true
+      description: 'Registered provider name. Must match an existing provider in the system.
+
+        '
+      schema:
+        type: string
+        minLength: 1
+      example: bukwebapp
   securitySchemes:
     ProviderAuth:
       type: apiKey

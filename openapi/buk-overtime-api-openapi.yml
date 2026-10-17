@@ -303,12 +303,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
     Attendances__Overtime__Type:
       properties:
         id:
@@ -369,6 +363,12 @@ components:
           type: string
         centro_costo_code:
           type: string
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
     Pagination:
       properties:
         next:

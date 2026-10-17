@@ -403,6 +403,68 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Employee__Assign:
+      properties:
+        id:
+          type: integer
+        item:
+          $ref: '#/components/schemas/Bono__Minimal'
+        amount:
+          type: number
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        description:
+          type: string
+        custom_attrs:
+          type: object
+    Assign:
+      properties:
+        id:
+          type: integer
+        item_id:
+          type: integer
+        employee_id:
+          type: integer
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        amount:
+          type: integer
+        advance_payment_day:
+          type: integer
+        description:
+          type: string
+        cost_center:
+          type: string
+    Bono__Minimal:
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+    bad_request:
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    Pagination:
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+        count:
+          type: integer
+        total_pages:
+          type: integer
     Assign__Create:
       properties:
         employee_id:
@@ -429,68 +491,6 @@ components:
           type: boolean
           default: false
         cost_center:
-          type: string
-        custom_attrs:
-          type: object
-    Pagination:
-      properties:
-        next:
-          type: string
-        previous:
-          type: string
-        count:
-          type: integer
-        total_pages:
-          type: integer
-    Bono__Minimal:
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-    Assign:
-      properties:
-        id:
-          type: integer
-        item_id:
-          type: integer
-        employee_id:
-          type: integer
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        amount:
-          type: integer
-        advance_payment_day:
-          type: integer
-        description:
-          type: string
-        cost_center:
-          type: string
-    bad_request:
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-    Employee__Assign:
-      properties:
-        id:
-          type: integer
-        item:
-          $ref: '#/components/schemas/Bono__Minimal'
-        amount:
-          type: number
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        description:
           type: string
         custom_attrs:
           type: object
